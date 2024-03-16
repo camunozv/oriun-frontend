@@ -1,5 +1,10 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "./globals.css"; // this affects all classes and all components
+
+// It is possible to create different css file outside of the folders
+
+import Header from "@/components/header";
+import Navbar from "@/components/navbar/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +16,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {/**
+         * No pueden ir etiquetas regulares de html fuera de la etiqueta body
+         * no se por que XD. Acabo de solucionar un simplmente metiendo p dentro de body
+         * Más adelante quizas me de cuenta.
+         */}
+        {children}
+      </body>
     </html>
   );
 }

@@ -20,4 +20,5 @@ function ConvocatoriasPage({ params }) {
   );
 }
 
+
 export default ConvocatoriasPage;
