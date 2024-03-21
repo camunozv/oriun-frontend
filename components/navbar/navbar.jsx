@@ -1,12 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { NAV_LINKS } from "@/constants";
-
+import Button from "../button/Button";
 function Navbar() {
   // NOTES:
   // "fixed" means no matter if we scroll the nav will pasted on top of the page.
-
-  // "w-full" means it takes the full width of the page
 
   // "shadow-xl" puts the big shadow under the component
 
@@ -49,7 +47,7 @@ function Navbar() {
   // "z-30" sets the height of the z index, which is perpendicular to the screen. this allows to deal with element overlapping
   // elements with higher z index are placed above the elements with lower z-index.
 
-  // in the "ul": we use hidden for small screens, but flex on large screens or bigger, by using the utility: "lg".
+  // in the "ul": we use hidden for small screens, but flex on large screens or bigger, by using the utility: "lg: flex".
   // "gap-12" : sets spacing between elements of grid, ul, or flex elements 12 is multiplied by 4 to obtain size in pixels
 
   // text & font utilites are different: text is used for setting up text appearance whereas font is used to set up the font
@@ -69,19 +67,27 @@ function Navbar() {
       </Link>
 
       <ul className="hidden h-full gap-12 lg:flex">
-        {
-          NAV_LINKS.map((link) => (
-            <Link href={link.href} key={link.key} className="flex items-center justify-center text-[16px] font-[400]
-            hover:font-bold cursor-pointer pb-1.5 transition-all">
-              {link.label}
-            </Link>    
-          ))
-        }
+        {NAV_LINKS.map((link) => (
+          <Link
+            href={link.href}
+            key={link.key}
+            className="flex items-center justify-center text-[16px] font-[400]
+            hover:font-bold cursor-pointer pb-1.5 transition-all"
+          >
+            {link.label}
+          </Link>
+        ))}
       </ul>
 
-      <Link href="/" className="transition-all hover:font-bold text-[20px] font-[400] pr-10">
+      {/* <Link href="/" className="transition-all hover:font-bold text-[20px] font-[400] pr-10">
         Fuck you
-      </Link>
+      </Link> */}
+
+      <div className="hidden items-center justify-center lg:flex bg-black text-white border-2 border-red-500">
+        <Button title = "hola" type="button" variant="">
+          <h1>Hola</h1>
+        </Button>
+      </div>
     </nav>
   );
 }

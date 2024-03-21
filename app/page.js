@@ -33,8 +33,15 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main className="relative overflow-hidden mx-auto max-w-[1580px] border-2 border-cyan-700">
-        Hello there fucker
+      <main className="relative overflow-hidden mx-auto max-w-[1580px] max-h-[1024px] border-2 border-cyan-700">
+        <h1 className="text-[80px]">Hello</h1>
+        <h1 className="text-[80px]">Hello</h1>
+        <h1 className="text-[80px]">Hello</h1>
+        <h1 className="text-[80px]">Hello</h1>
+        <h1 className="text-[80px]">Hello</h1>
+        <h1 className="text-[80px]">Hello</h1>
+        <h1 className="text-[80px]">Hello</h1>
+        
       </main>
       
       <Footer />
