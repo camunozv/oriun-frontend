@@ -3,6 +3,7 @@ import React from "react";
 import { NAV_LINKS } from "@/constants";
 import Button from "../Button/Button";
 import { FaUser } from "react-icons/fa";
+import { AiOutlineMenu } from "react-icons/ai";
 
 function Navbar() {
   // NOTES:
@@ -60,6 +61,16 @@ function Navbar() {
 
   // overflow-hidden: is a utility class which hides anything that breaks the bounds of its container
   // hover:"custom utility" we put what we want to change on hovering.
+
+  // inline: displays element to occupy only the necessary width they need to be rendered. Meaning other elements could be
+  // rendered to their sides. By putting "inline-block"
+
+  // block: this utility means elements start on a new line and can be stretched as much they can. These kind of elements
+  // doesn't leave other elements to be on the same line with them.
+
+  // inline-block: this allows other elements to be on the same line with them but, can be stretched as much as they can
+  // just like block elements.
+
   return (
     <nav
       className="flex items-center justify-between mx-auto max-w-[1580px]
@@ -82,17 +93,19 @@ function Navbar() {
         ))}
       </ul>
 
-      {/* <Link href="/" className="transition-all hover:font-bold text-[20px] font-[400] pr-10">
-        Fuck you
-      </Link> */}
+      <div className="lg:flex lg:justify-center lg:items-center hidden">
+        <Link href="/Ingreso">
+          <Button
+            title="Login"
+            type="button"
+            variant="bg-green-90 px-8 py-4 text-white hover:bg-black"
+          >
+            <FaUser className="transition-all" />
+          </Button>
+        </Link>
+      </div>
 
-      <Button
-        title="Login"
-        type="button"
-        variant="bg-green-90 px-8 py-4 text-white hover:bg-black"
-      >
-        <FaUser className="transition-all"/>
-      </Button>
+      <AiOutlineMenu className="h-[32px] w-[32px] lg:hidden inline-block cursor-pointer" />
     </nav>
   );
 }

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
+import Convocatorias from "@/components/MainPage/Convocatorias";
+import PreguntasFrecuentes from "@/components/MainPage/PreguntasFrecuentes";
 
 // By default tailwind comes with 5 breakpoints defined for responsive design.
 // sm, md, lg, xl, 2xl --> these are mobile first
@@ -32,18 +34,10 @@ export default function Home() {
   return (
     <>
       <Navbar />
-
-      <main className="relative overflow-hidden mx-auto max-w-[1580px] max-h-[1024px] border-2 border-cyan-700">
-        <h1 className="text-[80px]">Hello</h1>
-        <h1 className="text-[80px]">Hello</h1>
-        <h1 className="text-[80px]">Hello</h1>
-        <h1 className="text-[80px]">Hello</h1>
-        <h1 className="text-[80px]">Hello</h1>
-        <h1 className="text-[80px]">Hello</h1>
-        <h1 className="text-[80px]">Hello</h1>
-        
+      <main className="relative overflow-hidden mx-auto max-w-[1580px] border-2 border-cyan-700">
+        <Convocatorias />
+        <PreguntasFrecuentes />
       </main>
-      
       <Footer />
     </>
   );
