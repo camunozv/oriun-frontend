@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import LoginForm from "@/components/login_form/login_form";
+import LoginForm from "@/components/LoginForm/LoginForm";
 
 export default function AboutPage() {
   return (

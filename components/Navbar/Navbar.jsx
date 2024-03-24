@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { NAV_LINKS } from "@/constants";
-import Button from "../button/Button";
+import Button from "../Button/Button";
 function Navbar() {
   // NOTES:
   // "fixed" means no matter if we scroll the nav will pasted on top of the page.
@@ -57,6 +57,7 @@ function Navbar() {
   // tansition-all: provides a smooth transition to all css properties when their value changes
 
   // overflow-hidden: is a utility class which hides anything that breaks the bounds of its container
+  // hover:"custom utility" we put what we want to change on hovering.
   return (
     <nav
       className="flex items-center justify-between mx-auto max-w-[1580px]
@@ -83,11 +84,12 @@ function Navbar() {
         Fuck you
       </Link> */}
 
-      <div className="hidden items-center justify-center lg:flex bg-black text-white border-2 border-red-500">
-        <Button title = "hola" type="button" variant="">
-          <h1>Hola</h1>
-        </Button>
-      </div>
+      <Button
+        title="Login"
+        type="button"
+        variant="bg-green-90 px-8 py-4 text-white transition-all hover:bg-black"
+        icon="/user.svg"
+      ></Button>
     </nav>
   );
 }
