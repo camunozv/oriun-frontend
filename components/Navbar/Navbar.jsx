@@ -2,6 +2,8 @@ import Link from "next/link";
 import React from "react";
 import { NAV_LINKS } from "@/constants";
 import Button from "../Button/Button";
+import { FaUser } from "react-icons/fa";
+
 function Navbar() {
   // NOTES:
   // "fixed" means no matter if we scroll the nav will pasted on top of the page.
@@ -87,9 +89,10 @@ function Navbar() {
       <Button
         title="Login"
         type="button"
-        variant="bg-green-90 px-8 py-4 text-white transition-all hover:bg-black"
-        icon="/user.svg"
-      ></Button>
+        variant="bg-green-90 px-8 py-4 text-white hover:bg-black"
+      >
+        <FaUser className="transition-all"/>
+      </Button>
     </nav>
   );
 }
