@@ -5,15 +5,15 @@ import React from "react";
 function Ingreso() {
   return (
     <>
-      <header className="mx-auto max-w-[1580px] py-10 flex items-center justify-left bg-figma_blue gap-3 border-green-500 border-2">
+      <header className="mx-auto max-w-[3160px] py-10 flex items-center justify-left bg-figma_blue gap-3 px-5">
         <h1 className="text-[60px] font-bold text-black mx-2">ORIUN</h1>
       </header>
 
-      <main className="mx-auto max-h-[1024px] max-w-[1580px] border-2 border-red-500 relative overflow-hidden flex items-center flex-col justify-center py-5 px-5">
+      <main className="mx-auto max-h-[2048px] max-w-[3160px] relative overflow-hidden flex items-center flex-col justify-center py-[80px] px-5">
         <LoginForm />
       </main>
 
-      <footer className="mx-auto max-w-[1580px] py-10 flex items-center justify-left bg-figma_blue gap-3 border-green-500 border-2">
+      <footer className="mx-auto max-w-[3160px] py-10 flex items-center justify-left bg-figma_blue gap-3">
         Meine Footer
       </footer>
     </>
