@@ -7,7 +7,7 @@ import Link from "next/link";
 // focus:border-gray-600: sets the custom border when user focuses the element
 function LoginForm() {
   return (
-    <div className="flex flex-col justify-center items-center w-96 rounded-md bg-figma_grey shadow-xl border-2  gap-3  p-6">
+    <div className="flex flex-col justify-center items-center w-96 rounded-md bg-figma_grey z-100 shadow-xl border-2  gap-3  p-6">
       <div className="flex justify-center items-center gap-3 w-full">
         <h1 className="font-bold text-[40px] inline-block">Login</h1>
         <FaUser className="h-[30px] w-[30px]" />
@@ -22,7 +22,7 @@ function LoginForm() {
         ></input>
       </div>
 
-      <div className="flex justify-left items-left flex-col gap-2 mt-1 w-full p-2">
+      <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
         <label className="font-semibold">Contraseña</label>
         <input
           type="password"
@@ -31,7 +31,7 @@ function LoginForm() {
         ></input>
       </div>
 
-      <div className="flex items-center justify-between w-full mt-2 p-2">
+      <div className="flex items-center justify-between w-full p-2">
         <div className="flex items-center gap-2">
           <label className="text-base">Recuerdame</label>
           <input type="checkbox" className="focus:outline-none focus:ring-0 focus:border-gray-600"/>

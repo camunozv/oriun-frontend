@@ -112,18 +112,6 @@ body {
     @apply text-[32px] font-[700] leading-[120%];
   }
 
-  .bold-20 {
-    @apply text-[20px] font-[700];
-  }
-
-  .bold-18 {
-    @apply text-[18px] font-[700];
-  }
-
-  .bold-16 {
-    @apply text-[16px] font-[700];
-  }
-
   /* Hero */
   .hero-map {
     @apply absolute right-0 top-0 h-screen w-screen bg-pattern-2 bg-cover bg-center md:-right-28 xl:-top-60;
@@ -142,6 +130,10 @@ body {
   /* Get App */
   .get-app {
     @apply max-container relative flex w-full  flex-col justify-between gap-32 overflow-hidden bg-green-90 bg-pattern bg-cover bg-center bg-no-repeat px-6 py-12 text-white sm:flex-row sm:gap-12 sm:py-24 lg:px-20 xl:max-h-[598px] 2xl:rounded-5xl;
+  }
+
+  .general-max-size {
+    @apply max-w-[3160px] max-h-[4096px]
   }
 }
 
