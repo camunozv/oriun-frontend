@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 function Filter() {
   return (
@@ -10,22 +9,22 @@ function Filter() {
           type="text"
           placeholder="País"
           className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-        ></input>
+        />
         <input
           type="text"
           placeholder="Nombre"
           className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-        ></input>
+        />
         <input
           type="text"
           placeholder="Alcance Geográfico"
           className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-        ></input>
+        />
         <input
           type="date"
           placeholder="Fecha"
           className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-        ></input>
+        />
       </div>
 
       <div className="w-40">

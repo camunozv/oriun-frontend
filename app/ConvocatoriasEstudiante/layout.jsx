@@ -1,7 +1,7 @@
-import Filter from "@/components/ConvsPage/Filter";
-import Navbar from "@/components/Navbar/Navbar";
 import React from "react";
-
+import Filter from "@/components/ConvsPage/Filter";
+import NavbarConvocatorias from "@/components/ConvsPage/NavbarConvocatorias";
+import { LINKS_ESTUDIANTE } from "@/constants";
 function ConvocatoriasLayout({ children }) {
   {
     /**
@@ -17,9 +17,8 @@ function ConvocatoriasLayout({ children }) {
   }
   return (
     <>
-      <Navbar />
+      <NavbarConvocatorias links= {LINKS_ESTUDIANTE} />
       <Filter />
-
       {children}
     </>
   );

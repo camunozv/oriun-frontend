@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { NAV_LINKS } from "@/constants";
+import { LINKS_ESTUDIANTE } from "@/constants";
 import Button from "../Button/Button";
 import { FaUser } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -81,7 +81,7 @@ function Navbar() {
       </Link>
 
       <ul className="hidden h-full gap-12 lg:flex">
-        {NAV_LINKS.map((link) => (
+        {LINKS_ESTUDIANTE.map((link) => (
           <Link
             href={link.href}
             key={link.key}

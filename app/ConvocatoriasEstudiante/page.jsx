@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import Navbar from "@/components/Navbar/Navbar";
 import Filter from "@/components/ConvsPage/Filter";
+import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 
 // async function shareMeal({ formData }) {
 // "use-server"; // This creates a soggneante "server-action". Which is a function guaranteed to funciton on the server.
@@ -15,17 +16,18 @@ import Filter from "@/components/ConvsPage/Filter";
 //   };
 // }
 
-function ConvocatoriasPage() {
+function ConvocatoriasEstudiantePage() {
   return (
     <>
-      <main className="relative mx-auto overflow-hidden border-2 border-cyan-700 general-max-size p-6">
-        main page pending to improve
+      <main className="relative mt-2 mx-auto overflow-hidden max-w-[1580px] p-6 ">
+        Hier werden alle die Auskunft von der Universität gefunden.
+        <CardConvocatorias />
       </main>
     </>
   );
 }
 
-export default ConvocatoriasPage;
+export default ConvocatoriasEstudiantePage;
 
 /* <h1>Bienvenido a la página de convocatorias.</h1>
       <Link href="./">Regresar a la página principal.</Link>
