@@ -19,9 +19,17 @@ import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 function ConvocatoriasEstudiantePage() {
   return (
     <>
-      <main className="relative mt-2 mx-auto overflow-hidden max-w-[1580px] p-6 ">
-        Hier werden alle die Auskunft von der Universität gefunden.
-        <CardConvocatorias />
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        <div className="grid grid-cols-3 w-full gap-6">
+          
+          <CardConvocatorias admin = {false}/>
+          <CardConvocatorias admin = {false}/>
+          <CardConvocatorias admin = {false}/>
+          <CardConvocatorias admin = {false}/>
+          <CardConvocatorias admin = {false}/>
+          <CardConvocatorias admin = {false}/>
+          
+        </div>
       </main>
     </>
   );

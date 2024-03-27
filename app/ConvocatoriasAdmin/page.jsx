@@ -2,13 +2,24 @@ import React from "react";
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 
 function ConvocatoriasAdminPage() {
+
+  // En esta parte debe ir el hook que realiza la petición a la api
+  // en la parte donde están las CardConvocatorias debe ir un ciclo que recorra el
+  // arreglo con los datos recibidos y renderize multiples card convocatorias.
+  // Actualmente se probó con 6 componentes para ver como quedaba el maquetado.
   return (
     <>
-      <main className="flex mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-6">
-        <CardConvocatorias />
-        <CardConvocatorias />
-        <CardConvocatorias />
-        <CardConvocatorias />
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        <div className="grid grid-cols-3 w-full gap-6">
+          
+          <CardConvocatorias admin={true}/>
+          <CardConvocatorias admin={true}/>
+          <CardConvocatorias admin={true}/>
+          <CardConvocatorias admin={true}/>
+          <CardConvocatorias admin={true}/>
+          <CardConvocatorias admin={true}/>
+          
+        </div>
       </main>
     </>
   );
