@@ -1,12 +1,11 @@
 export const LINKS_ESTUDIANTE = [
-    {href:"/ConvocatoriasDisponibles", key:"convocatorias_disponibles", label:"Convocatorias Disponibles"},
-    {href:"/ConvocatoriasCerradas", key:"convocatorias_cerradas", label:"Convocatorias Cerradas"},
+    {href:"/ConvocatoriasEstudiante", key:"convocatorias_cerradas", label:"Convocatorias"},
     {href:"/MisConvocatorias", key:"mis_convocatorias", label:"Mis Convocatorias"},
 ]
 
 export const LINKS_ADMIN = [
+    {href:"/ConvocatoriasAdmin", key:"consultar_convocatorias", label:"Convocatorias"},
     {href:"/ConvocatoriasAdmin/CrearConvocatoria", key:"crear_convocatorias",label:"Crear Convocatorias"},
-    {href:"/ConvocatoriasAdmin", key:"consultar_convocatorias", label:"Consultar Convocatorias"},
 ]
 
 // Dentro de consultar convocatorias se mostraran las convocatorias publicadas, para las que habrá un botón de opciones

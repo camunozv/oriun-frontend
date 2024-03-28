@@ -7,19 +7,27 @@ function Filter() {
       <div className="flex items-center justify-between gap-3">
         <input
           type="text"
-          placeholder="País"
-          className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-        />
-        <input
-          type="text"
           placeholder="Nombre"
           className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
         />
         <input
           type="text"
+          placeholder="País"
+          className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+        />
+
+        <input
+          type="text"
           placeholder="Alcance Geográfico"
           className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
         />
+
+        <select placeholder='value 0' className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1 bg-white" >
+          <option value="value 0">Estado</option>
+          <option value="value 1">Abierta</option>
+          <option value="value 2">Cerrada</option>
+        </select>
+        
         <input
           type="date"
           placeholder="Fecha"
