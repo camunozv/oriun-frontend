@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 
-function CardConvocatorias({ admin, name, university, country }) {
+function CardConvocatorias({ admin, name, university, country, code }) {
 
   const [isVisibleModal, setIsVisibleModal ] = useState(false);
 
