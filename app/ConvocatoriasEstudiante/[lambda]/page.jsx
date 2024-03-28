@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-function ConvocatoriasPage({ params }) {
+function ConvocatoriasDetailsPage({ params }) {
   return (
     <main>
       <h1>Información sobre convocatoria: {params.lambda} </h1>
@@ -21,4 +21,4 @@ function ConvocatoriasPage({ params }) {
 }
 
 
-export default ConvocatoriasPage;
+export default ConvocatoriasDetailsPage;

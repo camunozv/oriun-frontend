@@ -8,7 +8,6 @@ function ConvocatoriasAdminLayout({ children }) {
   return (
     <>
       <NavbarConvocatorias links={LINKS_ADMIN}/>
-      <Filter />
       {children}
     </>
   );

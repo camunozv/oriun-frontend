@@ -2,7 +2,7 @@ import React from "react";
 import Filter from "@/components/ConvsPage/Filter";
 import NavbarConvocatorias from "@/components/ConvsPage/NavbarConvocatorias";
 import { LINKS_ESTUDIANTE } from "@/constants";
-function ConvocatoriasLayout({ children }) {
+function ConvocatoriasEstudianteLayout({ children }) {
   {
     /**
      * Children es un objeto especial de react que permite.
@@ -24,4 +24,4 @@ function ConvocatoriasLayout({ children }) {
   );
 }
 
-export default ConvocatoriasLayout;
+export default ConvocatoriasEstudianteLayout;

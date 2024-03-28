@@ -1,11 +1,15 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Modal from "./Modal";
 
 function CardConvocatorias({ admin, name, university, country }) {
+
+  const [isVisibleModal, setIsVisibleModal ] = useState(false);
+
   if (admin === true) {
     return (
       <>
-        
+        <Modal isVisible={isVisibleModal} onClose={() => {setIsVisibleModal(false)}}/>      
         <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
           <h6 className="font-bold">Conv. 2024-01</h6>
           <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
@@ -35,6 +39,7 @@ function CardConvocatorias({ admin, name, university, country }) {
               <button
               type="button"
               className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
+              onClick={() => {setIsVisibleModal(true)}}
               >
               Eliminar
               </button>

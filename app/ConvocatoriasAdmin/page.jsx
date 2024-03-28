@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
-import Modal from "@/components/ConvsPage/Modal";
+import Filter from "@/components/ConvsPage/Filter";
 
 function ConvocatoriasAdminPage() {
   // En esta parte debe ir el hook que realiza la petición a la api
@@ -10,9 +11,9 @@ function ConvocatoriasAdminPage() {
 
   return (
     <>
+      <Filter />
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         <div className="grid grid-cols-3 w-full gap-6">
-          <Modal isVisible={true}/>
           <CardConvocatorias admin={true} />
           <CardConvocatorias admin={true} />
           <CardConvocatorias admin={true} />
