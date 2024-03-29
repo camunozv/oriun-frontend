@@ -1,15 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import Modal from "./Modal";
+import Link from "next/link";
 
 function CardConvocatorias({ admin, name, university, country, code }) {
 
-  const [isVisibleModal, setIsVisibleModal ] = useState(false);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
 
+  
   if (admin === true) {
     return (
       <>
-        <Modal isVisible={isVisibleModal} onClose={() => {setIsVisibleModal(false)}}/>      
+        <Modal
+          isVisible={isVisibleModal}
+          onClose={() => {
+            setIsVisibleModal(false);
+          }}
+        />
         <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
           <h6 className="font-bold">Conv. 2024-01</h6>
           <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
@@ -26,22 +33,26 @@ function CardConvocatorias({ admin, name, university, country, code }) {
           <p className="font-semibold">Universidad</p>
           <p className="font-semibold">País</p>
 
-         <div className="flex justify-between items-center w-96">
-          <div className="w-full p-2">
-              <button
-              type="button"
-              className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"
-              >
-              Actualizar
-              </button>
+          <div className="flex justify-between items-center w-96">
+            <div className="w-full p-2">
+              <Link href={`./ConvocatoriasAdmin/${code}`}>
+                <button
+                  type="button"
+                  className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"
+                >
+                  Actualizar
+                </button>
+              </Link>
             </div>
             <div className="w-full p-2">
               <button
-              type="button"
-              className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
-              onClick={() => {setIsVisibleModal(true)}}
+                type="button"
+                className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
+                onClick={() => {
+                  setIsVisibleModal(true);
+                }}
               >
-              Eliminar
+                Eliminar
               </button>
             </div>
           </div>

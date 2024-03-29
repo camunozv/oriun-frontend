@@ -22,12 +22,12 @@ function ConvocatoriasEstudiantePage() {
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         <div className="grid grid-cols-3 w-full gap-6">
           
-          <CardConvocatorias admin = {false}/>
-          <CardConvocatorias admin = {false}/>
-          <CardConvocatorias admin = {false}/>
-          <CardConvocatorias admin = {false}/>
-          <CardConvocatorias admin = {false}/>
-          <CardConvocatorias admin = {false}/>
+          <CardConvocatorias admin = {false} code = "2021"/>
+          <CardConvocatorias admin = {false} code = {2022}/>
+          <CardConvocatorias admin = {false} code = {2023}/>
+          <CardConvocatorias admin = {false} code = {2024}/>
+          <CardConvocatorias admin = {false} code = {2025}/>
+          <CardConvocatorias admin = {false} code = {2026}/>
           
         </div>
       </main>
