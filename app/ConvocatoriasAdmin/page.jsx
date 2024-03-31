@@ -18,15 +18,7 @@ async function ConvocatoriasAdminPage() {
     <>
       <Filter />
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        {/* <div className="grid grid-cols-3 w-full gap-6">
-          <CardConvocatorias admin={true} />
-          <CardConvocatorias admin={true} />
-          <CardConvocatorias admin={true} />
-          <CardConvocatorias admin={true} />
-          <CardConvocatorias admin={true} />
-          <CardConvocatorias admin={true} />
-        </div> */}
-        <GridConvocatorias calls={calls}/>
+        <GridConvocatorias calls={calls} admin={true}/>
       </main>
     </>
   );

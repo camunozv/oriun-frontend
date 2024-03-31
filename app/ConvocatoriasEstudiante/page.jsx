@@ -3,6 +3,8 @@ import React from "react";
 import Navbar from "@/components/Navbar/Navbar";
 import Filter from "@/components/ConvsPage/Filter";
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
+import GridConvocatorias from "@/components/ConvsPage/GridConvocatorias";
+import { getCalls } from "@/lib/calls";
 
 // async function shareMeal({ formData }) {
 // "use-server"; // This creates a soggneante "server-action". Which is a function guaranteed to funciton on the server.
@@ -16,20 +18,14 @@ import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 //   };
 // }
 
-function ConvocatoriasEstudiantePage() {
+async function ConvocatoriasEstudiantePage() {
+  const calls = await getCalls();
+
   return (
     <>
+    <Filter/>
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        <div className="grid grid-cols-3 w-full gap-6">
-          
-          <CardConvocatorias admin = {false} code = "2021"/>
-          <CardConvocatorias admin = {false} code = {2022}/>
-          <CardConvocatorias admin = {false} code = {2023}/>
-          <CardConvocatorias admin = {false} code = {2024}/>
-          <CardConvocatorias admin = {false} code = {2025}/>
-          <CardConvocatorias admin = {false} code = {2026}/>
-          
-        </div>
+        <GridConvocatorias admin={false} calls={calls} />
       </main>
     </>
   );

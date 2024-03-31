@@ -1,6 +1,5 @@
 import React from "react";
 
-
 // Actualizar me redirige a la página donde va a estar la convocatoria que yo necesito modificar, que va a ser
 // una ruta dinámica. Dentro de esa ruta voy a tener un componente que recibe como parámetro el id que viene en
 // la ruta dinámica, de tal manera que haga un fetch instantáneo de la convocatoria que se quiere actualizar.
@@ -11,8 +10,10 @@ import React from "react";
 // 3. El componente hará automáticamente un fetch con use effect para traer a la convocatoria tras bambalinas
 // 4. Se le pedirá al usuario que digite solo la información que desea actualizar.
 // 5. Se actualiza la convocatoria.
+// 6. Debe actualizarse la convocatoria solo en los campos que desea modificar el usuario, la demás información
+// se retorna al backend tal cual como está.
 
-function UpdateConvocatoria() {
+function UpdateConvocatoria({ id }) {
   return (
     <div className="flex flex-col justify-center items-center w-full rounded-lg shadow-lg p-6">
       <form className="w-full">
@@ -21,8 +22,9 @@ function UpdateConvocatoria() {
             htmlFor="information_grid"
             className="font-semibold text-[20px] block"
           >
-            Información General
+            Convocatoria Selecionada : {id}
           </label>
+          <p className="text-grey-500">Por favor solo escriba en los campos que desea actualizar.</p>
         </div>
         <div
           id="information_grid"
@@ -165,7 +167,7 @@ function UpdateConvocatoria() {
             type="submit"
             className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
           >
-            Crear
+            Actualizar
           </button>
         </div>
       </form>

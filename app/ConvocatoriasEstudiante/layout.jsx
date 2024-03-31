@@ -18,7 +18,6 @@ function ConvocatoriasEstudianteLayout({ children }) {
   return (
     <>
       <NavbarConvocatorias links= {LINKS_ESTUDIANTE} />
-      <Filter />
       {children}
     </>
   );

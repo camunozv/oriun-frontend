@@ -2,6 +2,8 @@ const sql = require("better-sqlite3");
 const db = sql("calls.db");
 
 // This script was created for TESTING PURPOSES ONLY for fetching data from a data base.
+// To run this file type in the node command line "node init_database.js"
+
 const dummyCalls = [
   {
     university_id: 10031,
