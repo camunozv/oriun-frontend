@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 import Link from "next/link";
 
-function CardConvocatorias({ admin, name, university, country, code }) {
+function CardConvocatorias({ admin, description, university_id, available_slots, id }) {
 
   const [isVisibleModal, setIsVisibleModal] = useState(false);
 
@@ -18,7 +18,7 @@ function CardConvocatorias({ admin, name, university, country, code }) {
           }}
         />
         <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
-          <h6 className="font-bold">Conv. 2024-01</h6>
+          <h6 className="font-bold">{id}</h6>
           <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
             Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
             Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
@@ -29,13 +29,13 @@ function CardConvocatorias({ admin, name, university, country, code }) {
             Flag Here Flag Here Flag Here Flag Here Flag Here
           </div>
 
-          <p className="font-semibold">Nombre</p>
-          <p className="font-semibold">Universidad</p>
-          <p className="font-semibold">País</p>
+          <p className="font-semibold">{description}</p>
+          <p className="font-semibold">{university_id}</p>
+          <p className="font-semibold">{available_slots}</p>
 
           <div className="flex justify-between items-center w-96">
             <div className="w-full p-2">
-              <Link href={`./ConvocatoriasAdmin/${code}`}>
+              <Link href={`./ConvocatoriasAdmin/${id}`}>
                 <button
                   type="button"
                   className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"
@@ -62,7 +62,7 @@ function CardConvocatorias({ admin, name, university, country, code }) {
   } else {
     return (
       <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
-        <h6 className="font-bold">Conv. 2024-01</h6>
+        <h6 className="font-bold">{id}</h6>
         <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
           Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
           Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here

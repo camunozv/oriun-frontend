@@ -6,16 +6,13 @@ import React from "react";
 
 // The form will consist in a simple text fiel which has loaded the id of the call. Then the user shall select
 // which information relative to the call he wanst to modify.
-function ActualizarConvocatoria({params}) {
-
-  const convocatoria = params.ActualizarConvocatoria;
-  console.log(convocatoria.code);
+function ActualizarConvocatoria({ params }) {
+  const id = params.ActualizarConvocatoria;
 
   return (
     <>
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         <UpdateConvocatoria />
-        <h1>{convocatoria}</h1>
       </main>
     </>
   );
