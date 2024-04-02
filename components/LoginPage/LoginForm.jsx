@@ -1,13 +1,33 @@
+"use client";
 import React from "react";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
+import { useRef } from "react";
 // text-base: allows setting up the size of the font to the base size, which by default is 16px.
 // focus:outline-none: allows deleting default outline when an element receives focus
 // focus:ring-0: deletes the default ring that appears when users focus an element
 // focus:border-gray-600: sets the custom border when user focuses the element
+
 function LoginForm() {
+
+  const user_name = useRef();
+  const user_password = useRef();
+
+  
+
+  function submitHanlder (event) 
+  {
+    event.preventDefault();
+
+    const entered_name = user_name.current.value;
+    const entered_password = user_password.current.value;
+
+    console.log(entered_name);
+    console.log(entered_password);
+  }
+
   return (
-    <div className="flex flex-col justify-center items-center w-96 rounded-md bg-figma_grey z-100 shadow-xl border-2  gap-3  p-6">
+    <form onSubmit={submitHanlder} className="flex flex-col justify-center items-center w-96 rounded-md bg-figma_grey z-100 shadow-xl border-2  gap-3  p-6">
       <div className="flex justify-center items-center gap-3 w-full">
         <h1 className="font-bold text-[40px] inline-block">Login</h1>
         <FaUser className="h-[30px] w-[30px]" />
@@ -19,6 +39,8 @@ function LoginForm() {
           type="text"
           placeholder="sin el @unal.edu.co"
           className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+          required = {true}
+          ref = {user_name}
         ></input>
       </div>
 
@@ -28,6 +50,8 @@ function LoginForm() {
           type="password"
           placeholder="contraseña"
           className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+          required = {true}
+          ref = {user_password}
         ></input>
       </div>
 
@@ -45,7 +69,7 @@ function LoginForm() {
       <div className="w-full p-2">
         <button type="submit" className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2">Ingresar</button>
       </div>
-    </div>
+    </form>
   );
 }
 
