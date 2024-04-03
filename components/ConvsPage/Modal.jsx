@@ -12,16 +12,15 @@ function Modal({ isVisible, onClose }) {
 
   // This functions allows correct closing of the Modal when blurred background is clicked.
   const handleOnClose = (e) => {
-    if (e.target.id === "wrapper")
-    {
+    if (e.target.id === "wrapper") {
       onClose();
     }
-  }
+  };
 
   if (isVisible == true) {
     return (
       <div
-        id = "wrapper"
+        id="wrapper"
         className="flex fixed justify-center items-center bg-black inset-0 backdrop-blur-sm bg-opacity-25"
         onClick={handleOnClose}
       >

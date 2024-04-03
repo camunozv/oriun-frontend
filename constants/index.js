@@ -9,6 +9,9 @@ export const LINKS_ADMIN = [
     {href:"/ConvocatoriasAdmin/CrearConvocatoria", key:"crear_convocatorias",label:"Crear Convocatorias"},
 ]
 
+export const ACCESS_TOKEN = 'access';
+export const REFRESH_TOKEN = 'refresh';
+
 // Dentro de consultar convocatorias se mostraran las convocatorias publicadas, para las que habrá un botón de opciones
 // allí se desplegarán las opciones del crud que puede hacer el admin.
 

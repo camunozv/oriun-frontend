@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import Link from "next/link";
 
 function CardConvocatorias({
+  key,
   admin,
   description,
   university_id,
