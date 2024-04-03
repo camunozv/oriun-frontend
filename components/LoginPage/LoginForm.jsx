@@ -3,7 +3,8 @@ import React from "react";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useRef } from "react";
-import signIn from "next-auth/react";
+
+import { loginAPI } from "@/app/api/auth/loginForm";
 
 // text-base: allows setting up the size of the font to the base size, which by default is 16px.
 // focus:outline-none: allows deleting default outline when an element receives focus
@@ -20,8 +21,14 @@ function LoginForm() {
     const entered_name = user_name.current.value;
     const entered_password = user_password.current.value;
 
-    console.log(entered_name);
-    console.log(entered_password);
+    // console.log(entered_name);
+    // console.log(entered_password);
+
+    loginAPI.postUser(entered_name, entered_password).then((response) => {
+      console.log(response.data)
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 
   return (

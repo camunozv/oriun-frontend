@@ -3,15 +3,33 @@ import React from "react";
 import { FaUser } from "react-icons/fa";
 import { useRef } from "react";
 import { useState } from "react";
+// import registerHandler from "@/app/api/auth/register";
 
 // This component was created for TESTING PURPOSES ONLY & should not be included in the final production application.
+
+async function createUser(name, email, password) {
+  const response = await fetch("@/app/api/auth/register/", {
+    method: "POST",
+    body: JSON.stringify({ name, email, password }),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    // If we get error status code
+    throw new Error("Something went wrong");
+  }
+
+  return data;
+}
+
 function RegisterForm() {
   const user_name = useRef();
   const user_password = useRef();
   const user_email = useRef();
-
-  const [error, setError] = useState("");
-  const [pending, setPending] = useState(false);
 
   async function submitHanlder(event) {
     event.preventDefault();
@@ -19,43 +37,17 @@ function RegisterForm() {
     const entered_name = user_name.current.value;
     const entered_password = user_password.current.value;
     const entered_email = user_email.current.value;
-
-    console.log("entro al post");
-    const info = {
-      user_name_: entered_name,
-      user_password_: entered_password,
-      user_email_: entered_email,
-    };
-
-    if (!info.user_name_ || !info.user_email_ || !info.user_password_) {
-      setError("No ha registrado todos los campos");
-    }
-
+    
+    console.log(entered_email);
     try {
-      setPending(true);
-      console.log("entro al post_1");
-      const response = await fetch("@/app/api/register/", { 
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body:JSON.stringify(info),
-      });
-
-      if (response.ok) {
-        setPending(false);
-        const form = event.target;
-        form.reset();
-        console.log("User registered!");
-      } else {
-        const errorData = await response.json();
-        console.log("post error")
-        setError(errorData.message);
-        setPending(false);
-      }
+      const response = await createUser(
+        entered_name,
+        entered_email,
+        entered_password
+      );
+      console.log("User created :D");
     } catch (error) {
-      setPending(false);
-      setError("Something went wrong :(");
+      console.log(error)
     }
   }
 
@@ -105,7 +97,6 @@ function RegisterForm() {
         ></input>
       </div>
 
-        {error ? <span>ERROR</span> : null}
       <div className="w-full p-2">
         <button
           type="submit"

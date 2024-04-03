@@ -1,4 +1,4 @@
-import sql from "better-sqlite3";
+// import sql from "better-sqlite3";
 export const LINKS_ESTUDIANTE = [
     {href:"/ConvocatoriasEstudiante", key:"convocatorias_cerradas", label:"Convocatorias"},
     {href:"/MisConvocatorias", key:"mis_convocatorias", label:"Mis Convocatorias"},

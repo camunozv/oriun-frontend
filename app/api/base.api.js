@@ -1,10 +1,10 @@
 import { ACCESS_TOKEN } from "@/constants";
 import axios from "axios";
 
-// const BASE_URL = "http://127.0.0.1:8000/"; // Base URL from the APIS. *Correct
+const BASE_URL = "http://127.0.0.1:8000/"; // Base URL from the APIS. *Correct
 
 export const api_instance = axios.create({
-  baseURL: import.meta.env.BASE_API_URL,
+  baseURL: BASE_URL,
 });
 
 // We must add interceptor to add manually headers to our requests.

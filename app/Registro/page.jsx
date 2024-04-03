@@ -1,5 +1,4 @@
 import RegisterForm from "@/components/RegisterPage/RegisterForm";
-import Link from "next/link";
 import React from "react";
 
 // This component was created for TESTING PURPOSES ONLY & should not be included in the final production application.
