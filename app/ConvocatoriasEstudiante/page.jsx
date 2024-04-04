@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import Navbar from "@/components/Navbar/Navbar";
-import Filter from "@/components/ConvsPage/Filter";
-import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
-import GridConvocatorias from "@/components/ConvsPage/GridConvocatorias";
+import Navbar from "@/app/components/Navbar/Navbar";
+import Filter from "@/app/components/ConvsPage/Filter";
+import CardConvocatorias from "@/app/components/ConvsPage/CardConvocatorias";
+import GridConvocatorias from "@/app/components/ConvsPage/GridConvocatorias";
 import { getCalls } from "@/lib/calls";
 
 // async function shareMeal({ formData }) {

@@ -1,4 +1,4 @@
-import api_instance from "../base.api";
+import api_instance from "./base.api";
 
 const endpoint = "api-token/";
 

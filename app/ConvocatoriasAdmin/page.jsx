@@ -1,9 +1,8 @@
-// "use client";
+"use client";
 import React from "react";
-import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
-import Filter from "@/components/ConvsPage/Filter";
 import { getCalls } from "@/lib/calls";
-import GridConvocatorias from "@/components/ConvsPage/GridConvocatorias";
+import Filter from "@/app/components/ConvsPage/Filter";
+import GridConvocatorias from "@/app/components/ConvsPage/GridConvocatorias";
 
 async function ConvocatoriasAdminPage() {
   // En esta parte debe ir el hook que realiza la petición a la api
@@ -12,8 +11,6 @@ async function ConvocatoriasAdminPage() {
   // Actualmente se probó con 6 componentes para ver como quedaba el maquetado.
 
   const calls = await getCalls();
-   
-
   return (
     <>
       <Filter />

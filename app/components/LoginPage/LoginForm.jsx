@@ -3,32 +3,39 @@ import React from "react";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useRef } from "react";
-
-import { loginAPI } from "@/app/api/auth/loginForm";
+import { signIn } from "next-auth/react";
 
 // text-base: allows setting up the size of the font to the base size, which by default is 16px.
 // focus:outline-none: allows deleting default outline when an element receives focus
 // focus:ring-0: deletes the default ring that appears when users focus an element
 // focus:border-gray-600: sets the custom border when user focuses the element
 
+// Access token should only be stored in Memory and not in server or a cookie, for security reasons.
+
 function LoginForm() {
   const user_name = useRef();
   const user_password = useRef();
 
-  function submitHanlder(event) {
+  async function submitHanlder(event) {
     event.preventDefault();
 
     const entered_name = user_name.current.value;
     const entered_password = user_password.current.value;
 
-    // console.log(entered_name);
-    // console.log(entered_password);
+    try {
+      const response = await signIn("credentials", {
+        entered_name,
+        entered_password,
+      });
 
-    loginAPI.postUser(entered_name, entered_password).then((response) => {
-      console.log(response.data)
-    }).catch((error) => {
-      console.log(error)
-    })
+      if (response) {
+        console.log(response);
+      } else {
+        console.log("ZZZZZ");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/RegisterPage/RegisterForm";
+import RegisterForm from "@/app/components/RegisterPage/RegisterForm";
 import React from "react";
 
 // This component was created for TESTING PURPOSES ONLY & should not be included in the final production application.
