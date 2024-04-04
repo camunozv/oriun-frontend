@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Footer from "@/app/components/Footer/Footer";
-import Navbar from "@/app/components/Navbar/Navbar";
-import Convocatorias from "@/app/components/MainPage/Convocatorias";
-import PreguntasFrecuentes from "@/app/components/MainPage/PreguntasFrecuentes";
+import Footer from "@/components/Footer/Footer";
+import Navbar from "@/components/Navbar/Navbar";
+import Convocatorias from "@/components/MainPage/Convocatorias";
+import PreguntasFrecuentes from "@/components/MainPage/PreguntasFrecuentes";
 
 // By default tailwind comes with 5 breakpoints defined for responsive design.
 // sm, md, lg, xl, 2xl --> these are mobile first

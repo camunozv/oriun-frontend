@@ -1,5 +1,4 @@
-import LoginForm from "@/app/components/LoginPage/LoginForm";
-import Link from "next/link";
+import LoginForm from "@/components/LoginPage/LoginForm";
 import React from "react";
 
 function Ingreso() {

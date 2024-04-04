@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarConvocatorias from "@/app/components/ConvsPage/NavbarConvocatorias";
+import NavbarConvocatorias from "@/components/ConvsPage/NavbarConvocatorias";
 import { LINKS_ADMIN } from "@/constants";
 
 function ConvocatoriasAdminLayout({ children }) {

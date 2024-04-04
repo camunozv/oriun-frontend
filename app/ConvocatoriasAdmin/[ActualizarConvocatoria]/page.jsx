@@ -1,4 +1,4 @@
-import UpdateConvocatoria from "@/app/components/ConvsPage/UpdateConvocatoria";
+import UpdateConvocatoria from "@/components/ConvsPage/UpdateConvocatoria";
 import React from "react";
 
 // A useEffect hook must be used to load the information corresponding to the call that is willing to be modified

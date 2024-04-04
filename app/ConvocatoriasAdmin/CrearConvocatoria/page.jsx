@@ -1,5 +1,5 @@
 import React from "react";
-import CreationFormConvocatorias from "@/app/components/ConvsPage/CreationFormConvocatorias";
+import CreationFormConvocatorias from "@/components/ConvsPage/CreationFormConvocatorias";
 
 function CrearConvocatoria() {
   return (

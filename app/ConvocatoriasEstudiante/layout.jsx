@@ -1,6 +1,6 @@
 import React from "react";
-import Filter from "@/app/components/ConvsPage/Filter";
-import NavbarConvocatorias from "@/app/components/ConvsPage/NavbarConvocatorias";
+import Filter from "@/components/ConvsPage/Filter";
+import NavbarConvocatorias from "@/components/ConvsPage/NavbarConvocatorias";
 import { LINKS_ESTUDIANTE } from "@/constants";
 function ConvocatoriasEstudianteLayout({ children }) {
   {

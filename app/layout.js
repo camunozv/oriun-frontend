@@ -1,9 +1,6 @@
 import "./globals.css"; // this affects all classes and all components
 import { Lato, Lobster, Inter } from "next/font/google";
 
-import Navbar from "@/app/components/Navbar/Navbar";
-import Footer from "@/app/components/Footer/Footer";
-
 // It is possible to create different css file outside of the folders
 const lato = Lato({
   subsets: ["latin"],

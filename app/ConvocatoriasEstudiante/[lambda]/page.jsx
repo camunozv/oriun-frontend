@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import DetailsConvocatoria from "@/app/components/ConvsPage/DetailsConvocatoria";
+import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
 
 function ConvocatoriasDetailsPage({ params }) {
   const id = params.lambda;
