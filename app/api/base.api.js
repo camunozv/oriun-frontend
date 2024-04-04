@@ -1,7 +1,7 @@
 import { ACCESS_TOKEN } from "@/constants";
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8000/"; // Base URL from the APIS. *Correct
+const BASE_URL = process.env.BASE_API_URL;
 
 export const api_instance = axios.create({
   baseURL: BASE_URL,
