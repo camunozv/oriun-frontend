@@ -34,6 +34,8 @@ export const handler = NextAuth({
           );
           // return access tokens O9AwCbV9DchBx8qv+EJidnfp9069gQcriBXdskFUbas=
           console.log("successfully gotten user tokens");
+          console.log(user_tokens);
+          console.log(user_tokens.data.type_user);
           return user_tokens;
         } catch (error) {
           console.log(error);
