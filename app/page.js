@@ -1,8 +1,8 @@
-import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import Convocatorias from "@/components/MainPage/Convocatorias";
 import PreguntasFrecuentes from "@/components/MainPage/PreguntasFrecuentes";
+import { redirect } from "next/navigation";
 
 // By default tailwind comes with 5 breakpoints defined for responsive design.
 // sm, md, lg, xl, 2xl --> these are mobile first
@@ -31,6 +31,10 @@ import PreguntasFrecuentes from "@/components/MainPage/PreguntasFrecuentes";
 
 // <main className="relative overflow-hidden mx-auto max-w-[1580px] border-2 border-cyan-500">
 export default function Home() {
+  // Por lo pronto no vamos a usar la página de home, la única ruta que va a estar sin proteger
+  // va a ser "Ingreso" la cual nos va a permitir autenticarnos para usar el resto de páginas.
+
+  redirect("/Ingreso");
   return (
     <>
       <Navbar />
