@@ -10,5 +10,5 @@ export { default } from "next-auth/middleware";
 // to which the matchers apply.
 
 export const config = {
-  matcher: ['/ConvocatoriasAdmin', '/ConvocatoriasEstudiante'],
+  matcher: ["/", "/ConvocatoriasAdmin/:path*", "/ConvocatoriasEstudiante/:path*"],
 };
