@@ -1,9 +1,9 @@
 import React from "react";
 import Filter from "@/components/ConvsPage/Filter";
-import GridConvocatorias from "@/components/ConvsPage/GridConvocatorias";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/credentials_options";
 import { redirect } from "next/navigation";
+import GridConvocatorias from "@/components/ConvsPage/GridConvocatorias";
 
 function ConvocatoriasAdminPage() {
   // En esta parte debe ir el hook que realiza la petición a la api

@@ -1,8 +1,8 @@
-import UpdateConvocatoria from "@/components/ConvsPage/UpdateConvocatoria";
 import React from "react";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
 import { redirect } from "next/navigation";
+import UpdateConvocatoria from "@/components/ConvsPage/UpdateConvocatoria";
 
 // A useEffect hook must be used to load the information corresponding to the call that is willing to be modified
 // within the form, so that the user just has to update the informations he wants to change.

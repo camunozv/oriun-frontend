@@ -1,8 +1,8 @@
 import React from "react";
-import CreationFormConvocatorias from "@/components/ConvsPage/CreationFormConvocatorias";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
+import CreationFormConvocatorias from "@/components/ConvsPage/CreationFormConvocatorias";
 
 async function CrearConvocatoria() {
   try {

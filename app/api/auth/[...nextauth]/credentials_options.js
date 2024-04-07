@@ -1,5 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import { loginAPI } from "../../loginForm";
+import { apiLogin } from "../../userLogin";
 
 export const options = {
   pages: {
@@ -25,7 +25,7 @@ export const options = {
       async authorize(credentials) {
         try {
           // look for the user
-          const user_tokens = await loginAPI.postUser(
+          const user_tokens = await apiLogin.postUser(
             credentials.entered_name,
             credentials.entered_password
           );

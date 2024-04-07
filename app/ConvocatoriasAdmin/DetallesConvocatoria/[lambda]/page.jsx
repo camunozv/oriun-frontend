@@ -1,8 +1,8 @@
 import React from "react";
-import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
 import { redirect } from "next/navigation";
+import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
 
 async function ConvocatoriasAdminDetailsPage({ params }) {
   
@@ -21,7 +21,7 @@ async function ConvocatoriasAdminDetailsPage({ params }) {
     console.log('Error de sesion en detalles de convocatoria admin.');
     console.log(error);
     redirect('/Ingreso');
-    
+
   }
   return (
     <>
