@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Filter from "@/components/ConvsPage/Filter";
 import GridConvocatorias from "@/components/ConvsPage/GridConvocatorias";
