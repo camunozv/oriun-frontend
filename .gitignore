@@ -35,5 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# ignore dummy data base
-calls.db
+# endpoints documentation sprint 1
+Endpoints.md

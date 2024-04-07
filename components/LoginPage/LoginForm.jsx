@@ -4,7 +4,7 @@ import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useRef } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 // text-base: allows setting up the size of the font to the base size, which by default is 16px.
 // focus:outline-none: allows deleting default outline when an element receives focus
 // focus:ring-0: deletes the default ring that appears when users focus an element
@@ -29,13 +29,15 @@ function LoginForm() {
       });
 
       if (response.ok) {
-        const router = useRouter();
-        router.push("/ConvocatoriasAdmin");
+        redirect('/ConvocatoriasAdmin');
       } else {
-        console.log("ZZZZZ");
+        console.log("Aceso denegado, ");
+        redirect('/Ingreso');
       }
+
     } catch (error) {
       console.log(error);
+      redirect('/Ingreso');
     }
   }
 

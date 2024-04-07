@@ -1,7 +1,9 @@
+"use client";
 import React from 'react'
 import CardConvocatorias from './CardConvocatorias'
 
-function GridConvocatorias({calls, admin}) {
+async function GridConvocatorias({calls, admin}) {
+  
   
   return (
     <div className="grid grid-cols-3 w-full gap-6">
