@@ -10,15 +10,17 @@ import { redirect } from "next/navigation";
 // The form will consist in a simple text fiel which has loaded the id of the call. Then the user shall select
 // which information relative to the call he wanst to modify.
 async function ActualizarConvocatoria({ params }) {
-  const id = 0;
+  let id = 0;
 
   try {
     const session = await getServerSession(options);
     if (!session) {
       redirect("/Ingreso");
     }
-    params.ActualizarConvocatoria;
+    id = params.ActualizarConvocatoria;
   } catch (error) {
+    console.log(error);
+    console.log('Error de sesion en actualizar convocatoria admin.');
     redirect("/Ingreso");
   }
 

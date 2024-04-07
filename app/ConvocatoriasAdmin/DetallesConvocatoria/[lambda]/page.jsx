@@ -1,8 +1,28 @@
 import React from "react";
 import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
+import { redirect } from "next/navigation";
 
-function ConvocatoriasAdminDetailsPage({ params }) {
-  const id = params.lambda;
+async function ConvocatoriasAdminDetailsPage({ params }) {
+  
+  let id = 0;
+  try {
+    const session = await getServerSession(options);
+
+    if (!session) 
+    {
+      redirect('/Ingreso');
+    }
+
+    id = params.lambda;
+  } catch (error)
+  {
+    console.log('Error de sesion en detalles de convocatoria admin.');
+    console.log(error);
+    redirect('/Ingreso');
+    
+  }
   return (
     <>
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
