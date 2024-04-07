@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Link from "next/link";
 
 function PreguntasFrecuentes() {
   return (
-    <div>PreguntasFrecuentes</div>
+    <div>
+      <Link href="/preguntasfrecuentes">Preguntas Frecuentes</Link>
+    </div>
+    
   )
 }
 
