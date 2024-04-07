@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar/Navbar';
 import preguntas from '@/constants/preguntas.json';
-import { marked } from 'marked';
+
 
 function PreguntasFrec() {
   const [selectedMessage, setSelectedMessage] = useState("");
@@ -18,15 +18,16 @@ function PreguntasFrec() {
       <div className="grid grid-cols-2 gap-2">
         <div className="pl-5 pr-20 pt-10">
           <br />
-          {preguntas.map((item) => (
-            <>
+          {preguntas.map((item,index) => (
+            <div key={index}>
+            
             <button 
                 type='button' 
                 className={"flex transition-all items-center justify-center gap-3 border rounded-full w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"}
                 onClick={() => handleClick(item.title,item.ans_title)}>{item.title}</button>
               
               <br />
-            </>
+            </div>
             
           ))}
         </div>
