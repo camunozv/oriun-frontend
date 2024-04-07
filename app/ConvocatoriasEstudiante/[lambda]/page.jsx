@@ -1,5 +1,5 @@
 import React from "react";
-import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
+import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoriaAbierta";
 
 function ConvocatoriasDetailsPage({ params }) {
   const id = params.lambda;

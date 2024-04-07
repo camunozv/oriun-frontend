@@ -67,7 +67,7 @@ function Filter() {
         <input
           ref={convocatoria_fecha}
           type="date"
-          placeholder="Fecha"
+          datatype="DD-MM-YYYY"
           className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
         />
       </div>

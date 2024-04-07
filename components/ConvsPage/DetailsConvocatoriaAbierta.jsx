@@ -1,5 +1,5 @@
 "use client";
-import { apiDetailsClosedCall } from "@/app/api/Convocatorias/detailsClosedCall";
+import { apiDetailsOpenCall } from "@/app/api/Convocatorias/detailsClosedCall";
 import React from "react";
 
 /**
@@ -19,7 +19,7 @@ import React from "react";
   | `note`            | Text          | Additional notes about the call.May be null           |
  * 
  */
-async function DetailsConvocatoria({ idConvocatoria, name, description, available }) {
+async function DetailsConvocatoriaAbierta({ idConvocatoria, name, description, available }) {
 
   if (available == false) {
     return <div>Hello</div>;
@@ -75,4 +75,4 @@ async function DetailsConvocatoria({ idConvocatoria, name, description, availabl
   }
 }
 
-export default DetailsConvocatoria;
+export default DetailsConvocatoriaAbierta;
