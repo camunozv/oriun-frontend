@@ -34,7 +34,7 @@ export default function Home() {
   // Por lo pronto no vamos a usar la página de home, la única ruta que va a estar sin proteger
   // va a ser "Ingreso" la cual nos va a permitir autenticarnos para usar el resto de páginas.
   
-  redirect("/Ingreso");
+  redirect("/auth/signin");
   return (
     <>
       <Navbar />

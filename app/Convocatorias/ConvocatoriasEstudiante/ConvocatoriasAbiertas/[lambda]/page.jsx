@@ -1,7 +1,7 @@
 import React from "react";
 import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoriaAbierta";
 
-function ConvocatoriasDetailsPage({ params }) {
+function ConvocatoriasAbiertasDetailsPage({ params }) {
   const id = params.lambda;
   return (
     <>
@@ -19,4 +19,4 @@ function ConvocatoriasDetailsPage({ params }) {
   );
 }
 
-export default ConvocatoriasDetailsPage;
+export default ConvocatoriasAbiertasDetailsPage;

@@ -5,21 +5,22 @@ import { apiGetNewAccess } from "../../apiTokens/newTokens";
 export const options = {
   pages: {
     // signIn: "/Ingreso",
-    signOut: "/Ingreso",
+    // signOut: "/Ingreso",
+    newUser: "/Convocatorias"
   },
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {
         entered_name: {
-          label: "entered_name",
+          label: "Name",
           type: "text",
-          placeholder: "no_user",
+          placeholder: "no user",
         },
         entered_password: {
-          label: "entered_password",
+          label: "Password",
           type: "password",
-          placeholder: "000000",
+          placeholder: "your-password",
         },
       },
       // After retrieving the user object (which may contain user data) next js creates for us a session

@@ -2,7 +2,8 @@ export const ACCESS_TOKEN = 'access';
 export const REFRESH_TOKEN = 'refresh';
 
 export const LINKS_ESTUDIANTE = [
-    {href:"/ConvocatoriasEstudiante", key:"convocatorias_cerradas", label:"Convocatorias"},
+    {href:"/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas", key:"convocatorias_abiertas", label:"Convocatorias Abiertas"},
+    {href:"/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasCerradas", key:"convocatorias_cerradas", label:"Convocatorias Cerradas"},
     {href:"/MisConvocatorias", key:"mis_convocatorias", label:"Mis Convocatorias"},
 ]
 

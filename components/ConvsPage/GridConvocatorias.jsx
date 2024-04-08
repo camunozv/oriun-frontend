@@ -1,13 +1,8 @@
-// "use client";
-// import React, { useEffect, useState } from "react";
-// import CardConvocatorias from "./CardConvocatorias";
-// import { apiDetailsOpenCall } from "@/app/api/Convocatorias/detailsOpenCall";
-// import { apiFilterOpenCalls } from "@/app/api/Convocatorias/filterOpenCalls";
-// import { useSession } from "next-auth/react";
-// import { data } from "autoprefixer";
-// import { redirect } from "next/dist/server/api-utils";
+"use client";
+import React from "react";
+import CardConvocatorias from "./CardConvocatorias";
 
-function GridConvocatorias({ admin }) {
+function GridConvocatorias({ admin, calls }) {
   // const [my_calls, set_my_calls] = useState();
   // const { data: session, status } = useSession({
   //   required:true,
@@ -31,7 +26,7 @@ function GridConvocatorias({ admin }) {
   return (
     <div className="grid grid-cols-3 w-full gap-6">
       
-      {/* {my_calls?.map((call) => (
+      {calls?.map((call) => (
         
         <CardConvocatorias
           key={call.id}
@@ -41,8 +36,8 @@ function GridConvocatorias({ admin }) {
           description={call.description}
           university_id={call.university_id}
         />
-      ))} */}
-      ddd
+      ))}
+
     </div>
   );
 }

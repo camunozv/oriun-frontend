@@ -15,23 +15,29 @@ import { NextResponse } from "next/server";
 // Augments requests with user tokens
 export default withAuth(
   function middleware(request) {
-    console.log(request.nextUrl.pathname, 'my path');
-    console.log(request.nextauth.token, 'my token');
+    console.log(request.nextUrl.pathname, "my path");
+    console.log(request.nextauth.token, "my token");
 
     if (
-      request.nextUrl.pathname.startsWith("/ConvocatoriasAdmin") &&
-      request.nextauth.token?.type_user !== "employee"
+      request.nextUrl.pathname.startsWith(
+        "/Convocatorias/ConvocatoriasAdmin"
+      ) &&
+      request.nextauth.token.type_user === "student"
     ) {
       return NextResponse.rewrite(
-        new URL("/ConvocatoriasEstudiante", request.url)
+        new URL("/Convocatorias/ConvocatoriasEstudiante", request.url)
       );
     }
 
     if (
-      request.nextUrl.pathname.startsWith("/ConvocatoriasEstudiante") &&
-      request.nextauth.token?.type_user !== "student"
+      request.nextUrl.pathname.startsWith(
+        "/Convocatorias/ConvocatoriasEstudiante"
+      ) &&
+      request.nextauth.token.type_user === "employee"
     ) {
-      return NextResponse.rewrite(new URL("/ConvocatoriasAdmin", request.url));
+      return NextResponse.rewrite(
+        new URL("/Convocatorias/ConvocatoriasAdmin", request.url)
+      );
     }
   },
 

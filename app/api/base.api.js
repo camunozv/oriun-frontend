@@ -1,9 +1,7 @@
 import { ACCESS_TOKEN } from "@/constants";
 import axios from "axios";
-import { useSession } from "next-auth/react";
-import { options } from "./auth/[...nextauth]/credentials_options";
-import { redirect } from "next/navigation";
-import { getToken } from "next-auth/jwt";
+
+// procCes.env.BASE_API_URL
 
 const BASE_URL = "http://127.0.0.1:8000/";
 
@@ -19,7 +17,7 @@ export const api_instance = axios.create({
     
 //     return config;
 //   },
-//   (error) => {
+//   (error) => {process.env.BASE_API_URL
 //     return Promise.reject(error);
 //   }
 // );

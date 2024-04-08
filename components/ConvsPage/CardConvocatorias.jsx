@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Modal from "./Modal";
 import Link from "next/link";
+import Modal from "./Modal";
 
 function CardConvocatorias({
   key,
@@ -77,20 +77,14 @@ function CardConvocatorias({
           Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
           Flag Here Flag Here
         </div>
-        {/* <p className="font-semibold">Nombre</p>{" "} */}
-        {/** Aqui debe ir prop name de la convocatoria */}
-        {/* <p className="font-semibold">Universidad</p>{" "} */}
-        {/** Aqui debe ir prop university de la convocatoria */}
-        {/* <p className="font-semibold">País</p>{" "} */}
-        {/** Aqui debe ir prop country de la convocatoria */}
-
+        
         <p className="font-semibold">{description}</p>
         <p className="font-semibold">{university_id}</p>
         <p className="font-semibold">{available_slots}</p>
 
         <div className="flex justify-between items-center w-96">
           <div className="w-full p-2">
-            <Link href={`./ConvocatoriasEstudiante/${id}`}>
+            <Link href={`./ConvocatoriasEstudiante/ConvocatoriasAbiertas/${id}`}>
               <button
                 type="button"
                 className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"
