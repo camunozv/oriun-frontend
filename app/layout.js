@@ -1,3 +1,5 @@
+import { SessionProvider } from "next-auth/react";
+import AuthProvider from "./Context/AuthProvider";
 import "./globals.css"; // this affects all classes and all components
 import { Lato, Lobster, Inter } from "next/font/google";
 
@@ -26,7 +28,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <AuthProvider>
+        <body className={inter.className}>{children}</body>
+      </AuthProvider>
     </html>
   );
 }

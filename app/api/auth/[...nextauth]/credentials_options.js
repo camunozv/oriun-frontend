@@ -1,9 +1,10 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { apiLogin } from "../../userLogin";
+import { apiGetNewAccess } from "../../apiTokens/newTokens";
 
 export const options = {
   pages: {
-    signIn: "/Ingreso",
+    // signIn: "/Ingreso",
     signOut: "/Ingreso",
     newUser: "/ConvocatoriasAdmin",
   },
@@ -22,25 +23,21 @@ export const options = {
           placeholder: "000000",
         },
       },
+      // After retrieving the user object (which may contain user data) next js creates for us a session
+      // object which is stored in a session cookie, where the user data is encrypted.
       async authorize(credentials) {
         try {
           // look for the user
-          const user_tokens = await apiLogin.postUser(
+          const user = await apiLogin.postUser(
             credentials.entered_name,
             credentials.entered_password
           );
 
           console.log("successfully gotten user tokens");
+          console.log(user.data.type_user);
+          console.log(user.data)
 
-          // Safecly keep user tokens in local storage.
-          if (typeof window !== "undefined") {
-            localStorage.setItem("access", user_tokens.data.access);
-            localStorage.setItem("refresh", user_tokens.data.refresh);
-          }
-
-          console.log(user_tokens.data.type_user);
-          return user_tokens;
-          
+          return user;
         } catch (error) {
           console.log(error);
           return null;
@@ -49,15 +46,24 @@ export const options = {
     }),
   ],
 
-  // callbacks : {
-  //   // For persisting the role on the server side
-  //   // async jwt ({token, user}){
-  //   //   if (user) {
-  //   //    token.role = user.role
-  //   //   }
-  //   //   return token
-  //   // }
-  // }
+  callbacks: {
+    // For persisting the role on the server side
+    async jwt({ token, user }) {
+      if (user) {
+        token.access = user.data.access;
+        token.refresh = user.data.refresh;
+        console.log(token.access, 'token.access generado')
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      session.access = token.access;
+      session.refresh = token.refresh
+      
+      return session;
+    },
+  },
 };
 
 // After getting the user data we get the access & refresh tokens

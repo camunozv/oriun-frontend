@@ -28,7 +28,7 @@ function LoginForm() {
         entered_password,
       });
 
-      if (response.ok) {
+      if (response) {
         redirect('/ConvocatoriasAdmin');
       } else {
         console.log("Aceso denegado, ");

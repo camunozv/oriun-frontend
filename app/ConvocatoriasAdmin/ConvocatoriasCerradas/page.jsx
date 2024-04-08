@@ -1,7 +1,7 @@
 import React from "react";
 import Filter from "@/components/ConvsPage/Filter";
 import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/credentials_options";
+import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
 import { redirect } from "next/navigation";
 import GridConvocatorias from "@/components/ConvsPage/GridConvocatorias";
 
