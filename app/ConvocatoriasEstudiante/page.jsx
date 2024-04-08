@@ -19,7 +19,7 @@ async function ConvocatoriasEstudiantePage() {
 
   return (
     <>
-      <Filter />
+      {/* <Filter /> */}
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         {/* <GridConvocatorias admin={false} calls={calls} /> */}
         <h1 className="text-[40px] font-bold">

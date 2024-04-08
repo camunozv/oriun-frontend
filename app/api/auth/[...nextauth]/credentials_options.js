@@ -6,7 +6,6 @@ export const options = {
   pages: {
     // signIn: "/Ingreso",
     signOut: "/Ingreso",
-    newUser: "/ConvocatoriasAdmin",
   },
   providers: [
     CredentialsProvider({

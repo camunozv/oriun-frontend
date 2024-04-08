@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
+import { apiFilterOpenCalls } from "@/app/api/Convocatorias/filterOpenCalls";
 
 function ConvocatoriasAbiertasAdminPage() {
   // En esta parte debe ir el hook que realiza la petición a la api
@@ -25,7 +26,18 @@ function ConvocatoriasAbiertasAdminPage() {
   }
 
   // useEffect(() => {
-  //   apiFilterOpenCalls.getFilterOpenCalls();
+  //   async function getCallsInstant() {
+  //     const new_calls = await apiFilterOpenCalls.getFilterOpenCalls();
+  //   }
+
+  //   try {
+  //     set_my_calls(new_calls);
+  //     console.log("new calls setted up")
+  //   }catch(error)
+  //   {
+  //     console.log(error)
+  //   }
+
   // }, []);
 
   const token = session.access;
@@ -51,27 +63,51 @@ function ConvocatoriasAbiertasAdminPage() {
      * 987654321carlos */
 
     const params = new URLSearchParams({
-      university_name: conv_universidad,
-      country: conv_pais,
+      name_university: conv_universidad,
+      Country: conv_pais,
       language: conv_idioma,
     });
 
-    fetch(`http://127.0.0.1:8000/call/open/${params}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Eroorrr");
-        }
+    // fetch(`http://127.0.0.1:8000/call/open/${params}`, {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("Eroorrr");
+    //     }
 
-        set_my_calls(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //     set_my_calls(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    const my_headers = new Headers();
+
+    my_headers.append("Authorization", `Bearer ${token}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: my_headers,
+      redirect: "follow",
+    };
+
+    // fetch("http://127.0.0.1:8000/call/open/", requestOptions).then((response) => {
+    //   console.log(response)
+    // }).catch((error) => {
+    //   console.log(error)
+    // })
+
+    fetch(
+      "http://127.0.0.1:8000/call/open/?Country=Colombia&name_university=Universidad%20de%20los%20Andes",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error, 'hola'));
   }
 
   return (

@@ -1,6 +1,6 @@
 import api_instance from "../base.api";
 
-const endpoint = 'http://127.0.0.1:8000/call/open/';
+const endpoint = '/call/open/';
 
 /**
  * DESCRIPTION: 
@@ -19,7 +19,7 @@ const endpoint = 'http://127.0.0.1:8000/call/open/';
 export const apiFilterOpenCalls = {
   getFilterOpenCalls: function (country, language, name_university, token) {
     
-    return api_instance.get("http://127.0.0.1:8000/call/open/",{
+    return api_instance.get("/call/open/",{
       headers : {
         Authorization : `Bearer ${token}`
       },
@@ -31,6 +31,21 @@ export const apiFilterOpenCalls = {
     });
   },
 };
+// export const apiFilterOpenCalls = {
+//   getFilterOpenCalls: function (country, language, name_university, token) {
+    
+//     return api_instance.get("/call/open/",{
+//       headers : {
+//         Authorization : `Bearer ${token}`
+//       },
+//       params : {
+//         country: country,
+//         name_university: name_university,
+//         language: language
+//       }
+//     });
+//   },
+// };
 
 /***
  * 
