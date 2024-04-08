@@ -21,7 +21,7 @@ export const apiFilterOpenCalls = {
     
     return api_instance.get("http://127.0.0.1:8000/call/open/",{
       headers : {
-        Authorization : `Bearer${token}`
+        Authorization : `Bearer ${token}`
       },
       params : {
         country: country,

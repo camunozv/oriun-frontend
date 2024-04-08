@@ -52,6 +52,7 @@ export const options = {
       if (user) {
         token.access = user.data.access;
         token.refresh = user.data.refresh;
+        token.type_user = user.data.type_user;
         console.log(token.access, 'token.access generado')
       }
       return token;
@@ -60,7 +61,7 @@ export const options = {
     async session({ session, token }) {
       session.access = token.access;
       session.refresh = token.refresh
-      
+      session.type_user = token.type_user
       return session;
     },
   },

@@ -1,9 +1,8 @@
 "use client";
 import { apiFilterOpenCalls } from "@/app/api/Convocatorias/filterOpenCalls";
-import React, { useState } from "react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import CardConvocatorias from "./CardConvocatorias";
-import { set } from "mongoose";
+
 
 function Filter({ token }) {
   // const convocatoria_nombre = useRef();
