@@ -2,14 +2,10 @@ import React from "react";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
 import { redirect } from "next/navigation";
-import DetailsConvocatoriaAbierta from "@/components/ConvsPage/DetailsConvocatoria";
+import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
 
-/**
- * 
- * Aca se debe manipular el componente de details de tal manera que sepa cuando se estan viendo detalles de 
- * una convocatoria abierta o cerrada.
- */
-async function ConvocatoriasAdminDetailsPage({ params }) {
+
+async function ConvocatoriasAdminDetailsPage({ params, open }) {
   
   let id = 0;
   try {
@@ -32,7 +28,7 @@ async function ConvocatoriasAdminDetailsPage({ params }) {
   return (
     <>
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        <DetailsConvocatoriaAbierta
+        <DetailsConvocatoria
           idConvocatoria={id}
           name="Kospie"
           description={`Esta es una convocatoria destinada a estudiantes de ingeniería con un avance entre el 65% y el 80% de avance. Con el fin de realizar una movilidad académica en Alemania durante 1 año, 

@@ -8,8 +8,7 @@ export const LINKS_ESTUDIANTE = [
 ]
 
 export const LINKS_ADMIN = [
-    {href:"/Convocatorias/ConvocatoriasAdmin/ConvocatoriasAbiertas", key:"consultar_abiertas", label:"Convocatorias Abiertas"},
-    {href:"/Convocatorias/ConvocatoriasAdmin/ConvocatoriasCerradas", key:"consultar_cerradas", label:"Convocatorias Cerradas"},
+    {href:"/Convocatorias/ConvocatoriasAdmin/ConvocatoriasGeneral", key:"consultar_abiertas", label:"Convocatorias"},
     {href:"/Convocatorias/ConvocatoriasAdmin/CrearConvocatorias", key:"crear_convocatorias",label:"Crear Convocatorias"},
 ]
 
