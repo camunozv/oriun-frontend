@@ -9,6 +9,7 @@ const endpoint = "call/open/";
  * 
  * OUTPUTS:
  * 
+ * id
   | `university_name`   | String     | Name of the university offering the call.                    |
   | `country`           | String     | Country where the call is offered.                           |
   | `language`          | ArrayField | Language requirement for the call.                           |
@@ -30,36 +31,4 @@ export const apiFilterOpenCalls = {
     });
   },
 };
-// export const apiFilterOpenCalls = {
-//   getFilterOpenCalls: function (country, language, name_university, token) {
 
-//     return api_instance.get("/call/open/",{
-//       headers : {
-//         Authorization : `Bearer ${token}`
-//       },
-//       params : {
-//         country: country,
-//         name_university: name_university,
-//         language: language
-//       }
-//     });
-//   },
-// };
-
-/***
- * 
- * `${endpoint}`, {
-      params: {
-        name_university: name_university,
-        country: country,
-        language: language,
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
- */
-
-//Authorization
-//**nataly
-// 123456789 */

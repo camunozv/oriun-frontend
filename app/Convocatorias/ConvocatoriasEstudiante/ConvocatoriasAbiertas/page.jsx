@@ -1,12 +1,16 @@
 "use client";
+// Main dependencies
 import React from "react";
 import { redirect } from "next/navigation";
-import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { apiFilterOpenCalls } from "@/app/api/ConvocatoriasEstudiante/filterOpenCalls";
 
+// Imported components
+import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
+
 function ConvocatoriasAbiertasEstudiantePage() {
+  // UseSession allows accessing user data retrived by JWT in a client component.
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -15,16 +19,19 @@ function ConvocatoriasAbiertasEstudiantePage() {
   });
 
   if (!session) {
-    const [my_calls, set_my_calls] = useState([]);
+    const [available_calls, set_available_calls] = useState([]);
     const convocatoria_pais = useRef();
     const convocatoria_idioma = useRef();
     const convocatoria_universidad = useRef();
-    return <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">{status}...</main>;
+    return (
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        {status}...
+      </main>
+    );
   }
 
-  const [my_calls, set_my_calls] = useState([]);
+  const [available_calls, set_available_calls] = useState([]);
   const token = session.access;
-  console.log(token);
 
   const convocatoria_pais = useRef();
   const convocatoria_idioma = useRef();
@@ -44,11 +51,11 @@ function ConvocatoriasAbiertasEstudiantePage() {
         conv_universidad,
         token
       );
-      console.log(fetched_calls, "axios calls");
-      set_my_calls(fetched_calls.data);
+      // console.log(fetched_calls, "Student open calls");
+      set_available_calls(fetched_calls.data);
     } catch (error) {
-      console.log(error);
-    }    
+      console.log(error, "Error while fetching student open calls");
+    }
   }
 
   return (
@@ -92,14 +99,15 @@ function ConvocatoriasAbiertasEstudiantePage() {
 
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         <div className="grid grid-cols-3 w-full gap-6">
-          {my_calls?.map((call) => (
+          {available_calls?.map((call) => (
             <CardConvocatorias
-              key={call.university_name}
+              id={call.id}
               admin={false}
-              id={call.university_name}
-              available_slots={call.university_name}
-              description={call.language}
-              university_id={call.country}
+              university_name={call.university_name}
+              language={call.language}
+              country={call.country}
+              deadline={call.deadline}
+              open="Abiertas"
             />
           ))}
         </div>
@@ -109,57 +117,3 @@ function ConvocatoriasAbiertasEstudiantePage() {
 }
 
 export default ConvocatoriasAbiertasEstudiantePage;
-
-// En esta parte debe ir el hook que realiza la petición a la api
-// en la parte donde están las CardConvocatorias debe ir un ciclo que recorra el
-// arreglo con los datos recibidos y renderize multiples card convocatorias.
-// Actualmente se probó con 6 componentes para ver como quedaba el maquetado.
-
-// fetch(`http://127.0.0.1:8000/call/open/${params}`, {
-//   method: "GET",
-//   headers: {
-//     Authorization: `Bearer ${token}`,
-//   },
-// })
-//   .then((response) => {
-//     if (!response.ok) {
-//       throw new Error("Eroorrr");
-//     }
-
-//     set_my_calls(response.data);
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
-
-// try {
-//   const callz = await apiFilterOpenCalls.getFilterOpenCalls(
-//     conv_pais,
-//     conv_idioma,
-//     conv_universidad
-//   );
-//   set_my_calls(callz);
-// } catch (error) {
-//   console.log(error);
-// }
-
-// console.log(params);
-
-// const myHeaders = new Headers();
-// myHeaders.append("Authorization", `Bearer ${token}`);
-
-// const requestOptions = {
-//   method: "GET",
-//   headers: myHeaders,
-//   redirect: "follow",
-// };
-
-// const fetchUrl = "http://127.0.0.1:8000/";
-
-// fetch(`${fetchUrl}/call/open/${params}`, requestOptions)
-//   .then((response) => response.json())
-//   .then((result) => set_my_calls(result))
-//   .catch((error) => console.error(error));
-
-// const conv_universidad_request = conv_universidad.replace(/ /g, "%20");
-    // console.log(conv_universidad_request);

@@ -1,5 +1,4 @@
 "use client";
-import { apiDetailsOpenCall } from "@/app/api/Convocatorias/detailsClosedCall";
 import React from "react";
 
 /**
