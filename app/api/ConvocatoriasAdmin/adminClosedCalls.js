@@ -1,6 +1,6 @@
 import api_instance from "../base.api";
 
-const endpoint = "/call/api/closed";
+const endpoint = "call/api/closed/";
 
 export const apiAdminClosedCalls = {
 
@@ -11,5 +11,4 @@ export const apiAdminClosedCalls = {
             }
         })
     },
-    // postAdminClosedCalls XD
 }

@@ -3,7 +3,7 @@ import api_instance from "../base.api";
 const endpoint = "call/university_api/";
 
 export const apiAdminUniversity = {
-  getAdminUniversities: function (token) {
+  getAdminAllUniversities: function (token) {
     return api_instance.get(`${endpoint}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
