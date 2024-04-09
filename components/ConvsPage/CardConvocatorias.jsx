@@ -35,9 +35,9 @@ function CardConvocatorias({
             Flag Here Flag Here Flag Here Flag Here Flag Here
           </div>
 
-          <p className="font-semibold">{description}</p>
+          {/* <p className="font-semibold">{description}</p>
           <p className="font-semibold">{university_id}</p>
-          <p className="font-semibold">{available_slots}</p>
+          <p className="font-semibold">{available_slots}</p> */}
 
           <div className="flex justify-between items-center w-96">
             <div className="w-full p-2">

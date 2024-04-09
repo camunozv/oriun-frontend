@@ -1,6 +1,6 @@
 import api_instance from "../base.api";
 
-const endpoint = "call/api/closed/";
+const endpoint = "call/api/employee_filter/";
 
 export const apiAdminFilterCalls = {
   //     **Inputs:**

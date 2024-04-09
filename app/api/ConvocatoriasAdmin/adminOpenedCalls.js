@@ -10,7 +10,5 @@ export const apiAdminOpenedCalls = {
                 'Authorization' : `Bearer ${token}`
             }
         })
-    },
-
-    
+    },    
 }

@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import { useEffect } from "react";
 import { redirect } from "next/navigation";
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { apiFilterOpenCalls } from "@/app/api/Convocatorias/filterOpenCalls";
+import { apiAdminOpenedCalls } from "@/app/api/ConvocatoriasAdmin/adminOpenedCalls";
+import { apiAdminFilterCalls } from "@/app/api/ConvocatoriasAdmin/adminFilterCalls";
 
 function ConvocatoriasAbiertasAdminPage() {
   const { data: session, status } = useSession({
@@ -13,44 +14,90 @@ function ConvocatoriasAbiertasAdminPage() {
       redirect("/Ingreso");
     },
   });
+  const [my_calls, set_my_calls] = useState([]);
 
   if (!session) {
-    const [my_calls, set_my_calls] = useState([]);
-    const convocatoria_pais = useRef();
-    const convocatoria_idioma = useRef();
-    const convocatoria_universidad = useRef();
-    return <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">{status}...</main>;
+    useEffect(() => {},[]);
+    const active = useRef();
+    const university_id = useRef();
+    const university_name = useRef();
+    const deadline = useRef();
+    const format = useRef();
+    const study_level = useRef();
+    const year = useRef();
+    const semester = useRef();
+    const region = useRef();
+    const country = useRef();
+    const language = useRef();
+    return (
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        {status}...
+      </main>
+    );
   }
 
-  const [my_calls, set_my_calls] = useState([]);
-  const token = session.access;
-  console.log(token, 'admin token');
+  // When the page charges, we will see all the opened calls with this use effect
+  useEffect(() => {
 
-  const convocatoria_pais = useRef();
-  const convocatoria_idioma = useRef();
-  const convocatoria_universidad = useRef();
+    apiAdminOpenedCalls
+      .getAdminOpenedCalls(token)
+      .then((response) => set_my_calls(response.data))
+      .then(() => console.log(my_calls))
+      .catch((error) => console.log(error));
+
+  }, []);
+
+  const token = session.access;
+  const active = useRef();
+  const university_id = useRef();
+  const university_name = useRef();
+  const deadline = useRef();
+  const format = useRef();
+  const study_level = useRef();
+  const year = useRef();
+  const semester = useRef();
+  const region = useRef();
+  const country = useRef();
+  const language = useRef();
+
+  
 
   async function handleFilterSumbit(event) {
     event.preventDefault();
 
-    const conv_pais = convocatoria_pais.current.value;
-    const conv_idioma = convocatoria_idioma.current.value;
-    let conv_universidad = convocatoria_universidad.current.value;
+    const call_active = active.current.value;
+    const call_university_id = university_id.current.value;
+    const call_university_name = university_name.current.value;
+    const call_deadline = deadline.current.value;
+    const call_format = format.current.value;
+    const call_study_level = study_level.current.value;
+    const call_year = year.current.value;
+    const call_semester = semester.current.value;
+    const call_region = region.current.value;
+    const call_country = country.current.value;
+    const call_language = language.current.value;
 
     try {
-      const fetched_calls = await apiFilterOpenCalls.getFilterOpenCalls(
-        conv_pais,
-        conv_idioma,
-        conv_universidad,
+      const fetched_calls = await apiAdminFilterCalls.getAdminFilterCalls(
+        call_active,
+        call_university_id,
+        call_university_name,
+        call_deadline,
+        call_format,
+        call_study_level,
+        call_year,
+        call_semester,
+        call_region,
+        call_country,
+        call_language,
         token
       );
       console.log(fetched_calls, "axios calls");
       set_my_calls(fetched_calls.data);
     } catch (error) {
       console.log(error);
-    }    
+    }
   }
-
   return (
     <>
       <form
@@ -58,34 +105,197 @@ function ConvocatoriasAbiertasAdminPage() {
         className="overflow-hidden flex items-center justify-between mx-auto max-w-[1580px] max-h-[1024px] border-2 border-gray-10 p-5 shadow-lg rounded-xl"
       >
         <h2 className="block font-bold">Buscar Convocatorias Abiertas:</h2>
-        <div className="flex items-center justify-between gap-3">
-          <input
-            ref={convocatoria_pais}
-            type="text"
-            placeholder="País"
-            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-          />
 
-          <input
-            ref={convocatoria_idioma}
-            type="text"
-            placeholder="Idioma"
-            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-          />
-          <input
-            ref={convocatoria_universidad}
-            type="text"
-            placeholder="Nombre universidad"
-            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-          />
+        {/** */}
+
+        <div
+          id="information_grid"
+          className="p-6 grid grid-cols-3 justify-center items-center w-full gap-3"
+        >
+          {/**Active */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="active" className="font-semibold">
+              Estado
+            </label>
+            <select
+              ref={active}
+              id="active"
+              className="border-gray-300 border rounded-md outline-none bg-white"
+              placeholder="value 0"
+            >
+              <option value="">Selección...</option>
+              <option value={true}>Abierta</option>
+              <option value={false}>Cerrada</option>
+            </select>
+          </div>
+
+          {/**university_id */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="university_id" className="font-semibold">
+              id Universidad
+            </label>
+            <input
+              ref={university_id}
+              id="university_id"
+              type="text"
+              placeholder="código universidad /un número"
+              className="bg-white border-gray-300 border rounded-md outline-none"
+            />
+          </div>
+
+          {/**university_name */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="univeristy_name" className="font-semibold">
+              Nombre Universidad
+            </label>
+            <input
+              ref={university_name}
+              id="university_name"
+              type="text"
+              placeholder="universidad de destino"
+              className="bg-white border-gray-300 border rounded-md outline-none"
+            />
+          </div>
+
+          {/**deadline */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="deadline" className="font-semibold">
+              Cierre
+            </label>
+            <input
+              ref={deadline}
+              id="deadline"
+              type="date"
+              placeholder=""
+              className="bg-white border-gray-300 border rounded-md outline-none"
+            />
+          </div>
+
+          {/**format */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="format" className="font-semibold">
+              Formato
+            </label>
+            <select
+              ref={format}
+              id="format"
+              className="border-gray-300 border rounded-md outline-none bg-white"
+              placeholder="value 0"
+            >
+              <option value="">Selección...</option>
+              <option value="presencial">Presencial</option>
+              <option value="virtual">Virtual</option>
+              <option value="mixed">Híbrido</option>
+            </select>
+          </div>
+
+          {/**study_level */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="study_level" className="font-semibold">
+              Nivel de Estudios
+            </label>
+            <select
+              ref={study_level}
+              id="study_level"
+              className="border-gray-300 border rounded-md outline-none bg-white"
+              placeholder="value 0"
+            >
+              <option value="">Selección...</option>
+              <option value="pre_pregrado">Pregrado</option>
+              <option value="pos_postgrado">Maestría</option>
+              <option value="doc_doctorado">Doctorado</option>
+            </select>
+          </div>
+
+          {/**year */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="year" className="font-semibold">
+              Año
+            </label>
+            <input
+              ref={year}
+              id="year"
+              type="text"
+              placeholder="año-semestre"
+              className="bg-white border-gray-300 border rounded-md outline-none"
+            />
+          </div>
+
+          {/**semester */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="semester" className="font-semibold">
+              Semestre
+            </label>
+            <select
+              ref={semester}
+              id="semester"
+              className="border-gray-300 border rounded-md outline-none bg-white"
+              placeholder=""
+            >
+              <option value="">Selección...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+
+          {/**Región */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="region" className="font-semibold">
+              Región
+            </label>
+            <select
+              ref={region}
+              id="region"
+              className="border-gray-300 border rounded-md outline-none bg-white"
+              placeholder=""
+            >
+              <option value="">Selección...</option>
+              <option value="NA">Norte América</option>
+              <option value="LA">Latinoamérica</option>
+              <option value="EU">Europa</option>
+              <option value="OC">Oceanía</option>
+              <option value="AN">Uniandes</option>
+              <option value="SG">Convenio Sigueme/Nacional</option>
+            </select>
+          </div>
+
+          {/**Country */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="country" className="font-semibold">
+              País
+            </label>
+            <input
+              ref={country}
+              id="country"
+              type="text"
+              placeholder="País"
+              className="border-gray-300 border rounded-md outline-none"
+            />
+          </div>
+
+          {/**language */}
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label htmlFor="language" className="font-semibold">
+              Idioma
+            </label>
+            <input
+              ref={language}
+              id="language"
+              type="text"
+              placeholder=""
+              className="border-gray-300 border rounded-md outline-none"
+            />
+          </div>
         </div>
+
+        {/** */}
 
         <div className="w-40">
           <button
             type="submit"
             className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
           >
-            Filtrar
+            Buscar
           </button>
         </div>
       </form>
@@ -162,4 +372,4 @@ export default ConvocatoriasAbiertasAdminPage;
 //   .catch((error) => console.error(error));
 
 // const conv_universidad_request = conv_universidad.replace(/ /g, "%20");
-    // console.log(conv_universidad_request);
+// console.log(conv_universidad_request);
