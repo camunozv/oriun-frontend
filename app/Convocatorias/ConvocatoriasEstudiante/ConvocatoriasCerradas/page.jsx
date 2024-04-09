@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { apiFilterOpenCalls } from "@/app/api/Convocatorias/filterOpenCalls";
+import { apiFilterClosedCalls } from "@/app/api/ConvocatoriasEstudiante/filterClosedCalls";
 
 function ConvocatoriasCerradasEstudiantePage() {
   const { data: session, status } = useSession({
@@ -19,7 +19,11 @@ function ConvocatoriasCerradasEstudiantePage() {
     const convocatoria_pais = useRef();
     const convocatoria_idioma = useRef();
     const convocatoria_universidad = useRef();
-    return <div>{status}</div>;
+    return (
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        {status}...
+      </main>
+    );
   }
 
   const [my_calls, set_my_calls] = useState([]);
@@ -35,23 +39,23 @@ function ConvocatoriasCerradasEstudiantePage() {
 
     const conv_pais = convocatoria_pais.current.value;
     const conv_idioma = convocatoria_idioma.current.value;
-    let conv_universidad = convocatoria_universidad.current.value;
+    const conv_universidad = convocatoria_universidad.current.value;
 
     try {
-      const callz = await apiFilterOpenCalls.getFilterOpenCalls(
+      const fetched_calls = await apiFilterClosedCalls.getFilterClosedCalls(
         conv_pais,
         conv_idioma,
         conv_universidad,
         token
       );
-      console.log(callz, "axios calls");
-      set_my_calls(callz.data);
+
+      console.log(fetched_calls, "axios calls");
+      set_my_calls(fetched_calls.data);
     } catch (error) {
       console.log(error);
     }
-
-    const conv_universidad_request = conv_universidad.replace(/ /g, "%20");
-    console.log(conv_universidad_request);
+    // const conv_universidad_request = conv_universidad.replace(/ /g, "%20");
+    // console.log(conv_universidad_request);
   }
 
   return (
@@ -94,13 +98,11 @@ function ConvocatoriasCerradasEstudiantePage() {
       </form>
 
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        {/* <GridConvocatorias admin={true} calls={my_calls}/> */}
-
         <div className="grid grid-cols-3 w-full gap-6">
           {my_calls?.map((call) => (
             <CardConvocatorias
               key={call.university_name}
-              admin={true}
+              admin={false}
               id={call.university_name}
               available_slots={call.university_name}
               description={call.language}

@@ -8,8 +8,9 @@ export const LINKS_ESTUDIANTE = [
 ]
 
 export const LINKS_ADMIN = [
-    {href:"/ConvocatoriasAdmin", key:"consultar_convocatorias", label:"Convocatorias"},
-    {href:"/ConvocatoriasAdmin/CrearConvocatoria", key:"crear_convocatorias",label:"Crear Convocatorias"},
+    {href:"/Convocatorias/ConvocatoriasAdmin/ConvocatoriasAbiertas", key:"consultar_abiertas", label:"Convocatorias Abiertas"},
+    {href:"/Convocatorias/ConvocatoriasAdmin/ConvocatoriasCerradas", key:"consultar_cerradas", label:"Convocatorias Cerradas"},
+    {href:"/Convocatorias/ConvocatoriasAdmin/CrearConvocatorias", key:"crear_convocatorias",label:"Crear Convocatorias"},
 ]
 
 // Dentro de consultar convocatorias se mostraran las convocatorias publicadas, para las que habrá un botón de opciones

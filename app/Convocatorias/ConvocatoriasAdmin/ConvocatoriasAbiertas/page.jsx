@@ -7,11 +7,6 @@ import { useSession } from "next-auth/react";
 import { apiFilterOpenCalls } from "@/app/api/Convocatorias/filterOpenCalls";
 
 function ConvocatoriasAbiertasAdminPage() {
-  // En esta parte debe ir el hook que realiza la petición a la api
-  // en la parte donde están las CardConvocatorias debe ir un ciclo que recorra el
-  // arreglo con los datos recibidos y renderize multiples card convocatorias.
-  // Actualmente se probó con 6 componentes para ver como quedaba el maquetado.
-
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -19,29 +14,17 @@ function ConvocatoriasAbiertasAdminPage() {
     },
   });
 
-  const [my_calls, set_my_calls] = useState([]);
-
-  if (status == "loading") {
-    return <div>loading...</div>;
+  if (!session) {
+    const [my_calls, set_my_calls] = useState([]);
+    const convocatoria_pais = useRef();
+    const convocatoria_idioma = useRef();
+    const convocatoria_universidad = useRef();
+    return <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">{status}...</main>;
   }
 
-  // useEffect(() => {
-  //   async function getCallsInstant() {
-  //     const new_calls = await apiFilterOpenCalls.getFilterOpenCalls();
-  //   }
-
-  //   try {
-  //     set_my_calls(new_calls);
-  //     console.log("new calls setted up")
-  //   }catch(error)
-  //   {
-  //     console.log(error)
-  //   }
-
-  // }, []);
-
+  const [my_calls, set_my_calls] = useState([]);
   const token = session.access;
-  console.log(token);
+  console.log(token, 'admin token');
 
   const convocatoria_pais = useRef();
   const convocatoria_idioma = useRef();
@@ -50,64 +33,22 @@ function ConvocatoriasAbiertasAdminPage() {
   async function handleFilterSumbit(event) {
     event.preventDefault();
 
-    // const conv_nombre = convocatoria_nombre.current.value;
     const conv_pais = convocatoria_pais.current.value;
     const conv_idioma = convocatoria_idioma.current.value;
-    const conv_universidad = convocatoria_universidad.current.value;
+    let conv_universidad = convocatoria_universidad.current.value;
 
-    // console.log(conv_nombre);
-    console.log(conv_pais);
-    console.log(conv_idioma);
-    console.log(conv_universidad);
-    /**
-     * 987654321carlos */
-
-    const params = new URLSearchParams({
-      name_university: conv_universidad,
-      Country: conv_pais,
-      language: conv_idioma,
-    });
-
-    // fetch(`http://127.0.0.1:8000/call/open/${params}`, {
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("Eroorrr");
-    //     }
-
-    //     set_my_calls(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    const my_headers = new Headers();
-
-    my_headers.append("Authorization", `Bearer ${token}`);
-
-    const requestOptions = {
-      method: "GET",
-      headers: my_headers,
-      redirect: "follow",
-    };
-
-    // fetch("http://127.0.0.1:8000/call/open/", requestOptions).then((response) => {
-    //   console.log(response)
-    // }).catch((error) => {
-    //   console.log(error)
-    // })
-
-    fetch(
-      "http://127.0.0.1:8000/call/open/?Country=Colombia&name_university=Universidad%20de%20los%20Andes",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error, 'hola'));
+    try {
+      const fetched_calls = await apiFilterOpenCalls.getFilterOpenCalls(
+        conv_pais,
+        conv_idioma,
+        conv_universidad,
+        token
+      );
+      console.log(fetched_calls, "axios calls");
+      set_my_calls(fetched_calls.data);
+    } catch (error) {
+      console.log(error);
+    }    
   }
 
   return (
@@ -116,7 +57,7 @@ function ConvocatoriasAbiertasAdminPage() {
         onSubmit={handleFilterSumbit}
         className="overflow-hidden flex items-center justify-between mx-auto max-w-[1580px] max-h-[1024px] border-2 border-gray-10 p-5 shadow-lg rounded-xl"
       >
-        <h2 className="block font-bold">Buscar Convocatorias:</h2>
+        <h2 className="block font-bold">Buscar Convocatorias Abiertas:</h2>
         <div className="flex items-center justify-between gap-3">
           <input
             ref={convocatoria_pais}
@@ -150,20 +91,15 @@ function ConvocatoriasAbiertasAdminPage() {
       </form>
 
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        {/* <Filter token={token} />
-        {/* <h1 className="text-[40px] font-bold">
-          Conv grid in comments; endpoints pending to be implemented.
-        </h1> */}
-
         <div className="grid grid-cols-3 w-full gap-6">
           {my_calls?.map((call) => (
             <CardConvocatorias
               key={call.university_name}
-              admin={admin}
+              admin={true}
               id={call.university_name}
-              available_slots={call.language}
-              description={call.deadline}
-              university_id={call.university_name}
+              available_slots={call.university_name}
+              description={call.language}
+              university_id={call.country}
             />
           ))}
         </div>
@@ -173,3 +109,57 @@ function ConvocatoriasAbiertasAdminPage() {
 }
 
 export default ConvocatoriasAbiertasAdminPage;
+
+// En esta parte debe ir el hook que realiza la petición a la api
+// en la parte donde están las CardConvocatorias debe ir un ciclo que recorra el
+// arreglo con los datos recibidos y renderize multiples card convocatorias.
+// Actualmente se probó con 6 componentes para ver como quedaba el maquetado.
+
+// fetch(`http://127.0.0.1:8000/call/open/${params}`, {
+//   method: "GET",
+//   headers: {
+//     Authorization: `Bearer ${token}`,
+//   },
+// })
+//   .then((response) => {
+//     if (!response.ok) {
+//       throw new Error("Eroorrr");
+//     }
+
+//     set_my_calls(response.data);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+// try {
+//   const callz = await apiFilterOpenCalls.getFilterOpenCalls(
+//     conv_pais,
+//     conv_idioma,
+//     conv_universidad
+//   );
+//   set_my_calls(callz);
+// } catch (error) {
+//   console.log(error);
+// }
+
+// console.log(params);
+
+// const myHeaders = new Headers();
+// myHeaders.append("Authorization", `Bearer ${token}`);
+
+// const requestOptions = {
+//   method: "GET",
+//   headers: myHeaders,
+//   redirect: "follow",
+// };
+
+// const fetchUrl = "http://127.0.0.1:8000/";
+
+// fetch(`${fetchUrl}/call/open/${params}`, requestOptions)
+//   .then((response) => response.json())
+//   .then((result) => set_my_calls(result))
+//   .catch((error) => console.error(error));
+
+// const conv_universidad_request = conv_universidad.replace(/ /g, "%20");
+    // console.log(conv_universidad_request);

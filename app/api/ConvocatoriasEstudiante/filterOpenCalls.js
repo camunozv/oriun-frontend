@@ -1,6 +1,6 @@
 import api_instance from "../base.api";
 
-const endpoint = 'call/open/';
+const endpoint = "call/open/";
 
 /**
  * DESCRIPTION: 
@@ -18,22 +18,21 @@ const endpoint = 'call/open/';
 
 export const apiFilterOpenCalls = {
   getFilterOpenCalls: function (country, language, name_university, token) {
-    
-    return api_instance.get(`${endpoint}` ,{
-      headers : {
-        'Authorization' : `Bearer ${token}`
+    return api_instance.get(`${endpoint}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
       },
-      params : {
+      params: {
         country: country,
         name_university: name_university,
-        language: language
-      }
+        language: language,
+      },
     });
   },
 };
 // export const apiFilterOpenCalls = {
 //   getFilterOpenCalls: function (country, language, name_university, token) {
-    
+
 //     return api_instance.get("/call/open/",{
 //       headers : {
 //         Authorization : `Bearer ${token}`
