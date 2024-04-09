@@ -1,11 +1,8 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { apiLogin } from "../../userLogin";
-import { apiGetNewAccess } from "../../apiTokens/newTokens";
 
 export const options = {
   pages: {
-    // signIn: "/Ingreso",
-    // signOut: "/Ingreso",
     newUser: "/Convocatorias"
   },
   providers: [
@@ -15,7 +12,7 @@ export const options = {
         entered_name: {
           label: "Name",
           type: "text",
-          placeholder: "no user",
+          placeholder: "your-username",
         },
         entered_password: {
           label: "Password",
@@ -53,7 +50,7 @@ export const options = {
         token.access = user.data.access;
         token.refresh = user.data.refresh;
         token.type_user = user.data.type_user;
-        console.log(token.access, 'token.access generado')
+        
       }
       return token;
     },
@@ -79,3 +76,11 @@ export const options = {
 // 1. next-auth.sesion-token : which allows accessing session data and knowing if the user is still logged
 // in in a browser, client side session management.
 // 2. next-auth.csfr-token: which protect us from cross side scripting attacks.
+
+// pages: {
+//   signIn: '/auth/signin',
+//   signOut: '/auth/signout',
+//   error: '/auth/error', // Error code passed in query string as ?error=
+//   verifyRequest: '/auth/verify-request', // (used for check email message)
+//   newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+// }

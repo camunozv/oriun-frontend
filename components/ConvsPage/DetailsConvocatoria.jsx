@@ -1,8 +1,7 @@
-"use client"
 import React from "react";
 
 function DetailsConvocatoria({ call, admin, id, open }) {
-  console.log(call);
+
   if (admin == true) {
     return <div>Hello</div>;
   } else if (call && !open) {
@@ -13,9 +12,6 @@ function DetailsConvocatoria({ call, admin, id, open }) {
         <h2 className="font-bold text-[30px] flex items-center justify-between">
           Oferentes: {call.university_name}
         </h2>
-        {/* <h3 className="font-bold text-[30px] flex items-center justify-between">
-          Apertura: {call.begin_date}
-        </h3>{" "} */}
         <br />
         <h3 className="font-bold text-[30px] flex items-center justify-between">
           Cerrada desde: {call.deadline}
