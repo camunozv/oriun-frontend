@@ -1,21 +1,45 @@
-import React from "react";
-import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoriaAbierta";
+"use client";
+// Main dependencies
+import { useEffect, useState } from "react";
+import { apiDetailsOpenCall } from "@/app/api/ConvocatoriasEstudiante/detailsOpenCall";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+// Imported components
+import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
 
 function ConvocatoriasAbiertasDetailsPage({ params }) {
-  const id = params.lambda;
-  return (
-    <>
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/Convocatorias");
+    },
+  });
+
+  const [call, set_call] = useState({});
+
+  if (!session) {
+    useEffect(() => {}, []);
+    return (
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        <DetailsConvocatoria
-          idConvocatoria={id}
-          name="Kospie"
-          description={`Esta es una convocatoria destinada a estudiantes de ingeniería con un avance entre el 65% y el 80% de avance. Con el fin de realizar una movilidad académica en Alemania durante 1 año, 
-          para afianzar el idioma alemán y 
-          realizar prácticas estudiantiles en la ciudad de destino. 
-          Para mejorar el acceso al mundo laboral.`}
-        />
+        {status}...
       </main>
-    </>
+    );
+  }
+
+  const token = session.access;
+  const id = params.lambda;
+
+  useEffect(() => {
+    apiDetailsOpenCall
+      .getDetailsOpenCall(id, token)
+      .then((response) => set_call(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  return (
+    <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+      <DetailsConvocatoria call={call} admin={false} id={id} />
+    </main>
   );
 }
 

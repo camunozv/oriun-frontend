@@ -2,7 +2,7 @@ import React from "react";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
 import { redirect } from "next/navigation";
-import DetailsConvocatoriaAbierta from "@/components/ConvsPage/DetailsConvocatoriaAbierta";
+import DetailsConvocatoriaAbierta from "@/components/ConvsPage/DetailsConvocatoria";
 
 /**
  * 

@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { apiFilterOpenCalls } from "@/app/api/ConvocatoriasEstudiante/filterOpenCalls";
-
 // Imported components
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 
@@ -51,7 +50,6 @@ function ConvocatoriasAbiertasEstudiantePage() {
         conv_universidad,
         token
       );
-      // console.log(fetched_calls, "Student open calls");
       set_available_calls(fetched_calls.data);
     } catch (error) {
       console.log(error, "Error while fetching student open calls");
