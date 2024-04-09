@@ -1,4 +1,4 @@
-"use client";
+"use client"; // MODULE COMPLETED
 // Main dependencies
 import React from "react";
 import { redirect } from "next/navigation";
@@ -90,7 +90,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
             type="submit"
             className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
           >
-            Filtrar
+            Buscar
           </button>
         </div>
       </form>

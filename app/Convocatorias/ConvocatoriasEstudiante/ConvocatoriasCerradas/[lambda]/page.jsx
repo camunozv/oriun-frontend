@@ -6,8 +6,9 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 // Imported components
 import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
+import { apiDetailsClosedCall } from "@/app/api/ConvocatoriasEstudiante/detailsClosedCall";
 
-function ConvocatoriasAbiertasDetailsPage({ params }) {
+function ConvocatoriasCerradasDetailsPage({ params }) {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -30,17 +31,16 @@ function ConvocatoriasAbiertasDetailsPage({ params }) {
   const id = params.lambda;
 
   useEffect(() => {
-    apiDetailsOpenCall
-      .getDetailsOpenCall(id, token)
+    apiDetailsClosedCall.getDetailsClosedCall(id, token)
       .then((response) => set_call(response.data))
       .catch((error) => console.log(error));
   }, []);
 
   return (
     <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-      <DetailsConvocatoria call={call} admin={false} id={id} open = {true}/>
+      <DetailsConvocatoria call={call} admin={false} id={id} open={false}/>
     </main>
   );
 }
 
-export default ConvocatoriasAbiertasDetailsPage;
+export default ConvocatoriasCerradasDetailsPage;
