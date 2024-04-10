@@ -43,7 +43,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
     const conv_idioma = convocatoria_idioma.current.value;
     let conv_universidad = convocatoria_universidad.current.value;
 
-    console.log(conv_pais)
+    console.log(conv_pais);
     try {
       const fetched_calls = await apiFilterOpenCalls.getFilterOpenCalls(
         conv_pais,
@@ -52,7 +52,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
         token
       );
       set_available_calls(fetched_calls.data);
-      console.log(fetched_calls.data)
+      console.log(fetched_calls.data);
     } catch (error) {
       console.log(error, "Error while fetching student open calls");
     }
@@ -74,17 +74,30 @@ function ConvocatoriasAbiertasEstudiantePage() {
           />
 
           <input
-            ref={convocatoria_idioma}
-            type="text"
-            placeholder="Idioma"
-            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-          />
-          <input
             ref={convocatoria_universidad}
             type="text"
             placeholder="Nombre universidad"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
           />
+
+          <select
+            ref={convocatoria_idioma}
+            id="language"
+            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1 bg-white"
+            placeholder=""
+          >
+            <option value="">Selección...</option>
+            <option value="en">Inglés</option>
+            <option value="es">Español</option>
+            <option value="fr">Francés</option>
+            <option value="pt">Portugués</option>
+            <option value="de">Alemán</option>
+            <option value="it">Italiano</option>
+            <option value="ko">Coreano</option>
+            <option value="ru">Ruso</option>
+            <option value="zh">Chino</option>
+            <option value="xx">Otro</option>
+          </select>
         </div>
 
         <div className="w-40">

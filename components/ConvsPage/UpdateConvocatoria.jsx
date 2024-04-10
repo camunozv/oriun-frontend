@@ -1,18 +1,6 @@
 "use client;";
 import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
 import { useRef } from "react";
-// Actualizar me redirige a la página donde va a estar la convocatoria que yo necesito modificar, que va a ser
-// una ruta dinámica. Dentro de esa ruta voy a tener un componente que recibe como parámetro el id que viene en
-// la ruta dinámica, de tal manera que haga un fetch instantáneo de la convocatoria que se quiere actualizar.
-
-// 1. Redirigir desde la card de convocatoria usando el botón de actualizar, usando una ruta dinámica.
-// 2. El componente que permite actualizar convocatorias va a tomar apenas cargue la página el id que se encuentra en
-// la ruta dinámica.
-// 3. El componente hará automáticamente un fetch con use effect para traer a la convocatoria tras bambalinas
-// 4. Se le pedirá al usuario que digite solo la información que desea actualizar.
-// 5. Se actualiza la convocatoria.
-// 6. Debe actualizarse la convocatoria solo en los campos que desea modificar el usuario, la demás información
-// se retorna al backend tal cual como está.
 
 function UpdateConvocatoria({ id, token }) {
   const universidad_id = useRef();
@@ -58,22 +46,22 @@ function UpdateConvocatoria({ id, token }) {
     const conv_minimum_papa_winner = minimum_papa_winner.current.value;
     const conv_selected = selected.current.value;
 
-    console.log(conv_begin_date);
-    console.log(conv_deadline);
-    console.log(conv_min_advance);
-    console.log(conv_min_papa);
-    console.log(conv_year);
-    console.log(conv_study_level);
-    console.log(conv_description);
-    console.log(conv_available_slots);
-    console.log(conv_note);
-    console.log(conv_active);
-    console.log(conv_format);
-    console.log(conv_semester);
-    console.log(conv_language);
-    console.log(conv_highest_papa_winner);
-    console.log(conv_minimum_papa_winner);
-    console.log(conv_selected);
+    // console.log(conv_begin_date);
+    // console.log(conv_deadline);
+    // console.log(conv_min_advance);
+    // console.log(conv_min_papa);
+    // console.log(conv_year);
+    // console.log(conv_study_level);
+    // console.log(conv_description);
+    // console.log(conv_available_slots);
+    // console.log(conv_note);
+    // console.log(conv_active);
+    // console.log(conv_format);
+    // console.log(conv_semester);
+    // console.log(conv_language);
+    // console.log(conv_highest_papa_winner);
+    // console.log(conv_minimum_papa_winner);
+    // console.log(conv_selected);
 
     apiAdminCalls.putAdminCallsUpdate(
       id,
@@ -108,7 +96,7 @@ function UpdateConvocatoria({ id, token }) {
             Convocatoria Selecionada : {id}
           </label>
           <p className="text-grey-500">
-            Por favor solo escriba en los campos que desea actualizar.
+            Todos los campos deben ser llenados.
           </p>
         </div>
         <div

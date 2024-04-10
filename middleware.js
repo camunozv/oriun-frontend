@@ -3,9 +3,6 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(request) {
-    console.log(request.nextUrl.pathname, "my path");
-    console.log(request.nextauth.token, "my token");
-
     if (
       request.nextUrl.pathname.startsWith(
         "/Convocatorias/ConvocatoriasAdmin"
@@ -35,8 +32,6 @@ export default withAuth(
     },
   }
 );
-
-
 // NICE NOTES ABOUT WITHAUTH & MIDDLEWARE SPECIAL FILE:
 // Without a defined matcher this line applies next auth to the entire project.
 // export { default } from "next-auth/middleware";

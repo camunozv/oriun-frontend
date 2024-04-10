@@ -1,4 +1,0 @@
-call/ api/opened/ [name='calls_opened']
-call/ api/closed/ [name='calls_closed']
-call/ api/employee_filter/ [name='calls_employee_filter']
-call/ university_api/ [name='univ_list']

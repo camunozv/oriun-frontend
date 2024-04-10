@@ -1,24 +1,36 @@
-import React from "react";
-import { getServerSession } from "next-auth";
+"use client";
+import { useEffect } from "react";
 import { redirect } from "next/navigation";
-import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
 import CreationFormConvocatorias from "@/components/ConvsPage/CreationFormConvocatorias";
+import { useSession } from "next-auth/react";
 
-async function CrearConvocatoria() {
+function CrearConvocatoria() {
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/Convocatorias");
+    },
+  });
 
-  const session = await getServerSession(options);
-  if (!session) {
-    redirect("/Ingreso");
-  }
+  let token = session?.access;
 
-  
-  return (
-    <>
+  useEffect(() => {
+    token = session.access;
+  }, [token]);
+
+  if (!token) {
+    return (
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        <CreationFormConvocatorias />
+        <div>{status}...</div>
       </main>
-    </>
-  );
+    );
+  } else {
+    return (
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        <CreationFormConvocatorias token={token} />
+      </main>
+    );
+  }
 }
 
 export default CrearConvocatoria;

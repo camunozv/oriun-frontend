@@ -96,7 +96,7 @@ function ConvocatoriasGeneralAdminPage() {
   }
   return (
     <>
-      <div className="flex flex-col justify-center items-center w-full rounded-lg shadow-lg p-6">
+      <div className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 flex flex-col justify-center items-center w-full rounded-lg shadow-lg p-6">
         <form onSubmit={handleFilterSumbit} className="w-full">
           {/** */}
 
@@ -279,13 +279,25 @@ function ConvocatoriasGeneralAdminPage() {
               <label htmlFor="language" className="font-semibold">
                 Idioma
               </label>
-              <input
+
+              <select
                 ref={language}
                 id="language"
-                type="text"
+                className="border-gray-300 border rounded-md outline-none bg-white"
                 placeholder=""
-                className="border-gray-300 border rounded-md outline-none"
-              />
+              >
+                <option value="">Selección...</option>
+                <option value="en">Inglés</option>
+                <option value="es">Español</option>
+                <option value="fr">Francés</option>
+                <option value="pt">Portugués</option>
+                <option value="de">Alemán</option>
+                <option value="it">Italiano</option>
+                <option value="ko">Coreano</option>
+                <option value="ru">Ruso</option>
+                <option value="zh">Chino</option>
+                <option value="xx">Otro</option>
+              </select>
             </div>
           </div>
 
@@ -304,11 +316,11 @@ function ConvocatoriasGeneralAdminPage() {
         <div className="grid grid-cols-3 w-full gap-6">
           {my_calls?.map((call) => (
             <CardConvocatorias
-              id = {call.id}
+              id={call.id}
               semester={call.semester}
               year={call.year}
               language={call.language}
-              admin = {true}
+              admin={true}
               study_level={call.study_level}
             />
           ))}

@@ -72,17 +72,30 @@ function ConvocatoriasCerradasEstudiantePage() {
           />
 
           <input
-            ref={convocatoria_idioma}
-            type="text"
-            placeholder="Idioma"
-            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-          />
-          <input
             ref={convocatoria_universidad}
             type="text"
             placeholder="Nombre universidad"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
           />
+
+          <select
+            ref={convocatoria_idioma}
+            id="language"
+            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1 bg-white"
+            placeholder=""
+          >
+            <option value="">Selección...</option>
+            <option value="en">Inglés</option>
+            <option value="es">Español</option>
+            <option value="fr">Francés</option>
+            <option value="pt">Portugués</option>
+            <option value="de">Alemán</option>
+            <option value="it">Italiano</option>
+            <option value="ko">Coreano</option>
+            <option value="ru">Ruso</option>
+            <option value="zh">Chino</option>
+            <option value="xx">Otro</option>
+          </select>
         </div>
 
         <div className="w-40">
@@ -99,13 +112,13 @@ function ConvocatoriasCerradasEstudiantePage() {
         <div className="grid grid-cols-3 w-full gap-6">
           {my_calls?.map((call) => (
             <CardConvocatorias
-            id={call.id}
-            admin={false}
-            university_name={call.university_name}
-            language={call.language}
-            country={call.country}
-            deadline={call.deadline}
-            open="Cerradas"
+              id={call.id}
+              admin={false}
+              university_name={call.university_name}
+              language={call.language}
+              country={call.country}
+              deadline={call.deadline}
+              open="Cerradas"
             />
           ))}
         </div>
