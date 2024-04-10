@@ -1,33 +1,31 @@
 "use client";
 import React from "react";
 import { useRef } from "react";
-// The following component will be used to register calls in the data base & probaly it will be used to
-// update calls in the data base.
 
-// The call entity is defined as follows in the data base and obviously in the ERD diagram:
 
-// The following field will be implemented in the following form:
-// id *
-// university_id *
-
-// begin_date: date *
-// deadline_date: date *
-// min_advance: smallint *
-// min_papa: smallint *
-
-// year: smallint *
-
-// description: character_varying / longtext *
-// available_slots: smallint *
-// note: text
-
-// active: boolean -> will be shown in the card component, it depends on the date
-
-// The following fields are pending for implementation bce i don't know what they mean:
-
-// format: format_en -> ?
-// study_level: study_level_en[] -> ?
-// semester: semester_en -> ?
+/**
+ * 
+ * univerisity_id,
+    active,
+    begin_date,
+    deadline,
+    min_advance,
+    min_papa,
+    format,
+    study_level,
+    year,
+    semester,
+    language,
+    description,
+    available_slots,
+    note,
+    highest_papa_winner,
+    minimum_papa_winner,
+    selected,
+    token
+ * 
+ * 
+ */
 
 function CreationFormConvocatorias() {
   const convocatoria_id = useRef();

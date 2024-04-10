@@ -1,41 +1,35 @@
-import React from "react";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
-import { redirect } from "next/navigation";
+"use client";
+import React, { useEffect, useState } from "react";
 import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
+import { useSession } from "next-auth/react";
+import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
 
+function ConvocatoriasAdminDetailsPage({ params, open }) {
+  const { data: session, status } = useSession();
 
-async function ConvocatoriasAdminDetailsPage({ params, open }) {
-  
-  let id = 0;
-  try {
-    const session = await getServerSession(options);
+  if (!session) {
 
-    if (!session) 
-    {
-      redirect('/Ingreso');
-    }
-
-    id = params.lambda;
-  } catch (error)
-  {
-    console.log('Error de sesion en detalles de convocatoria admin.');
-    console.log(error);
-    redirect('/Ingreso');
-
+    const [call, set_call] = useState({});
+    useEffect(() => {}, []);
+    return <div>{status}...</div>;
   }
-  
+
+  const id = params.lambda;
+  const token = session.access;
+  const [call, set_call] = useState({});
+
+  useEffect(() => {
+    apiAdminCalls
+      .getAdminCallsDetails(id, token)
+      .then((response) => set_call(response.data))
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <>
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        <DetailsConvocatoria
-          idConvocatoria={id}
-          name="Kospie"
-          description={`Esta es una convocatoria destinada a estudiantes de ingeniería con un avance entre el 65% y el 80% de avance. Con el fin de realizar una movilidad académica en Alemania durante 1 año, 
-          para afianzar el idioma alemán y 
-          realizar prácticas estudiantiles en la ciudad de destino. 
-          Para mejorar el acceso al mundo laboral.`}
-        />
+        <DetailsConvocatoria call={call} id={id} admin={true} />
       </main>
     </>
   );

@@ -11,9 +11,9 @@ export const apiFilterOpenCalls = {
         'Authorization': `Bearer ${token}`,
       },
       params: {
-        country: country,
+        countries: country,
         name_university: name_university,
-        language: language,
+        languages: language,
       },
     });
   },

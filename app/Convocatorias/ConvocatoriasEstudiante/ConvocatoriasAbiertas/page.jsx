@@ -43,6 +43,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
     const conv_idioma = convocatoria_idioma.current.value;
     let conv_universidad = convocatoria_universidad.current.value;
 
+    console.log(conv_pais)
     try {
       const fetched_calls = await apiFilterOpenCalls.getFilterOpenCalls(
         conv_pais,
@@ -51,6 +52,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
         token
       );
       set_available_calls(fetched_calls.data);
+      console.log(fetched_calls.data)
     } catch (error) {
       console.log(error, "Error while fetching student open calls");
     }
