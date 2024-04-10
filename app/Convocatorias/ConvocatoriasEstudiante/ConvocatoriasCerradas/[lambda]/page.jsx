@@ -1,7 +1,6 @@
 "use client";
 // Main dependencies
 import { useEffect, useState } from "react";
-import { apiDetailsOpenCall } from "@/app/api/ConvocatoriasEstudiante/detailsOpenCall";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 // Imported components
@@ -16,31 +15,30 @@ function ConvocatoriasCerradasDetailsPage({ params }) {
     },
   });
 
+  const token = session?.access;
+  const id = params.lambda;
   const [call, set_call] = useState({});
 
-  if (!session) {
-    useEffect(() => {}, []);
+  useEffect(() => {
+    apiDetailsClosedCall
+      .getDetailsClosedCall(id, token)
+      .then((response) => set_call(response.data))
+      .catch((error) => console.log(error));
+  }, [id, token]);
+
+  if (!token) {
     return (
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         {status}...
       </main>
     );
+  } else {
+    return (
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        <DetailsConvocatoria call={call} admin={false} id={id} open={false} />
+      </main>
+    );
   }
-
-  const token = session.access;
-  const id = params.lambda;
-
-  useEffect(() => {
-    apiDetailsClosedCall.getDetailsClosedCall(id, token)
-      .then((response) => set_call(response.data))
-      .catch((error) => console.log(error));
-  }, []);
-
-  return (
-    <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-      <DetailsConvocatoria call={call} admin={false} id={id} open={false}/>
-    </main>
-  );
 }
 
 export default ConvocatoriasCerradasDetailsPage;

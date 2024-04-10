@@ -15,32 +15,30 @@ function ConvocatoriasAbiertasDetailsPage({ params }) {
     },
   });
 
-  const [call, set_call] = useState({});
-
-  if (!session) {
-    useEffect(() => {}, []);
-    return (
-      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-        {status}...
-      </main>
-    );
-  }
-
-  const token = session.access;
+  const token = session?.access;
   const id = params.lambda;
+  const [call, set_call] = useState({});
 
   useEffect(() => {
     apiDetailsOpenCall
       .getDetailsOpenCall(id, token)
       .then((response) => set_call(response.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [id, token]);
 
-  return (
-    <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-      <DetailsConvocatoria call={call} admin={false} id={id} open = {true}/>
-    </main>
-  );
+  if (!token) {
+    return (
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        {status}...
+      </main>
+    );
+  } else {
+    return (
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        <DetailsConvocatoria call={call} admin={false} id={id} open={true} />
+      </main>
+    );
+  }
 }
 
 export default ConvocatoriasAbiertasDetailsPage;
