@@ -1,0 +1,42 @@
+[
+    {
+        "title":"¿Si existe un convenio marco vigente puedo realizar movilidad?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Se debe verificar que el convenio esté vigente e incluya el intercambio de estudiantes, docentes o investigadores, según el caso.</p><p style='font-size: 1.5rem; line-height: 2rem;'> Se debe tener en cuenta que algunos convenios marco no tienen aplicación directa hasta que no se suscriben los correspondientes convenios específicos para cada actividad que se va a realizar.</p>"
+    },
+    {
+        "title":"¿Qué documentos necesito para realizar movilidad saliente?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Se necesita la siguiente documentación:</p><ol style='font-size: 1.5rem; line-height: 2rem;list-style-type: decimal; padding-left: 3rem' >  <li>Formato de Solicitud en Línea diligenciado y firmado:  http://www.dre.unal.edu.co/movilidad.html?form=saliente</li>  <li>Certificado en línea con firma digital de las notas, expedido a través del Sistema de Información Académica.</li>  <li>Copia legible del documento de identificación (para movilidad nacional) o pasaporte (para movilidad internacional).</li>  <li>Carta de motivación dirigida a la institución anfitriona (máximo una página) que especifique los siguientes puntos: Razones académicas que le impulsan a realizar la movilidad (un párrafo), y razones culturales que le impulsan a realizar la movilidad (un párrafo).</li>  <li>En caso de que se trate de una práctica, pasantía o estancia de investigación, el estudiante debe anexar la carta de invitación de un profesor (tutor) de la institución anfitriona. La carta del tutor corresponde al documento mediante el cual un profesor de la institución anfitriona informa que oficiará como tutor durante la estadía del estudiante.</li>  <li>Carta de respaldo económico en la que indique que cuenta con los recursos necesarios para su movilidad. Si el candidato recibe una beca, debe anexar un certificado que respalde la adjudicación de la beca.</li>  <li>Certificado que demuestre conocimientos de la lengua, de acuerdo a los requisitos de la institución anfitriona.</li><li>Formato de responsabilidad individual estudiantes en movilidad saliente (adjunto).</li><li>Los demás documentos específicos solicitados por la institución anfitriona como requisito para tramitar la movilidad.</li></ol>"
+    },
+    {
+        "title":"¿Qué documentos necesito para realizar movilidad entrante?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Se necesita la siguiente documentación:</p><ol style='font-size: 1.5rem; line-height: 2rem; padding-left: 3rem; list-style-type: decimal;'>  <li>Carta oficial, mediante la cual la institución de origen presenta al estudiante. Para el caso de los estudiantes en movilidad freemover, certificado de estudios de la institución de origen.</li>  <li>Carta de motivación (máximo una página) que especifique los siguientes puntos: Razones académicas que le impulsan a realizar la movilidad (un párrafo) y razones culturales que le impulsan a realizar la movilidad (un párrafo).</li>  <li>Certificado oficial de calificaciones.</li>  <li> Certificado de suficiencia de español nivel B1 o su equivalente en horas, expedido por la institución de origen u cualquier otro Centro de Idiomas reconocido.</li>  <li>Copia del pasaporte (estudiantes extranjeros) o copia de la cédula de ciudadanía (estudiantes colombianos).</li>  <li>Carta de un tutor en la Universidad Nacional de Colombia que se haga responsable de la supervisión de sus actividades, en el caso de las estancias de investigación. </li>  <li>Carta de respaldo económico en la que indique que cuenta con los recursos necesarios para su movilidad. Si el candidato recibe una beca, debe anexar un certificado que respalde la adjudicación de la beca.</li><li>En caso de postularse a programas vinculados con el área de la salud, tener en cuenta, además, los siguientes requisitos específicos que deben ser verificados con el respectivo programa: Copia esquema de vacunación o títulos (Hepatitis B y Varicela), Certificado de Afiliación (ARL, EPS, etc), Certificado de buena conducta, Copia de la póliza de responsabilidad civil.</li></ol>"
+    },
+    {
+        "title":"¿Dónde puedo consultar los convenios vigentes que tiene la Universidad Nacional de Colombia?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Los convenios se pueden consultar en la página web de la DRE.  Para realizar la búsqueda puede usar varios filtros que le permitirán encontrar con facilidad la información que necesita. </p>"
+    },
+    {
+        "title":"¿Cada cuánto se publican las convocatorias para realizar movilidad saliente?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Las convocatorias se publican semestralmente, entre los meses de enero y febrero para realizar la movilidad en el segundo semestre del año y entre julio y agosto para realizar movilidad en el primer semestre del año siguiente.  Se debe tener en cuenta que la fecha de cierre en la DRE.</p>"
+    }
+    ,
+    {
+        "title":"¿Dónde puedo consultar las fechas de la convocatoria para movilidad entrante?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Las fechas pueden varíar cada semestre y se pueden consultar en la página web de la DRE. Sin embargo, las fechas de cierre suelen ser:</p><ul style='font-size: 1.5rem; line-height: 2rem; list-style-type: disc; padding-left: 3rem' >  <li>30 de abril para realizar movilidad durante el segundo semestre del mismo año.</li>  <li> 30 de octubre para realizar movilidad durante el primer semestre del año siguiente. </li></ul>"
+    }
+    ,
+    {
+        "title":"¿Cómo cancelar el proceso de movilidad?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Si en determinada etapa del proceso desea cancelarlo, debe enviar una carta a la Oficina de Asuntos Estudiantiles de su facultad con copia al correo electrónico ori_bog@unal.edu.co justificando por qué debe cancelar el proceso, si no hay una justa causa podría haber una penalización de tiempo  para realizar movilidad.</p>"
+    }
+    ,
+    {
+        "title":"¿Cómo realizo mi matrícula a la Universidad de Colombia después de regresar de mi movilidad?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Si usted regresa al país ya iniciado el semestre y aún no han pasado dos semanas puede realizar todo su proceso de matrícula normalmente, estar pendiente de las fechas en las que puede imprimir su recibo de pago, realizar el pago e inscribir las asignaturas en las fechas establecidas. Si regresa cuando ya ha pasado más de dos semanas debe quedar en reserva de cupo por ese semestre; si usted ya hizo uso de sus dos semestres de reserva de cupo debe pedir a su área curricular una reserva adicional que debe ser aprobada por el Consejo de Facultad al cual pertenece, esta solicitud debe ser enviada con suficiente tiempo de anticipación.</p>"
+    }
+    ,
+    {
+        "title":"¿Si soy beneficiario de algún programa como renuevo mi beca?",
+        "ans_title":"<p style='font-size: 1.5rem; line-height: 2rem;'>Usted debe consultar directamente con la entidad oferente del apoyo para informar que desea realizar una movilidad para que le den instrucciones de cómo proceder. </p>"
+    }
+]

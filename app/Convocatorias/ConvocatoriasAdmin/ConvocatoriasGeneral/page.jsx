@@ -24,7 +24,7 @@ function ConvocatoriasGeneralAdminPage() {
       .then((response) => set_my_calls(response.data))
       .then(() => console.log(my_calls))
       .catch((error) => console.log(error));
-  }, [token]);
+  }, [token, my_calls]);
 
   const active = useRef();
   const university_id = useRef();

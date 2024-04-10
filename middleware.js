@@ -24,6 +24,17 @@ export default withAuth(
         new URL("/Convocatorias/ConvocatoriasAdmin", request.url)
       );
     }
+
+    if (
+      request.nextUrl.pathname.startsWith(
+        "/FAQ"
+      ) &&
+      request.nextauth.token.type_user == "employee"
+    ) {
+      return NextResponse.rewrite(
+        new URL("/Convocatorias/ConvocatoriasAdmin", request.url)
+      );
+    }
   },
 
   {

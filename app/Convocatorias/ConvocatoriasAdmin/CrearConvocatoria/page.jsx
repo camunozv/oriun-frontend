@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { redirect } from "next/navigation";
 import CreationFormConvocatorias from "@/components/ConvsPage/CreationFormConvocatorias";
 import { useSession } from "next-auth/react";
@@ -12,6 +12,7 @@ function CrearConvocatoria() {
     },
   });
 
+  // Persistence fix pending
   let token = session?.access;
 
   useEffect(() => {
