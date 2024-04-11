@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const BASE_URL = "http://127.0.0.1:8000/";
-const BASE_URL = "https://oriun-ryhm23k6lq-uc.a.run.app/";
+export const BASE_URL = "https://oriun-ryhm23k6lq-uc.a.run.app/";
 
 export const api_instance = axios.create({
   baseURL: BASE_URL  

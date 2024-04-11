@@ -1,6 +1,7 @@
 "use client;";
-import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
 import { useRef } from "react";
+import axios from "axios";
+import { BASE_URL } from "@/app/api/base.api";
 
 function UpdateConvocatoria({ id, token }) {
   const universidad_id = useRef();
@@ -46,44 +47,55 @@ function UpdateConvocatoria({ id, token }) {
     const conv_minimum_papa_winner = minimum_papa_winner.current.value;
     const conv_selected = selected.current.value;
 
-    // console.log(conv_begin_date);
-    // console.log(conv_deadline);
-    // console.log(conv_min_advance);
-    // console.log(conv_min_papa);
-    // console.log(conv_year);
-    // console.log(conv_study_level);
-    // console.log(conv_description);
-    // console.log(conv_available_slots);
-    // console.log(conv_note);
-    // console.log(conv_active);
-    // console.log(conv_format);
-    // console.log(conv_semester);
-    // console.log(conv_language);
-    // console.log(conv_highest_papa_winner);
-    // console.log(conv_minimum_papa_winner);
-    // console.log(conv_selected);
+    const data = {
+      university_id: conv_universidad_id,
+      active: conv_active,
+      begin_date: conv_begin_date,
+      deadline: conv_deadline,
+      min_advance: conv_min_advance,
+      min_papa: conv_min_papa,
+      format: conv_format,
+      study_level: conv_study_level,
+      year: conv_year,
+      semester: conv_semester,
+      language: conv_language,
+      description: conv_description,
+      available_slots: conv_available_slots,
+      note: conv_note,
+      highest_papa_winner: conv_highest_papa_winner,
+      minimum_papa_winner: conv_minimum_papa_winner,
+      selected: conv_selected,
+    };
 
-    apiAdminCalls.putAdminCallsUpdate(
-      id,
-      conv_universidad_id,
-      conv_active,
-      conv_begin_date,
-      conv_deadline,
-      conv_min_advance,
-      conv_min_papa,
-      conv_format,
-      conv_study_level,
-      conv_year,
-      conv_semester,
-      conv_language,
-      conv_description,
-      conv_available_slots,
-      conv_note,
-      conv_highest_papa_winner,
-      conv_minimum_papa_winner,
-      conv_selected,
-      token
-    ).then((response) => console.log(response)).catch((error) => console.log(error));
+    let data_b = {};
+
+    for (const [key, value] of Object.entries(data)) {
+      if (value !== "") {
+        data_b[key] = value;
+      }
+    }
+
+    let data_c = JSON.stringify(data_b);
+
+    let config = {
+      method: "put",
+      maxBodyLength: Infinity,
+      url: `${BASE_URL}call/api_put/${id}/`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data: data_c,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(alert(response.data.mensaje));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <div className="flex flex-col justify-center items-center w-full rounded-lg shadow-lg p-6">
@@ -95,9 +107,7 @@ function UpdateConvocatoria({ id, token }) {
           >
             Convocatoria Selecionada : {id}
           </label>
-          <p className="text-grey-500">
-            Todos los campos deben ser llenados.
-          </p>
+          <p className="text-grey-500">Todos los campos deben ser llenados.</p>
         </div>
         <div
           id="information_grid"
@@ -136,9 +146,9 @@ function UpdateConvocatoria({ id, token }) {
               ref={study_level}
               id="study_level"
               className="border-gray-300 border rounded-md outline-none bg-white"
-              placeholder="value 0"
+              placeholder=""
             >
-              <option value="value 0">Selección...</option>
+              <option value="">Selección...</option>
               <option value="PRE">Pregrado</option>
               <option value="POS">Maestría</option>
               <option value="DOC">Doctorado</option>
@@ -247,8 +257,8 @@ function UpdateConvocatoria({ id, token }) {
             placeholder="value 0"
           >
             <option value="">Selección...</option>
-            <option value="true">Si</option>
-            <option value="false">No</option>
+            <option value="True">Si</option>
+            <option value="False">No</option>
           </select>
         </div>
 
