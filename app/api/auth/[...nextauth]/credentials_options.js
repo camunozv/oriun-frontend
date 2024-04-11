@@ -3,7 +3,11 @@ import { apiLogin } from "../../userLogin";
 
 export const options = {
   pages: {
-    newUser: "/Convocatorias"
+    // signIn: "/Ingreso",
+    signOut: "/",
+    newUser: "/Convocatorias",
+    // error: "/auth/error",
+    // verifyRequest: "/auth/verify-request",
   },
   providers: [
     CredentialsProvider({
@@ -31,12 +35,10 @@ export const options = {
           );
 
           console.log("successfully gotten user tokens");
-          console.log(user.data.type_user);
-          console.log(user.data)
+          console.log(user.data);
 
           return user;
         } catch (error) {
-          console.log(error);
           return null;
         }
       },
@@ -50,15 +52,14 @@ export const options = {
         token.access = user.data.access;
         token.refresh = user.data.refresh;
         token.type_user = user.data.type_user;
-        
       }
       return token;
     },
 
     async session({ session, token }) {
       session.access = token.access;
-      session.refresh = token.refresh
-      session.type_user = token.type_user
+      session.refresh = token.refresh;
+      session.type_user = token.type_user;
       return session;
     },
   },

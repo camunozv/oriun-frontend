@@ -47,6 +47,10 @@ export default withAuth(
 // Without a defined matcher this line applies next auth to the entire project.
 // export { default } from "next-auth/middleware";
 
+export const config = {
+  matcher : ['/Convocatorias/:path*']
+}
+
 // Middleware allows running code before a request is completed.
 // Then whith the incoming response we can modify it in different ways.
 // Basically it runs before cached content and routes are matched.

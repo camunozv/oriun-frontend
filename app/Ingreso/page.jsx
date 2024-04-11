@@ -1,14 +1,10 @@
-import LoginForm from "@/components/LoginPage/LoginForm";
+"use client";
 import React from "react";
-import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/credentials_options";
+import LoginForm from "@/components/LoginPage/LoginForm";
 import { redirect } from "next/navigation";
 
-async function Ingreso() {
-  const session = await getServerSession(options);
-  if (session) {
-    redirect("/Convocatorias");
-  }
+function Ingreso() {
+  redirect("/");
   return (
     <>
       <header className="mx-auto max-w-[3160px] py-10 flex items-center justify-left bg-figma_blue gap-3 px-7">
