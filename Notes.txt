@@ -1,3 +1,7 @@
+Recuerda que para ejecutar el proyecto debes ejecutar:
+npm run dev
+
+Para detener el proyecto basta con presionar Ctrl + c, y adicionalmente la letra S.
 
 
 
