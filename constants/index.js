@@ -10,11 +10,6 @@ export const LINKS_ESTUDIANTE = [
     label: "Convocatorias Cerradas",
   },
   {
-    href: "/FAQ",
-    key: "convocatorias_cerradas",
-    label: "Preguntas Frecuentes",
-  },
-  {
     href: "/MisConvocatorias",
     key: "mis_convocatorias",
     label: "Mis Convocatorias",

@@ -16,7 +16,7 @@ function CrearConvocatoria() {
   let token = session?.access;
 
   useEffect(() => {
-    token = session.access;
+    token = session?.access;
   }, [token]);
 
   if (!token) {

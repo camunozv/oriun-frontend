@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useRef } from "react";
@@ -12,7 +11,6 @@ import { redirect } from "next/navigation";
 
 // Access token should only be stored in Memory and not in server or a cookie, for security reasons.
 
-
 function LoginForm() {
   const user_name = useRef();
   const user_password = useRef();
@@ -24,22 +22,16 @@ function LoginForm() {
     const entered_password = user_password.current.value;
 
     try {
-      const response = await signIn("credentials", {
+      const new_user = await signIn("credentials", {
         entered_name,
         entered_password,
-      });
-
-      if (response) {
-        redirect('/ConvocatoriasAdmin');
-      } else {
-        console.log("Aceso denegado, ");
-        redirect('/Ingreso');
-      }
-
+      })
+      console.log(alert(new_user.message))
+      // redirect('/Convocatorias');
     } catch (error) {
-      console.log(error);
-      redirect('/Ingreso');
+      console.log(error)
     }
+    // signIn.then((response) => console.log(response)).catch((error) => console.log(error, 'bru'));
   }
 
   return (
@@ -92,6 +84,7 @@ function LoginForm() {
         <button
           type="submit"
           className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+          onClick={signIn}
         >
           Ingresar
         </button>

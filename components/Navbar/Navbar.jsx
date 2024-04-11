@@ -99,6 +99,7 @@ function Navbar() {
             title="Login"
             type="button"
             variant="bg-green-90 px-8 py-4 text-white hover:bg-black"
+            
           >
             <FaUser className="transition-all" />
           </Button>

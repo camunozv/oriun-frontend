@@ -12,7 +12,8 @@ async function ConvocatoriasPage() {
   } else if (session.type_user == "employee") {
     redirect("/Convocatorias/ConvocatoriasAdmin");
   } else {
-    signOut();
+    redirect("/");
+    // signOut();
   }
 
   return <div>Usuario no autenticado</div>;
