@@ -2,6 +2,8 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 
+
+
 function Button({ title, type, variant, children }) {
   // btn_dark_green : bg-green-90 px-8 py-4 text-white transition-all hover:bg-black
 
@@ -22,3 +24,5 @@ function Button({ title, type, variant, children }) {
 }
 
 export default Button;
+
+

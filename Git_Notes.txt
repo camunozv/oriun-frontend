@@ -1,0 +1,31 @@
+repaso de los comandos básicos de Git:
+
+git init: Inicia un nuevo repositorio Git en el directorio actual.
+
+git clone [URL]: Clona un repositorio Git existente desde una URL remota hacia tu computadora.
+
+git add [archivo(s)]: Agrega cambios de archivo al área de preparación para ser incluidos en el próximo commit.
+
+git commit -m "Mensaje": Guarda los cambios confirmados en el repositorio.
+
+git status: Muestra el estado actual de tu repositorio, incluyendo archivos modificados, agregados, y listos para hacer commit.
+
+git log: Muestra el historial de commits.
+
+git branch: Lista las ramas existentes en el repositorio.
+
+git branch [nombre-rama]: Crea una nueva rama con el nombre especificado.
+
+git checkout [nombre-rama o hash-commit]: Cambia a la rama especificada o al estado del commit especificado.
+
+git merge [nombre-rama]: Fusiona los cambios de la rama especificada en la rama actual.
+
+git pull: Obtiene y fusiona los cambios remotos en la rama actual.
+
+git push [nombre-remoto] [nombre-rama]: Envía los cambios locales de la rama especificada al repositorio remoto.
+
+git remote: Muestra los repositorios remotos configurados.
+
+git remote add [nombre-remoto] [URL]: Agrega un nuevo repositorio remoto.
+
+git diff: Muestra las diferencias entre los archivos modificados y el área de preparación.
