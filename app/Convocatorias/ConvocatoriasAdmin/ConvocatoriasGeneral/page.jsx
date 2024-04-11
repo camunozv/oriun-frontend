@@ -24,7 +24,7 @@ function ConvocatoriasGeneralAdminPage() {
       .then((response) => set_my_calls(response.data))
       .then(() => console.log(my_calls))
       .catch((error) => console.log(error));
-  }, [token, my_calls]);
+  }, [token]);
 
   const active = useRef();
   const university_id = useRef();
@@ -113,8 +113,8 @@ function ConvocatoriasGeneralAdminPage() {
                   placeholder="value 0"
                 >
                   <option value="">Selección...</option>
-                  <option value={true}>Abierta</option>
-                  <option value={false}>Cerrada</option>
+                  <option value="True">Abierta</option>
+                  <option value="False">Cerrada</option>
                 </select>
               </div>
 
@@ -172,9 +172,9 @@ function ConvocatoriasGeneralAdminPage() {
                   placeholder="value 0"
                 >
                   <option value="">Selección...</option>
-                  <option value="presencial">Presencial</option>
-                  <option value="virtual">Virtual</option>
-                  <option value="mixed">Híbrido</option>
+                  <option value="P">Presencial</option>
+                  <option value="V">Virtual</option>
+                  <option value="M">Híbrido</option>
                 </select>
               </div>
 
@@ -190,9 +190,9 @@ function ConvocatoriasGeneralAdminPage() {
                   placeholder="value 0"
                 >
                   <option value="">Selección...</option>
-                  <option value="pre_pregrado">Pregrado</option>
-                  <option value="pos_postgrado">Maestría</option>
-                  <option value="doc_doctorado">Doctorado</option>
+                  <option value="PRE">Pregrado</option>
+                  <option value="POS">Maestría</option>
+                  <option value="DOC">Doctorado</option>
                 </select>
               </div>
 
@@ -244,6 +244,7 @@ function ConvocatoriasGeneralAdminPage() {
                   <option value="EU">Europa</option>
                   <option value="OC">Oceanía</option>
                   <option value="AN">Uniandes</option>
+                  <option value="AS">Asia</option>
                   <option value="SG">Convenio Sigueme/Nacional</option>
                 </select>
               </div>
