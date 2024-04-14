@@ -1,17 +1,10 @@
-"use client";
+"use client"
 import React from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { redirect } from "next/navigation";
-
 
 function NavbarConvocatorias({ links }) {
-  function handleSeconClick(event) {
 
-    signOut({redirect:false})
-      .then(redirect('/'))
-      .catch((error) => console.log(error));
-  }
   if (!links) {
     return (
       <nav className="flex items-center justify-between mx-auto max-w-[1580px] p-5 shadow-md rounded-xl">
@@ -31,8 +24,9 @@ function NavbarConvocatorias({ links }) {
   } else {
     return (
       <nav className="flex items-center justify-between mx-auto max-w-[1580px] p-5 shadow-md rounded-xl">
-        <h1 className="text-black font-bold text-[60px]">ORIUN</h1>
-
+        <Link href="/Convocatorias">
+          <h1 className="text-black font-bold text-[60px]">ORIUN</h1>
+        </Link>
         <ul className="hidden h-full gap-12 lg:flex">
           {links.map((link) => (
             <Link
@@ -50,7 +44,7 @@ function NavbarConvocatorias({ links }) {
           <button
             type="button"
             className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
-            onClick={handleSeconClick}
+            onClick={signOut}
           >
             Cerrar Sesión
           </button>
