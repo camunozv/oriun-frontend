@@ -1,18 +1,16 @@
+import Link from "next/link";
 import React from "react";
-import { getServerSession } from "next-auth";
-import { options } from "./api/auth/[...nextauth]/credentials_options";
-import { redirect } from "next/navigation";
-import { signOut } from "next-auth/react";
 
-async function notfound() {
-  const session = await getServerSession(options);
-
-  if (session) {
-    redirect("/Convocatorias");
-  } else {
-    signOut();
-  }
-  return <div>not-found</div>;
+function NotFoundPage() {
+  return (
+    <main className="flex justify-between items-center max-w-[1580px]">
+      <Link href="/Convocatorias">
+        <h1 className="text-[60px] font-bold underline hover:blue-500">
+          Regresar
+        </h1>
+      </Link>
+    </main>
+  );
 }
 
-export default notfound;
+export default NotFoundPage;

@@ -3,11 +3,8 @@ import { apiLogin } from "../../userLogin";
 
 export const options = {
   pages: {
-    // signIn: "/Ingreso",
-    signOut: "/",
+    signOut: "/PreguntasFrecuentes",
     newUser: "/Convocatorias",
-    // error: "/auth/error",
-    // verifyRequest: "/auth/verify-request",
   },
   providers: [
     CredentialsProvider({
