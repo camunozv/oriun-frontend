@@ -3,7 +3,7 @@ import { apiLogin } from "../../userLogin";
 
 export const options = {
   pages: {
-    signOut: "https://oriun-preguntas-frecuentes.vercel.app",
+    signOut: "https://oriun-preguntas-frecuentes.vercel.app",   
     newUser: "/Convocatorias",
   },
   providers: [
