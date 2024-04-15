@@ -11,7 +11,7 @@ function ConvocatoriasGeneralAdminPage() {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/Ingreso");
+      redirect("/PreguntasFrecuentes");
     },
   });
   const [my_calls, set_my_calls] = useState([]);
@@ -322,57 +322,3 @@ function ConvocatoriasGeneralAdminPage() {
 }
 
 export default ConvocatoriasGeneralAdminPage;
-
-// En esta parte debe ir el hook que realiza la petición a la api
-// en la parte donde están las CardConvocatorias debe ir un ciclo que recorra el
-// arreglo con los datos recibidos y renderize multiples card convocatorias.
-// Actualmente se probó con 6 componentes para ver como quedaba el maquetado.
-
-// fetch(`http://127.0.0.1:8000/call/open/${params}`, {
-//   method: "GET",
-//   headers: {
-//     Authorization: `Bearer ${token}`,
-//   },
-// })
-//   .then((response) => {
-//     if (!response.ok) {
-//       throw new Error("Eroorrr");
-//     }
-
-//     set_my_calls(response.data);
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
-
-// try {
-//   const callz = await apiFilterOpenCalls.getFilterOpenCalls(
-//     conv_pais,
-//     conv_idioma,
-//     conv_universidad
-//   );
-//   set_my_calls(callz);
-// } catch (error) {
-//   console.log(error);
-// }
-
-// console.log(params);
-
-// const myHeaders = new Headers();
-// myHeaders.append("Authorization", `Bearer ${token}`);
-
-// const requestOptions = {
-//   method: "GET",
-//   headers: myHeaders,
-//   redirect: "follow",
-// };
-
-// const fetchUrl = "http://127.0.0.1:8000/";
-
-// fetch(`${fetchUrl}/call/open/${params}`, requestOptions)
-//   .then((response) => response.json())
-//   .then((result) => set_my_calls(result))
-//   .catch((error) => console.error(error));
-
-// const conv_universidad_request = conv_universidad.replace(/ /g, "%20");
-// console.log(conv_universidad_request);
