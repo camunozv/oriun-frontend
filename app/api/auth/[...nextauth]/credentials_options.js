@@ -3,7 +3,8 @@ import { apiLogin } from "../../userLogin";
 
 export const options = {
   pages: {
-    signOut: "/PreguntasFrecuentes",
+    //signOut: "/PreguntasFrecuentes",
+    signOut: "/",
     newUser: "/Convocatorias",
   },
   providers: [
