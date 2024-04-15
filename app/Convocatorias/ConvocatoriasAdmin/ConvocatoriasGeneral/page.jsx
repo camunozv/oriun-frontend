@@ -11,7 +11,7 @@ function ConvocatoriasGeneralAdminPage() {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/PreguntasFrecuentes");
+      redirect("/api/auth/signin");
     },
   });
   const [my_calls, set_my_calls] = useState([]);

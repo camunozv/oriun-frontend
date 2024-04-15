@@ -11,7 +11,7 @@ function ConvocatoriasCerradasDetailsPage({ params }) {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/Convocatorias");
+      redirect("/api/auth/signin");
     },
   });
 
