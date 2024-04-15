@@ -107,7 +107,7 @@ function UpdateConvocatoria({ id, token }) {
           >
             Convocatoria Selecionada : {id}
           </label>
-          <p className="text-grey-500">Todos los campos deben ser llenados.</p>
+          <p className="text-grey-500">Llene solo los campos que desea modificar.</p>
         </div>
         <div
           id="information_grid"
