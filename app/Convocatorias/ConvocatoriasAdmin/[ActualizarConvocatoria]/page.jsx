@@ -7,7 +7,7 @@ function ActualizarConvocatoria({ params }) {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect('/PreguntasFrecuentes')
+      redirect('/api/auth/signin')
     },
   });
 

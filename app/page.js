@@ -32,7 +32,7 @@ import { redirect } from "next/navigation";
 
 export default function Home() {
 
-  redirect('/PreguntasFrecuentes');
+  redirect('/Convocatorias');
   return (
     <>
       <div>Home page simple</div>

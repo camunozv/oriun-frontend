@@ -8,7 +8,7 @@ function CrearConvocatoria() {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/PreguntasFrecuentes");
+      redirect("/api/auth/signin");
     },
   });
 

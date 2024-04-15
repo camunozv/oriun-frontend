@@ -14,6 +14,12 @@ export const LINKS_ESTUDIANTE = [
     key: "mis_convocatorias",
     label: "Mis Convocatorias",
   },
+
+  {
+    href: "/PreguntasFrecuentes",
+    key: "preguntas_frecuentes",
+    label: "Preguntas Frecuentes",
+  },
 ];
 
 export const LINKS_ADMIN = [
@@ -26,5 +32,10 @@ export const LINKS_ADMIN = [
     href: "/Convocatorias/ConvocatoriasAdmin/CrearConvocatoria",
     key: "crear_convocatorias",
     label: "Crear Convocatorias",
+  },
+  {
+    href: "/PreguntasFrecuentes",
+    key: "preguntas_frecuentes",
+    label: "Preguntas Frecuentes",
   },
 ];
