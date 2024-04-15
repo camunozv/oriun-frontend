@@ -3,9 +3,15 @@ import React, { useEffect, useState } from "react";
 import DetailsConvocatoria from "@/components/ConvsPage/DetailsConvocatoria";
 import { useSession } from "next-auth/react";
 import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
+import { redirect } from "next/navigation";
 
 function ConvocatoriasAdminDetailsPage({ params }) {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession({
+    required:true,
+    onUnauthenticated() {
+      redirect('/PreguntasFrecuentes')
+    }
+  });
 
   const token = session?.access;
   const id = params.lambda;

@@ -1,11 +1,14 @@
 "use client";
 import UpdateConvocatoria from "@/components/ConvsPage/UpdateConvocatoria";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 function ActualizarConvocatoria({ params }) {
   const { data: session, status } = useSession({
     required: true,
-    onUnauthenticated() {},
+    onUnauthenticated() {
+      redirect('/PreguntasFrecuentes')
+    },
   });
 
   if (!session) {

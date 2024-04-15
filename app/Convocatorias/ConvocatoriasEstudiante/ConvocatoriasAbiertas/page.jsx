@@ -13,7 +13,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/Ingreso");
+      redirect("/PreguntasFrecuentes");
     },
   });
   
