@@ -1,6 +1,8 @@
 "use client;";
-import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
+
+import { BASE_URL } from "@/app/api/base.api";
 import { useRef } from "react";
+import axios from "axios";
 // Actualizar me redirige a la página donde va a estar la convocatoria que yo necesito modificar, que va a ser
 // una ruta dinámica. Dentro de esa ruta voy a tener un componente que recibe como parámetro el id que viene en
 // la ruta dinámica, de tal manera que haga un fetch instantáneo de la convocatoria que se quiere actualizar.
@@ -47,46 +49,98 @@ function CreationFormConvocatorias({ token }) {
     const conv_minimum_papa_winner = minimum_papa_winner.current.value;
     const conv_selected = selected.current.value;
 
-    console.log(conv_begin_date);
-    console.log(conv_deadline);
-    console.log(conv_min_advance);
-    console.log(conv_min_papa);
-    console.log(conv_year);
-    console.log(conv_study_level);
-    console.log(conv_description);
-    console.log(conv_available_slots);
-    console.log(conv_note);
-    console.log(conv_active);
-    console.log(conv_format);
-    console.log(conv_semester);
-    console.log(conv_language);
-    console.log(conv_highest_papa_winner);
-    console.log(conv_minimum_papa_winner);
-    console.log(conv_selected);
+    // console.log(conv_begin_date);
+    // console.log(conv_deadline);
+    // console.log(conv_min_advance);
+    // console.log(conv_min_papa);
+    // console.log(conv_year);
+    // console.log(conv_study_level);
+    // console.log(conv_description);
+    // console.log(conv_available_slots);
+    // console.log(conv_note);
+    // console.log(conv_active);
+    // console.log(conv_format);
+    // console.log(conv_semester);
+    // console.log(conv_language);
+    // console.log(conv_highest_papa_winner);
+    // console.log(conv_minimum_papa_winner);
+    // console.log(conv_selected);
 
-    apiAdminCalls
-      .postAdminCalls(
-        conv_universidad_id,
-        conv_active,
-        conv_begin_date,
-        conv_deadline,
-        conv_min_advance,
-        conv_min_papa,
-        conv_format,
-        conv_study_level,
-        conv_year,
-        conv_semester,
-        conv_language,
-        conv_description,
-        conv_available_slots,
-        conv_note,
-        conv_highest_papa_winner,
-        conv_minimum_papa_winner,
-        conv_selected,
-        token
-      )
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    // apiAdminCalls
+    //   .postAdminCalls(
+    //     conv_universidad_id,
+    //     conv_active,
+    //     conv_begin_date,
+    //     conv_deadline,
+    //     conv_min_advance,
+    //     conv_min_papa,
+    //     conv_format,
+    //     conv_study_level,
+    //     conv_year,
+    //     conv_semester,
+    //     conv_language,
+    //     conv_description,
+    //     conv_available_slots,
+    //     conv_note,
+    //     conv_highest_papa_winner,
+    //     conv_minimum_papa_winner,
+    //     conv_selected,
+    //     token
+    //   )
+    //   .then((response) => console.log(response))
+    //   .catch((error) => console.log(error));
+
+
+    
+      const data = {
+        university_id: conv_universidad_id,
+        active: conv_active,
+        begin_date: conv_begin_date,
+        deadline: conv_deadline,
+        min_advance: conv_min_advance,
+        min_papa: conv_min_papa,
+        format: conv_format,
+        study_level: conv_study_level,
+        year: conv_year,
+        semester: conv_semester,
+        language: conv_language,
+        description: conv_description,
+        available_slots: conv_available_slots,
+        note: conv_note,
+        highest_papa_winner: conv_highest_papa_winner,
+        minimum_papa_winner: conv_minimum_papa_winner,
+        selected: conv_selected,
+      };
+  
+      let data_b = {};
+  
+      for (const [key, value] of Object.entries(data)) {
+        if (value !== "") {
+          data_b[key] = value;
+        }
+      }
+  
+      let data_c = JSON.stringify(data_b);
+  
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: `${BASE_URL}call/api/`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: data_c,
+      };
+  
+      axios
+        .request(config)
+        .then((response) => {
+          alert(response.data.mensaje);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }
   return (
     <div className="flex flex-col justify-center items-center w-full rounded-lg shadow-lg p-6">
@@ -98,7 +152,7 @@ function CreationFormConvocatorias({ token }) {
           >
             Crear Convocatorias
           </label>
-          <p>Todos los campos deben llenarse</p>
+          <p>Todos los campos deben llenarse, excepto los últimos 3; solo se llenan cuando la convocatoria se inserte cerrada.</p>
         </div>
         <div
           id="information_grid"
