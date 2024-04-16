@@ -3,7 +3,7 @@ import api_instance from "../base.api";
 const endpoint = "call/api";
 
 export const apiAdminCalls = {
-  // Endpoint no.7 Implemented
+  // Endpoint no.6 Implemented
   getAdminAllCalls: function (token) {
     return api_instance.get(`${endpoint}`, {
       headers: {
