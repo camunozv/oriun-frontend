@@ -37,6 +37,12 @@ function ConvocatoriasCerradasEstudiantePage() {
       );
 
       set_my_calls(fetched_calls.data);
+
+      if (my_calls.length() === 0) {
+        alert(
+          "ninguna convocatoria abierta durante el momento con los filtros ingresados, y que se tiene que estar pendiende de los correos de la ORI y la DRE para saber cuando saldrá alguna."
+        );
+      }
     } catch (error) {
       console.log(error);
     }

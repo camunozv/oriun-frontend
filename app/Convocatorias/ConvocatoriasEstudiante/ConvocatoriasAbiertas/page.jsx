@@ -16,7 +16,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
       redirect("/api/auth/signin");
     },
   });
-  
+
   const token = session?.access;
 
   const [available_calls, set_available_calls] = useState([]);
@@ -39,6 +39,12 @@ function ConvocatoriasAbiertasEstudiantePage() {
         token
       );
       set_available_calls(fetched_calls.data);
+
+      if (available_calls.length() === 0) {
+        alert(
+          "ninguna convocatoria abierta durante el momento con los filtros ingresados, y que se tiene que estar pendiende de los correos de la ORI y la DRE para saber cuando saldrá alguna."
+        );
+      }
     } catch (error) {
       console.log(error, "Error while fetching student open calls");
     }
