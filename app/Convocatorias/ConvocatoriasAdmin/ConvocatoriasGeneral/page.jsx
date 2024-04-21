@@ -6,6 +6,8 @@ import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { apiAdminFilterCalls } from "@/app/api/ConvocatoriasAdmin/adminFilterCalls";
 import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
+import axios from "axios";
+import { BASE_URL } from "@/app/api/base.api";
 
 function ConvocatoriasGeneralAdminPage() {
   const { data: session, status } = useSession({
@@ -26,6 +28,7 @@ function ConvocatoriasGeneralAdminPage() {
       .catch((error) => console.log(error));
   }, [token]);
 
+  const call_id = useRef();
   const active = useRef();
   const university_id = useRef();
   const university_name = useRef();
@@ -38,9 +41,10 @@ function ConvocatoriasGeneralAdminPage() {
   const country = useRef();
   const language = useRef();
 
-  async function handleFilterSumbit(event) {
+  function handleFilterSumbit(event) {
     event.preventDefault();
 
+    const call_call_id = call_id.current.value;
     const call_active = active.current.value;
     const call_university_id = university_id.current.value;
     const call_university_name = university_name.current.value;
@@ -53,26 +57,52 @@ function ConvocatoriasGeneralAdminPage() {
     const call_country = country.current.value;
     const call_language = language.current.value;
 
-    try {
-      const fetched_calls = await apiAdminFilterCalls.getAdminFilterCalls(
-        call_active,
-        call_university_id,
-        call_university_name,
-        call_deadline,
-        call_format,
-        call_study_level,
-        call_year,
-        call_semester,
-        call_region,
-        call_country,
-        call_language,
-        token
-      );
+    const data = {
+      call_call_id: call_call_id,
+      call_active: call_active,
+      call_university_id: call_university_id,
+      call_university_name: call_university_name,
+      call_deadline: call_deadline,
+      call_format: call_format,
+      call_study_level: call_study_level,
+      call_year: call_year,
+      call_semester: call_semester,
+      call_region: call_region,
+      call_country: call_country,
+      call_language: call_language
+    };
 
-      set_my_calls(fetched_calls.data);
-    } catch (error) {
-      console.log(error);
+    let data_b = {};
+
+    for (const [key, value] of Object.entries(data)) {
+      if (value !== "") {
+        data_b[key] = value;
+      }
     }
+
+    let data_c = JSON.stringify(data_b);
+
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${BASE_URL}call/api/employee_filter/`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data: data_c,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        set_my_calls(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    
   }
 
   if (!token) {
@@ -116,6 +146,20 @@ function ConvocatoriasGeneralAdminPage() {
                   <option value="True">Abierta</option>
                   <option value="False">Cerrada</option>
                 </select>
+              </div>
+
+              {/**call_id */}
+              <div className="flex flex-col justify-start items-left gap-1">
+                <label htmlFor="call_id" className="font-semibold">
+                  id Convocatoria
+                </label>
+                <input
+                  ref={call_id}
+                  id="call_id"
+                  type="text"
+                  placeholder="código universidad /un número"
+                  className="bg-white border-gray-300 border rounded-md outline-none"
+                />
               </div>
 
               {/**university_id */}
