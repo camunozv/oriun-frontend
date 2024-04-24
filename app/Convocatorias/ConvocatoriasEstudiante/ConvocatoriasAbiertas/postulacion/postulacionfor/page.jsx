@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 //numero de convocatorias postulado menor a dos, cumplir porcentaje  de avance, papa, estar matriculado
 //obtener info del usuario para comparar con info de la convocatoria
 //Convocatorias/ConvEstudi/postulacion128384 (api)
-//hola
+//hola cambio randon 
 
 
 function postulacionform(){
