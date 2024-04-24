@@ -20,6 +20,7 @@ export const LINKS_ESTUDIANTE = [
     key: "preguntas_frecuentes",
     label: "Preguntas Frecuentes",
   },
+
 ];
 
 export const LINKS_ADMIN = [

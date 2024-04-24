@@ -3,7 +3,6 @@ import React from "react";
 import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
 import { signOut, useSession } from "next-auth/react";
 
-
 function DetailsConvocatoria({ call, admin, id, open }) {
   const { data: session, status } = useSession({
     required: true,
@@ -13,11 +12,10 @@ function DetailsConvocatoria({ call, admin, id, open }) {
     },
   });
 
-  if (!session){
-
-    return <div>{status}...</div>
+  if (!session) {
+    return <div>{status}...</div>;
   }
-  
+
   const token = session.access;
 
   function handleClickDelete(event) {
@@ -27,17 +25,15 @@ function DetailsConvocatoria({ call, admin, id, open }) {
       .catch((error) => console.log(error));
   }
 
-
-
   if (admin == true && call) {
-    if (call.active) {
+    if (call.active === true) {
       // open admin calls
       return (
         <section className="flex justify-start items-left flex-col gap-2">
           <h1 className="font-bold text-[40px] underline">Conv No - {id}</h1>
           <br />
           <h2 className="font-bold text-[30px] flex items-center justify-between">
-            Oferentes: {call.university_id}
+            Oferentes: {call.university_id?.name} {/**Put "?" symbol */}
           </h2>
           <br />
           <h3 className="font-bold text-[30px] flex items-center justify-between">
@@ -94,7 +90,7 @@ function DetailsConvocatoria({ call, admin, id, open }) {
           <h1 className="font-bold text-[40px] underline">Conv No - {id}</h1>
           <br />
           <h2 className="font-bold text-[30px] flex items-center justify-between">
-            Oferentes: {call.university_id}
+            Oferentes: {call.university_id?.name} {/**Put "?" symbol */}
           </h2>
           <br />
           <h3 className="font-bold text-[30px] flex items-center justify-between">
@@ -155,7 +151,7 @@ function DetailsConvocatoria({ call, admin, id, open }) {
         <h1 className="font-bold text-[40px] underline">Conv No - {id}</h1>
         <br />
         <h2 className="font-bold text-[30px] flex items-center justify-between">
-          Oferentes: {call.university_name}
+          Oferentes: {call.university_id?.name}
         </h2>
         <br />
         <h3 className="font-bold text-[30px] flex items-center justify-between">
@@ -205,11 +201,8 @@ function DetailsConvocatoria({ call, admin, id, open }) {
         <h1 className="font-bold text-[40px] underline">Conv No - {id}</h1>
         <br />
         <h2 className="font-bold text-[30px] flex items-center justify-between">
-          Oferentes: {call.university_name}
+          Oferentes: {call.university_id?.name}
         </h2>
-        {/* <h3 className="font-bold text-[30px] flex items-center justify-between">
-          Apertura: {call.begin_date}
-        </h3>{" "} */}
         <br />
         <h3 className="font-bold text-[30px] flex items-center justify-between">
           Cierre: {call.deadline}
