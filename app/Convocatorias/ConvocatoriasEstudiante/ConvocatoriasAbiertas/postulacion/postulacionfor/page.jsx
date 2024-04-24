@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 //Convocatorias/ConvEstudi/postulacion128384 (api)
 
 
-function postulacionform(){
+function Postulacionform(){
     const { data: session, status } = useSession({
         required: true,
         onUnauthenticated() {
@@ -219,4 +219,4 @@ function postulacionform(){
       )
 }
 
-export default postulacionform;
+export default Postulacionform;
