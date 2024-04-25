@@ -99,12 +99,15 @@ function CardConvocatorias({
             </Link>
           </div>
           <div className="w-full p-2">
-            <button
-              type="button"
-              className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
-            >
-              Postularme
-            </button>
+            <Link href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/postulacion/postulacionfor`}>
+              <button
+                type="button"
+                className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
+              >
+                Postularme
+              </button>
+            </Link>
+            
           </div>
         </div>
       </div>
