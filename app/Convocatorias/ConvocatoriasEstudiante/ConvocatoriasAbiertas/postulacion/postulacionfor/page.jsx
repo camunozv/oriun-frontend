@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray} from "react-hook-form";
 
 //Es donde verifico el inicio de seccion y donde coloco ruta dinaminca
 //de aucerdo al id de la convocatoria
@@ -10,20 +10,31 @@ import { useForm } from "react-hook-form";
 //numero de convocatorias postulado menor a dos, cumplir porcentaje  de avance, papa, estar matriculado
 //obtener info del usuario para comparar con info de la convocatoria
 //Convocatorias/ConvEstudi/postulacion128384 (api)
-//hola cambio randon 
 
 
-function postulacionform(){
+
+function Postulacionform(){
     const { data: session, status } = useSession({
         required: true,
         onUnauthenticated() {
           redirect("/Convocatorias");
         },
       });
+      
     
       const token = session?.access;
 
-      const {register, handleSubmit, formState:{errors}}= useForm();
+      const {register, handleSubmit, formState:{errors}, control}= useForm({
+        defaultValues: {
+          materias: [{nombreunal: '', codigounal: 0, nombredestino: ''}]
+        }
+      });
+      const { fields, append, remove } = useFieldArray({
+        name: 'materias',
+        control,
+      })
+
+
       console.log(errors)
       const onSubmit=handleSubmit((data)=>{console.log(data)})
 
@@ -202,6 +213,58 @@ function postulacionform(){
         <br/>
         <h1 className="text-black font-bold text-[25px] pl-6">Materias a ver</h1>
         <br/>
+        {fields.map((field, index)=>{
+          return <section key={field.id}>
+            <br/>
+            <div className="grid grid-cols-4">
+              <div>
+                <input 
+                  type="text" 
+                  placeholder="Nombre Unal"
+                  {...register(`materias.${index}.nombreunal`,
+                  {
+                    pattern:{
+                      value: /^[a-zA-Z]+$/,
+                    }
+                  }
+                  )}
+                />
+              </div>
+              <div>
+                <input 
+                  type="number" 
+                  placeholder="Codigo Unal"
+                  {...register(`materias.${index}.codigounal`)}
+                />
+              </div>
+              <div>
+                <input 
+                  type="text" 
+                  placeholder="Nombre Unal"
+                  {...register(`materias.${index}.nombredestino`,
+                  {
+                    pattern:{
+                      value: /^[a-zA-Z]+$/,
+                    }
+                  }
+                  )}
+                />
+              </div>
+              <div>
+                <button onClick={()=>remove(index)} type="button" className={ "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2" }>
+                  Eliminar
+                </button>
+              </div>
+            </div>
+            <br/>
+          </section>
+        })}
+        <br/>
+        <button onClick={()=>{
+          append();
+        }} type="button" className={ "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2" }>
+                Agregar
+        </button>
         <br/>
           <div className="grid grid-cols-2">
             <div>
@@ -220,4 +283,4 @@ function postulacionform(){
       )
 }
 
-export default postulacionform;
+export default Postulacionform;
