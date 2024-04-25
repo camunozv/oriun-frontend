@@ -74,6 +74,72 @@ function Postulacionform(){
           </div>
         <br/>
         <div>
+           <label htmlFor="apellido"></label>  
+            <input
+             placeholder="Apellido"
+             type="text"
+             {...register("apellido",
+              {required: {
+                value: true,
+                message: "Campo obligatorio"
+              },
+              pattern:{
+                value: /^[a-zA-Z]+$/,
+                message: "Este campo solo admite letras"
+              }
+              }
+             )}
+             />
+            {
+              errors.apellido && <span>{errors.apellido.message}</span>
+            }
+          </div>
+        <br/>
+        <div>
+           <label htmlFor="emailcontacto"></label>  
+            <input
+             placeholder="Email del Contacto"
+             type="text"
+             {...register("emailcontacto",
+              {required: {
+                value: true,
+                message: "Campo obligatorio"
+              },
+              pattern:{
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Inserte un correo valido"
+              }
+              }
+             )}
+             />
+            {
+              errors.emailcontacto && <span>{errors.emailcontacto.message}</span>
+            }
+          </div>
+        <br/>
+        <div>
+           <label htmlFor="relacion"></label>  
+            <input
+             placeholder="Relación con el Estudiante"
+             type="text"
+             {...register("relacion",
+              {required: {
+                value: true,
+                message: "Campo obligatorio"
+              },
+              pattern:{
+                value: /^[a-zA-Z]+$/,
+                message: "Este campo solo admite letras"
+              }
+              }
+             )}
+             />
+            {
+              errors.relacion && <span>{errors.relacion.message}</span>
+            }
+          </div>
+        <br/>
+        <div>
            <label htmlFor="telefono"></label>  
             <input
              placeholder="Teléfono"
