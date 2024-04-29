@@ -70,8 +70,6 @@ function RegisterForm() {
             type="text"
             placeholder="sin el @unal.edu.co"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            required={true}
-            ref={user_name}
           ></input>
         </div>
 
@@ -84,8 +82,6 @@ function RegisterForm() {
             id="email"
             placeholder="correo institucional"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            required={true}
-            ref={user_email}
           ></input>
         </div>
 
@@ -95,8 +91,6 @@ function RegisterForm() {
             type="password"
             placeholder="contraseña"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
@@ -105,8 +99,6 @@ function RegisterForm() {
             type="password"
             placeholder="verificar contraseña"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -117,8 +109,6 @@ function RegisterForm() {
             type="text"
             placeholder="0000"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -132,8 +122,6 @@ function RegisterForm() {
             id="id_doc"
             placeholder="sin puntos ni comas"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            required={true}
-            ref={user_email}
           ></input>
         </div>
 
@@ -161,8 +149,6 @@ function RegisterForm() {
             type="text"
             placeholder="ciudad"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -173,8 +159,6 @@ function RegisterForm() {
             type="date"
             placeholder=""
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -185,8 +169,6 @@ function RegisterForm() {
             type="text"
             placeholder="pais de residencia"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -197,8 +179,6 @@ function RegisterForm() {
             type="text"
             placeholder="ciudad de residencia"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -209,8 +189,6 @@ function RegisterForm() {
             type="text"
             placeholder="número telefónico"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -221,8 +199,6 @@ function RegisterForm() {
             type="text"
             placeholder="dirección"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -267,8 +243,6 @@ function RegisterForm() {
             type="text"
             placeholder="PAPPA"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -279,8 +253,6 @@ function RegisterForm() {
             type="text"
             placeholder="pbm"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -291,8 +263,6 @@ function RegisterForm() {
             type="text"
             placeholder="avance"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -319,8 +289,6 @@ function RegisterForm() {
             type="text"
             placeholder="semestres cursados"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -331,8 +299,6 @@ function RegisterForm() {
             type="text area"
             placeholder="Detalle enfermedades si padece alguna."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
@@ -343,8 +309,6 @@ function RegisterForm() {
             type="text area"
             placeholder="Detalle medicamentos si toma alguno."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            required={true}
-            ref={user_password}
           ></input>
         </div>
 
