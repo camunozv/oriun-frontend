@@ -27,8 +27,10 @@ async function createUser(name, email, password) {
   return data;
 }
 
+
 function RegisterFormAdmin() {
   const { register } = useForm(); // ctrl + space to see suggested objects
+  
   const user_name = useRef();
   const user_password = useRef();
   const user_email = useRef();
@@ -52,6 +54,8 @@ function RegisterFormAdmin() {
       console.log(error);
     }
   }
+
+  
 
   return (
     <form

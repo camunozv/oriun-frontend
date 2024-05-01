@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { FaUser } from "react-icons/fa";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 // import registerHandler from "@/app/api/auth/register";
@@ -27,7 +26,6 @@ async function createUser(name, email, password) {
 }
 
 function RegisterFormStudent() {
-  const { register } = useForm(); // ctrl + space to see suggested objects
   const user_name = useRef();
   const user_password = useRef();
   const user_email = useRef();
@@ -52,9 +50,25 @@ function RegisterFormStudent() {
     }
   }
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  // register: allows targetting form inputs.
+  // formState: allows accessing the current state of the form, and while changing we can check if the input is correct
+  // or not, this is useful in order to make validations.
+  // also it is worthwhile knowing that the register allows us to use html standard funcitionality such as required
+  // errors: allows us accessing information thrown by the errors caused because of the required condition stablished
+  // within the tags.
+
+  const mySubmit = handleSubmit((data) => {
+    console.log(data);
+  });
+
   return (
     <form
-      onSubmit={submitHanlder}
+      onSubmit={mySubmit}
       className="flex flex-col justify-center items-center w-[1000px] rounded-xl bg-figma_grey z-100 shadow-xl border-2  gap-3  p-6"
     >
       <div className="grid grid-cols-2 w-full">
@@ -64,15 +78,29 @@ function RegisterFormStudent() {
             type="text"
             placeholder="sin el @unal.edu.co"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+            {...register("first_name", { required: true })}
           ></input>
+          {errors.first_name && (
+            <span className="text-[15px] underline text-black-500">
+              Nombre es requerido
+            </span>
+          )}
         </div>
+
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
           <label className="font-semibold">Apellido</label>
           <input
             type="text"
             placeholder=""
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+            {...register("last_name", { required: true })}
           ></input>
+
+          {errors.last_name && (
+            <span className="text-[15px] underline text-black-500">
+              Apellido es requerido
+            </span>
+          )}
         </div>
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
           <label htmlFor="email" className="font-semibold">
@@ -83,7 +111,14 @@ function RegisterFormStudent() {
             id="email"
             placeholder="correo institucional"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+            {...register("email", { required: true })}
           ></input>
+
+          {errors.email && (
+            <span className="text-[15px] underline text-black-500">
+              Correo electrónico es requerido
+            </span>
+          )}
         </div>
 
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
@@ -92,7 +127,14 @@ function RegisterFormStudent() {
             type="password"
             placeholder="contraseña"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("password", { required: true })}
           ></input>
+
+          {errors.password && (
+            <span className="text-[15px] underline text-black-500">
+              Contraseña es requerido
+            </span>
+          )}
         </div>
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
           <label className="font-semibold">Verificar Contraseña</label>
@@ -100,7 +142,14 @@ function RegisterFormStudent() {
             type="password"
             placeholder="verificar contraseña"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("verif_password", { required: true })}
           ></input>
+
+          {errors.verif_password && (
+            <span className="text-[15px] underline text-black-500">
+              Verificar contraseña es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -110,7 +159,14 @@ function RegisterFormStudent() {
             type="text"
             placeholder="not implemented yet"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("verif_code", { required: true })}
           ></input>
+
+          {errors.verif_code && (
+            <span className="text-[15px] underline text-black-500">
+              Código de verificación es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -123,7 +179,14 @@ function RegisterFormStudent() {
             id="id_doc"
             placeholder="sin puntos ni comas"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+            {...register("id", { required: true })}
           ></input>
+
+          {errors.id && (
+            <span className="text-[15px] underline text-black-500">
+              Número de documento es requerido.
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -135,12 +198,19 @@ function RegisterFormStudent() {
             id="type_document"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("type_document", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="CC">Cédula de ciudadanía</option>
             <option value="CE">Cédula de extranjería</option>
             <option value="PA">Pasaporte</option>
           </select>
+
+          {errors.type_document && (
+            <span className="text-[15px] underline text-black-500">
+              Tipo de documento es requerido.
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -150,7 +220,14 @@ function RegisterFormStudent() {
             type="text"
             placeholder="ciudad"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("birth_place", { required: true })}
           ></input>
+
+          {errors.birth_place && (
+            <span className="text-[15px] underline text-black-500">
+              Ciudad de nacimiento es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -160,7 +237,14 @@ function RegisterFormStudent() {
             type="date"
             placeholder=""
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("birth_date", { required: true })}
           ></input>
+
+          {errors.birth_date && (
+            <span className="text-[15px] underline text-black-500">
+              Fecha de nacimiento es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -170,7 +254,14 @@ function RegisterFormStudent() {
             type="text"
             placeholder="pais de residencia"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("country", { required: true })}
           ></input>
+
+          {errors.country && (
+            <span className="text-[15px] underline text-black-500">
+              País de residencia es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -180,7 +271,14 @@ function RegisterFormStudent() {
             type="text"
             placeholder="ciudad de residencia"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("city", { required: true })}
           ></input>
+
+          {errors.city && (
+            <span className="text-[15px] underline text-black-500">
+              Ciudad de residencia es requerido
+            </span>
+          )}
         </div>
 
         {/** 3 a 12 carácteres*/}
@@ -190,7 +288,14 @@ function RegisterFormStudent() {
             type="text"
             placeholder="número telefónico"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("phone", { required: true })}
           ></input>
+
+          {errors.phone && (
+            <span className="text-[15px] underline text-black-500">
+              Número telefónico es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -200,7 +305,14 @@ function RegisterFormStudent() {
             type="text"
             placeholder="dirección"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("address", { required: true })}
           ></input>
+
+          {errors.address && (
+            <span className="text-[15px] underline text-black-500">
+              Dirección es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -212,11 +324,16 @@ function RegisterFormStudent() {
             id="sex"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("sex", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="M">Masculino</option>
             <option value="F">Femenino</option>
           </select>
+
+          {errors.sex && (
+            <span className="text-[15px] underline text-black-500">Sexo es requerido</span>
+          )}
         </div>
 
         {/** */}
@@ -228,6 +345,7 @@ function RegisterFormStudent() {
             id="etnicity"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("ethnicity", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="IN">Indígena</option>
@@ -235,6 +353,10 @@ function RegisterFormStudent() {
             <option value="RG">Rom o gitana</option>
             <option value="NA">Ninguna</option>
           </select>
+
+          {errors.ethnicity && (
+            <span className="text-[15px] underline text-black-500">Etnia es requerido</span>
+          )}
         </div>
 
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
@@ -245,6 +367,7 @@ function RegisterFormStudent() {
             id="headquarter"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("headquarter", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="BO">Bogotá</option>
@@ -257,6 +380,10 @@ function RegisterFormStudent() {
             <option value="TU">Tumaco</option>
             <option value="LP">La Paz</option>
           </select>
+
+          {errors.headquarter && (
+            <span className="text-[15px] underline text-black-500">Sede es requerido</span>
+          )}
         </div>
 
         {/** Flotante entre [0, 5.0]*/}
@@ -266,7 +393,12 @@ function RegisterFormStudent() {
             type="text"
             placeholder="PAPPA"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("PAPA", { required: true })}
           ></input>
+
+          {errors.PAPA && (
+            <span className="text-[15px] underline text-black-500">PAPPA es requerido</span>
+          )}
         </div>
 
         {/** PBM entre [0, 100]*/}
@@ -276,7 +408,12 @@ function RegisterFormStudent() {
             type="text"
             placeholder="pbm"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("PBM", { required: true })}
           ></input>
+
+          {errors.PBM && (
+            <span className="text-[15px] underline text-black-500">PBM es requerido</span>
+          )}
         </div>
 
         {/** Avance entre [0, 100]*/}
@@ -286,7 +423,14 @@ function RegisterFormStudent() {
             type="text"
             placeholder="avance"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("advance", { required: true })}
           ></input>
+
+          {errors.advance && (
+            <span className="text-[15px] underline text-black-500">
+              Avance es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -298,11 +442,18 @@ function RegisterFormStudent() {
             id="is_enrolled"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("is_enrolled", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="true">Si</option>
             <option value="false">No</option>
           </select>
+
+          {errors.is_enrolled && (
+            <span className="text-[15px] underline text-black-500">
+              ¿Está matrículado? es requerido
+            </span>
+          )}
         </div>
 
         {/** Numero de semestres cursados integer pequeño*/}
@@ -312,7 +463,14 @@ function RegisterFormStudent() {
             type="text"
             placeholder="semestres cursados"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("num_semesters", { required: true })}
           ></input>
+
+          {errors.num_semesters && (
+            <span className="text-[15px] underline text-black-500">
+              Número de semestres es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -322,7 +480,14 @@ function RegisterFormStudent() {
             type="text area"
             placeholder="Detalle enfermedades si padece alguna."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("diseases", { required: true })}
           ></input>
+
+          {errors.diseases && (
+            <span className="text-[15px] underline text-black-500">
+              Enfermedades es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -332,7 +497,14 @@ function RegisterFormStudent() {
             type="text area"
             placeholder="Detalle medicamentos si toma alguno."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("medication", { required: true })}
           ></input>
+
+          {errors.medication && (
+            <span className="text-[15px] underline text-black-500">
+              Medicación es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -344,6 +516,7 @@ function RegisterFormStudent() {
             id="Faculty"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("faculty", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="Ciencias Agrarias">
@@ -373,6 +546,12 @@ function RegisterFormStudent() {
               Facultad de Ciencias Administrativas
             </option>
           </select>
+
+          {errors.faculty && (
+            <span className="text-[15px] underline text-black-500">
+              Facultad es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -385,6 +564,7 @@ function RegisterFormStudent() {
             id="Major"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focurs:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("major", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="ISCO">Ingeniería de Sistemas y Computación</option>
@@ -454,6 +634,12 @@ function RegisterFormStudent() {
             </option>
             <option value="CONS">Construcción</option>
           </select>
+
+          {errors.major && (
+            <span className="text-[15px] underline text-black-500">
+              Carrera es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -465,12 +651,19 @@ function RegisterFormStudent() {
             id="admission"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("admission", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="REGUL">Regular</option>
             <option value="PAES">PAES</option>
             <option value="PEAMA">PEAMA</option>
           </select>
+
+          {errors.admission && (
+            <span className="text-[15px] underline text-black-500">
+              Tipo de admisión es requerido
+            </span>
+          )}
         </div>
 
         {/** */}
@@ -482,12 +675,19 @@ function RegisterFormStudent() {
             id="study_level"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             placeholder=""
+            {...register("study_level", { required: true })}
           >
             <option value="">Selección...</option>
             <option value="PRE">Pregrado</option>
             <option value="POS">Postgrado</option>
             <option value="DOC">Doctorado</option>
           </select>
+
+          {errors.study_level && (
+            <span className="text-[15px] underline text-black-500">
+              Nivel de estudios es requerido
+            </span>
+          )}
         </div>
         {/** */}
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
@@ -495,7 +695,14 @@ function RegisterFormStudent() {
           <input
             type="file"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("certificate_grades", { required: true })}
           ></input>
+
+          {errors.certificate_grades && (
+            <span className="text-[15px] underline text-black-500">
+              Certifcado de notas es requerido
+            </span>
+          )}
         </div>
         {/** */}
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
@@ -503,7 +710,14 @@ function RegisterFormStudent() {
           <input
             type="file"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("certificate_student", { required: true })}
           ></input>
+
+          {errors.certificate_student && (
+            <span className="text-[15px] underline text-black-500">
+              Certificado de matrícula es requerido
+            </span>
+          )}
         </div>
         {/** */}
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
@@ -511,7 +725,14 @@ function RegisterFormStudent() {
           <input
             type="file"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
+            {...register("payment_receipt", { required: true })}
           ></input>
+
+          {errors.payment_receipt && (
+            <span className="text-[15px] underline text-black-500">
+              Recibo de pago es requerido
+            </span>
+          )}
         </div>
       </div>
 
