@@ -3,6 +3,26 @@ npm run dev
 
 Para detener el proyecto basta con presionar Ctrl + c, y adicionalmente la letra S.
 
+Perfiles Para acceder rapidamente:
+
+Estudiante:
+valentina_rodriguez
+TestPassword
+
+santiago_garcia
+Password123
+
+
+
+Empleado:
+maria_alvarez
+Maria#1234
+
+juan_garcia
+JuanGa2024
+
+
+
 
 
 Hello, this are some notes of the HTML-CSS-COURSE
