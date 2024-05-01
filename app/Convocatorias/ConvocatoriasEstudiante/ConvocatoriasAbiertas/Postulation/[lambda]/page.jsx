@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
+import Link from "next/link";
 
 //Es donde verifico el inicio de seccion y donde coloco ruta dinaminca
 //de aucerdo al id de la convocatoria
@@ -55,6 +56,15 @@ function Postulacionform({ params }) {
           página podra subir los documentos que se requieren para hacer valida
           su postulación.
         </p>
+        <br/>
+        <div>
+          <Link
+           href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos`}>
+            <button className={ "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2" }>
+                  Ir a subir Documentos
+            </button>
+          </Link>
+        </div>
         <br />
         <h1 className="text-black font-bold text-[25px] pl-6">
           Información de Contacto
@@ -377,6 +387,8 @@ function Postulacionform({ params }) {
             </button>
           </div>
           <div>
+          <Link
+           href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos`}>
             <button
               type="submit"
               className={
@@ -385,6 +397,7 @@ function Postulacionform({ params }) {
             >
               Continuar
             </button>
+          </Link>
           </div>
         </div>
       </div>
