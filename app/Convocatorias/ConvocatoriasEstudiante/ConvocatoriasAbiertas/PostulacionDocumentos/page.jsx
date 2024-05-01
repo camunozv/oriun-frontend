@@ -18,14 +18,23 @@ function PostulacionDocumentos(){
       
     
       const token = session?.access;
-      const {register, handleSubmit, control}=useForm();
+      const {register, handleSubmit, formState: { errors }, control}=useForm();
       const[file, setFile] = useState(null);
       const onSubmit=handleSubmit((data)=>{console.log(data)});
+      const [fileName, setFileName] = useState("No seleccionado");
 
       const handleFileChange = (e) => {
+        if(e.target.files[0].size>2097152){
+          alert("El archivo supera 2MB");
+          return;
+        }
         setFile(e.target.files[0]);
+        if(setFile){
+          setFileName(e.target.files[0].name)
+        }
       };
-    
+ 
+
       const downloadFile = () => {
         if (file) {
           const url = URL.createObjectURL(file);
@@ -41,6 +50,7 @@ function PostulacionDocumentos(){
 
     return (
         <form onSubmit={onSubmit}>
+          
             <h1 className="text-black font-bold text-[35px]">Postularse a la Convocatoria</h1>
             <br/>
                 <p className="text-2xl text-justify pl-8 pr-10">
@@ -67,7 +77,8 @@ function PostulacionDocumentos(){
                     type="file"
                     id="file"
                     hidden
-                    {...register("request_form")}
+                    {...register("request_form",{
+                      required:{value: true, message:"No ha insertado un documento"}})}
                     onChange={handleFileChange}
                     />
                 {file ? <AiFillFilePdf/> : 
@@ -81,8 +92,12 @@ function PostulacionDocumentos(){
                 <div>
                     <AiFillFilePdf/>
                     <span>
-                        <MdDelete onClick={()=>{setFile(null)}}/>
+                        {fileName}
+                        <MdDelete onClick={()=>{{setFile(null)};{setFileName("No seleccionado")}}}/>
                     </span>
+                </div>
+                <div>
+                {errors.request_form && <span>{errors.request_form.message}</span>}
                 </div>
             </div>
             <div className="py-14 px-4">
@@ -101,7 +116,7 @@ function PostulacionDocumentos(){
                 </button>
             </div>
             <div className="py-14 px-4">
-                <button className={
+                <button type="submit" className={
                       "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
                     }>
                   Subir
