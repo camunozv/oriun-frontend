@@ -2,7 +2,6 @@
 import React from "react";
 import { FaUser } from "react-icons/fa";
 import { useRef } from "react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 // import registerHandler from "@/app/api/auth/register";
 
@@ -27,7 +26,7 @@ async function createUser(name, email, password) {
   return data;
 }
 
-function RegisterForm() {
+function RegisterFormStudent() {
   const { register } = useForm(); // ctrl + space to see suggested objects
   const user_name = useRef();
   const user_password = useRef();
@@ -56,23 +55,25 @@ function RegisterForm() {
   return (
     <form
       onSubmit={submitHanlder}
-      className="flex flex-col justify-center items-center w-[1000px] rounded-md bg-figma_grey z-100 shadow-xl border-2  gap-3  p-6"
+      className="flex flex-col justify-center items-center w-[1000px] rounded-xl bg-figma_grey z-100 shadow-xl border-2  gap-3  p-6"
     >
-      <div className="flex justify-center items-center gap-3 w-full">
-        <h1 className="font-bold text-[40px] inline-block">Registro</h1>
-        <FaUser className="h-[30px] w-[30px]" />
-      </div>
-
       <div className="grid grid-cols-2 w-full">
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
-          <label className="font-semibold">Nombre de Usuario</label>
+          <label className="font-semibold">Nombre</label>
           <input
             type="text"
             placeholder="sin el @unal.edu.co"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
           ></input>
         </div>
-
+        <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
+          <label className="font-semibold">Apellido</label>
+          <input
+            type="text"
+            placeholder=""
+            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+          ></input>
+        </div>
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
           <label htmlFor="email" className="font-semibold">
             Correo Electrónico
@@ -107,7 +108,7 @@ function RegisterForm() {
           <label className="font-semibold">Código de Verificación</label>
           <input
             type="text"
-            placeholder="0000"
+            placeholder="not implemented yet"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
           ></input>
         </div>
@@ -233,6 +234,28 @@ function RegisterForm() {
             <option value="AF">Afrocolombiana</option>
             <option value="RG">Rom o gitana</option>
             <option value="NA">Ninguna</option>
+          </select>
+        </div>
+
+        <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
+          <label htmlFor="headquarter" className="font-semibold">
+            Sede
+          </label>
+          <select
+            id="headquarter"
+            className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+            placeholder=""
+          >
+            <option value="">Selección...</option>
+            <option value="BO">Bogotá</option>
+            <option value="AM">Amazonia</option>
+            <option value="CA">Caribe</option>
+            <option value="MA">Manizales</option>
+            <option value="ME">Medellín</option>
+            <option value="OR">Orinoquia</option>
+            <option value="PA">Palmira</option>
+            <option value="TU">Tumaco</option>
+            <option value="LP">La Paz</option>
           </select>
         </div>
 
@@ -504,4 +527,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default RegisterFormStudent;
