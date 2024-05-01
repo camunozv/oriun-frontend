@@ -1,5 +1,6 @@
 
 //import CardPostulation from '@/components/ChooseWinners/CardPostulation';
+import CardPostulacion from '@/components/ChooseWinner/CardPostulacion';
 import Link from 'next/link';
 import React from 'react'
 
@@ -27,7 +28,7 @@ function verPostulaciones()
               {/**Active */}
               <div className="flex flex-col justify-start items-left gap-1">
                 <label htmlFor="active" className="font-semibold">
-                  Estado
+                  Estado de la Postulación
                 </label>
                 <select
                   id="active"
@@ -35,15 +36,16 @@ function verPostulaciones()
                   placeholder="value 0"
                 >
                   <option value="">Selección...</option>
-                  <option value="True">Abierta</option>
-                  <option value="False">Cerrada</option>
+                  <option value="0">Sin Revisar</option>
+                  <option value="1">Pendiente de Modificacion</option>
+                  <option value="2">Aceptado</option>
                 </select>
               </div>
 
-              {/**call_id */}
+              {/*Id Estudiante */}
               <div className="flex flex-col justify-start items-left gap-1">
                 <label htmlFor="call_id" className="font-semibold">
-                  id Convocatoria
+                  id Estudiante
                 </label>
                 <input
                   id="call_id"
@@ -53,36 +55,11 @@ function verPostulaciones()
                 />
               </div>
 
-              {/**university_id */}
-              <div className="flex flex-col justify-start items-left gap-1">
-                <label htmlFor="university_id" className="font-semibold">
-                  id Universidad
-                </label>
-                <input
-                  id="university_id"
-                  type="text"
-                  placeholder="código universidad /un número"
-                  className="bg-white border-gray-300 border rounded-md outline-none"
-                />
-              </div>
-
-              {/**university_name */}
-              <div className="flex flex-col justify-start items-left gap-1">
-                <label htmlFor="univeristy_name" className="font-semibold">
-                  Nombre Universidad
-                </label>
-                <input
-                  id="university_name"
-                  type="text"
-                  placeholder="universidad de destino"
-                  className="bg-white border-gray-300 border rounded-md outline-none"
-                />
-              </div>
 
               {/**deadline */}
               <div className="flex flex-col justify-start items-left gap-1">
                 <label htmlFor="deadline" className="font-semibold">
-                  Cierre
+                  Fecha de Postulación
                 </label>
                 <input
                   id="deadline"
@@ -90,23 +67,6 @@ function verPostulaciones()
                   placeholder=""
                   className="bg-white border-gray-300 border rounded-md outline-none"
                 />
-              </div>
-
-              {/**format */}
-              <div className="flex flex-col justify-start items-left gap-1">
-                <label htmlFor="format" className="font-semibold">
-                  Formato
-                </label>
-                <select
-                  id="format"
-                  className="border-gray-300 border rounded-md outline-none bg-white"
-                  placeholder="value 0"
-                >
-                  <option value="">Selección...</option>
-                  <option value="P">Presencial</option>
-                  <option value="V">Virtual</option>
-                  <option value="M">Híbrido</option>
-                </select>
               </div>
 
               {/**study_level */}
@@ -129,7 +89,7 @@ function verPostulaciones()
               {/**year */}
               <div className="flex flex-col justify-start items-left gap-1">
                 <label htmlFor="year" className="font-semibold">
-                  Año
+                  Año de la movilidad
                 </label>
                 <input
                   id="year"
@@ -142,7 +102,7 @@ function verPostulaciones()
               {/**semester */}
               <div className="flex flex-col justify-start items-left gap-1">
                 <label htmlFor="semester" className="font-semibold">
-                  Semestre
+                  Semestre de la movilidad
                 </label>
                 <select
                   id="semester"
@@ -155,64 +115,6 @@ function verPostulaciones()
                 </select>
               </div>
 
-              {/**Región */}
-              <div className="flex flex-col justify-start items-left gap-1">
-                <label htmlFor="region" className="font-semibold">
-                  Región
-                </label>
-                <select
-                  id="region"
-                  className="border-gray-300 border rounded-md outline-none bg-white"
-                  placeholder=""
-                >
-                  <option value="">Selección...</option>
-                  <option value="NA">Norte América</option>
-                  <option value="LA">Latinoamérica</option>
-                  <option value="EU">Europa</option>
-                  <option value="OC">Oceanía</option>
-                  <option value="AN">Uniandes</option>
-                  <option value="AS">Asia</option>
-                  <option value="SG">Convenio Sigueme/Nacional</option>
-                </select>
-              </div>
-
-              {/**Country */}
-              <div className="flex flex-col justify-start items-left gap-1">
-                <label htmlFor="country" className="font-semibold">
-                  País
-                </label>
-                <input
-                  id="country"
-                  type="text"
-                  placeholder="País"
-                  className="border-gray-300 border rounded-md outline-none"
-                />
-              </div>
-
-              {/**language */}
-              <div className="flex flex-col justify-start items-left gap-1">
-                <label htmlFor="language" className="font-semibold">
-                  Idioma
-                </label>
-
-                <select
-                  id="language"
-                  className="border-gray-300 border rounded-md outline-none bg-white"
-                  placeholder=""
-                >
-                  <option value="">Selección...</option>
-                  <option value="en">Inglés</option>
-                  <option value="es">Español</option>
-                  <option value="fr">Francés</option>
-                  <option value="pt">Portugués</option>
-                  <option value="de">Alemán</option>
-                  <option value="it">Italiano</option>
-                  <option value="ko">Coreano</option>
-                  <option value="ru">Ruso</option>
-                  <option value="zh">Chino</option>
-                  <option value="xx">Otro</option>
-                </select>
-              </div>
             </div>
 
             {/** */}
@@ -227,6 +129,16 @@ function verPostulaciones()
         </div>
 
         <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+          <div className="grid grid-cols-3 w-full gap-6">
+              <CardPostulacion>
+              </CardPostulacion>
+
+              <CardPostulacion>
+              </CardPostulacion>
+
+              <CardPostulacion>
+              </CardPostulacion>
+          </div>
         </main>
       </>
     );
