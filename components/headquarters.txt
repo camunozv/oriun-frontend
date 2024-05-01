@@ -1,0 +1,9 @@
+{"value": "BO", "display": "Bogotá"},
+        {"value": "AM", "display": "Amazonia"},
+        {"value": "CA", "display": "Caribe"},
+        {"value": "MA", "display": "Manizales"},
+        {"value": "ME", "display": "Medellín"},
+        {"value": "OR", "display": "Orinoquia"},
+        {"value": "PA", "display": "Palmira"},
+        {"value": "TU", "display": "Tumaco"},
+        {"value": "LP", "display": "La Paz"}
