@@ -3,6 +3,7 @@ npm run dev
 
 Para detener el proyecto basta con presionar Ctrl + c, y adicionalmente la letra S.
 
+
 Perfiles Para acceder rapidamente:
 
 Estudiante:
@@ -23,6 +24,11 @@ JuanGa2024
 
 
 
+Comando a usar para hacer el push: 
+git push origin development:Developmentcloud
+
+Estructura del push:
+git push <nombre_remoto> <rama_local>:<rama_remota>
 
 
 Hello, this are some notes of the HTML-CSS-COURSE
