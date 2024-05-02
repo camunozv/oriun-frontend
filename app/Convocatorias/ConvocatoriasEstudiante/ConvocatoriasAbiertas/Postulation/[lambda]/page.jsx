@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, control} from "react-hook-form";
 import Link from "next/link";
 
 //Es donde verifico el inicio de seccion y donde coloco ruta dinaminca

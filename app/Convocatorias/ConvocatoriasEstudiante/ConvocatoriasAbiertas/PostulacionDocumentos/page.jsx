@@ -81,23 +81,25 @@ function PostulacionDocumentos(){
                       required:{value: true, message:"No ha insertado un documento"}})}
                     onChange={handleFileChange}
                     />
-                {file ? <AiFillFilePdf/> : 
-                <section>
-                <MdCloudUpload className="fill-blue-500" />
-                <p>Inserte un Documento</p> 
-                </section>
+                {file ? <AiFillFilePdf size={150} style={{ color: '#f73e3e' }}/> : 
+                <div className="flex items-center justify-center p-8 ">
+                <MdCloudUpload className="fill-blue-500" size={100} />
+                <br/>
+                <p className="pl-6 pt-4">Inserte un Documento</p> 
+                </div>
 
                 }
                 </div>
-                <div>
-                    <AiFillFilePdf/>
-                    <span>
-                        {fileName}
-                        <MdDelete onClick={()=>{{setFile(null)};{setFileName("No seleccionado")}}}/>
-                    </span>
+                <div className="p-2">
+                <div className="flex bg-lime-200 items-center justify-center ">
+                    <AiFillFilePdf className="fill-green-950" size={20}/>
+                    <div className="px-5">{fileName}</div>
+                        <MdDelete size={20} className="fill-green-950" onClick={()=>{{setFile(null)};{setFileName("No seleccionado")}}}/>
                 </div>
-                <div>
-                {errors.request_form && <span>{errors.request_form.message}</span>}
+                <div className="pt-2" >
+                {errors.request_form && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold'  }}>{errors.request_form.message} </span>}
+
+                </div>
                 </div>
             </div>
             <div className="py-14 px-4">
