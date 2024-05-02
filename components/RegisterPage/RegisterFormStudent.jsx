@@ -78,11 +78,27 @@ function RegisterFormStudent() {
             type="text"
             placeholder="sin el @unal.edu.co"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            {...register("first_name", { required: true })}
+            {...register("first_name", {
+
+              required: {
+                value: true,
+                message: "Nombre es requerido",
+              },
+              minLength: {
+                value: 4,
+                message: "Nombre debe tener mínimo 4 carácteres",
+              },
+              maxLength: {
+                value: 20,
+                message: "Nombre debe tener máximo 20 carácteres",
+              },
+
+            })}
           ></input>
+
           {errors.first_name && (
             <span className="text-[15px] underline text-black-500">
-              Nombre es requerido
+              {errors.first_name.message}
             </span>
           )}
         </div>
@@ -93,14 +109,28 @@ function RegisterFormStudent() {
             type="text"
             placeholder=""
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            {...register("last_name", { required: true })}
+            {...register("last_name", { required: {
+              value:true,
+              message: "El appellido es requerido."
+            },
+            minLength : {
+              value: 4,
+              message: "El appellido debe tener mínimo 4 carácteres.",
+            },
+            maxLength : {
+              value: 20,
+              message: "El appellido debe tener máximo 20 carácteres.",
+            }
+           })}
           ></input>
 
           {errors.last_name && (
             <span className="text-[15px] underline text-black-500">
-              Apellido es requerido
+              {errors.last_name.message}
             </span>
           )}
+
+
         </div>
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
           <label htmlFor="email" className="font-semibold">
@@ -111,14 +141,24 @@ function RegisterFormStudent() {
             id="email"
             placeholder="correo institucional"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            {...register("email", { required: true })}
+            {...register("email", { required: {
+              value: true,
+              message: "El correo electrónico es requeriado"
+            },
+            pattern : {
+              value: /^[A-Za-z]+@unal\.edu\.co$/i,
+              message: "El correo debe ser de dominio @unal.edu.co"
+            }
+          
+          })}
           ></input>
 
           {errors.email && (
             <span className="text-[15px] underline text-black-500">
-              Correo electrónico es requerido
+              {errors.email.message}
             </span>
           )}
+
         </div>
 
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
@@ -237,12 +277,23 @@ function RegisterFormStudent() {
             type="date"
             placeholder=""
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("birth_date", { required: true })}
+            {...register("birth_date", { required: {
+              value:true,
+              message: 'La fecha de nacimiento es requerida.'
+            },
+            validate : (value) => {
+              const fechaDeNacimiento = new Date(value);
+              const fechaActual = new Date();
+              const edad = fechaDeNacimiento.getFullYear() - fechaActual.getFullYear();
+              return edad >= 15 || "Esta seguro que está en la universidad?"
+            }
+            
+           })}
           ></input>
 
           {errors.birth_date && (
             <span className="text-[15px] underline text-black-500">
-              Fecha de nacimiento es requerido
+              {errors.birth_date.message}
             </span>
           )}
         </div>
@@ -332,7 +383,9 @@ function RegisterFormStudent() {
           </select>
 
           {errors.sex && (
-            <span className="text-[15px] underline text-black-500">Sexo es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              Sexo es requerido
+            </span>
           )}
         </div>
 
@@ -355,7 +408,9 @@ function RegisterFormStudent() {
           </select>
 
           {errors.ethnicity && (
-            <span className="text-[15px] underline text-black-500">Etnia es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              Etnia es requerido
+            </span>
           )}
         </div>
 
@@ -382,7 +437,9 @@ function RegisterFormStudent() {
           </select>
 
           {errors.headquarter && (
-            <span className="text-[15px] underline text-black-500">Sede es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              Sede es requerido
+            </span>
           )}
         </div>
 
@@ -397,7 +454,9 @@ function RegisterFormStudent() {
           ></input>
 
           {errors.PAPA && (
-            <span className="text-[15px] underline text-black-500">PAPPA es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              PAPPA es requerido
+            </span>
           )}
         </div>
 
@@ -412,7 +471,9 @@ function RegisterFormStudent() {
           ></input>
 
           {errors.PBM && (
-            <span className="text-[15px] underline text-black-500">PBM es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              PBM es requerido
+            </span>
           )}
         </div>
 
