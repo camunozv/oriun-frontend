@@ -54,6 +54,7 @@ function RegisterFormStudent() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
   // register: allows targetting form inputs.
   // formState: allows accessing the current state of the form, and while changing we can check if the input is correct
@@ -61,6 +62,7 @@ function RegisterFormStudent() {
   // also it is worthwhile knowing that the register allows us to use html standard funcitionality such as required
   // errors: allows us accessing information thrown by the errors caused because of the required condition stablished
   // within the tags.
+  // watch: allows us bringing the current state.
 
   const mySubmit = handleSubmit((data) => {
     console.log(data);
@@ -78,11 +80,25 @@ function RegisterFormStudent() {
             type="text"
             placeholder="sin el @unal.edu.co"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            {...register("first_name", { required: true })}
+            {...register("first_name", {
+              required: {
+                value: true,
+                message: "Nombre es requerido",
+              },
+              minLength: {
+                value: 4,
+                message: "Nombre debe tener mínimo 4 carácteres",
+              },
+              maxLength: {
+                value: 20,
+                message: "Nombre debe tener máximo 20 carácteres",
+              },
+            })}
           ></input>
+
           {errors.first_name && (
             <span className="text-[15px] underline text-black-500">
-              Nombre es requerido
+              {errors.first_name.message}
             </span>
           )}
         </div>
@@ -93,12 +109,25 @@ function RegisterFormStudent() {
             type="text"
             placeholder=""
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            {...register("last_name", { required: true })}
+            {...register("last_name", {
+              required: {
+                value: true,
+                message: "El appellido es requerido.",
+              },
+              minLength: {
+                value: 4,
+                message: "El appellido debe tener mínimo 4 carácteres.",
+              },
+              maxLength: {
+                value: 20,
+                message: "El appellido debe tener máximo 20 carácteres.",
+              },
+            })}
           ></input>
 
           {errors.last_name && (
             <span className="text-[15px] underline text-black-500">
-              Apellido es requerido
+              {errors.last_name.message}
             </span>
           )}
         </div>
@@ -111,12 +140,21 @@ function RegisterFormStudent() {
             id="email"
             placeholder="correo institucional"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: {
+                value: true,
+                message: "El correo electrónico es requeriado",
+              },
+              pattern: {
+                value: /^[A-Za-z]+@unal\.edu\.co$/i,
+                message: "El correo debe ser de dominio @unal.edu.co",
+              },
+            })}
           ></input>
 
           {errors.email && (
             <span className="text-[15px] underline text-black-500">
-              Correo electrónico es requerido
+              {errors.email.message}
             </span>
           )}
         </div>
@@ -127,12 +165,25 @@ function RegisterFormStudent() {
             type="password"
             placeholder="contraseña"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: {
+                value: true,
+                message: "La contraseña es requerida",
+              },
+              pattern: {
+                value: /^[A-Za-z0-9]+$/i,
+                message: "La contraseña debe incluir carácteres alfanuméricos",
+              },
+              minLength: {
+                value: 12,
+                message: "La contraseña debe incluir mínimo 12 carácteres.",
+              },
+            })}
           ></input>
 
           {errors.password && (
             <span className="text-[15px] underline text-black-500">
-              Contraseña es requerido
+              {errors.password.message}
             </span>
           )}
         </div>
@@ -142,12 +193,24 @@ function RegisterFormStudent() {
             type="password"
             placeholder="verificar contraseña"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("verif_password", { required: true })}
+            {...register("verif_password", {
+              required: {
+                value: true,
+                message: "Verificar la contraseña es requerido.",
+              },
+              validate: (value) => {
+                if (value === watch("password")) {
+                  return true;
+                } else {
+                  return "Las contraseñas no coinciden";
+                }
+              },
+            })}
           ></input>
 
           {errors.verif_password && (
             <span className="text-[15px] underline text-black-500">
-              Verificar contraseña es requerido
+              {errors.verif_password.message}
             </span>
           )}
         </div>
@@ -159,12 +222,21 @@ function RegisterFormStudent() {
             type="text"
             placeholder="not implemented yet"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("verif_code", { required: true })}
+            {...register("verif_code", {
+              required: {
+                value: true,
+                message: "El código de verificación es requerido.",
+              },
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "El código de verificación debe ser un número.",
+              },
+            })}
           ></input>
 
           {errors.verif_code && (
             <span className="text-[15px] underline text-black-500">
-              Código de verificación es requerido
+              {errors.verif_code.message}
             </span>
           )}
         </div>
@@ -179,12 +251,22 @@ function RegisterFormStudent() {
             id="id_doc"
             placeholder="sin puntos ni comas"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
-            {...register("id", { required: true })}
+            {...register("id", {
+              required: {
+                value: true,
+                message: "El número de documento es requerido.",
+              },
+              pattern: {
+                value: /^[0-9]+$/i,
+                message:
+                  "El número de documento no puede incluir puntos ni comas.",
+              },
+            })}
           ></input>
 
           {errors.id && (
             <span className="text-[15px] underline text-black-500">
-              Número de documento es requerido.
+              {errors.id.message}
             </span>
           )}
         </div>
@@ -237,12 +319,23 @@ function RegisterFormStudent() {
             type="date"
             placeholder=""
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("birth_date", { required: true })}
+            {...register("birth_date", {
+              required: {
+                value: true,
+                message: "La fecha de nacimiento es requerida.",
+              },
+              // validate : (value) => {
+              //   const fechaDeNacimiento = new Date(value);
+              //   const fechaActual = new Date();
+              //   const edad = fechaDeNacimiento.getFullYear() - fechaActual.getFullYear();
+              //   return edad >= 15 || "Esta seguro que está en la universidad?"
+              // }
+            })}
           ></input>
 
           {errors.birth_date && (
             <span className="text-[15px] underline text-black-500">
-              Fecha de nacimiento es requerido
+              {errors.birth_date.message}
             </span>
           )}
         </div>
@@ -254,12 +347,21 @@ function RegisterFormStudent() {
             type="text"
             placeholder="pais de residencia"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("country", { required: true })}
+            {...register("country", {
+              required: {
+                value: true,
+                message: "El páis de residencia es requerido",
+              },
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message: "El país no puede tener números.",
+              },
+            })}
           ></input>
 
           {errors.country && (
             <span className="text-[15px] underline text-black-500">
-              País de residencia es requerido
+              {errors.country.message}
             </span>
           )}
         </div>
@@ -271,12 +373,21 @@ function RegisterFormStudent() {
             type="text"
             placeholder="ciudad de residencia"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("city", { required: true })}
+            {...register("city", {
+              required: {
+                value: true,
+                message: "La ciudad de residencia es requerida.",
+              },
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message: "La ciudad de residencia no puede tener números.",
+              },
+            })}
           ></input>
 
           {errors.city && (
             <span className="text-[15px] underline text-black-500">
-              Ciudad de residencia es requerido
+              {errors.city.message}
             </span>
           )}
         </div>
@@ -288,12 +399,25 @@ function RegisterFormStudent() {
             type="text"
             placeholder="número telefónico"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("phone", { required: true })}
+            {...register("phone", {
+              required: {
+                value: true,
+                message: "El número telefónico es requerido.",
+              },
+              minLength: {
+                value: 10,
+                message: "El número telefónico debe tener mínimo 10 digitos.",
+              },
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "El número telefónico solo puede incluir números.",
+              },
+            })}
           ></input>
 
           {errors.phone && (
             <span className="text-[15px] underline text-black-500">
-              Número telefónico es requerido
+              {errors.phone.message}
             </span>
           )}
         </div>
@@ -310,7 +434,7 @@ function RegisterFormStudent() {
 
           {errors.address && (
             <span className="text-[15px] underline text-black-500">
-              Dirección es requerido
+              Dirección de residencia es requerido
             </span>
           )}
         </div>
@@ -332,7 +456,9 @@ function RegisterFormStudent() {
           </select>
 
           {errors.sex && (
-            <span className="text-[15px] underline text-black-500">Sexo es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              Sexo es requerido
+            </span>
           )}
         </div>
 
@@ -355,7 +481,9 @@ function RegisterFormStudent() {
           </select>
 
           {errors.ethnicity && (
-            <span className="text-[15px] underline text-black-500">Etnia es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              Etnia es requerido
+            </span>
           )}
         </div>
 
@@ -382,22 +510,35 @@ function RegisterFormStudent() {
           </select>
 
           {errors.headquarter && (
-            <span className="text-[15px] underline text-black-500">Sede es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              Sede es requerido
+            </span>
           )}
         </div>
 
         {/** Flotante entre [0, 5.0]*/}
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
-          <label className="font-semibold">PAPA</label>
+          <label className="font-semibold">PAPPA</label>
           <input
             type="text"
             placeholder="PAPPA"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("PAPA", { required: true })}
+            {...register("PAPA", {
+              required: {
+                value: true,
+                message: "El PAPPA es requerido.",
+              },
+              pattern: {
+                value: /^(?:5\.0|(?:(?:[0-4](?:\.\d*)?)|(?:\.\d+)))$/,
+                message: "El PAPPA debe ser un flotante entre 0.0 y 5.0",
+              },
+            })}
           ></input>
 
           {errors.PAPA && (
-            <span className="text-[15px] underline text-black-500">PAPPA es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              {errors.PAPA.message}
+            </span>
           )}
         </div>
 
@@ -408,11 +549,22 @@ function RegisterFormStudent() {
             type="text"
             placeholder="pbm"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("PBM", { required: true })}
+            {...register("PBM", {
+              required: {
+                value: true,
+                message: "El PBM es requerido.",
+              },
+              pattern: {
+                value: /^(?:100|\d{1,2}|0)$/,
+                message: "El PBM debe ser un entero de 0 a 100.",
+              },
+            })}
           ></input>
 
           {errors.PBM && (
-            <span className="text-[15px] underline text-black-500">PBM es requerido</span>
+            <span className="text-[15px] underline text-black-500">
+              {errors.PBM.message}
+            </span>
           )}
         </div>
 
@@ -421,14 +573,23 @@ function RegisterFormStudent() {
           <label className="font-semibold">Avance</label>
           <input
             type="text"
-            placeholder="avance"
+            placeholder="Avance en porcentaje"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("advance", { required: true })}
+            {...register("advance", {
+              required: {
+                value: true,
+                message: "Avance es requerido",
+              },
+              pattern: {
+                value: /^(?:100|\d{1,2}|0)$/,
+                message: "El avance debe ser un número entero entre 0 y 100.",
+              },
+            })}
           ></input>
 
           {errors.advance && (
             <span className="text-[15px] underline text-black-500">
-              Avance es requerido
+              {errors.advance.message}
             </span>
           )}
         </div>
@@ -451,7 +612,7 @@ function RegisterFormStudent() {
 
           {errors.is_enrolled && (
             <span className="text-[15px] underline text-black-500">
-              ¿Está matrículado? es requerido
+              Estado de matrícula es requerido
             </span>
           )}
         </div>
@@ -463,12 +624,22 @@ function RegisterFormStudent() {
             type="text"
             placeholder="semestres cursados"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("num_semesters", { required: true })}
+            {...register("num_semesters", {
+              required: {
+                value: true,
+                message: "El número de semestres cursados es requerido.",
+              },
+              pattern: {
+                value: /^(?:[0-9]|[12][0-9]|30)$/,
+                message:
+                  "El número de semestres cursados debe ser un número menor a 30.",
+              },
+            })}
           ></input>
 
           {errors.num_semesters && (
             <span className="text-[15px] underline text-black-500">
-              Número de semestres es requerido
+              {errors.num_semesters.message}
             </span>
           )}
         </div>
@@ -480,12 +651,16 @@ function RegisterFormStudent() {
             type="text area"
             placeholder="Detalle enfermedades si padece alguna."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("diseases", { required: true })}
+            {...register("diseases", { required: {
+              value: true,
+              message: 'Las enfermedades son requeridas.'
+            }
+           })}
           ></input>
 
           {errors.diseases && (
             <span className="text-[15px] underline text-black-500">
-              Enfermedades es requerido
+              {errors.diseases.message}
             </span>
           )}
         </div>
@@ -743,6 +918,10 @@ function RegisterFormStudent() {
         >
           Registrar
         </button>
+      </div>
+
+      <div>
+        <pre>{JSON.stringify(watch(), null, 2)}</pre>
       </div>
     </form>
   );
