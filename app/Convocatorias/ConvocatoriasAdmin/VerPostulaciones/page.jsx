@@ -130,13 +130,13 @@ function verPostulaciones()
 
         <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
           <div className="grid grid-cols-3 w-full gap-6">
-              <CardPostulacion>
+              <CardPostulacion  EstadoConv={1} >
               </CardPostulacion>
 
-              <CardPostulacion>
+              <CardPostulacion EstadoConv={2}>
               </CardPostulacion>
 
-              <CardPostulacion>
+              <CardPostulacion EstadoConv={3}>
               </CardPostulacion>
           </div>
         </main>
