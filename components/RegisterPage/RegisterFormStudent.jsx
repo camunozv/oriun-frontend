@@ -1,11 +1,8 @@
 "use client";
 import React from "react";
-import { useRef } from "react";
 import { useForm } from "react-hook-form";
-// import registerHandler from "@/app/api/auth/register";
 
-// This component was created for TESTING PURPOSES ONLY & should not be included in the final production application.
-
+// This function must be modified to send the data to the backend.
 async function createUser(name, email, password) {
   const response = await fetch("@/app/api/auth/register/", {
     method: "POST",
@@ -20,41 +17,21 @@ async function createUser(name, email, password) {
   if (!response.ok) {
     // If we get error status code
     throw new Error("Something went wrong");
+  } else {
+    alert('Usuario creado exitosamente.')
   }
 
   return data;
 }
 
 function RegisterFormStudent() {
-  const user_name = useRef();
-  const user_password = useRef();
-  const user_email = useRef();
-
-  async function submitHanlder(event) {
-    event.preventDefault();
-
-    const entered_name = user_name.current.value;
-    const entered_password = user_password.current.value;
-    const entered_email = user_email.current.value;
-
-    console.log(entered_email);
-    try {
-      const response = await createUser(
-        entered_name,
-        entered_email,
-        entered_password
-      );
-      console.log("User created :D");
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
+    resetField,
   } = useForm();
   // register: allows targetting form inputs.
   // formState: allows accessing the current state of the form, and while changing we can check if the input is correct
@@ -64,8 +41,57 @@ function RegisterFormStudent() {
   // within the tags.
   // watch: allows us bringing the current state.
 
+  const handleCertificateGrades = (e) => {
+    if (e.target.files[0].size > 2097152) {
+      alert(`El archivo ${e.target.files[0].name} supera 2 MB.`);
+      resetField("certificate_grades");
+      return;
+    }
+  };
+
+  const handleCertificateStudent = (e) => {
+    if (e.target.files[0].size > 2097152) {
+      alert(`El archivo ${e.target.files[0].name} supera 2 MB.`);
+      resetField("certificate_student");
+      return;
+    }
+  };
+
+  const handlePaymentReceipt = (e) => {
+    if (e.target.files[0].size > 2097152) {
+      alert(`El archivo ${e.target.files[0].name} supera 2 MB.`);
+      resetField("payment_receipt");
+      return;
+    }
+  };
+
+  async function submitHanlder(event) {  
+    try {
+      console.log("User created :D");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const mySubmit = handleSubmit((data) => {
-    console.log(data);
+    // console.log(data, 'hola');
+
+    const data_b = {};
+    for (const [key, value] of Object.entries(data)) {
+      if (key !== "verif_password") {
+        data_b[key] = value;
+      }
+    }
+
+    // console.log(data_b)
+    alert("Enviando datos...");
+    // API post data_b
+    /*
+     * Code here: try catch block to execute 'createUser' async function.
+     *
+     */
+
+    reset();
   });
 
   return (
@@ -261,6 +287,11 @@ function RegisterFormStudent() {
                 message:
                   "El número de documento no puede incluir puntos ni comas.",
               },
+              maxLength: {
+                value: 20,
+                message:
+                  "El número de documento no puede tener más de 20 dígitos.",
+              },
             })}
           ></input>
 
@@ -302,7 +333,17 @@ function RegisterFormStudent() {
             type="text"
             placeholder="ciudad"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("birth_place", { required: true })}
+            {...register("birth_place", {
+              required: {
+                value: true,
+                message: "La ciudad de nacimiento es requerida.",
+              },
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message:
+                  "La ciudad de nacimiento no puede tener números ni carácteres especiales.",
+              },
+            })}
           ></input>
 
           {errors.birth_place && (
@@ -354,7 +395,8 @@ function RegisterFormStudent() {
               },
               pattern: {
                 value: /^[A-Za-z]+$/i,
-                message: "El país no puede tener números.",
+                message:
+                  "El país no puede tener números ni carácteres especiales.",
               },
             })}
           ></input>
@@ -380,7 +422,8 @@ function RegisterFormStudent() {
               },
               pattern: {
                 value: /^[A-Za-z]+$/i,
-                message: "La ciudad de residencia no puede tener números.",
+                message:
+                  "La ciudad de residencia no puede tener números ni carácteres especiales.",
               },
             })}
           ></input>
@@ -651,11 +694,12 @@ function RegisterFormStudent() {
             type="text area"
             placeholder="Detalle enfermedades si padece alguna."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
-            {...register("diseases", { required: {
-              value: true,
-              message: 'Las enfermedades son requeridas.'
-            }
-           })}
+            {...register("diseases", {
+              required: {
+                value: true,
+                message: "Las enfermedades son requeridas.",
+              },
+            })}
           ></input>
 
           {errors.diseases && (
@@ -871,6 +915,7 @@ function RegisterFormStudent() {
             type="file"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("certificate_grades", { required: true })}
+            onChange={handleCertificateGrades}
           ></input>
 
           {errors.certificate_grades && (
@@ -886,6 +931,7 @@ function RegisterFormStudent() {
             type="file"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("certificate_student", { required: true })}
+            onChange={handleCertificateStudent}
           ></input>
 
           {errors.certificate_student && (
@@ -901,6 +947,7 @@ function RegisterFormStudent() {
             type="file"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("payment_receipt", { required: true })}
+            onChange={handlePaymentReceipt}
           ></input>
 
           {errors.payment_receipt && (
@@ -920,9 +967,10 @@ function RegisterFormStudent() {
         </button>
       </div>
 
-      <div>
+      {/*The code below was just for visualizing the data before it was sent.*/}
+      {/* <div> 
         <pre>{JSON.stringify(watch(), null, 2)}</pre>
-      </div>
+      </div> */}
     </form>
   );
 }
