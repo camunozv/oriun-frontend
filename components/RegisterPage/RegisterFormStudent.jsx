@@ -18,7 +18,7 @@ async function createUser(name, email, password) {
     // If we get error status code
     throw new Error("Something went wrong");
   } else {
-    alert('Usuario creado exitosamente.')
+    alert("Usuario creado exitosamente.");
   }
 
   return data;
@@ -65,7 +65,7 @@ function RegisterFormStudent() {
     }
   };
 
-  async function submitHanlder(event) {  
+  async function submitHanlder(event) {
     try {
       console.log("User created :D");
     } catch (error) {
@@ -101,10 +101,10 @@ function RegisterFormStudent() {
     >
       <div className="grid grid-cols-2 w-full">
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
-          <label className="font-semibold">Nombre</label>
+          <label className="font-semibold">Nombre(s)</label>
           <input
             type="text"
-            placeholder="sin el @unal.edu.co"
+            placeholder="AAAA AAAA"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             {...register("first_name", {
               required: {
@@ -130,10 +130,10 @@ function RegisterFormStudent() {
         </div>
 
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
-          <label className="font-semibold">Apellido</label>
+          <label className="font-semibold">Apellido(s)</label>
           <input
             type="text"
-            placeholder=""
+            placeholder="AAAA AAAA"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             {...register("last_name", {
               required: {
@@ -164,7 +164,7 @@ function RegisterFormStudent() {
           <input
             type="text"
             id="email"
-            placeholder="correo institucional"
+            placeholder="Correo institucional"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             {...register("email", {
               required: {
@@ -189,7 +189,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Contraseña</label>
           <input
             type="password"
-            placeholder="contraseña"
+            placeholder="Contraseña"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("password", {
               required: {
@@ -217,7 +217,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Verificar Contraseña</label>
           <input
             type="password"
-            placeholder="verificar contraseña"
+            placeholder="Verificar contraseña"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("verif_password", {
               required: {
@@ -246,7 +246,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Código de Verificación</label>
           <input
             type="text"
-            placeholder="not implemented yet"
+            placeholder="Código enviado al correo."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("verif_code", {
               required: {
@@ -275,7 +275,7 @@ function RegisterFormStudent() {
           <input
             type="text"
             id="id_doc"
-            placeholder="sin puntos ni comas"
+            placeholder="Sin puntos ni comas"
             className="border-2 rounded-md w-full focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
             {...register("id", {
               required: {
@@ -331,7 +331,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Ciudad de nacimiento</label>
           <input
             type="text"
-            placeholder="ciudad"
+            placeholder="Nombre ciudad de nacimiento."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("birth_place", {
               required: {
@@ -365,12 +365,6 @@ function RegisterFormStudent() {
                 value: true,
                 message: "La fecha de nacimiento es requerida.",
               },
-              // validate : (value) => {
-              //   const fechaDeNacimiento = new Date(value);
-              //   const fechaActual = new Date();
-              //   const edad = fechaDeNacimiento.getFullYear() - fechaActual.getFullYear();
-              //   return edad >= 15 || "Esta seguro que está en la universidad?"
-              // }
             })}
           ></input>
 
@@ -386,7 +380,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Páis de residencia</label>
           <input
             type="text"
-            placeholder="pais de residencia"
+            placeholder="Nombre país de residencia"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("country", {
               required: {
@@ -413,7 +407,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Ciudad de residencia</label>
           <input
             type="text"
-            placeholder="ciudad de residencia"
+            placeholder="Nombre ciudad de residencia."
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("city", {
               required: {
@@ -440,7 +434,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Número Telefónico</label>
           <input
             type="text"
-            placeholder="número telefónico"
+            placeholder="Número telefónico"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("phone", {
               required: {
@@ -470,7 +464,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Dirección de Residencia</label>
           <input
             type="text"
-            placeholder="dirección"
+            placeholder="Dirección"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("address", { required: true })}
           ></input>
@@ -564,7 +558,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">PAPPA</label>
           <input
             type="text"
-            placeholder="PAPPA"
+            placeholder="pappa"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("PAPA", {
               required: {
@@ -665,7 +659,7 @@ function RegisterFormStudent() {
           <label className="font-semibold">Semestres cursados</label>
           <input
             type="text"
-            placeholder="semestres cursados"
+            placeholder="Semestres cursados"
             className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 py-1 px-1"
             {...register("num_semesters", {
               required: {
