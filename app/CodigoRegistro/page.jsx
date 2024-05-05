@@ -2,6 +2,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { apiVerificationCode } from "../api/CodigoRegistro/verificationCode";
 
 function RegisterCodePage() {
   const {
@@ -12,13 +13,18 @@ function RegisterCodePage() {
   } = useForm();
 
   const mySubmit = handleSubmit((data) => {
-    console.log(data, "hola");
-    /**
-     * API call for calling the register code.
-     *
-     *
-     */
-    alert("Pidiendo código...");
+    console.log(data);
+
+    apiVerificationCode
+      .requestVerificationCode(data.id, data.email)
+      .then((response) => {
+        alert(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    alert("El código está siendo pedido, revisa tu correo.");
     reset();
   });
   return (
@@ -40,10 +46,10 @@ function RegisterCodePage() {
             </label>
             <input
               id="headquarter"
-              name="type_document"
+              name="id"
               className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
               placeholder="123456789"
-              {...register("type_document", {
+              {...register("id", {
                 required: {
                   value: true,
                   message: "El tipo de documento es requerido.",
@@ -103,7 +109,7 @@ function RegisterCodePage() {
             </button>
           </div>
           <div className="w-full p-2">
-            <Link href = '/Registro'>
+            <Link href="/Registro">
               <button
                 type="button"
                 className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue hover:text-white hover:bg-figma_blue py-2"
