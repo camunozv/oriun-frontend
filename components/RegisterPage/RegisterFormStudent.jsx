@@ -1,7 +1,8 @@
-"use client";
+// "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+
 // This function must be modified to send the data to the backend.
 async function createUser(name, email, password) {
   const response = await fetch("@/app/api/auth/register/", {
@@ -78,56 +79,88 @@ function RegisterFormStudent() {
     alert("Enviando datos...");
     // API post data_b
 
-    // const axios = require("axios");
-    // const FormData = require("form-data");
+    const axios = require("axios");
+    const FormData = require("form-data");
     // const fs = require("fs");
-    // let dataToSend = new FormData();
-    // dataToSend.append("email", data.email);
-    // dataToSend.append("password", data.password);
-    // dataToSend.append("id", data.id);
-    // dataToSend.append("first_name", data.first_name);
-    // dataToSend.append("last_name", data.last_name);
-    // dataToSend.append("type_document", data.type_document);
-    // dataToSend.append("birth_place", data.birth_place);
-    // dataToSend.append("birth_date", data.birth_date);
-    // dataToSend.append("country", data.country);
-    // dataToSend.append("city", data.city);
-    // dataToSend.append("phone",data.phone);
-    // dataToSend.append("address",data.address);
-    // dataToSend.append("sex", data.sex);
-    // dataToSend.append("ethnicity", data.ethnicity);
-    // dataToSend.append("headquarter", data.headquarter);
-    // dataToSend.append("PAPA", data.PAPA);
-    // dataToSend.append("PBM", data.PBM);
-    // dataToSend.append("advance", data.advance);
-    // dataToSend.append("is_enrolled", data.is_enrolled);
-    // dataToSend.append("num_semesters", data.num_semesters);
-    // dataToSend.append("diseases", data.diseases);
-    // dataToSend.append("medication", data.medication);
-    // dataToSend.append("faculty", data.faculty);
-    // dataToSend.append("major", data.major);
-    // dataToSend.append("admission", data.admission);
-    // dataToSend.append("study_level", data.study_level);
-    // dataToSend.append(
-    //   "certificate_grades",
-    //   fs.createReadStream(
-    //     "/C:/Users/javit/Documents/ORIUN_back/django_project/data/forms/templates/Certificado_Notas.pdf"
-    //   )
+    let dataToSend = new FormData();
+    dataToSend.append("email", data.email);
+    dataToSend.append("password", data.password);
+    dataToSend.append("id", data.id);
+    dataToSend.append("first_name", data.first_name);
+    dataToSend.append("last_name", data.last_name);
+    dataToSend.append("type_document", data.type_document);
+    dataToSend.append("birth_place", data.birth_place);
+    dataToSend.append("birth_date", data.birth_date);
+    dataToSend.append("country", data.country);
+    dataToSend.append("city", data.city);
+    dataToSend.append("phone", data.phone);
+    dataToSend.append("address", data.address);
+    dataToSend.append("sex", data.sex);
+    dataToSend.append("ethnicity", data.ethnicity);
+    dataToSend.append("headquarter", data.headquarter);
+    dataToSend.append("PAPA", data.PAPA);
+    dataToSend.append("PBM", data.PBM);
+    dataToSend.append("advance", data.advance);
+    dataToSend.append("is_enrolled", data.is_enrolled);
+    dataToSend.append("num_semesters", data.num_semesters);
+    dataToSend.append("diseases", data.diseases);
+    dataToSend.append("medication", data.medication);
+    dataToSend.append("faculty", data.faculty);
+    dataToSend.append("major", data.major);
+    dataToSend.append("admission", data.admission);
+    dataToSend.append("study_level", data.study_level);
+
+    // Es ist nicht möglich im das Filesystem eindringen, aber Es ist noch möglich das gleiches Ergebnissh zu erreichen,
+    // ob wir das "File reader API" verwenden.
+
+    const reader_a = new FileReader();
+    const reader_b = new FileReader();
+    const reader_c = new FileReader();
+    
+    const blob_a = new Blob([data.certificate_grades], { type: data.certificate_grades.type });
+    const blob_b = new Blob([data.certificate_student], { type: data.certificate_student.type });
+    const blob_c = new Blob([data.payment_receipt], { type: data.payment_receipt.type });
+
+    reader_a.onload = () => {
+      const fileContent = reader_c.result;
+      console.log("File content: ", fileContent);
+    };
+    reader_b.onload = () => {
+      const fileContent = reader_b.result;
+      console.log("File content: ", fileContent);
+    };
+    reader_c.onload = () => {
+      const fileContent = reader_c.result;
+      console.log("File content: ", fileContent);
+    };
+
+    const blobCertificateGrades = 0;
+    const dataCertificateGrades = reader.readAsArrayBuffer(blob_a);
+    // const dataCertificateStudent = reader.readAsText(blob_b);
+    // const dataPaymentReceipt = reader.readAsText(blob_c);
+
+    dataToSend.append("certificate_grades", dataCertificateGrades);
+    // dataToSend.append("certificate_student", dataCertificateStudent);
+    // dataToSend.append("payment_receipt", dataPaymentReceipt);
+
+    // /home/carlosivan/Escritorio/DocsTestingOriun/cert_notas.pdf
+    // /home/carlosivan/Escritorio/DocsTestingOriun/cert_matricula.pdf
+    // /home/carlosivan/Escritorio/DocsTestingOriun/recibo_de_pago.pdf
+
+    // const dataCertificateGrades2 = fs.createReadStream(
+    //   "/home/carlosivan/Escritorio/DocsTestingOriun/cert_notas.pdf"
     // );
-    // dataToSend.append(
-    //   "certificate_student",
-    //   fs.createReadStream(
-    //     "/C:/Users/javit/Documents/ORIUN_back/django_project/data/forms/templates/Matricula_Unal.pdf"
-    //   )
+    // const dataCertificateStudent2 = fs.createReadStream(
+    //   "/home/carlosivan/Escritorio/DocsTestingOriun/cert_matricula.pdf"
     // );
-    // dataToSend.append(
-    //   "payment_receipt",
-    //   fs.createReadStream(
-    //     "/C:/Users/javit/Documents/ORIUN_back/django_project/data/forms/templates/ReciboPago.pdf"
-    //   )
+    // const dataPaymentReceipt2 = fs.createReadStream(
+    //   "/home/carlosivan/Escritorio/DocsTestingOriun/recibo_de_pago.pdf"
     // );
 
-    reset();
+    // console.log(dataCertificateGrades, "file reader");
+    // console.log(dataCertificateGrades2, "create read stream");
+
+    // reset();
   });
   return (
     <form
