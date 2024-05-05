@@ -1,31 +1,7 @@
 "use client";
 import React from "react";
-import { FaUser } from "react-icons/fa";
-import { useRef } from "react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-// import registerHandler from "@/app/api/auth/register";
-
-// This component was created for TESTING PURPOSES ONLY & should not be included in the final production application.
-
-async function createUser(name, email, password) {
-  const response = await fetch("@/app/api/auth/register/", {
-    method: "POST",
-    body: JSON.stringify({ name, email, password }),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    // If we get error status code
-    throw new Error("Something went wrong");
-  }
-
-  return data;
-}
+import { apiRegisterAdmin } from "@/app/api/Registro/registerAdmin";
 
 function RegisterFormAdmin() {
   const {
@@ -36,38 +12,35 @@ function RegisterFormAdmin() {
     reset,
   } = useForm();
 
-  async function submitHanlder(event) {
-    try {
-      const response = await createUser(
-        entered_name,
-        entered_email,
-        entered_password
-      );
-      console.log("User created :D");
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   const mySubmit = handleSubmit((data) => {
-    console.log(data, "HOLA");
-
-    const data_b = {};
-    for (const [key, value] of Object.entries(data)) {
-      if (key !== "verif_password") {
-        data_b[key] = value;
-      }
-    }
-
-    console.log(data_b);
+    
     alert("Enviando datos...");
-    // API post data_b
-    /*
-     * Code here: try catch block to execute 'createUser' async function.
 
-    USE TRY CATCH BLOCK WITH CUSTOM FUNCTION.
-     *
-     */
+    apiRegisterAdmin
+      .postUserAdmin(
+        data.email,
+        data.password,
+        data.verif_code,
+        data.id,
+        data.first_name,
+        data.last_name,
+        data.type_document,
+        data.birth_place,
+        data.birth_date,
+        data.country,
+        data.city,
+        data.phone,
+        data.address,
+        data.sex,
+        data.ethnicity,
+        data.headquarter
+      )
+      .then((response) => {
+        console.log(alert(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     reset();
   });
