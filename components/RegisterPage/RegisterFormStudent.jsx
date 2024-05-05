@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
-
+import axios from "axios";
 // This function must be modified to send the data to the backend.
 async function createUser(name, email, password) {
   const response = await fetch("@/app/api/auth/register/", {
@@ -74,26 +74,61 @@ function RegisterFormStudent() {
   }
 
   const mySubmit = handleSubmit((data) => {
-    // console.log(data, 'hola');
-
-    const data_b = {};
-    for (const [key, value] of Object.entries(data)) {
-      if (key !== "verif_password") {
-        data_b[key] = value;
-      }
-    }
-
-    // console.log(data_b)
+    console.log(data);
     alert("Enviando datos...");
     // API post data_b
-    /*
-     * Code here: try catch block to execute 'createUser' async function.
-     *
-     */
+
+    // const axios = require("axios");
+    // const FormData = require("form-data");
+    // const fs = require("fs");
+    // let dataToSend = new FormData();
+    // dataToSend.append("email", data.email);
+    // dataToSend.append("password", data.password);
+    // dataToSend.append("id", data.id);
+    // dataToSend.append("first_name", data.first_name);
+    // dataToSend.append("last_name", data.last_name);
+    // dataToSend.append("type_document", data.type_document);
+    // dataToSend.append("birth_place", data.birth_place);
+    // dataToSend.append("birth_date", data.birth_date);
+    // dataToSend.append("country", data.country);
+    // dataToSend.append("city", data.city);
+    // dataToSend.append("phone",data.phone);
+    // dataToSend.append("address",data.address);
+    // dataToSend.append("sex", data.sex);
+    // dataToSend.append("ethnicity", data.ethnicity);
+    // dataToSend.append("headquarter", data.headquarter);
+    // dataToSend.append("PAPA", data.PAPA);
+    // dataToSend.append("PBM", data.PBM);
+    // dataToSend.append("advance", data.advance);
+    // dataToSend.append("is_enrolled", data.is_enrolled);
+    // dataToSend.append("num_semesters", data.num_semesters);
+    // dataToSend.append("diseases", data.diseases);
+    // dataToSend.append("medication", data.medication);
+    // dataToSend.append("faculty", data.faculty);
+    // dataToSend.append("major", data.major);
+    // dataToSend.append("admission", data.admission);
+    // dataToSend.append("study_level", data.study_level);
+    // dataToSend.append(
+    //   "certificate_grades",
+    //   fs.createReadStream(
+    //     "/C:/Users/javit/Documents/ORIUN_back/django_project/data/forms/templates/Certificado_Notas.pdf"
+    //   )
+    // );
+    // dataToSend.append(
+    //   "certificate_student",
+    //   fs.createReadStream(
+    //     "/C:/Users/javit/Documents/ORIUN_back/django_project/data/forms/templates/Matricula_Unal.pdf"
+    //   )
+    // );
+    // dataToSend.append(
+    //   "payment_receipt",
+    //   fs.createReadStream(
+    //     "/C:/Users/javit/Documents/ORIUN_back/django_project/data/forms/templates/ReciboPago.pdf"
+    //   )
+    // );
 
     reset();
   });
-
   return (
     <form
       onSubmit={mySubmit}

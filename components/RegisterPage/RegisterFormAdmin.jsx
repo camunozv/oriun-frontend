@@ -1,32 +1,7 @@
 "use client";
 import React from "react";
-import { FaUser } from "react-icons/fa";
-import { useRef } from "react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { apiRegisterAdmin } from "@/app/api/Registro/registerAdmin";
-// import registerHandler from "@/app/api/auth/register";
-
-// This component was created for TESTING PURPOSES ONLY & should not be included in the final production application.
-
-async function createUser(name, email, password) {
-  const response = await fetch("@/app/api/auth/register/", {
-    method: "POST",
-    body: JSON.stringify({ name, email, password }),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    // If we get error status code
-    throw new Error("Something went wrong");
-  }
-
-  return data;
-}
 
 function RegisterFormAdmin() {
   const {
@@ -36,19 +11,6 @@ function RegisterFormAdmin() {
     watch,
     reset,
   } = useForm();
-
-  async function submitHanlder(event) {
-    try {
-      const response = await createUser(
-        entered_name,
-        entered_email,
-        entered_password
-      );
-      console.log("User created :D");
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const mySubmit = handleSubmit((data) => {
     
