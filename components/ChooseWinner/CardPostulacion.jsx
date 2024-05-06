@@ -17,13 +17,16 @@ function CardPostulacion({
 
   switch (EstadoConv) {
     case 1:
-      imagenSrc = "/images/CirculoRojo.png";
+      imagenSrc = "/images/CirculoGris.png";
       break;
     case 2:
       imagenSrc = "/images/CirculoAmarillo.png";
       break;
     case 3:
       imagenSrc = "/images/CirculoVerde.png";
+      break;
+    case 4:
+      imagenSrc = "/images/CampanaRoja.png";
       break;
     default:
       imagenSrc = "/images/CirculoRojo.png"; // Por defecto, mostrar la primera imagen
