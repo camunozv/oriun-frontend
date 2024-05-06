@@ -128,17 +128,53 @@ function verPostulaciones()
           </form>
         </div>
 
+
         <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+
+          <div className="bg-white border-b-2 border-gray-400">
+            <div className="flex justify-center items-center p-4">
+              <div className="flex items-center mr-4">
+                <p className="mr-2">No Revisado</p>
+                <img src="/images/CirculoGris.png" alt="Círculo Gris" className="w-12 h-12" />
+              </div>
+              <div className="flex items-center mr-4">
+                <p className="mr-2">Modificación solicitada</p>
+                <img src="/images/CirculoAmarillo.png" alt="Círculo Amarillo" className="w-12 h-12" />
+              </div>
+              <div className="flex items-center mr-4">
+                <p className="mr-2">Documentos aceptados</p>
+                <img src="/images/CirculoVerde.png" alt="Círculo Verde" className="w-12 h-12" />
+              </div>
+              <div className="flex items-center">
+                <p className="mr-2">Modificación del Estudiante</p>
+                <img src="/images/CampanaRoja.png" alt="Campana Roja" className="w-12 h-12" />
+              </div>
+            </div>
+          </div>
+
+          
+
           <div className="grid grid-cols-3 w-full gap-6">
-              <CardPostulacion>
+              <CardPostulacion  EstadoConv={1} >
               </CardPostulacion>
 
-              <CardPostulacion>
+              <CardPostulacion EstadoConv={2}>
               </CardPostulacion>
 
-              <CardPostulacion>
+              <CardPostulacion EstadoConv={3}>
+              </CardPostulacion>
+
+              <CardPostulacion EstadoConv={4}>
               </CardPostulacion>
           </div>
+
+          <div className="fixed bottom-0 right-0 p-4">
+            <button className="w-full font-semibold bg-figma_blue border-2 rounded-2xl border-figma_blue text-white py-4 px-2">
+              Ver Resultados Postulantes
+            </button>
+          </div>
+
+
         </main>
       </>
     );
