@@ -1,5 +1,5 @@
-// "use client";
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
@@ -42,40 +42,74 @@ function RegisterFormStudent() {
   // within the tags.
   // watch: allows us bringing the current state.
 
+  const [certificateGrades, setCertificateGrades] = useState();
+  const [certificateStudent, setCertificateStudent] = useState();
+  const [paymentReceipt, setPaymentReceipt] = useState();
+
   const handleCertificateGrades = (e) => {
-    if (e.target.files[0].size > 2097152) {
+    const file = e.target.files[0];
+    if (file.size > 2097152) {
       alert(`El archivo ${e.target.files[0].name} supera 2 MB.`);
       resetField("certificate_grades");
       return;
+    } else {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const fileContent = reader.result;
+        setCertificateGrades(fileContent);
+      };
+
+      reader.readAsDataURL(file);
     }
   };
 
   const handleCertificateStudent = (e) => {
-    if (e.target.files[0].size > 2097152) {
+    const file = e.target.files[0];
+    if (file.size > 2097152) {
       alert(`El archivo ${e.target.files[0].name} supera 2 MB.`);
       resetField("certificate_student");
       return;
+    } else {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const fileContent = reader.result;
+        setCertificateStudent(fileContent);
+      };
+
+      reader.readAsDataURL(file);
     }
   };
 
   const handlePaymentReceipt = (e) => {
-    if (e.target.files[0].size > 2097152) {
+    const file = e.target.files[0];
+    if (file.size > 2097152) {
       alert(`El archivo ${e.target.files[0].name} supera 2 MB.`);
       resetField("payment_receipt");
       return;
+    } else {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const fileContent = reader.result;
+        setPaymentReceipt(fileContent);
+      };
+
+      reader.readAsDataURL(file);
     }
   };
 
-  async function submitHanlder(event) {
-    try {
-      console.log("User created :D");
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const substringToRemove = 'data:application/pdf;base64,';
+  let newCertificateGrades = certificateGrades?.replace(substringToRemove,'');
+  let newCertificateStudent = certificateStudent?.replace(substringToRemove,'');
+  let newPaymentReceipt = paymentReceipt?.replace(substringToRemove,'');
+
+  console.log(newCertificateGrades, "grade_certificate");
+  console.log(newCertificateStudent, "student_certificate");
+  console.log(newPaymentReceipt, "newnewPaymentReceipt");
 
   const mySubmit = handleSubmit((data) => {
-    console.log(data);
     alert("Enviando datos...");
     // API post data_b
 
@@ -109,56 +143,9 @@ function RegisterFormStudent() {
     dataToSend.append("major", data.major);
     dataToSend.append("admission", data.admission);
     dataToSend.append("study_level", data.study_level);
-
-    // Es ist nicht möglich im das Filesystem eindringen, aber Es ist noch möglich das gleiches Ergebnissh zu erreichen,
-    // ob wir das "File reader API" verwenden.
-
-    const reader_a = new FileReader();
-    const reader_b = new FileReader();
-    const reader_c = new FileReader();
-    
-    const blob_a = new Blob([data.certificate_grades], { type: data.certificate_grades.type });
-    const blob_b = new Blob([data.certificate_student], { type: data.certificate_student.type });
-    const blob_c = new Blob([data.payment_receipt], { type: data.payment_receipt.type });
-
-    reader_a.onload = () => {
-      const fileContent = reader_c.result;
-      console.log("File content: ", fileContent);
-    };
-    reader_b.onload = () => {
-      const fileContent = reader_b.result;
-      console.log("File content: ", fileContent);
-    };
-    reader_c.onload = () => {
-      const fileContent = reader_c.result;
-      console.log("File content: ", fileContent);
-    };
-
-    const blobCertificateGrades = 0;
-    const dataCertificateGrades = reader.readAsArrayBuffer(blob_a);
-    // const dataCertificateStudent = reader.readAsText(blob_b);
-    // const dataPaymentReceipt = reader.readAsText(blob_c);
-
-    dataToSend.append("certificate_grades", dataCertificateGrades);
-    // dataToSend.append("certificate_student", dataCertificateStudent);
-    // dataToSend.append("payment_receipt", dataPaymentReceipt);
-
-    // /home/carlosivan/Escritorio/DocsTestingOriun/cert_notas.pdf
-    // /home/carlosivan/Escritorio/DocsTestingOriun/cert_matricula.pdf
-    // /home/carlosivan/Escritorio/DocsTestingOriun/recibo_de_pago.pdf
-
-    // const dataCertificateGrades2 = fs.createReadStream(
-    //   "/home/carlosivan/Escritorio/DocsTestingOriun/cert_notas.pdf"
-    // );
-    // const dataCertificateStudent2 = fs.createReadStream(
-    //   "/home/carlosivan/Escritorio/DocsTestingOriun/cert_matricula.pdf"
-    // );
-    // const dataPaymentReceipt2 = fs.createReadStream(
-    //   "/home/carlosivan/Escritorio/DocsTestingOriun/recibo_de_pago.pdf"
-    // );
-
-    // console.log(dataCertificateGrades, "file reader");
-    // console.log(dataCertificateGrades2, "create read stream");
+    dataToSend.append("certificate_grades", newCertificateGrades);
+    dataToSend.append("certificate_student", newCertificateStudent);
+    dataToSend.append("payment_receipt", newPaymentReceipt);
 
     // reset();
   });
