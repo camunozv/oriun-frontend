@@ -1,10 +1,17 @@
-
 import Link from "next/link";
 import React from "react";
 
-function UniversitiesCard({id, name, webpage, region, country, city, academic_offer, exchange_info}) {
-
-    // This component is intended to render an initial overview of the universities.
+function UniversitiesCard({
+  id,
+  name,
+  webpage,
+  region,
+  country,
+  city,
+  academic_offer,
+  exchange_info,
+}) {
+  // This component is intended to render an initial overview of the universities.
   return (
     <>
       <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
@@ -30,24 +37,12 @@ function UniversitiesCard({id, name, webpage, region, country, city, academic_of
 
         <div className="flex justify-between items-center w-96">
           <div className="w-full p-2">
-            <Link href={`/Convocatorias/ConvocatoriasAdmin/${id}`}>
+            <Link href={`/Universidades/${id}`}>
               <button
                 type="button"
                 className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"
               >
                 Actualizar
-              </button>
-            </Link>
-          </div>
-          <div className="w-full p-2">
-            <Link
-              href={`/Convocatorias/ConvocatoriasAdmin/DetallesConvocatoria/${id}`}
-            >
-              <button
-                type="button"
-                className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
-              >
-                Ver detalles
               </button>
             </Link>
           </div>

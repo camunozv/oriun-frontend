@@ -1,9 +1,13 @@
 "use client";
 import React from "react";
 
-function CreateUniversitiesPage() {
-  const createForm = () => {};
+function UpdateUniversityPage({ params }) {
+  const id = params.ActualizarUniversidad;
 
+  const createForm = (e) => {
+
+  }
+  
   return (
     <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
       <div className="flex flex-col justify-center items-center w-full rounded-lg shadow-lg p-6">
@@ -13,7 +17,7 @@ function CreateUniversitiesPage() {
               htmlFor="information_grid"
               className="font-semibold text-[20px] block"
             >
-              Registrar una Universidad.
+              Actualizar Universidad : {id}
             </label>
             <p>Todos los campos deben llenarse.</p>
           </div>
@@ -121,10 +125,18 @@ function CreateUniversitiesPage() {
               Registrar
             </button>
           </div>
+          <div className="w-full flex flex-col items-start justify-start gap-3 mt-3">
+            <button
+              type="button"
+              className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"
+            >
+              Eliminar
+            </button>
+          </div>
         </form>
       </div>
     </main>
   );
 }
 
-export default CreateUniversitiesPage;
+export default UpdateUniversityPage;
