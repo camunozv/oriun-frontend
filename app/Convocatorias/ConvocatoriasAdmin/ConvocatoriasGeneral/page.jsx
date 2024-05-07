@@ -18,7 +18,7 @@ function ConvocatoriasGeneralAdminPage() {
   });
   const [my_calls, set_my_calls] = useState([]);
   const token = session?.access;
-
+  const user_type = session?.type_user;
   // When the page charges, we will see all the opened calls with this use effect
   useEffect(() => {
     apiAdminCalls
@@ -69,7 +69,7 @@ function ConvocatoriasGeneralAdminPage() {
       call_semester: call_semester,
       call_region: call_region,
       call_country: call_country,
-      call_language: call_language
+      call_language: call_language,
     };
 
     let data_b = {};
@@ -101,8 +101,6 @@ function ConvocatoriasGeneralAdminPage() {
       .catch((error) => {
         console.log(error);
       });
-
-    
   }
 
   if (!token) {
@@ -111,6 +109,8 @@ function ConvocatoriasGeneralAdminPage() {
         {status}...
       </main>
     );
+  } else if (user_type === "student") {
+    redirect("/Convocatorias");
   } else {
     return (
       <>

@@ -7,13 +7,14 @@ import { redirect } from "next/navigation";
 
 function ConvocatoriasAdminDetailsPage({ params }) {
   const { data: session, status } = useSession({
-    required:true,
+    required: true,
     onUnauthenticated() {
-      redirect('/api/auth/signin')
-    }
+      redirect("/api/auth/signin");
+    },
   });
 
   const token = session?.access;
+  const user_type = session?.type_user;
   const id = params.lambda;
   const [call, set_call] = useState({});
 
@@ -31,6 +32,8 @@ function ConvocatoriasAdminDetailsPage({ params }) {
         {status}...
       </main>
     );
+  } else if (user_type === "student") {
+    redirect("/Convocatorias");
   } else {
     return (
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">

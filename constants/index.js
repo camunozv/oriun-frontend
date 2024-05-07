@@ -35,6 +35,11 @@ export const LINKS_ADMIN = [
     label: "Crear Convocatorias",
   },
   {
+    href: "/Universidades",
+    key: "universidades",
+    label: "Universidades",
+  },
+  {
     href: "/PreguntasFrecuentes",
     key: "preguntas_frecuentes",
     label: "Preguntas Frecuentes",
