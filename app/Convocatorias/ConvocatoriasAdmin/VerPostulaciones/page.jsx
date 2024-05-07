@@ -5,6 +5,8 @@ import Link from 'next/link';
 import React from 'react'
 
 function verPostulaciones() 
+
+  // Pendiente: Agregar protección de ruta.
   {
     return (
       <>
