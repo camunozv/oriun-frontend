@@ -81,7 +81,11 @@ function CardPostulacion({
                   type="button"
                   className="w-full text-base font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-1"
                 >
+                  <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulacionDocumentos">
+            
                   Seleccionar como Ganador
+                  </Link>
+                  
                 </button>
             </div>
             <div className="w-full p-2">
@@ -89,7 +93,10 @@ function CardPostulacion({
                   type="button"
                   className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-4"
                 >
+                  <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulacionDatos">
+            
                   Ver Detalles
+                  </Link>
                 </button>
             </div>
           </div>

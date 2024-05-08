@@ -89,7 +89,7 @@ function DetailsConvocatoria({ call, admin, id, open }) {
             type="button"
             className="flex-1 ml-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
           >
-          <Link href="\Convocatorias\ConvocatoriasAdmin\VerPostulaciones">
+          <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulaciones">
             
             Ver Postulaciones
           </Link>
@@ -163,7 +163,7 @@ function DetailsConvocatoria({ call, admin, id, open }) {
             type="button"
             className="flex-1 ml-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
           >
-            <Link href="\Convocatorias\ConvocatoriasAdmin\VerPostulaciones">
+            <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulaciones">
             
             Ver Postulaciones
           </Link>
