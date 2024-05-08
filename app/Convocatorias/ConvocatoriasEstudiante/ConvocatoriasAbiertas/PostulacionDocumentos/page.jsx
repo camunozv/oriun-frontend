@@ -1,17 +1,18 @@
 "use client";
 import React, { useState} from "react";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Archivo from "./archivo";
-import Link from "next/link";
 import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationConv";
 import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
 import internacional from "@/constants/internacional.json";
+import { useRouter } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 
 function PostulacionDocumentos() {
+  const router = useRouter()
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -35,6 +36,7 @@ const region="nacional";
     control,
   } = useForm();
 
+
   const onSubmit = handleSubmit(() => {
     
      const result={}
@@ -52,7 +54,18 @@ const region="nacional";
       })
      }
      // Validacion si todos tienen archivo
-     
+     let documents=true;
+     Object.entries(result).map(([key, value]) => {
+      if(value==undefined){
+        documents=false
+      }
+     });
+     if(!documents){
+      alert("No ha subido todos los documentos")
+      return;
+     }else{
+      router.push('/Convocatorias/ConvocatoriasEstudiante');
+     }
      console.log(result);
   });
 

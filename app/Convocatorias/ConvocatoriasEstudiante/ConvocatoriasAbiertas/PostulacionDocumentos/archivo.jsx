@@ -71,7 +71,7 @@ function Archivo({ onChange ,id, title, allButtons}) {
             <div className="flex bg-lime-200 items-center justify-center ">
               <div className="px-5">{fileName}</div>
               <MdDelete size={20} className="fill-green-950" 
-              onClick={()=>{{setFile(null)};{setFileName("No seleccionado")}}}/>
+              onClick={()=>{{setFile(null)};{setFileName("No seleccionado")};{onChange(undefined)}}}/>
             </div>
           </div>
           {file ? (
