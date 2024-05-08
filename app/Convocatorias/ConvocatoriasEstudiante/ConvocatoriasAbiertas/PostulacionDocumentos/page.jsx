@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Archivo from "./archivo";
 import Link from "next/link";
+import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationConv";
 
 function PostulacionDocumentos() {
   const { data: session, status } = useSession({
@@ -12,11 +13,16 @@ function PostulacionDocumentos() {
     onUnauthenticated() {
       redirect("/Convocatorias");
     },
-  });
-
-  
-
+  });  
   const token = session?.access;
+
+  const region="nacional";
+
+  /*const [convocatoria, setConvocatoria]=useState({})
+  useEffect(()=>{
+    apitypePos.getRegionCall(callId,token).then((response)=>{setConvocatoria(response.data)}).then(console.log(convocatoria)).catch((error)=>{console.log(error)})
+  },[])*/
+
   const {
     register,
     handleSubmit,
