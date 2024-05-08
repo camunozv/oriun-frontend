@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useForm, useFieldArray, control} from "react-hook-form";
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
 
 //Es donde verifico el inicio de seccion y donde coloco ruta dinaminca
 //de aucerdo al id de la convocatoria
@@ -41,6 +42,8 @@ function Postulacionform({ params }) {
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    router.push('/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos');
+    
   });
 
   return (
@@ -92,7 +95,7 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.nombre && <span>{errors.nombre.message}</span>}
+            {errors.nombre && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.nombre.message}</span>}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
@@ -111,7 +114,7 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.apellido && <span>{errors.apellido.message}</span>}
+            {errors.apellido && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.apellido.message}</span>}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
@@ -131,7 +134,7 @@ function Postulacionform({ params }) {
               })}
             />
             {errors.emailcontacto && (
-              <span>{errors.emailcontacto.message}</span>
+              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.emailcontacto.message}</span>
             )}
           </div>
 
@@ -151,7 +154,7 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.relacion && <span>{errors.relacion.message}</span>}
+            {errors.relacion && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.relacion.message}</span>}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
@@ -166,7 +169,7 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.telefono && <span>{errors.telefono.message}</span>}
+            {errors.telefono && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.telefono.message}</span>}
           </div>
 
           {/* <div className="w-full flex flex-col items-start justify-start gap-3">
@@ -200,7 +203,7 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.medicinas && <span>{errors.medicinas.message}</span>}
+            {errors.medicinas && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.medicinas.message}</span>}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
@@ -215,7 +218,7 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.enfermedades && <span>{errors.enfermedades.message}</span>}
+            {errors.enfermedades && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.enfermedades.message}</span>}
           </div>
         </div>
         <br />
@@ -241,7 +244,7 @@ function Postulacionform({ params }) {
               })}
             />
             {errors.fechadeinicio && (
-              <span>{errors.fechadeinicio.message}</span>
+              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.fechadeinicio.message}</span>
             )}
           </div>
 
@@ -262,7 +265,7 @@ function Postulacionform({ params }) {
               })}
             />
             {errors.nombrecoordinadordestino && (
-              <span>{errors.nombrecoordinadordestino.message}</span>
+              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.nombrecoordinadordestino.message}</span>
             )}
           </div>
 
@@ -283,7 +286,7 @@ function Postulacionform({ params }) {
               })}
             />
             {errors.emailcoordinador && (
-              <span>{errors.emailcoordinador.message}</span>
+              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.emailcoordinador.message}</span>
             )}
           </div>
 
@@ -300,7 +303,7 @@ function Postulacionform({ params }) {
               })}
             />
             {errors.telefonocoordinador && (
-              <span>{errors.telefonocoordinador.message}</span>
+              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.telefonocoordinador.message}</span>
             )}
           </div>
         </div>
@@ -387,8 +390,7 @@ function Postulacionform({ params }) {
             </button>
           </div>
           <div>
-          <Link
-           href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos`}>
+
             <button
               type="submit"
               className={
@@ -397,7 +399,7 @@ function Postulacionform({ params }) {
             >
               Continuar
             </button>
-          </Link>
+
           </div>
         </div>
       </div>
