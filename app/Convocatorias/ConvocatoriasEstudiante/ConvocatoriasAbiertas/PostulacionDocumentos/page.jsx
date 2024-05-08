@@ -1,11 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Archivo from "./archivo";
 import Link from "next/link";
 import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationConv";
+import base from "@/constants/base.json";
+import nacional from "@/constants/nacional.json";
+import internacional from "@/constants/internacional.json";
+import filesnacional from "@/constants/filesnacional.json";
+import filesinternacional from "@/constants/filesinternacional.json";
+import filesbase from "@/constants/filesbase.json";
 
 function PostulacionDocumentos() {
   const { data: session, status } = useSession({
@@ -14,9 +20,10 @@ function PostulacionDocumentos() {
       redirect("/Convocatorias");
     },
   });  
-  const token = session?.access;
- /*a*/
-  const region="nacional";
+const token = session?.access;
+
+
+const region="uniandes";
 
   /*const [convocatoria, setConvocatoria]=useState({})
   useEffect(()=>{
@@ -30,25 +37,95 @@ function PostulacionDocumentos() {
     control,
   } = useForm();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(() => {
+    
+     const result={}
+     if(region=="nacional"){
+      filesnacional.map((item)=>{
+        result[item]= values[item]
+      })
+     } else if(region=="internacional"){
+      filesinternacional.map((item)=>{
+        result[item]= values[item]
+      })
+     }else{
+      filesbase.map((item)=>{
+        result[item]= values[item]
+      })
+     }
+     
+     console.log(result);
   });
 
-  const [values, setValues] = useState({
-    request_form:null,
-    responsibility_form:null,
-    data_processing_form: null,
-    doc_id_student: null,
-    grades_certificate: null,
+  const [values, setValues] = useState(() => {
+    if (region === 'nacional') {
+      return { ...nacional };
+    } else if (region === 'internacional') {
+      return { ...internacional };
+    } else {
+      return { ...base };
+    }
   });
-
-
+  
   const handleChange=(key,file)=>{
     setValues((prevValues) => ({
       ...prevValues,
       [key]: file
     }));
   }
+
+  const regionForm = () => {
+    if (region === "nacional") {
+      return (
+        <div>
+          {nacional.map((item, index) => (
+            <div key={index}>
+              <Archivo
+                id={item.id}
+                title={item.title}
+                nombrearchivo={item.id}
+                onChange={(file) => handleChange(item.id, file)}
+                allButtons={item.allButtons}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    } else if (region === "internacional") {
+      return (
+        <div>
+          {internacional.map((item, index) => (
+            <div key={index}>
+              <Archivo
+                id={item.id}
+                title={item.title}
+                nombrearchivo={item.id}
+                onChange={(file) => handleChange(item.id, file)}
+                allButtons={item.allButtons}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {base.map((item, index) => (
+            <div key={index}>
+              <Archivo
+                id={item.id}
+                title={item.title}
+                nombrearchivo={item.id}
+                onChange={(file) => handleChange(item.id, file)}
+                allButtons={item.allButtons}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    }
+  };
+
 
   return (
     <div className="p-8"> 
@@ -68,56 +145,18 @@ function PostulacionDocumentos() {
         documentos estén cargados, de click en enviar. 
       </p>
       <br/>
-      <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-        <div class="flex">
-          <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+      <div className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+        <div className="flex">
+          <div className="py-1"><svg className="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
           <div>
-            <p class="font-bold">El tamaño límite es 500KB</p>
-            <p class="text-sm">Para cada uno de los documentos requeridos.</p>
+            <p className="font-bold">El tamaño límite es 500KB</p>
+            <p className="text-sm">Para cada uno de los documentos requeridos.</p>
           </div>
         </div>
       </div>
       <br/>
     <form onSubmit={onSubmit}>
-      <Archivo
-        id="request_form"
-        title="Formato de Solicitud"
-        nombrearchivo="request_form"
-        onChange={(file) => handleChange('request_form', file)}
-        allButtons= "True"
-      />
-      <br />
-      <Archivo
-          id="responsibility_form"
-          title="Formato de Responsabilidad Nacional"
-          nombrearchivo="responsibility_form"
-          onChange={(file) => handleChange('responsibility_form', file)}
-          allButtons="True"
-      />
-      <br />
-      <Archivo
-          id="data_processing_form"
-          title="Tratamiento de Datos Personales"
-          nombrearchivo="data_processing_form"
-          onChange={(file) => handleChange('data_processing_form', file)}
-          allButtons="True"
-      />
-      <br />
-      <Archivo
-          id="doc_id_student"
-          title="Documento de Identidad"
-          nombrearchivo="doc_id_student"
-          onChange={(file) => handleChange('doc_id_student', file)}
-          allButtons="False"
-      />
-      <br />
-      <Archivo
-          id="grades_certificate"
-          title="Certificado de Notas"
-          nombrearchivo="grades_certificate"
-          onChange={(file) => handleChange('grades_certificate', file)}
-          allButtons="False"
-      />
+      <div>{regionForm()}</div>
       <br />
       <div>
         <button

@@ -4,9 +4,16 @@ import { AiFillFilePdf } from "react-icons/ai";
 import {  MdCloudUpload, MdDelete } from "react-icons/md";
 import { useForm } from "react-hook-form";
 
+
 function Archivo({ onChange ,id, title, allButtons}) {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("No seleccionado");
+
+  const {
+    register,
+    formState: { errors },
+    control,
+  } = useForm();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -34,7 +41,8 @@ function Archivo({ onChange ,id, title, allButtons}) {
   };
 
   return (
-    <div> 
+    <div>
+       
       <h1 className="text-2xl text-justify pl-2 pr-10 font-bold">{title}</h1>
       <br/>
       <div className="grid grid-cols-6 px-8 pb-4 pt-2">
@@ -43,6 +51,7 @@ function Archivo({ onChange ,id, title, allButtons}) {
           onClick={()=>document.getElementById(id).click()} >
             <input
               className="input-field"
+              name="doc_id_student"
               type="file"
               id={id}
               hidden
@@ -65,6 +74,15 @@ function Archivo({ onChange ,id, title, allButtons}) {
               onClick={()=>{{setFile(null)};{setFileName("No seleccionado")}}}/>
             </div>
           </div>
+          {file ? (
+              <></>
+            ) : (
+              <div className="pt-2">
+              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>
+                Por favor inserte un documento
+              </span>
+              </div>
+            )}
         </div>
         <div>
           {allButtons =="True" ? (
