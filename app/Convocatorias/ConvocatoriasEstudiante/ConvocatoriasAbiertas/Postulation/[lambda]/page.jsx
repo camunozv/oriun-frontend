@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 //numero de convocatorias postulado menor a dos, cumplir porcentaje  de avance, papa, estar matriculado
 //obtener info del usuario para comparar con info de la convocatoria
 //Convocatorias/ConvEstudi/postulacion128384 (api)
+// Pendiente agregar protección de rutas.
 
 function Postulacionform({ params }) {
   const { data: session, status } = useSession({

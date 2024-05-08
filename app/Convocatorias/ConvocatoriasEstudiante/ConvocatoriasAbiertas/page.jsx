@@ -18,6 +18,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
   });
 
   const token = session?.access;
+  const user_type = session?.type_user;
 
   const [available_calls, set_available_calls] = useState([]);
   const convocatoria_pais = useRef();
@@ -56,6 +57,8 @@ function ConvocatoriasAbiertasEstudiantePage() {
         {status}...
       </main>
     );
+  } else if (user_type === "employee") {
+    redirect("/Convocatorias");
   } else {
     return (
       <>
