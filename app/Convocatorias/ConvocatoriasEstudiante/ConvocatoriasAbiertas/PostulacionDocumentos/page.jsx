@@ -9,9 +9,7 @@ import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationCon
 import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
 import internacional from "@/constants/internacional.json";
-import filesnacional from "@/constants/filesnacional.json";
-import filesinternacional from "@/constants/filesinternacional.json";
-import filesbase from "@/constants/filesbase.json";
+
 
 function PostulacionDocumentos() {
   const { data: session, status } = useSession({
@@ -23,7 +21,7 @@ function PostulacionDocumentos() {
 const token = session?.access;
 
 
-const region="uniandes";
+const region="nacional";
 
   /*const [convocatoria, setConvocatoria]=useState({})
   useEffect(()=>{
@@ -41,21 +39,24 @@ const region="uniandes";
     
      const result={}
      if(region=="nacional"){
-      filesnacional.map((item)=>{
-        result[item]= values[item]
+      nacional.map((item)=>{
+        result[item.id]= values[item.id]
       })
      } else if(region=="internacional"){
-      filesinternacional.map((item)=>{
-        result[item]= values[item]
+      internacional.map((item)=>{
+        result[item.id]= values[item.id]
       })
      }else{
-      filesbase.map((item)=>{
-        result[item]= values[item]
+      base.map((item)=>{
+        result[item.id]= values[item.id]
       })
      }
+     // Validacion si todos tienen archivo
      
      console.log(result);
   });
+
+
 
   const [values, setValues] = useState(() => {
     if (region === 'nacional') {
