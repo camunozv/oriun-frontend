@@ -1,0 +1,27 @@
+[
+    {
+        "id":"request_form",
+        "title":"Formato de Solicitud",
+        "allButtons": "True"
+    },
+    {
+        "id":"responsibility_form",
+        "title":"Formato de Responsabilidad Nacional",
+        "allButtons": "True"
+    },
+    {
+        "id":"data_processing_form",
+        "title":"Tratamiento de Datos Personales",
+        "allButtons": "True"
+    },
+    {
+        "id":"doc_id_student",
+        "title":"Documento de Identidad",
+        "allButtons": "False"
+    },
+    {
+        "id":"grades_certificate",
+        "title":"Certificado de Notas",
+        "allButtons": "False"
+    }
+]
