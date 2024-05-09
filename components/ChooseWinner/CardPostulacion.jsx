@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from "next/link";
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 function CardPostulacion({
   // Aqui se agregan las variables necesarias para la carta de postulacion.
