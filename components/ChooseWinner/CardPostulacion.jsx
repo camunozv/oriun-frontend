@@ -82,10 +82,7 @@ function CardPostulacion({
                   type="button"
                   className="w-full text-base font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-1"
                 >
-                  <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulacionDocumentos">
-            
                   Seleccionar como Ganador
-                  </Link>
                   
                 </button>
             </div>

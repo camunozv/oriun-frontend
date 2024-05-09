@@ -5,7 +5,8 @@ import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationConv";
-import Archivo from "@/app/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos/archivo.jsx";
+import Archivo from "./Archivo.jsx";
+import Comentarios from "./Comentarios.jsx";
 
 
 function VerPostulacionDocumentos() {
@@ -53,33 +54,23 @@ function VerPostulacionDocumentos() {
   
     return (
       <div className="p-8"> 
-        <h1 className="text-black font-bold text-[35px]">Postularse a la Convocatoria</h1>
+        <h1 className="text-black font-bold text-[35px]">Documentos de la Postulación</h1>
         <br/>
         <p className="text-2xl text-justify pl-8 pr-10">
-          En está sección puede subir sus documentos. De click en el recuadro para subir 
-          el documento que desee, una vez lo suba se va a mostrar el nombre de su archivo y
-          un icono para eliminarlo si se equivoco de documento. Al lado encuentra el boton 
-          para descargar el archivo que subio, descargar el archivo original y finalmente
-          el botón para cargar el documento a la base de datos.  
+          A continuacion se encuentran los documentos enviados por el estudiante para 
+          postularse a esta convocatoria.
         </p>
         <br/>
         <p className="text-2xl text-justify pl-8 pr-10">
-          Por favor cuando este seguro que su documento está correcto y corresponde a la 
-          casilla correspondiente, dele click en Subir para que se guarden. Una vez todos los 
-          documentos estén cargados, de click en enviar. 
+          Por favor revisar que los documentos cumplen con las condiciones solicitadas para la convocatoria. 
+          De ser necesario un cambio en los documentos, podra dejar un comentario al final de esta seleccion y 
+          notificar al estudiante y para realizar las correciones necesarias. 
         </p>
         <br/>
-        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-          <div class="flex">
-            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-            <div>
-              <p class="font-bold">El tamaño límite es 500KB</p>
-              <p class="text-sm">Para cada uno de los documentos requeridos.</p>
-            </div>
-          </div>
-        </div>
-        <br/>
+
+
       <form onSubmit={onSubmit}>
+
         <Archivo
           id="request_form"
           title="Formato de Solicitud"
@@ -120,16 +111,30 @@ function VerPostulacionDocumentos() {
             allButtons="False"
         />
         <br />
-        <div>
+        <h1 className="text-2xl font-bold text-center">A continuación, asigne el estado de esta Postulación</h1>
+        <br />
+        <div className="flex">  
           <button
-              type="submit"
-              className={
-                "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
-              }
+            type="button"
+            className="flex-1 mr-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+
           >
-              Enviar
+            Pendiente de modificación
           </button>
-        </div>
+
+          <button
+            type="button"
+            className="flex-1 ml-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+          >
+            Aceptado
+          </button>
+          </div>
+        <br />
+        <br />
+
+
+        <Comentarios />
+
         </form>
         </div> 
       );
