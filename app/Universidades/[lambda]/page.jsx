@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
-import { redirect } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { useForm } from "react-hook-form";
 import { apiAdminUniversities } from "@/app/api/ConvocatoriasAdmin/adminUniversities";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import React from "react";
+import { useForm } from "react-hook-form";
 
-function CreateUniversitiesPage() {
+function UpdateUniversityPage({ params }) {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -16,6 +16,7 @@ function CreateUniversitiesPage() {
   const user_type = session?.type_user;
   const token = session?.access;
 
+  const id = params.lambda;
   const {
     register,
     reset,
@@ -23,13 +24,14 @@ function CreateUniversitiesPage() {
     handleSubmit,
   } = useForm();
 
-  const createForm = handleSubmit((data) => {
+  const mySubmit = handleSubmit((data) => {
     console.log(data);
 
     apiAdminUniversities
-      .postUniversities(
-        data.name,
-        data.webpag,
+      .putUniversities(
+        id,
+        data.name_university,
+        data.webpage,
         data.region,
         data.country,
         data.city,
@@ -38,13 +40,24 @@ function CreateUniversitiesPage() {
         token
       )
       .then((response) => {
-        alert(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
     reset();
   });
+
+  const handleClickDelete = () => {
+    apiAdminUniversities
+      .deleteUniverisitiesById(id, token)
+      .then((response) => {
+        alert(`${response.data}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   if (!session) {
     return <div>{status}...</div>;
@@ -54,15 +67,14 @@ function CreateUniversitiesPage() {
     return (
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         <div className="flex flex-col justify-center items-center w-full rounded-lg shadow-lg p-6">
-          <form onSubmit={createForm} className="w-full">
+          <form onSubmit={mySubmit} className="w-full">
             <div className="w-full flex flex-col items-start justify-start gap-3">
               <label
                 htmlFor="information_grid"
                 className="font-semibold text-[20px] block"
               >
-                Registrar una Universidad.
+                Actualizar Universidad : {id}
               </label>
-              <p>Todos los campos deben llenarse.</p>
             </div>
             <div
               id="information_grid"
@@ -76,18 +88,18 @@ function CreateUniversitiesPage() {
                   id="name_university"
                   type="text"
                   placeholder="Nombre universidad"
-                  {...register("name", {
+                  {...register("name_university", {
                     required: {
-                      value: true,
-                      message: "Nombre es requerido",
+                      value: false,
+                      message: "Nombre es requerido.",
                     },
                   })}
                   className="border-gray-300 border rounded-md outline-none"
                 />
 
-                {errors.name && (
+                {errors.name_university && (
                   <span className="text-[15px] underline text-black-500">
-                    {errors.name.message}
+                    {errors.name_university.message}
                   </span>
                 )}
               </div>
@@ -98,13 +110,13 @@ function CreateUniversitiesPage() {
                 </label>
                 <select
                   id="region"
+                  className="border-gray-300 border rounded-md outline-none bg-white"
                   {...register("region", {
                     required: {
-                      value: true,
-                      message: "Región es requerido",
+                      value: false,
+                      message: "La región es requerida.",
                     },
                   })}
-                  className="border-gray-300 border rounded-md outline-none bg-white"
                   placeholder=""
                 >
                   <option value="">Selección...</option>
@@ -133,8 +145,8 @@ function CreateUniversitiesPage() {
                   placeholder="Nombre país"
                   {...register("country", {
                     required: {
-                      value: true,
-                      message: "País es requerido",
+                      value: false,
+                      message: "País es requerido.",
                     },
                   })}
                   className="border-gray-300 border rounded-md outline-none"
@@ -157,8 +169,8 @@ function CreateUniversitiesPage() {
                   placeholder="Nombre ciudad"
                   {...register("city", {
                     required: {
-                      value: true,
-                      message: "Ciudad es requerido",
+                      value: false,
+                      message: "La ciudad es requerida.",
                     },
                   })}
                   className="border-gray-300 border rounded-md outline-none"
@@ -181,8 +193,8 @@ function CreateUniversitiesPage() {
                   placeholder="link aquí"
                   {...register("webpage", {
                     required: {
-                      value: true,
-                      message: "La página web es requerido",
+                      value: false,
+                      message: "Página web es requerida",
                     },
                   })}
                   className="border-gray-300 border rounded-md outline-none"
@@ -205,8 +217,8 @@ function CreateUniversitiesPage() {
                   placeholder="link aquí"
                   {...register("academic_offer", {
                     required: {
-                      value: true,
-                      message: "La oferta académica es requerida",
+                      value: false,
+                      message: "Oferta académica es requerida.",
                     },
                   })}
                   className="border-gray-300 border rounded-md outline-none"
@@ -229,8 +241,8 @@ function CreateUniversitiesPage() {
                   placeholder="link aquí"
                   {...register("exchange_info", {
                     required: {
-                      value: true,
-                      message: "La información de intercambio es requerida",
+                      value: false,
+                      message: "Información de intercambio es requerida.",
                     },
                   })}
                   className="border-gray-300 border rounded-md outline-none"
@@ -249,7 +261,16 @@ function CreateUniversitiesPage() {
                 type="submit"
                 className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
               >
-                Registrar
+                Guardar
+              </button>
+            </div>
+            <div className="w-full flex flex-col items-start justify-start gap-3 mt-3">
+              <button
+                type="button"
+                className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"
+                onClick={handleClickDelete}
+              >
+                Eliminar
               </button>
             </div>
           </form>
@@ -259,4 +280,4 @@ function CreateUniversitiesPage() {
   }
 }
 
-export default CreateUniversitiesPage;
+export default UpdateUniversityPage;

@@ -29,6 +29,8 @@ const region="nacional";
     apitypePos.getRegionCall(callId,token).then((response)=>{setConvocatoria(response.data)}).then(console.log(convocatoria)).catch((error)=>{console.log(error)})
   },[])*/
 
+  // Pendiente agregar protección de rutas.
+
   const {
     register,
     handleSubmit,

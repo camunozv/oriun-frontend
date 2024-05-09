@@ -1,6 +1,7 @@
 import api_instance from "../base.api";
 
 const endpoint = "call/api/employee_filter/";
+const special_endpoint = "call/api";
 
 export const apiAdminFilterCalls = {
   //     **Inputs:**
@@ -48,7 +49,6 @@ export const apiAdminFilterCalls = {
   // | `minium_PAPA_winner` | Float         | Minimum PAPA score among winners of the call.              |
   // | `selected`           | Integer       | Number of winners.                                         |
   getAdminFilterCalls: function (
-    call_id,
     active,
     university_id,
     university_name,
@@ -67,7 +67,6 @@ export const apiAdminFilterCalls = {
         'Authorization': `Bearer ${token}`,
       },
       params: {
-        call_id,
         active,
         university_id,
         university_name,
@@ -79,6 +78,14 @@ export const apiAdminFilterCalls = {
         region,
         country,
         language,
+      },
+    });
+  },
+
+  getAdminFilterCallById: function (call_id, token) {
+    return api_instance.get(`${special_endpoint}/${call_id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
       },
     });
   },

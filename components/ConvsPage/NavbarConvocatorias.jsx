@@ -1,10 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 function NavbarConvocatorias({ links }) {
-
   if (!links) {
     return (
       <nav className="flex items-center justify-between mx-auto max-w-[1580px] p-5 shadow-md rounded-xl">

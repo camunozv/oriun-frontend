@@ -17,6 +17,7 @@ function ConvocatoriasCerradasEstudiantePage() {
   const [my_calls, set_my_calls] = useState([]);
 
   const token = session?.access;
+  const user_type = session?.type_user;
   const convocatoria_pais = useRef();
   const convocatoria_idioma = useRef();
   const convocatoria_universidad = useRef();
@@ -54,6 +55,8 @@ function ConvocatoriasCerradasEstudiantePage() {
         {status}...
       </main>
     );
+  } else if (user_type === "employee") {
+    redirect("/Convocatorias");
   } else {
     return (
       <>
@@ -111,7 +114,7 @@ function ConvocatoriasCerradasEstudiantePage() {
           <div className="grid grid-cols-3 w-full gap-6">
             {my_calls?.map((call) => (
               <CardConvocatorias
-                key = {call.id}
+                key={call.id}
                 id={call.id}
                 admin={false}
                 university_name={call.university_name}

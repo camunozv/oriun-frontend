@@ -93,14 +93,25 @@ function ConvocatoriasGeneralAdminPage() {
       data: data_c,
     };
 
-    axios
-      .request(config)
-      .then((response) => {
-        set_my_calls(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (!data_c.call_call_id) {
+      axios
+        .request(config)
+        .then((response) => {
+          set_my_calls(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      apiAdminFilterCalls
+        .getAdminFilterCallById(data.call_call_id, token)
+        .then((response) => {
+          set_my_calls(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   if (!token) {
