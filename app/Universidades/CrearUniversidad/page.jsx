@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import { redirect } from "next/navigation";
-import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { apiAdminUniversities } from "@/app/api/ConvocatoriasAdmin/adminUniversities";
 
 function CreateUniversitiesPage() {
-  const { data: session, status } = getSession({
+  const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       redirect("/api/auth/signin");

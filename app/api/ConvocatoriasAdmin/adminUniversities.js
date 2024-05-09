@@ -53,7 +53,7 @@ export const apiAdminUniversities = {
     );
   },
 
-  deleteUniverisitiesById: function (id) {
+  deleteUniverisitiesById: function (id, token) {
     return api_instance.delete(`${endpoint}/${id}`, {
       headers: {
         "Authorization": `Bearer ${token}`,

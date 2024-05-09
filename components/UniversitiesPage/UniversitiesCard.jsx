@@ -11,7 +11,6 @@ function UniversitiesCard({
   academic_offer,
   exchange_info,
 }) {
-  // This component is intended to render an initial overview of the universities.
   return (
     <>
       <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
@@ -25,15 +24,24 @@ function UniversitiesCard({
           Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
           Flag Here Flag Here
         </div>
-
         <p className="font-semibold">
           {name} - {country}
         </p>
-        <p className="font-semibold">{city}</p>
-        <p className="font-semibold">{region}</p>
-        <p className="font-semibold">Página web.</p>
-        <p className="font-semibold">Oferta académica.</p>
-        <p className="font-semibold">Información de intercambio</p>
+        <div className="grid grid-cols-2 gap-3 p-4">
+          <p className="font-semibold">{city}</p>
+          <p className="font-semibold">{region}</p>
+          <a href={`${webpage}`}>
+            <p className="font-semibold underline">Página web.</p>
+          </a>
+          <a href={`${academic_offer}`}>
+            <p className="font-semibold underline">Oferta académica.</p>
+          </a>
+          <a href={`${exchange_info}`}>
+            <p className="font-semibold underline">
+              Información de intercambio
+            </p>
+          </a>
+        </div>
 
         <div className="flex justify-between items-center w-96">
           <div className="w-full p-2">
