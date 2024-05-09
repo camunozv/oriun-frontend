@@ -2,10 +2,10 @@
 import React from "react";
 import { redirect } from "next/navigation";
 import { getSession } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { apiAdminUniversities } from "@/app/api/ConvocatoriasAdmin/adminUniversities";
 
 function CreateUniversitiesPage() {
-  const createForm = () => {};
-
   const { data: session, status } = getSession({
     required: true,
     onUnauthenticated() {
@@ -15,6 +15,36 @@ function CreateUniversitiesPage() {
 
   const user_type = session?.type_user;
   const token = session?.access;
+
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const createForm = handleSubmit((data) => {
+    console.log(data);
+
+    apiAdminUniversities
+      .postUniversities(
+        data.name,
+        data.webpag,
+        data.region,
+        data.country,
+        data.city,
+        data.academic_offer,
+        data.exchange_info,
+        token
+      )
+      .then((response) => {
+        alert(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    reset();
+  });
 
   if (!session) {
     return <div>{status}...</div>;
@@ -46,8 +76,20 @@ function CreateUniversitiesPage() {
                   id="name_university"
                   type="text"
                   placeholder="Nombre universidad"
+                  {...register("name", {
+                    required: {
+                      value: true,
+                      message: "Nombre es requerido",
+                    },
+                  })}
                   className="border-gray-300 border rounded-md outline-none"
                 />
+
+                {errors.name && (
+                  <span className="text-[15px] underline text-black-500">
+                    {errors.name.message}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col justify-start items-left gap-1">
@@ -56,6 +98,12 @@ function CreateUniversitiesPage() {
                 </label>
                 <select
                   id="region"
+                  {...register("region", {
+                    required: {
+                      value: true,
+                      message: "Región es requerido",
+                    },
+                  })}
                   className="border-gray-300 border rounded-md outline-none bg-white"
                   placeholder=""
                 >
@@ -67,6 +115,12 @@ function CreateUniversitiesPage() {
                   <option value="AN">Uniandes</option>
                   <option value="SG">Convenio Sigueme/Nacional</option>
                 </select>
+
+                {errors.region && (
+                  <span className="text-[15px] underline text-black-500">
+                    {errors.region.message}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col justify-start items-left gap-1">
@@ -77,8 +131,20 @@ function CreateUniversitiesPage() {
                   id="country"
                   type="text"
                   placeholder="Nombre país"
+                  {...register("country", {
+                    required: {
+                      value: true,
+                      message: "País es requerido",
+                    },
+                  })}
                   className="border-gray-300 border rounded-md outline-none"
                 />
+
+                {errors.country && (
+                  <span className="text-[15px] underline text-black-500">
+                    {errors.country.message}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col justify-start items-left gap-1">
@@ -89,8 +155,20 @@ function CreateUniversitiesPage() {
                   id="city"
                   type="text"
                   placeholder="Nombre ciudad"
+                  {...register("city", {
+                    required: {
+                      value: true,
+                      message: "Ciudad es requerido",
+                    },
+                  })}
                   className="border-gray-300 border rounded-md outline-none"
                 />
+
+                {errors.city && (
+                  <span className="text-[15px] underline text-black-500">
+                    {errors.city.message}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col justify-start items-left gap-1">
@@ -101,8 +179,20 @@ function CreateUniversitiesPage() {
                   id="webpage"
                   type="text"
                   placeholder="link aquí"
+                  {...register("webpage", {
+                    required: {
+                      value: true,
+                      message: "La página web es requerido",
+                    },
+                  })}
                   className="border-gray-300 border rounded-md outline-none"
                 />
+
+                {errors.webpage && (
+                  <span className="text-[15px] underline text-black-500">
+                    {errors.webpage.message}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col justify-start items-left gap-1">
@@ -113,8 +203,20 @@ function CreateUniversitiesPage() {
                   id="academic_offer"
                   type="text"
                   placeholder="link aquí"
+                  {...register("academic_offer", {
+                    required: {
+                      value: true,
+                      message: "La oferta académica es requerida",
+                    },
+                  })}
                   className="border-gray-300 border rounded-md outline-none"
                 />
+
+                {errors.academic_offer && (
+                  <span className="text-[15px] underline text-black-500">
+                    {errors.academic_offer.message}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col justify-start items-left gap-1">
@@ -125,8 +227,20 @@ function CreateUniversitiesPage() {
                   id="exchange_info"
                   type="text"
                   placeholder="link aquí"
+                  {...register("exchange_info", {
+                    required: {
+                      value: true,
+                      message: "La información de intercambio es requerida",
+                    },
+                  })}
                   className="border-gray-300 border rounded-md outline-none"
                 />
+
+                {errors.exchange_info && (
+                  <span className="text-[15px] underline text-black-500">
+                    {errors.exchange_info.message}
+                  </span>
+                )}
               </div>
             </div>
 
