@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { signIn } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 function Navbar() {
   // NOTES:
@@ -73,11 +74,9 @@ function Navbar() {
       className="flex items-center justify-between mx-auto max-w-[1580px]
     px-6 lg:px-20 3xl:px-0 z-30 py-5"
     >
-      <Link href="/" className="pl-6">
-        <h1 className="text-black font-bold text-[60px]">ORIUN</h1>
-      </Link>
+      <h1 className="text-black font-bold text-[60px]">ORIUN</h1>
 
-      <div className="w-40">
+      <div className="flex items-center gap-3 w-80">
         <button
           type="button"
           className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
@@ -85,8 +84,15 @@ function Navbar() {
         >
           Ingresar
         </button>
+        <Link href="/Registro" className="w-full">
+          <button
+            type="button"
+            className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue hover:text-white hover:bg-figma_blue py-2"
+          >
+            Registrate
+          </button>
+        </Link>
       </div>
-
     </nav>
   );
 }
