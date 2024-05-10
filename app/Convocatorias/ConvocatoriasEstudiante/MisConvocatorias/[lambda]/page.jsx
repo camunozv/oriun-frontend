@@ -3,9 +3,9 @@ import React from 'react'
 function ModifyCallPage({params}) {
 
     const call_id = params.lambda;
-    
+
   return (
-    <div>ModifyCallPage</div>
+    <div>ModifyCallPage {call_id}</div>
   )
 }
 

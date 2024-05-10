@@ -5,7 +5,7 @@ const endpoint = "application";
 export const apiStudentApplications = {
 
   getAllApplications: function (token) {
-    return api_instance.get(`${endpoint}/student`, {
+    return api_instance.get(`${endpoint}/student/`, {
       headers: {
         "Authorization" : `Bearer ${token}`
       },
