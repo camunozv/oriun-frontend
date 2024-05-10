@@ -24,7 +24,7 @@ function verPostulaciones({ params }) {
 
   useEffect(() => {
     adminPostulacion
-      .getPostulacionGeneral(id, "", "", token)
+      .getPostulacionGeneral(null, id, null, token)
       .then((response) => {
         console.log(response.data);
       })
@@ -43,9 +43,17 @@ function verPostulaciones({ params }) {
 
   const mySubmit = handleSubmit((data) => {
     console.log(data);
+    
 
+    if(!data.student_id){
+      data.student_id= null
+    }
+
+    if(!data.state_documents){
+      data.state_documents= null
+    }
     adminPostulacion
-      .getPostulacionGeneral(id, data.call_id, data.state_documents, token)
+      .getPostulacionGeneral(data.student_id, id, data.state_documents, token)
       .then((response) => {
         console.log(response.data);
       })
@@ -55,9 +63,11 @@ function verPostulaciones({ params }) {
     reset();
   });
 
+
   if (!session) {
-    return;
-    <div>{status} ...</div>;
+    return(
+      <div>{status} ...</div>
+    );
   } else {
     return (
       <>
