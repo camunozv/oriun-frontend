@@ -3,7 +3,7 @@ import api_instance from "../base.api";
 const endpoint = "application";
 
 export const apiStudentApplications = {
-    
+
   getAllApplications: function (token) {
     return api_instance.get(`${endpoint}/student`, {
       headers: {
@@ -49,7 +49,7 @@ export const apiStudentApplications = {
       });
   },
 
-  putDocumentModification: function (call, document, name_file) {
+  putDocumentModification: function (call, document, name_file, token) {
 
     return api_instance.put(`${endpoint}/edit/`,{call, document, name_file},{
         headers : {
