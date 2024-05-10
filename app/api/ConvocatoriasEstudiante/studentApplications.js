@@ -12,7 +12,7 @@ export const apiStudentApplications = {
     });
   },
 
-  getCallByRegion: function (call_id, token) {
+  getRegionFromCall: function (call_id, token) {
     return api_instance.get(`${endpoint}/region_call/`, {
       headers: {
         "Authorization" : `Bearer ${token}`
