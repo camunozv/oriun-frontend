@@ -1,11 +1,13 @@
 import api_instance from "../base.api";
 
-const endpoint = "/person/code/";
+const endpoint_1 = "/person/code/";
+const endpoint_2 = "/student/post/";
+const endpoint_3 = "/employee/post/";
 
 export const apiRegisterAdmin = {
 
   postInfoVerificationCode: function (id, email) {
-    return api_instance.post(`${endpoint}`, { id, email });
+    return api_instance.post(`${endpoint_1}`, { id, email });
   },
 
   postUserStudent: function (
@@ -40,7 +42,7 @@ export const apiRegisterAdmin = {
     certificate_student,
     payment_receipt
   ) {
-    return api_instance.post(`${endpoint}`, {
+    return api_instance.post(`${endpoint_2}`, {
       email,
       password,
       verif_code,
@@ -73,7 +75,7 @@ export const apiRegisterAdmin = {
       payment_receipt,
     });
   },
-  
+
   postUserAdmin: function (
     email,
     password,
@@ -92,7 +94,7 @@ export const apiRegisterAdmin = {
     ethnicity,
     headquarter
   ) {
-    return api_instance.post(`${endpoint}`, {
+    return api_instance.post(`${endpoint_3}`, {
       email,
       password,
       verif_code,
