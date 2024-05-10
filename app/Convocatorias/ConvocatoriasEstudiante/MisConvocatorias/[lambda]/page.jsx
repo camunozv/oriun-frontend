@@ -12,7 +12,9 @@ function ModifyCallPage({ params }) {
     },
   });
 
-  const [region, setRegion] = useState({});
+  const [region, setRegion] = useState('');
+  const [comments, setComments] = useState({});
+
   const call_id = params.lambda;
   const token = session?.access;
   const user_type = session?.type_user;
@@ -22,6 +24,15 @@ function ModifyCallPage({ params }) {
       .getRegionFromCall(call_id, token)
       .then((response) => {
         setRegion(response.data.region);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    apiStudentApplications
+      .getApplicationComments(call_id, token)
+      .then((response) => {
+        setComments(response.data.comment);
       })
       .catch((error) => {
         console.log(error);
@@ -41,6 +52,7 @@ function ModifyCallPage({ params }) {
           müss, um zu wissen, welche Dokumente von den Studenten hochgelädt
           werden müssen. Student Gebiet.
           <div>{region}</div>
+          <div>{comments}</div>
         </main>
       </>
     );
