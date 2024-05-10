@@ -13,7 +13,7 @@ function ModifyCallPage({ params }) {
   });
 
   const [region, setRegion] = useState('');
-  const [comments, setComments] = useState({});
+  const [comments, setComments] = useState('');
 
   const call_id = params.lambda;
   const token = session?.access;
@@ -46,11 +46,7 @@ function ModifyCallPage({ params }) {
   } else {
     return (
       <>
-        <main>
-          Wir werden ein Component bauen, das uns erlauben wird, ein besser GUI
-          zu haben. Wir werden ein Formulär verwenden, die die Gebiete verwenden
-          müss, um zu wissen, welche Dokumente von den Studenten hochgelädt
-          werden müssen. Student Gebiet.
+        <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
           <div>{region}</div>
           <div>{comments}</div>
         </main>
