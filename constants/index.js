@@ -10,7 +10,7 @@ export const LINKS_ESTUDIANTE = [
     label: "Convocatorias Cerradas",
   },
   {
-    href: "/MisConvocatorias",
+    href: "/Convocatorias/ConvocatoriasEstudiante/MisConvocatorias",
     key: "mis_convocatorias",
     label: "Mis Convocatorias",
   },
