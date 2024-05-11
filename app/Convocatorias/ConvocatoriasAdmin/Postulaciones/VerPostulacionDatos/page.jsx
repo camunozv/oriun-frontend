@@ -49,10 +49,11 @@ function VerPostulacionDatos({ params }) {
         </h1>
         <br />
         <p className="text-2xl text-justify pl-8 pr-10">
-          En esta sección se mostraran los datos diligenciados por el estudiante que realiza la postulación.
-          En la siguiente sección se mostraran los documentos que el estudiante adjuntó a su solicitud.
+          En esta sección se mostraran los datos generales del estudiante que realiza la postulación.
+          En la siguiente sección se mostraran los documentos que el estudiante adjuntó a su solicitud de movilidad.
         </p>
         <br/>
+        {/*
         <div>
         <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulacionDocumentos">
             <button className={ "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2" }>
@@ -60,9 +61,10 @@ function VerPostulacionDatos({ params }) {
             </button>
           </Link>
         </div>
+        */}
         <br />
         <h1 className="text-black font-bold text-[25px] pl-6">
-          Información de Contacto
+          Información del Estudiante
         </h1>
         <br />
 
@@ -72,31 +74,33 @@ function VerPostulacionDatos({ params }) {
           className="px-6 py-3 grid grid-cols-3 justify-center items-center w-full gap-3"
         >
           <div className="flex flex-col justify-start items-left gap-1">
-            <p className="font-bold">Nombre:</p>
+            <p className="font-bold">Nombre Estudiante:</p>
             <div className="border border-gray-300 rounded-md p-2">formData.nombre</div>
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
-            <p className="font-bold">Apellido:</p>
-            <div className="border border-gray-300 rounded-md p-2">formData.apellido</div>
+            <p className="font-bold">Numero de Identidad:</p>
+            <div className="border border-gray-300 rounded-md p-2">formData.Identidad</div>
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
-            <p className="font-bold">Email del Contacto:</p>
-            <div className="border border-gray-300 rounded-md p-2">formData.emailcontacto</div>
+            <p className="font-bold">Universidad Destino:</p>
+            <div className="border border-gray-300 rounded-md p-2">formData.UniversidadDestino</div>
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
-            <p className="font-bold">Relación con el Estudiante:</p>
-            <div className="border border-gray-300 rounded-md p-2">formData.relacion</div>
+            <p className="font-bold">País de la Movilidad:</p>
+            <div className="border border-gray-300 rounded-md p-2">formData.PaísMovilidad</div>
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
-            <p className="font-bold">Teléfono:</p>
-            <div className="border border-gray-300 rounded-md p-2">formData.telefono</div>
+            <p className="font-bold">Programa Academico del Estudiante:</p>
+            <div className="border border-gray-300 rounded-md p-2">formData.Programa</div>
           </div>
         </div>
 
+
+        {/* 
 
 
         <br />
@@ -185,7 +189,7 @@ function VerPostulacionDatos({ params }) {
         })}
         <br />
 
-
+        */}
         
         <br />
           <div>
