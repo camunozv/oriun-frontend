@@ -8,7 +8,7 @@ import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
 import internacional from "@/constants/internacional.json";
 import { useRouter } from "next/navigation";
-import Archivo from "@/components/ConvsPage/Archivo";
+import Archivo2 from "@/components/ConvsPage/Archivo_2";
 
 function ModifyCallPage({ params }) {
   const { data: session, status } = useSession({
@@ -117,12 +117,13 @@ function ModifyCallPage({ params }) {
         <div>
           {nacional.map((item, index) => (
             <div key={index}>
-              <Archivo
+              <Archivo2
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
+                call_id = {id}
               />
             </div>
           ))}
@@ -133,12 +134,14 @@ function ModifyCallPage({ params }) {
         <div>
           {internacional.map((item, index) => (
             <div key={index}>
-              <Archivo
+              <Archivo2
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
+                call_id = {id}
+
               />
             </div>
           ))}
@@ -149,12 +152,14 @@ function ModifyCallPage({ params }) {
         <div>
           {base.map((item, index) => (
             <div key={index}>
-              <Archivo
+              <Archivo2
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
+                call_id = {id}
+
               />
             </div>
           ))}

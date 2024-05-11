@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import Archivo from "../../../../../../components/ConvsPage/Archivo";
+import Archivo1 from "../../../../../../components/ConvsPage/Archivo_1";
 import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationConv";
 import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
@@ -54,7 +54,7 @@ function PostulacionDocumentos({ params }) {
         result[item.id] = values[item.id];
       });
     }
-    // Validacion si todos tienen archivo
+    // Validacion si todos tienen Archivo_1
     let documents = true;
     Object.entries(result).map(([key, value]) => {
       if (value == undefined) {
@@ -93,7 +93,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {nacional.map((item, index) => (
             <div key={index}>
-              <Archivo
+              <Archivo1
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
@@ -109,7 +109,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {internacional.map((item, index) => (
             <div key={index}>
-              <Archivo
+              <Archivo1
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
@@ -125,7 +125,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {base.map((item, index) => (
             <div key={index}>
-              <Archivo
+              <Archivo1
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
