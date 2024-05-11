@@ -18,26 +18,19 @@ function Archivo({ title, fileName, onDownload }) {
             <AiFillFilePdf size={150} style={{ color: "#f73e3e" }} />
           </div>
         </div>
-        <div className="py-14 px-4">
+        <div className="py-14 px-20">
           <button type="button" onClick={downloadFile} 
             className={
-              "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-5"
+              "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-5 px-20"
             }>
               Descargar
           </button>
         </div>
-        <div className="py-14 px-4">
+        <div className="py-14 px-40">
           <button type="button" className={
-            "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-5"
+            "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-5 px-20"
           }>
             Ver
-          </button>
-        </div>
-        <div className="py-14 px-4">
-          <button type="button" className={
-            "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
-          }>
-            Solicitar Modificacion
           </button>
         </div>
       </div>
