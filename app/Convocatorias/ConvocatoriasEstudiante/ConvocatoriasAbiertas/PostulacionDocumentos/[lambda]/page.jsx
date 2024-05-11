@@ -2,7 +2,7 @@
 import React, { useState} from "react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import Archivo from "./archivo";
+import Archivo from "./Archivo";
 import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationConv";
 import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import { redirect } from "next/navigation";
 
 
-function PostulacionDocumentos() {
+function PostulacionDocumentos({params}) {
   const router = useRouter()
   const { data: session, status } = useSession({
     required: true,
@@ -20,7 +20,7 @@ function PostulacionDocumentos() {
     },
   });  
 const token = session?.access;
-
+const id = params.lambda;
 
 const region="nacional";
 
@@ -145,7 +145,7 @@ const region="nacional";
 
   return (
     <div className="p-8"> 
-      <h1 className="text-black font-bold text-[35px]">Postularse a la Convocatoria</h1>
+      <h1 className="text-black font-bold text-[35px]">Postularse a la Convocatoria: {id}</h1>
       <br/>
       <p className="text-2xl text-justify pl-8 pr-10">
         En está sección puede subir sus documentos. De click en el recuadro para subir 

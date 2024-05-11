@@ -2,9 +2,9 @@
 
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useForm, useFieldArray, control} from "react-hook-form";
+import { useForm, useFieldArray, control } from "react-hook-form";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 //Es donde verifico el inicio de seccion y donde coloco ruta dinaminca
 //de aucerdo al id de la convocatoria
@@ -31,7 +31,14 @@ function Postulacionform({ params }) {
     control,
   } = useForm({
     defaultValues: {
-      materias: [{ nombreunal: "", codigounal: 0, nombredestino: "" }],
+      materias: [
+        {
+          codigo_unal: 0,
+          nombre_unal: "",
+          codigo_destino: 0,
+          nombre_destino: "",
+        },
+      ],
     },
   });
   const { fields, append, remove } = useFieldArray({
@@ -39,16 +46,58 @@ function Postulacionform({ params }) {
     control,
   });
 
-  console.log(errors);
+  const mySubmit = handleSubmit((data) => {
+    let data_to_send = {};
+    let data_contact_person = {};
+    let data_info_mobility = {};
+    // console.log(data, "hola");
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    router.push('/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos');
-    
+    for (const [key, value] of Object.entries(data)) {
+      if (
+        key === "nombre" ||
+        key === "telefono" ||
+        key === "apellido" ||
+        key === "email_contacto_emergencia" ||
+        key === "relacion"
+      ) {
+        data_contact_person[key] = value;
+      } else if (
+        key === "fecha_de_inicio" ||
+        key === "fecha_de_fin" ||
+        key === "nombre_contacto_destino" ||
+        key === "telefono_contacto" ||
+        key === "facultad" ||
+        key === "programa" ||
+        key === "cargo_contacto_destino" ||
+        key === "email_contacto"
+      ) {
+        data_info_mobility[key] = value;
+      } else {
+        data_to_send[key] = value;
+      }
+    }
+
+    data_to_send['contact_person'] = data_contact_person;
+    data_to_send['data_info_mobilitiy'] = data_info_mobility;
+
+    // console.log(data_contact_person, "persona de contacto");
+    // console.log(data_info_mobility, "info movilidad");
+    console.log(data_to_send);
+    // router.push(
+    //   `/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos/${id}`
+    // );
   });
 
+  // Falta agregar el endpoint que revisa si el estudiante puede postularse o no;
+  // Se hace haciendo una petición y protegiendo la ruta.
+
+  // Falta agregar el endpoint que llena automáticamente los campos que el usuario ya haya llenado.
+
+  // Falta: id para el contacto del estudiante es un input*
+
+  // Sobra: fecha en el campo de información de la movilidad; en realidad es info sobre el coordinador de la movilidad.*
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={mySubmit}>
       <div className="p-10">
         <h1 className="px-6 text-black font-bold text-[35px]">
           Postularse a la Convocatoria: {id}
@@ -60,12 +109,17 @@ function Postulacionform({ params }) {
           página podra subir los documentos que se requieren para hacer valida
           su postulación.
         </p>
-        <br/>
+        <br />
         <div>
           <Link
-           href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos`}>
-            <button className={ "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2" }>
-                  Ir a subir Documentos
+            href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos/${id}`}
+          >
+            <button
+              className={
+                "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
+              }
+            >
+              Ir a subir Documentos
             </button>
           </Link>
         </div>
@@ -96,7 +150,18 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.nombre && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.nombre.message}</span>}
+            {errors.nombre && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.nombre.message}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
@@ -115,7 +180,18 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.apellido && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.apellido.message}</span>}
+            {errors.apellido && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.apellido.message}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
@@ -123,7 +199,7 @@ function Postulacionform({ params }) {
               className="border-gray-300 border rounded-md outline-none"
               placeholder="Email del Contacto"
               type="text"
-              {...register("emailcontacto", {
+              {...register("email_contacto_emergencia", {
                 required: {
                   value: true,
                   message: "Campo obligatorio",
@@ -134,8 +210,17 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.emailcontacto && (
-              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.emailcontacto.message}</span>
+            {errors.email_contacto_emergencia && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.email_contacto_emergencia.message}
+              </span>
             )}
           </div>
 
@@ -155,14 +240,25 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.relacion && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.relacion.message}</span>}
+            {errors.relacion && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.relacion.message}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
             <input
               placeholder="Teléfono"
               className="border-gray-300 border rounded-md outline-none"
-              type="number"
+              type="text"
               {...register("telefono", {
                 required: {
                   value: true,
@@ -170,7 +266,18 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.telefono && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.telefono.message}</span>}
+            {errors.telefono && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.telefono.message}
+              </span>
+            )}
           </div>
 
           {/* <div className="w-full flex flex-col items-start justify-start gap-3">
@@ -204,7 +311,18 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.medicinas && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.medicinas.message}</span>}
+            {errors.medicinas && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.medicinas.message}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
@@ -219,7 +337,18 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.enfermedades && <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.enfermedades.message}</span>}
+            {errors.enfermedades && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.enfermedades.message}
+              </span>
+            )}
           </div>
         </div>
         <br />
@@ -233,28 +362,66 @@ function Postulacionform({ params }) {
           className="px-6 py-3 grid grid-cols-3 justify-center items-center w-full gap-3"
         >
           <div className="flex flex-col justify-start items-left gap-1">
+            <label className="font-semibold">Fecha de Inicio</label>
             <input
               placeholder="Fecha de Inicio"
               className="border-gray-300 border rounded-md outline-none"
               type="date"
-              {...register("fechadeinicio", {
+              {...register("fecha_de_inicio", {
                 required: {
                   value: true,
                   message: "Campo obligatorio",
                 },
               })}
             />
-            {errors.fechadeinicio && (
-              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.fechadeinicio.message}</span>
+            {errors.fecha_de_inicio && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.fecha_de_inicio.message}
+              </span>
+            )}
+          </div>
+          <div className="flex flex-col justify-start items-left gap-1">
+            <label className="font-semibold">Fecha de Fin</label>
+            <input
+              placeholder="Fecha de Fin"
+              className="border-gray-300 border rounded-md outline-none"
+              type="date"
+              {...register("fecha_de_fin", {
+                required: {
+                  value: true,
+                  message: "Campo obligatorio",
+                },
+              })}
+            />
+
+            {errors.fecha_de_fin && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.fecha_de_fin.message}
+              </span>
             )}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
+            <label className="text-white">5</label>
             <input
-              placeholder="Nombre Coordinador del Destino"
+              placeholder="Facultad de destino"
               className="border-gray-300 border rounded-md outline-none"
               type="text"
-              {...register("nombrecoordinadordestino", {
+              {...register("facultad", {
                 required: {
                   value: true,
                   message: "Campo obligatorio",
@@ -265,17 +432,119 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.nombrecoordinadordestino && (
-              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.nombrecoordinadordestino.message}</span>
+
+            {errors.facultad && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.facultad.message}
+              </span>
             )}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
             <input
-              placeholder="Email Coordinador del Destino"
+              placeholder="Programa de destino"
               className="border-gray-300 border rounded-md outline-none"
               type="text"
-              {...register("emailcoordinador", {
+              {...register("programa", {
+                required: {
+                  value: true,
+                  message: "Campo obligatorio",
+                },
+                pattern: {
+                  value: /^[a-zA-Z]+$/,
+                  message: "Este campo solo admite letras",
+                },
+              })}
+            />
+
+            {errors.programa && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.programa.message}
+              </span>
+            )}
+          </div>
+
+          <div className="flex flex-col justify-start items-left gap-1">
+            <input
+              placeholder="Nombre del Contacto del Destino"
+              className="border-gray-300 border rounded-md outline-none"
+              type="text"
+              {...register("nombre_contacto_destino", {
+                required: {
+                  value: true,
+                  message: "Campo obligatorio",
+                },
+                pattern: {
+                  value: /^[a-zA-Z]+$/,
+                  message: "Este campo solo admite letras",
+                },
+              })}
+            />
+            {errors.nombre_contacto_destino && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.nombre_contacto_destino.message}
+              </span>
+            )}
+          </div>
+
+          <div className="flex flex-col justify-start items-left gap-1">
+            <input
+              placeholder="Cargo contacto del Destino"
+              className="border-gray-300 border rounded-md outline-none"
+              type="text"
+              {...register("cargo_contacto_destino", {
+                required: {
+                  value: true,
+                  message: "Campo obligatorio",
+                },
+                pattern: {
+                  value: /^[a-zA-Z]+$/,
+                  message: "Este campo solo admite letras",
+                },
+              })}
+            />
+
+            {errors.cargo_contacto_destino && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.cargo_contacto_destino.message}
+              </span>
+            )}
+          </div>
+
+          <div className="flex flex-col justify-start items-left gap-1">
+            <input
+              placeholder="Email contacto del Destino"
+              className="border-gray-300 border rounded-md outline-none"
+              type="mail"
+              {...register("email_contacto", {
                 required: {
                   value: true,
                   message: "Campo obligatorio",
@@ -286,25 +555,44 @@ function Postulacionform({ params }) {
                 },
               })}
             />
-            {errors.emailcoordinador && (
-              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.emailcoordinador.message}</span>
+
+            {errors.email_contacto && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.email_contacto.message}
+              </span>
             )}
           </div>
 
           <div className="flex flex-col justify-start items-left gap-1">
             <input
-              placeholder="Telefono Coordinador del Destino"
+              placeholder="Teléfono contacto del Destino"
               className="border-gray-300 border rounded-md outline-none"
-              type="number"
-              {...register("telefonocoordinador", {
+              type="text"
+              {...register("telefono_contacto", {
                 required: {
                   value: true,
                   message: "Campo obligatorio",
                 },
               })}
             />
-            {errors.telefonocoordinador && (
-              <span style={{ backgroundColor: '#ffabab', borderRadius: '2px', color: '#360b0b', fontWeight: 'bold' }}>{errors.telefonocoordinador.message}</span>
+            {errors.telefono_contacto && (
+              <span
+                style={{
+                  backgroundColor: "#ffabab",
+                  borderRadius: "2px",
+                  color: "#360b0b",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.telefono_contacto.message}
+              </span>
             )}
           </div>
         </div>
@@ -317,33 +605,43 @@ function Postulacionform({ params }) {
         {fields.map((field, index) => {
           return (
             <section key={field.id}>
-              <div className="px-6 py-3 grid grid-cols-4 justify-center items-center w-full gap-3">
+              <div className="px-6 py-3 grid grid-cols-5 justify-center items-center w-full gap-3">
+                <div className="flex flex-col justify-start items-left gap-1">
+                  <input
+                    className="border-gray-300 border rounded-md outline-none"
+                    type="text"
+                    placeholder="Código Unal"
+                    {...register(`materias.${index}.codigo_unal`)}
+                  />
+                </div>
                 <div className="flex flex-col justify-start items-left gap-1">
                   <input
                     className="border-gray-300 border rounded-md outline-none"
                     type="text"
                     placeholder="Nombre Unal"
-                    {...register(`materias.${index}.nombreunal`, {
+                    {...register(`materias.${index}.nombre_unal`, {
                       pattern: {
                         value: /^[a-zA-Z]+$/,
                       },
                     })}
                   />
                 </div>
-                <div className="flex flex-col justify-start items-left gap-1">
-                  <input
-                    className="border-gray-300 border rounded-md outline-none"
-                    type="number"
-                    placeholder="Codigo Unal"
-                    {...register(`materias.${index}.codigounal`)}
-                  />
-                </div>
+
                 <div className="flex flex-col justify-start items-left gap-1">
                   <input
                     className="border-gray-300 border rounded-md outline-none"
                     type="text"
-                    placeholder="Nombre Unal"
-                    {...register(`materias.${index}.nombredestino`, {
+                    placeholder="Código Destino"
+                    {...register(`materias.${index}.codigo_destino`)}
+                  />
+                </div>
+
+                <div className="flex flex-col justify-start items-left gap-1">
+                  <input
+                    className="border-gray-300 border rounded-md outline-none"
+                    type="text"
+                    placeholder="Nombre Destino"
+                    {...register(`materias.${index}.nombre_destino`, {
                       pattern: {
                         value: /^[a-zA-Z]+$/,
                       },
@@ -381,17 +679,18 @@ function Postulacionform({ params }) {
         <br />
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <button
-              type="button"
-              className={
-                "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
-              }
-            >
-              Volver
-            </button>
+            <Link href="/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/">
+              <button
+                type="button"
+                className={
+                  "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
+                }
+              >
+                Volver
+              </button>
+            </Link>
           </div>
           <div>
-
             <button
               type="submit"
               className={
@@ -400,7 +699,6 @@ function Postulacionform({ params }) {
             >
               Continuar
             </button>
-
           </div>
         </div>
       </div>

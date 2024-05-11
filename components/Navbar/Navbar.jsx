@@ -84,7 +84,7 @@ function Navbar() {
         >
           Ingresar
         </button>
-        <Link href="/Registro" className="w-full">
+        <Link href="/CodigoRegistro" className="w-full">
           <button
             type="button"
             className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue hover:text-white hover:bg-figma_blue py-2"

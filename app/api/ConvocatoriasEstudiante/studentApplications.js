@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import api_instance from "../base.api";
 
 const endpoint_1 = "application";
@@ -7,21 +6,19 @@ const endpoint_2 = "student";
 export const apiStudentApplications = {
   // Use Case #4:
   /**
-   * 
-   * medication	String	Medication the student might take, it can be an empty string (which means the student does not take any medication). It is not obligatory.
-diseases	String	Diseases the student might have, it can be an empty string (which means the student does not have any disease). It is not obligatory.
-contact_person	JSON	Information of the contact person of the student. You must send all the values in the JSON (if you decide to send it) or the contact_person must be known before hand (part of the output of the second endpoint), that's why you must check that these fields (in the frontend) are not empty. In the second case (info was known before) do not send anything.
-call	Integer	ID of the call the student wants to apply. It is obligatory.
-info_mobility	JSON	Basic information about the mobility that is not in the call model. If the student doesn't put any information, do not send an empty string. It is not obligatory.
-info_courses	List of JSONs	Information about the courses the student wants to take. If the student doesn't put any information, do not send an empty string. It is not obligatory.
-   * 
+   * medication	
+   * diseases	
+   * contact_person	
+   * call
+   * info_mobility	
+   * info_courses	
    * "Authorization" : `Bearer ${token}`
    */
-  
+
   getStudentEligibility: function (call, token) {
     return api_instance.get(`${endpoint_2}/eligible/`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization" : `Bearer ${token}`
       },
       params: {
         call: call,
@@ -32,7 +29,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
   getStudentInformation: function (token) {
     return api_instance.get(`${endpoint_2}/info-application/`, {
       headers : {
-        Authorization: `Bearer ${token}`,
+        "Authorization" : `Bearer ${token}`
       },
     })
   },
@@ -58,7 +55,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization" : `Bearer ${token}`
         },
       }
     );
@@ -67,7 +64,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
   getDocument: function (call, type_file, name_file, token) {
     return api_instance.get(`${endpoint_1}/download/`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization" : `Bearer ${token}`
       },
       params: {
         call: call,
@@ -83,7 +80,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
       { call, document, name_file },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization" : `Bearer ${token}`
         },
       }
     );
@@ -95,7 +92,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
       { call, is_extension },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization" : `Bearer ${token}`
         },
       }
     );
@@ -105,7 +102,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
   getAllApplications: function (token) {
     return api_instance.get(`${endpoint_1}/student/`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization" : `Bearer ${token}`
       },
     });
   },
@@ -113,7 +110,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
   getRegionFromCall: function (call_id, token) {
     return api_instance.get(`${endpoint_1}/region_call/`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization" : `Bearer ${token}`
       },
       params: {
         call: call_id,
@@ -124,7 +121,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
   getApplicationComments: function (call_id, token) {
     return api_instance.get(`${endpoint_1}/comments/`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization" : `Bearer ${token}`
       },
       params: {
         call: call_id,
@@ -135,7 +132,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
   getApplicationDocument: function (call_id, file_type, file_name, token) {
     return api_instance.get(`${endpoint_1}/download/`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization" : `Bearer ${token}`
       },
       params: {
         call: call_id,
@@ -151,7 +148,7 @@ info_courses	List of JSONs	Information about the courses the student wants to ta
       { call, document, name_file },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization" : `Bearer ${token}`
         },
       }
     );
