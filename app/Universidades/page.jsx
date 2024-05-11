@@ -1,7 +1,7 @@
 "use client";
 import UniversitiesCard from "@/components/UniversitiesPage/UniversitiesCard";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,7 +9,6 @@ import { apiAdminUniversities } from "../api/ConvocatoriasAdmin/adminUniversitie
 
 function UniversitiesMainPage() {
   const [myUniversities, setMyUniversities] = useState([]);
-  const [universiti, setUniversiti] = useState();
 
   const { data: session, status } = useSession({
     required: true,
@@ -23,25 +22,27 @@ function UniversitiesMainPage() {
 
   const { register, handleSubmit, reset } = useForm();
 
-  let variable = false;
-  const toggle = () => {
-
-    variable = !variable;
-
-  }
-
   const mySubmit = handleSubmit((data) => {
-    console.log(data);
-    apiAdminUniversities
-      .getUniversitiesById(data.idUniversity, token)
-      .then((response) => {
-        setUniversiti(response.data);        
-        console.log(response.data);
-        setMyUniversities([]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (data.idUniversity !== "") {
+      apiAdminUniversities
+        .getUniversitiesById(data.idUniversity, token)
+        .then((response) => {
+          setMyUniversities([response.data]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      apiAdminUniversities
+        .getAllUniversities(token)
+        .then((response) => {
+          setMyUniversities(response.data);
+          // console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
 
     reset();
   });
@@ -51,12 +52,11 @@ function UniversitiesMainPage() {
       .getAllUniversities(token)
       .then((response) => {
         setMyUniversities(response.data);
-        // console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [token]);
 
   if (!token) {
     return (
@@ -87,7 +87,6 @@ function UniversitiesMainPage() {
             <button
               type="submit"
               className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
-              onClick={toggle}
             >
               Buscar
             </button>
@@ -114,19 +113,6 @@ function UniversitiesMainPage() {
                 region={university.region}
               />
             ))}
-            {universiti && 
-              <UniversitiesCard
-                key={universiti.id}
-                id={universiti.id}
-                country={universiti.country}
-                city={universiti.city}
-                webpage={universiti.webpage}
-                exchange_info={universiti.exchange_info}
-                name={universiti.name}
-                academic_offer={universiti.academic_offer}
-                region={universiti.region}
-              />
-            }
           </div>
         </main>
       </>

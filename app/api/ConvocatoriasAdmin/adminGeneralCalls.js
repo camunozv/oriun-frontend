@@ -5,7 +5,7 @@ const endpoint = "call/api";
 export const apiAdminCalls = {
   // Endpoint no.6 Implemented
   getAdminAllCalls: function (token) {
-    return api_instance.get(`${endpoint}u`, {
+    return api_instance.get(`${endpoint}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },

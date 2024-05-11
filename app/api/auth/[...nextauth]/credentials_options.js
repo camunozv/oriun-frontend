@@ -1,9 +1,10 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { apiLogin } from "../../userLogin";
+import { signOut } from "next-auth/react";
 
 export const options = {
   pages: {
-    signOut: "https://oriun-preguntas-frecuentes.vercel.app",   
+    signOut: "/PreguntasFrecuentes",   
     newUser: "/Convocatorias",
   },
   providers: [

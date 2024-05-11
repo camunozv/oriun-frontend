@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import preguntas from "@/constants/preguntas.json";
 import Navbar from "@/components/Navbar/Navbar";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 function PreguntasFrecuentesPage() {
   const [selectedMessage, setSelectedMessage] = useState("");
@@ -10,6 +12,14 @@ function PreguntasFrecuentesPage() {
     setSelectedMessage(message);
     setAnsTitle(ansTitle);
   };
+
+  const {data:session, status} = useSession({
+    required: false
+  });
+
+  if (session) {
+    redirect('/Convocatorias');
+  }
 
   return (
     <>

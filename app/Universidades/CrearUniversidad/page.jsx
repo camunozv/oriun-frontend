@@ -29,7 +29,7 @@ function CreateUniversitiesPage() {
     apiAdminUniversities
       .postUniversities(
         data.name,
-        data.webpag,
+        data.webpage,
         data.region,
         data.country,
         data.city,
@@ -43,7 +43,7 @@ function CreateUniversitiesPage() {
       .catch((error) => {
         console.log(error);
       });
-    reset();
+    // reset();
   });
 
   if (!session) {

@@ -72,11 +72,11 @@ function Navbar() {
   return (
     <nav
       className="flex items-center justify-between mx-auto max-w-[1580px]
-    px-6 lg:px-20 3xl:px-0 z-30 py-5"
+    px-6 lg:px-20 3xl:px-0 z-30 py-5 rounded-lg shadow-lg"
     >
-      <h1 className="text-black font-bold text-[60px]">ORIUN</h1>
+      <h1 className="text-black font-bold text-[60px] pl-4">ORIUN</h1>
 
-      <div className="flex items-center gap-3 w-80">
+      <div className="flex items-center gap-3 w-80 pr-4">
         <button
           type="button"
           className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"

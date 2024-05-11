@@ -15,6 +15,7 @@ export const apiStudentApplications = {
    * "Authorization" : `Bearer ${token}`
    */
 
+  // Implemented
   getStudentEligibility: function (call, token) {
     return api_instance.get(`${endpoint_2}/eligible/`, {
       headers: {
@@ -26,14 +27,16 @@ export const apiStudentApplications = {
     });
   },
 
+  // Implemented.
   getStudentInformation: function (token) {
-    return api_instance.get(`${endpoint_2}/info-application/`, {
+    return api_instance.get(`${endpoint_2}/info_application/`, {
       headers : {
         "Authorization" : `Bearer ${token}`
       },
     })
   },
 
+  // Implemented
   postCreateDocuments: function (
     medication,
     diseases,
@@ -61,6 +64,7 @@ export const apiStudentApplications = {
     );
   },
 
+
   getDocument: function (call, type_file, name_file, token) {
     return api_instance.get(`${endpoint_1}/download/`, {
       headers: {
@@ -74,6 +78,7 @@ export const apiStudentApplications = {
     });
   },
 
+  
   postDocument: function (call, document, name_file, token) {
     return api_instance.post(
       `${endpoint_1}/upload/`,

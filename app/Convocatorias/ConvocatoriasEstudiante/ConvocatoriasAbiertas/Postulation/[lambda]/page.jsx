@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { useForm, useFieldArray, control } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { apiStudentApplications } from "@/app/api/ConvocatoriasEstudiante/studentApplications";
 
 //Es donde verifico el inicio de seccion y donde coloco ruta dinaminca
 //de aucerdo al id de la convocatoria
@@ -24,22 +26,45 @@ function Postulacionform({ params }) {
 
   const token = session?.access;
   const id = params.lambda;
+
+  const [studentElegibility, setStudentElegibility] = useState({});
+  const [initialInfo, setInitialInfo] = useState({});
+  useEffect(() => {
+    apiStudentApplications
+      .getStudentEligibility(id, token)
+      .then((response) => {
+        setStudentElegibility(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    apiStudentApplications
+      .getStudentInformation(token)
+      .then((response) => {
+        setInitialInfo(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
   } = useForm({
-    defaultValues: {
-      materias: [
-        {
-          codigo_unal: 0,
-          nombre_unal: "",
-          codigo_destino: 0,
-          nombre_destino: "",
-        },
-      ],
-    },
+    // defaultValues: {
+    //   materias: [
+    //     {
+    //       codigo_unal: 0,
+    //       nombre_unal: "",
+    //       codigo_destino: 0,
+    //       nombre_destino: "",
+    //     },
+    //   ],
+    // },
   });
   const { fields, append, remove } = useFieldArray({
     name: "materias",
@@ -54,11 +79,11 @@ function Postulacionform({ params }) {
 
     for (const [key, value] of Object.entries(data)) {
       if (
-        key === "nombre" ||
-        key === "telefono" ||
-        key === "apellido" ||
-        key === "email_contacto_emergencia" ||
-        key === "relacion"
+        key === "name" ||
+        key === "last_name" ||
+        key === "email" ||
+        key === "relationship" ||
+        key === "cellphone"
       ) {
         data_contact_person[key] = value;
       } else if (
@@ -80,7 +105,58 @@ function Postulacionform({ params }) {
     data_to_send["contact_person"] = data_contact_person;
     data_to_send["data_info_mobilitiy"] = data_info_mobility;
 
-    console.log(data_to_send);
+    // if (
+    //   data_to_send.contact_person.name === "" ||
+    //   data_to_send.contact_person.last_name === "" ||
+    //   data_to_send.contact_person.email === "" ||
+    //   data_to_send.contact_person.relationship === "" ||
+    //   data_to_send.contact_person.cellphone === ""
+    // ) {
+    //   alert("Toda la información de contacto debe llenarse.");
+    //   delete data_to_send.contact_person;
+    // }
+
+    // if (
+    //   data_to_send.data_info_mobilitiy.fecha_de_inicio === "" ||
+    //   data_to_send.data_info_mobilitiy.fecha_de_fin === "" ||
+    //   data_to_send.data_info_mobilitiy.nombre_contacto_destino === "" ||
+    //   data_to_send.data_info_mobilitiy.telefono_contacto === "" ||
+    //   data_to_send.data_info_mobilitiy.facultad === "" ||
+    //   data_to_send.data_info_mobilitiy.programa === "" ||
+    //   data_to_send.data_info_mobilitiy.cargo_contacto_destino === "" ||
+    //   data_to_send.data_info_mobilitiy.email_contacto === ""
+    // ) {
+    //   alert("Toda la información de movilidad debe llenarse.");
+    //   delete data_to_send.data_info_mobilitiy;
+    // }
+
+    if (data_to_send.materias.length === 0) {
+      delete data_to_send.materias;
+    }
+
+    if (data_to_send.enfermedades === "") {
+      delete data_to_send.enfermedades;
+    }
+    if (data_to_send.medicinas === "") {
+      delete data_to_send.medicinas;
+    }
+
+    apiStudentApplications
+      .postCreateDocuments(
+        data_to_send.medicinas,
+        data_to_send.enfermedades,
+        data_to_send.contact_person,
+        id,
+        data_to_send.data_info_mobilitiy,
+        data_to_send.materias,
+        token
+      )
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     /**
      * POST DATA WITH ENDPOINT 4
@@ -89,9 +165,9 @@ function Postulacionform({ params }) {
      *  ...
      */
 
-    router.push(
-      `/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos/${id}`
-    );
+    // router.push(
+    //   `/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos/${id}`
+    // );
   });
 
   // Falta agregar el endpoint que revisa si el estudiante puede postularse o no;
@@ -101,6 +177,9 @@ function Postulacionform({ params }) {
 
   if (!session) {
     return <div>{status}...</div>;
+  } else if (studentElegibility.elegibility === false) {
+    alert(studentElegibility.message);
+    redirect("/Convocatorias");
   } else {
     return (
       <form onSubmit={mySubmit}>
@@ -110,10 +189,9 @@ function Postulacionform({ params }) {
           </h1>
           <br />
           <p className="text-2xl text-justify pl-8 pr-10">
-            Esta información es requerida para completar su solicitud. Es
-            importante que complete todos los campos requeridos. En la siguiente
-            página podrá subir los documentos que se requieren para hacer válida
-            su postulación.
+            Esta información es importante para su solicitud. Su llenado es
+            obligatorio su postulación. Luego podrá dirigirse a subir
+            documentos, para finalizar su proceso de postulación.
           </p>
           <br />
           <div>
@@ -126,6 +204,19 @@ function Postulacionform({ params }) {
                 }
               >
                 Ir a subir Documentos
+              </button>
+            </Link>
+          </div>
+          <div className="mt-3">
+            <Link
+              href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/Postulation`}
+            >
+              <button
+                className={
+                  "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
+                }
+              >
+                Consultar Información Registrada
               </button>
             </Link>
           </div>
@@ -145,18 +236,14 @@ function Postulacionform({ params }) {
                 placeholder="Nombre"
                 type="text"
                 className="border-gray-300 border rounded-md outline-none"
-                {...register("nombre", {
+                {...register("name", {
                   required: {
                     value: true,
                     message: "Campo obligatorio",
                   },
-                  pattern: {
-                    value: /^[a-zA-Z]+$/,
-                    message: "Este campo solo admite letras",
-                  },
                 })}
               />
-              {errors.nombre && (
+              {errors.name && (
                 <span
                   style={{
                     backgroundColor: "#ffabab",
@@ -165,7 +252,7 @@ function Postulacionform({ params }) {
                     fontWeight: "bold",
                   }}
                 >
-                  {errors.nombre.message}
+                  {errors.name.message}
                 </span>
               )}
             </div>
@@ -175,18 +262,14 @@ function Postulacionform({ params }) {
                 className="border-gray-300 border rounded-md outline-none"
                 placeholder="Apellido"
                 type="text"
-                {...register("apellido", {
+                {...register("last_name", {
                   required: {
                     value: true,
                     message: "Campo obligatorio",
                   },
-                  pattern: {
-                    value: /^[a-zA-Z]+$/,
-                    message: "Este campo solo admite letras",
-                  },
                 })}
               />
-              {errors.apellido && (
+              {errors.last_name && (
                 <span
                   style={{
                     backgroundColor: "#ffabab",
@@ -195,7 +278,7 @@ function Postulacionform({ params }) {
                     fontWeight: "bold",
                   }}
                 >
-                  {errors.apellido.message}
+                  {errors.last_name.message}
                 </span>
               )}
             </div>
@@ -205,7 +288,7 @@ function Postulacionform({ params }) {
                 className="border-gray-300 border rounded-md outline-none"
                 placeholder="Email del Contacto"
                 type="text"
-                {...register("email_contacto_emergencia", {
+                {...register("email", {
                   required: {
                     value: true,
                     message: "Campo obligatorio",
@@ -216,7 +299,7 @@ function Postulacionform({ params }) {
                   },
                 })}
               />
-              {errors.email_contacto_emergencia && (
+              {errors.email && (
                 <span
                   style={{
                     backgroundColor: "#ffabab",
@@ -225,7 +308,7 @@ function Postulacionform({ params }) {
                     fontWeight: "bold",
                   }}
                 >
-                  {errors.email_contacto_emergencia.message}
+                  {errors.email.message}
                 </span>
               )}
             </div>
@@ -235,18 +318,18 @@ function Postulacionform({ params }) {
                 placeholder="Relación con el Estudiante"
                 className="border-gray-300 border rounded-md outline-none"
                 type="text"
-                {...register("relacion", {
+                {...register("relationship", {
                   required: {
                     value: true,
                     message: "Campo obligatorio",
                   },
                   pattern: {
                     value: /^[a-zA-Z]+$/,
-                    message: "Este campo solo admite letras",
+                    message: "Este campo solo admite una palabra.",
                   },
                 })}
               />
-              {errors.relacion && (
+              {errors.relationship && (
                 <span
                   style={{
                     backgroundColor: "#ffabab",
@@ -255,7 +338,7 @@ function Postulacionform({ params }) {
                     fontWeight: "bold",
                   }}
                 >
-                  {errors.relacion.message}
+                  {errors.relationship.message}
                 </span>
               )}
             </div>
@@ -265,14 +348,18 @@ function Postulacionform({ params }) {
                 placeholder="Teléfono"
                 className="border-gray-300 border rounded-md outline-none"
                 type="text"
-                {...register("telefono", {
+                {...register("cellphone", {
                   required: {
                     value: true,
                     message: "Campo obligatorio",
                   },
+                  pattern: {
+                    value: /^[0-9]+$/i,
+                    message: "Este campo solo admite números.",
+                  },
                 })}
               />
-              {errors.telefono && (
+              {errors.cellphone && (
                 <span
                   style={{
                     backgroundColor: "#ffabab",
@@ -281,7 +368,7 @@ function Postulacionform({ params }) {
                     fontWeight: "bold",
                   }}
                 >
-                  {errors.telefono.message}
+                  {errors.cellphone.message}
                 </span>
               )}
             </div>
@@ -312,7 +399,7 @@ function Postulacionform({ params }) {
                 type="text"
                 {...register("medicinas", {
                   required: {
-                    value: true,
+                    value: false,
                     message: "Campo obligatorio",
                   },
                 })}
@@ -338,7 +425,7 @@ function Postulacionform({ params }) {
                 type="text"
                 {...register("enfermedades", {
                   required: {
-                    value: true,
+                    value: false,
                     message: "Campo obligatorio",
                   },
                 })}
@@ -361,6 +448,7 @@ function Postulacionform({ params }) {
           <h1 className="text-black font-bold text-[25px] pl-6">
             Información de la Movilidad
           </h1>
+
           <br />
 
           <div
@@ -432,10 +520,6 @@ function Postulacionform({ params }) {
                     value: true,
                     message: "Campo obligatorio",
                   },
-                  pattern: {
-                    value: /^[a-zA-Z]+$/,
-                    message: "Este campo solo admite letras",
-                  },
                 })}
               />
 
@@ -463,10 +547,6 @@ function Postulacionform({ params }) {
                     value: true,
                     message: "Campo obligatorio",
                   },
-                  pattern: {
-                    value: /^[a-zA-Z]+$/,
-                    message: "Este campo solo admite letras",
-                  },
                 })}
               />
 
@@ -493,10 +573,6 @@ function Postulacionform({ params }) {
                   required: {
                     value: true,
                     message: "Campo obligatorio",
-                  },
-                  pattern: {
-                    value: /^[a-zA-Z]+$/,
-                    message: "Este campo solo admite letras",
                   },
                 })}
               />
@@ -526,7 +602,7 @@ function Postulacionform({ params }) {
                   },
                   pattern: {
                     value: /^[a-zA-Z]+$/,
-                    message: "Este campo solo admite letras",
+                    message: "Este campo solo admite una palabra.",
                   },
                 })}
               />
@@ -585,6 +661,10 @@ function Postulacionform({ params }) {
                   required: {
                     value: true,
                     message: "Campo obligatorio",
+                  },
+                  pattern: {
+                    value: /^[0-9]+$/i,
+                    message: "Este campo solo admite números.",
                   },
                 })}
               />
@@ -703,7 +783,7 @@ function Postulacionform({ params }) {
                   "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
                 }
               >
-                Continuar
+                Guardar
               </button>
             </div>
           </div>

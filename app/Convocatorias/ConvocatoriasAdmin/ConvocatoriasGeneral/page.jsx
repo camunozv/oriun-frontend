@@ -24,7 +24,6 @@ function ConvocatoriasGeneralAdminPage() {
     apiAdminCalls
       .getAdminAllCalls(token)
       .then((response) => set_my_calls(response.data))
-      .then(() => console.log(my_calls))
       .catch((error) => console.log(error));
   }, [token]);
 
@@ -41,7 +40,7 @@ function ConvocatoriasGeneralAdminPage() {
   const country = useRef();
   const language = useRef();
 
-  function handleFilterSumbit(event) {
+  const handleFilterSumbit = (event) => {
     event.preventDefault();
 
     const call_call_id = call_id.current.value;
@@ -93,11 +92,12 @@ function ConvocatoriasGeneralAdminPage() {
       data: data_c,
     };
 
-    if (!data_c.call_call_id) {
+    if (!data_b.call_call_id) {
       axios
         .request(config)
         .then((response) => {
           set_my_calls(response.data);
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -106,13 +106,13 @@ function ConvocatoriasGeneralAdminPage() {
       apiAdminFilterCalls
         .getAdminFilterCallById(data.call_call_id, token)
         .then((response) => {
-          set_my_calls(response.data);
+          set_my_calls([response.data]);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }
+  };
 
   if (!token) {
     return (

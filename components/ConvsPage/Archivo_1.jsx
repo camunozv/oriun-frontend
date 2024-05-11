@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { AiFillFilePdf } from "react-icons/ai";
 import { MdCloudUpload, MdDelete } from "react-icons/md";
 import { useForm } from "react-hook-form";
+import { apiStudentApplications } from "@/app/api/ConvocatoriasEstudiante/studentApplications";
 
-function Archivo1({ onChange, id, title, allButtons }) {
+function Archivo1({ onChange, id, title, allButtons, call_id, token }) {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("No seleccionado");
 
+  const [mockFile, setMockFile] = useState(null);
   const {
     register,
     formState: { errors },
@@ -24,7 +26,35 @@ function Archivo1({ onChange, id, title, allButtons }) {
     if (setFile) {
       setFileName(file.name);
     }
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const fileContent = reader.result;
+      setMockFile(fileContent);
+    };
+
+    // reader.readAsDataURL(file);
+    // reader.readAsArrayBuffer(file);
+    // reader.readAsText(file);
     onChange(file);
+  };
+
+  console.log(mockFile);
+  console.log(file);
+
+  // Uncomment the following 3 lines to use readAsDataURL for base 64 conversion
+  // const substringToRemove = 'data:application/pdf;base64,';
+  // let finalFile= mockFile?.replace(substringToRemove,'');
+
+  const handleUploadDocument = () => {
+    apiStudentApplications
+      .postDocument(call_id, mockFile, file.name, token)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const downloadFile = () => {
@@ -38,7 +68,6 @@ function Archivo1({ onChange, id, title, allButtons }) {
       document.body.removeChild(a);
     }
   };
-
 
   return (
     <div>
@@ -126,6 +155,7 @@ function Archivo1({ onChange, id, title, allButtons }) {
         <div className="py-14 px-4">
           <button
             type="button"
+            onClick={handleUploadDocument}
             className={
               "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
             }
