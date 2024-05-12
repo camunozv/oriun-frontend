@@ -1,17 +1,16 @@
 "use client";
-
-//import CardPostulation from '@/components/ChooseWinners/CardPostulation';
-import { adminPostulacion } from "@/app/api/ConvocatoriasAdmin/adminApplications";
+import { adminApplications } from "@/app/api/ConvocatoriasAdmin/adminApplications";
 import CardPostulacion from "@/components/ChooseWinner/CardPostulacion";
 import Link from "next/link";
-import React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useSession } from "next-auth/react"
-
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 function VerPostulaciones({ params }) {
   // Pendiente: Agregar protección de ruta.
+
+  const [applications, setApplcations] = useState([]);
 
   const { data: session, status } = useSession({
     required: true,
@@ -21,12 +20,14 @@ function VerPostulaciones({ params }) {
   });
 
   const token = session?.access;
+  const user_type = session?.type_user;
   const id = params.lambda;
 
   useEffect(() => {
-    adminPostulacion
-      .getPostulacionGeneral(null, id, null, token)
+    adminApplications
+      .getGeneralApplications(null, id, null, token)
       .then((response) => {
+        setApplcations(response.data);
         console.log(response.data);
       })
       .catch((error) => {
@@ -43,39 +44,37 @@ function VerPostulaciones({ params }) {
   } = useForm();
 
   const mySubmit = handleSubmit((data) => {
-    console.log(data);
-    
-
-    if(!data.student_id){
-      data.student_id= null
+    if (!data.student_id) {
+      data.student_id = null;
     }
 
-    if(!data.state_documents){
-      data.state_documents= null
+    if (!data.state_documents) {
+      data.state_documents = null;
     }
-    adminPostulacion
-      .getPostulacionGeneral(data.student_id, id, data.state_documents, token)
+    adminApplications
+      .getGeneralApplications(data.student_id, id, data.state_documents, token)
       .then((response) => {
+        setApplcations(response.data);
         console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
+      
     reset();
   });
 
+  let Key = 0;
 
   if (!session) {
-    return(
-      <div>{status} ...</div>
-    );
+    return <div>{status} ...</div>;
+  } else if (user_type === "student") {
+    redirect("/Convocatorias");
   } else {
     return (
       <>
         <div className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 flex flex-col justify-center items-center w-full rounded-lg shadow-lg p-6">
           <form className="w-full" onSubmit={mySubmit}>
-            {/** */}
-
             <div className="w-full flex flex-col items-start justify-start gap-3">
               <label
                 htmlFor="information_grid"
@@ -90,7 +89,6 @@ function VerPostulaciones({ params }) {
               id="information_grid"
               className="p-6 grid grid-cols-3 justify-center items-center w-full gap-3"
             >
-              {/**Active */}
               <div className="flex flex-col justify-start items-left gap-1">
                 <label htmlFor="active" className="font-semibold">
                   Estado de la Postulación
@@ -108,7 +106,6 @@ function VerPostulaciones({ params }) {
                 </select>
               </div>
 
-              {/*Id Estudiante */}
               <div className="flex flex-col justify-start items-left gap-1">
                 <label htmlFor="student_id" className="font-semibold">
                   id Estudiante
@@ -121,71 +118,7 @@ function VerPostulaciones({ params }) {
                   className="bg-white border-gray-300 border rounded-md outline-none"
                 />
               </div>
-
-              {/*
-
-            
-            <div className="flex flex-col justify-start items-left gap-1">
-              <label htmlFor="deadline" className="font-semibold">
-                Fecha de Postulación
-              </label>
-              <input
-                id="deadline"
-                type="date"
-                placeholder=""
-                className="bg-white border-gray-300 border rounded-md outline-none"
-              />
             </div>
-
-           
-            <div className="flex flex-col justify-start items-left gap-1">
-              <label htmlFor="study_level" className="font-semibold">
-                Nivel de Estudios
-              </label>
-              <select
-                id="study_level"
-                className="border-gray-300 border rounded-md outline-none bg-white"
-                placeholder="value 0"
-              >
-                <option value="">Selección...</option>
-                <option value="PRE">Pregrado</option>
-                <option value="POS">Maestría</option>
-                <option value="DOC">Doctorado</option>
-              </select>
-            </div>
-
-            
-            <div className="flex flex-col justify-start items-left gap-1">
-              <label htmlFor="year" className="font-semibold">
-                Año de la movilidad
-              </label>
-              <input
-                id="year"
-                type="text"
-                placeholder="año-semestre"
-                className="bg-white border-gray-300 border rounded-md outline-none"
-              />
-            </div>
-
-            
-            <div className="flex flex-col justify-start items-left gap-1">
-              <label htmlFor="semester" className="font-semibold">
-                Semestre de la movilidad
-              </label>
-              <select
-                id="semester"
-                className="border-gray-300 border rounded-md outline-none bg-white"
-                placeholder=""
-              >
-                <option value="">Selección...</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
-            </div>
-            */}
-            </div>
-
-            {/** */}
 
             <button
               type="submit"
@@ -235,15 +168,19 @@ function VerPostulaciones({ params }) {
           </div>
 
           <div className="grid grid-cols-3 w-full gap-6">
-            <CardPostulacion EstadoConv={1}></CardPostulacion>
-
-            <CardPostulacion EstadoConv={2}></CardPostulacion>
-
-            <CardPostulacion EstadoConv={3}></CardPostulacion>
-
-            <CardPostulacion EstadoConv={4}></CardPostulacion>
+            {applications?.map((application, index) => (
+              <CardPostulacion
+                key={index}
+                call_id={application.call}
+                StudentId={application.student_id}
+                major={application.student_major}
+                StudentName={application.student_name}
+                Country={application.university_country}
+                EstadoConv={application.state_documents}
+                University={application.university_name}
+              />
+            ))}
           </div>
-
 
           {/*
           <div className="fixed bottom-0 right-0 p-4">

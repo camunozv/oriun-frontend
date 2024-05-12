@@ -1,32 +1,32 @@
 "use client";
 
-import React from 'react'
+import React from "react";
 import Link from "next/link";
-import Image from 'next/image';
-import { useEffect } from 'react';
+import Image from "next/image";
+import { useEffect } from "react";
 
 function CardPostulacion({
-  // Aqui se agregan las variables necesarias para la carta de postulacion.
+  call_id,
   EstadoConv,
-
-  // students open & closed
- //* shared characteristics
-
-  // admin open & closed
-
-}) {  let imagenSrc;
+  StudentName,
+  StudentId,
+  Country,
+  University,
+  major,
+}) {
+  let imagenSrc;
 
   switch (EstadoConv) {
-    case 1:
+    case "Documentos no revisados":
       imagenSrc = "/images/CirculoGris.png";
       break;
-    case 2:
+    case "Modificación de los documentos solicitada":
       imagenSrc = "/images/CirculoAmarillo.png";
       break;
-    case 3:
+    case "Documentos aprobados":
       imagenSrc = "/images/CirculoVerde.png";
       break;
-    case 4:
+    case "Modificación realizada":
       imagenSrc = "/images/CampanaRoja.png";
       break;
     default:
@@ -37,28 +37,22 @@ function CardPostulacion({
     return (
       <>
         <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
-          
           <div className="relative flex justify-center items-center flex-col gap-3 bg-white -lg rounded-xl p-6 w-full h-full">
-            <h6 className="font-bold">Conv No. 0001-2024</h6>
+            <h6 className="font-bold">Conv No. {call_id}</h6>
 
             {/* Agrega la imagen en la esquina superior derecha 
             <div className="absolute top-0 right-0 w-12 h-12">
               <Image src="/images/CirculoVerde.png" width={50} height={50} alt="Logo" />
-            </div>
-            
+            </div>           
             El metodo de abajo tiene una mejor calidad de imagen*/}
-            
 
             <img
-                src={imagenSrc} // Reemplaza esta ruta con la ruta de tu imagen
-                alt="Logo"
-                className="absolute top-0 right-0 w-12 h-12" // Estilos para posicionar la imagen en la esquina superior derecha
+              src={imagenSrc} // Reemplaza esta ruta con la ruta de tu imagen
+              alt="Logo"
+              className="absolute top-0 right-0 w-12 h-12" // Estilos para posicionar la imagen en la esquina superior derecha
             />
           </div>
-          
-          
 
-          
           <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
             Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
             Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
@@ -69,39 +63,37 @@ function CardPostulacion({
             Flag Here Flag Here Flag Here Flag Here Flag Here
           </div>
 
+          <p className="font-semibold">{StudentId}</p>
           <p className="font-semibold">
-            ID Estudiante
+            {StudentName} - {major}
           </p>
-          <p className="font-semibold">Nombre Estudiante</p>
-          <p className="font-semibold">Nombre Universidad</p>
-          <p className="font-semibold">País</p>
+          <p className="font-semibold">{University}</p>
+          <p className="font-semibold">{Country}</p>
 
           <div className="flex justify-between items-center w-96">
             <div className="w-full p-2">
-                <button
-                  type="button"
-                  className="w-full text-base font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-1"
-                >
-                  Seleccionar como Ganador
-                  
-                </button>
+              <button
+                type="button"
+                className="w-full text-base font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-1"
+              >
+                Seleccionar como Ganador
+              </button>
             </div>
             <div className="w-full p-2">
-                <button
-                  type="button"
-                  className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-4"
-                >
-                  <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulacionDatos">
-            
+              <button
+                type="button"
+                className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-4"
+              >
+                <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulacionDatos">
                   Ver Detalles
-                  </Link>
-                </button>
+                </Link>
+              </button>
             </div>
           </div>
         </div>
       </>
     );
-  } 
+  }
 }
 
-export default CardPostulacion
+export default CardPostulacion;

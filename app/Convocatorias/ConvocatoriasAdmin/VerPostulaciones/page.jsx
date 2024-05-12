@@ -4,7 +4,7 @@ import CardPostulacion from '@/components/ChooseWinner/CardPostulacion';
 import Link from 'next/link';
 import React from 'react'
 
-function verPostulaciones() 
+function VerPostulaciones() 
 
   // Pendiente: Agregar protección de ruta.
   {
@@ -181,4 +181,4 @@ function verPostulaciones()
       </>
     );
   }
-export default verPostulaciones
+export default VerPostulaciones

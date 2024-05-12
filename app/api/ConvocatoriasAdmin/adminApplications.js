@@ -4,7 +4,7 @@ const endpoint = "application";
 
 export const adminApplications = {
 
-  // #1
+  // #1 Implemented
   getGeneralApplications: function (
     student_id,
     call_id,
@@ -17,7 +17,7 @@ export const adminApplications = {
     });
   },
 
-  // #2
+  // #2 Not necessary to implement.
   getStudentApplication: function (call_id, student_id, token) {
     return api_instance.get(
       `${endpoint}/student-info/${call_id}/${student_id}/`,
@@ -27,7 +27,7 @@ export const adminApplications = {
     );
   },
 
-  // #3
+  // #3 
   getStudentDocuments: function (call_id, student_id, token) {
     return api_instance.get(`${endpoint}/documents/${call_id}/${student_id}/`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -69,7 +69,6 @@ export const adminApplications = {
 
   // #7
   getDocumentationStatus: function (call_id, student_id, token) {
-
     return api_instance.get(`${endpoint}/get-state/${call_id}/${student_id}/`,{
       headers: { Authorization: `Bearer ${token}` },
       params: {
