@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillFilePdf } from "react-icons/ai";
 import { MdCloudUpload, MdDelete } from "react-icons/md";
 
-function Archivo({ title, fileName, onDownload }) {
+function Archivo({ title, fileName, call_id, token }) {
 
   const downloadFile = () => {
     onDownload();

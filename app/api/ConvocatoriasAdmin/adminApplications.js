@@ -34,7 +34,7 @@ export const adminApplications = {
     });
   },
 
-  // #4 
+  // #4 Implemented
   putApplicationModification: function (call_id, student_id, token) {
     return api_instance.put(
       `${endpoint}/modify/${call_id}/${student_id}/`,
@@ -45,7 +45,7 @@ export const adminApplications = {
     );
   },
 
-  // #5
+  // #5 Not found
   putAcceptDocuments: function (call_id, student_id, token) {
     return api_instance.put(
       `${endpoint}/accept-documents/${call_id}/${student_id}/`,
@@ -56,10 +56,10 @@ export const adminApplications = {
     );
   },
 
-  // #6
+  // #6 Implemented
   postCommentApplication: function (call_id, student_id, comment, token) {
     return api_instance.post(
-      `${endpoint}/add_comment/${call_id}/${student_id}/`,
+      `${endpoint}/add-comment/${call_id}/${student_id}/`,
       { comment },
       {
         headers: { Authorization: `Bearer ${token}` },

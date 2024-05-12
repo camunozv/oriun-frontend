@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import Archivo1 from "../../../../../../components/ConvsPage/Archivo_1";
-import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationConv";
 import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
 import internacional from "@/constants/internacional.json";
