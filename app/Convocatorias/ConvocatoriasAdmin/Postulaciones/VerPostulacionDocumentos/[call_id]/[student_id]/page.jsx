@@ -103,8 +103,9 @@ function VerPostulacionDocumentos({ params }) {
             <div key={index}>
               <Archivo
                 key={index}
+                fileName={item.id}
                 title={item.title}
-                nombrearchivo={item.id}
+                applicationDocuments={applicationData.documents}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
                 call_id={callId}
@@ -121,8 +122,9 @@ function VerPostulacionDocumentos({ params }) {
             <div key={index}>
               <Archivo
                 key={index}
+                fileName={item.id}
                 title={item.title}
-                nombrearchivo={item.id}
+                applicationDocuments={applicationData.documents}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
                 call_id={callId}
@@ -139,8 +141,9 @@ function VerPostulacionDocumentos({ params }) {
             <div key={index}>
               <Archivo
                 key={index}
+                fileName={item.id}
                 title={item.title}
-                nombrearchivo={item.id}
+                applicationDocuments={applicationData.documents}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
                 call_id={callId}

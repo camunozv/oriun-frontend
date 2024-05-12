@@ -81,19 +81,6 @@ function Archivo1({ onChange, id, title, allButtons, call_id, token }) {
       });
   };
 
-  // It doesn't make sense to download the same file the user has in it's pc.
-  // const downloadFile = () => {
-  //   if (file) {
-  //     const url = URL.createObjectURL(file);
-  //     const a = document.createElement("a");
-  //     a.href = url;
-  //     a.download = file.name;
-  //     document.body.appendChild(a);
-  //     a.click();
-  //     document.body.removeChild(a);
-  //   }
-  // };
-
   return (
     <div>
       <h1 className="text-2xl text-justify pl-2 pr-10 font-bold">{title}</h1>

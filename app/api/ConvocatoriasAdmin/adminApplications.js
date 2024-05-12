@@ -67,7 +67,7 @@ export const adminApplications = {
     );
   },
 
-  // #7 
+  // #7 Questions pending
   getDocumentationStatus: function (call_id, student_id, token) {
     return api_instance.get(`${endpoint}/get-state/${call_id}/${student_id}/`,{
       headers: { Authorization: `Bearer ${token}` },

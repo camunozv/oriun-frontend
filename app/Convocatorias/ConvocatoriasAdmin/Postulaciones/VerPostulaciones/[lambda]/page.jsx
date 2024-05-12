@@ -8,7 +8,6 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 function VerPostulaciones({ params }) {
-  // Pendiente: Agregar protección de ruta.
 
   const [applications, setApplcations] = useState([]);
 
