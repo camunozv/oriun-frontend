@@ -1,7 +1,7 @@
 "use client";
 
 //import CardPostulation from '@/components/ChooseWinners/CardPostulation';
-import { adminPostulacion } from "@/app/api/ConvocatoriasAdmin/Postulaciones/CardPostulacion";
+import { adminPostulacion } from "@/app/api/ConvocatoriasAdmin/adminApplications";
 import CardPostulacion from "@/components/ChooseWinner/CardPostulacion";
 import Link from "next/link";
 import React from "react";
