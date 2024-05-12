@@ -24,6 +24,8 @@ function PostulacionDocumentos({ params }) {
   const id = params.lambda;
 
   const [region, setRegion] = useState("");
+  const [is_extension, set_is_extension] = useState(false);
+
   useEffect(() => {
     apiStudentApplications
       .getRegionFromCall(id, token)
@@ -73,7 +75,15 @@ function PostulacionDocumentos({ params }) {
       alert("No ha subido todos los documentos");
       return;
     } else {
-      router.push("/Convocatorias/ConvocatoriasEstudiante");
+      apiStudentApplications
+        .postApplication(id, is_extension, token)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      // router.push("/Convocatorias/ConvocatoriasEstudiante");
     }
     console.log(result);
   });
@@ -204,8 +214,26 @@ function PostulacionDocumentos({ params }) {
         </div>
         <br />
         <form onSubmit={onSubmit}>
+          <div className="flex justify-left items-left flex-col gap-2 w-[1000px] pt-1 pb-8">
+            <h1 className="text-2xl text-justify pl-2 pr-10 font-bold">
+              ¿Es una extensión de una convocatoria anterior?
+            </h1>
+            <select
+              id="headquarter"
+              name="toggle_form"
+              className="border-2 rounded-md focus:outline-none focus:ring-0 focus:border-gray-600 px-1 py-1"
+              placeholder="False"
+              onChange={() => {
+                set_is_extension(!is_extension);
+              }}
+            >
+              <option value="False">No</option>
+              <option value="True">Si</option>
+            </select>
+          </div>
           <div>{regionForm()}</div>
           <br />
+
           <div>
             <button
               type="submit"
@@ -213,7 +241,7 @@ function PostulacionDocumentos({ params }) {
                 "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
               }
             >
-              Enviar
+              Guardar Postulación
             </button>
           </div>
         </form>
