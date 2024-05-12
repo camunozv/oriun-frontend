@@ -7,9 +7,10 @@ import Link from "next/link";
 import React from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react"
 
-function verPostulaciones({ params }) {
+
+function VerPostulaciones({ params }) {
   // Pendiente: Agregar protección de ruta.
 
   const { data: session, status } = useSession({
@@ -256,4 +257,4 @@ function verPostulaciones({ params }) {
     );
   }
 }
-export default verPostulaciones;
+export default VerPostulaciones;

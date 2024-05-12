@@ -84,9 +84,12 @@ export const apiStudentApplications = {
       `${endpoint_1}/upload/`,
       { call, document, name_file },
       {
+        
         headers: {
-          "Authorization" : `Bearer ${token}`
+          "Authorization" : `Bearer ${token}`,
+          // "Content-Type": "multipart/form-data"
         },
+        
       }
     );
   },

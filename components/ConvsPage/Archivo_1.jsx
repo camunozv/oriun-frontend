@@ -33,18 +33,18 @@ function Archivo1({ onChange, id, title, allButtons, call_id, token }) {
       setMockFile(fileContent);
     };
 
-    // reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
     // reader.readAsArrayBuffer(file);
     // reader.readAsText(file);
     onChange(file);
   };
 
-  console.log(mockFile);
-  console.log(file);
+  
+  console.log('mi id', id)
 
   // Uncomment the following 3 lines to use readAsDataURL for base 64 conversion
-  // const substringToRemove = 'data:application/pdf;base64,';
-  // let finalFile= mockFile?.replace(substringToRemove,'');
+  const substringToRemove = 'data:application/pdf;base64,';
+  let finalFile= mockFile?.replace(substringToRemove,'');
 
   const handleUploadDocument = () => {
     apiStudentApplications
@@ -55,6 +55,8 @@ function Archivo1({ onChange, id, title, allButtons, call_id, token }) {
       .catch((error) => {
         console.log(error);
       });
+
+      
   };
 
   const downloadFile = () => {

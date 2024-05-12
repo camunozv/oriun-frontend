@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { apiRegisterAdmin } from "@/app/api/Registro/registerAdmin";
 
 // This function must be modified to send the data to the backend.
 async function createUser(name, email, password) {
@@ -147,6 +148,13 @@ function RegisterFormStudent() {
     dataToSend.append("certificate_student", newCertificateStudent);
     dataToSend.append("payment_receipt", newPaymentReceipt);
 
+    console.log(dataToSend)
+    // apiRegisterAdmin.postUserStudent({...dataToSend}).then((response) => {
+    //   alert(response.data)
+    //   console.log(response.data)
+    // }).catch((error) => {
+    //   console.log(error)
+    // })
     // reset();
   });
   return (
