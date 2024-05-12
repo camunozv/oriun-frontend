@@ -60,7 +60,6 @@ function VerPostulaciones({ params }) {
       .catch((error) => {
         console.log(error);
       });
-      
     reset();
   });
 
@@ -178,17 +177,18 @@ function VerPostulaciones({ params }) {
                 Country={application.university_country}
                 EstadoConv={application.state_documents}
                 University={application.university_name}
+
               />
             ))}
           </div>
 
-          {/*
           <div className="fixed bottom-0 right-0 p-4">
-            <button className="w-full font-semibold bg-figma_blue border-2 rounded-2xl border-figma_blue text-white py-4 px-2">
-              Ver Resultados Postulantes
-            </button>
+            
+              <button className="w-full font-semibold bg-figma_blue border-2 rounded-2xl border-figma_blue text-white py-4 px-2">
+                Ver Resultados Postulantes
+              </button>
+            
           </div>
-          */}
         </main>
       </>
     );

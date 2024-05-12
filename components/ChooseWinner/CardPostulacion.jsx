@@ -80,14 +80,16 @@ function CardPostulacion({
               </button>
             </div>
             <div className="w-full p-2">
-              <button
-                type="button"
-                className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-4"
+              <Link
+                href={`/Convocatorias/ConvocatoriasAdmin/Postulaciones/VerPostulacionDocumentos/${call_id}/${StudentId}`}
               >
-                <Link href="\Convocatorias\ConvocatoriasAdmin\Postulaciones\VerPostulacionDatos">
-                  Ver Detalles
-                </Link>
-              </button>
+                <button
+                  type="button"
+                  className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-4"
+                >
+                  Ver detalles
+                </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -27,14 +27,14 @@ export const adminApplications = {
     );
   },
 
-  // #3 
+  // #3 Implemented
   getStudentDocuments: function (call_id, student_id, token) {
     return api_instance.get(`${endpoint}/documents/${call_id}/${student_id}/`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   },
 
-  // #4
+  // #4 
   putApplicationModification: function (call_id, student_id, token) {
     return api_instance.put(
       `${endpoint}/modify/${call_id}/${student_id}/`,
@@ -67,7 +67,7 @@ export const adminApplications = {
     );
   },
 
-  // #7
+  // #7 
   getDocumentationStatus: function (call_id, student_id, token) {
     return api_instance.get(`${endpoint}/get-state/${call_id}/${student_id}/`,{
       headers: { Authorization: `Bearer ${token}` },
