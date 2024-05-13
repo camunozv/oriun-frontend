@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillFilePdf } from "react-icons/ai";
 
 function Archivo({ title, fileName, call_id, token, applicationDocuments }) {
-  // let finalLink = '';
+  
   const downloadFile = () => {
     let finalLink = applicationDocuments[fileName];
     const url = finalLink;

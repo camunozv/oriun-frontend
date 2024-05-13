@@ -8,7 +8,7 @@ import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
 import internacional from "@/constants/internacional.json";
 import { useRouter } from "next/navigation";
-import Archivo2 from "@/components/ConvsPage/Archivo_2";
+import File from "@/components/ConvsPage/File";
 
 function ModifyCallPage({ params }) {
   const { data: session, status } = useSession({
@@ -54,7 +54,7 @@ function ModifyCallPage({ params }) {
   },[])*/
 
   // Pendiente agregar protección de rutas.
-  
+
   const {
     register,
     handleSubmit,
@@ -62,37 +62,37 @@ function ModifyCallPage({ params }) {
     control,
   } = useForm();
 
-  const onSubmit = handleSubmit(() => {
-    
-    const result = {};
-    if (region === "Nacional") {
-      nacional.map((item) => {
-        result[item.id] = values[item.id];
-      });
-    } else if (region === "Internacional") {
-      internacional.map((item) => {
-        result[item.id] = values[item.id];
-      });
-    } else {
-      base.map((item) => {
-        result[item.id] = values[item.id];
-      });
-    }
-    // Validacion si todos tienen archivo
-    let documents = true;
-    Object.entries(result).map(([key, value]) => {
-      if (value == undefined) {
-        documents = false;
-      }
-    });
-    if (!documents) {
-      alert("No ha subido todos los documentos");
-      return;
-    } else {
-      router.push("/Convocatorias/ConvocatoriasEstudiante");
-    }
-    console.log(result);
-  });
+  // const onSubmit = handleSubmit(() => {
+
+  //   const result = {};
+  //   if (region === "Nacional") {
+  //     nacional.map((item) => {
+  //       result[item.id] = values[item.id];
+  //     });
+  //   } else if (region === "Internacional") {
+  //     internacional.map((item) => {
+  //       result[item.id] = values[item.id];
+  //     });
+  //   } else {
+  //     base.map((item) => {
+  //       result[item.id] = values[item.id];
+  //     });
+  //   }
+  //   // Validacion si todos tienen archivo
+  //   let documents = true;
+  //   Object.entries(result).map(([key, value]) => {
+  //     if (value == undefined) {
+  //       documents = false;
+  //     }
+  //   });
+  //   if (!documents) {
+  //     alert("No ha subido todos los documentos");
+  //     return;
+  //   } else {
+  //     router.push("/Convocatorias/ConvocatoriasEstudiante");
+  //   }
+
+  // });
 
   const [values, setValues] = useState(() => {
     if (region === "Nacional") {
@@ -117,13 +117,15 @@ function ModifyCallPage({ params }) {
         <div>
           {nacional.map((item, index) => (
             <div key={index}>
-              <Archivo2
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
-                call_id = {id}
+                call_id={id}
+                Case={5}
+                token={token}
               />
             </div>
           ))}
@@ -134,14 +136,15 @@ function ModifyCallPage({ params }) {
         <div>
           {internacional.map((item, index) => (
             <div key={index}>
-              <Archivo2
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
-                call_id = {id}
-
+                call_id={id}
+                Case={5}
+                token={token}
               />
             </div>
           ))}
@@ -152,14 +155,15 @@ function ModifyCallPage({ params }) {
         <div>
           {base.map((item, index) => (
             <div key={index}>
-              <Archivo2
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
                 onChange={(file) => handleChange(item.id, file)}
                 allButtons={item.allButtons}
-                call_id = {id}
-
+                call_id={id}
+                Case={5}
+                token={token}
               />
             </div>
           ))}
@@ -200,9 +204,7 @@ function ModifyCallPage({ params }) {
               Comentarios:
             </h1>
             <br />
-            <p className="text-2xl text-justify pl-8 pr-10">
-              {comments}
-            </p>
+            <p className="text-2xl text-justify pl-8 pr-10">{comments}</p>
             <br />
             <div
               className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
@@ -227,20 +229,7 @@ function ModifyCallPage({ params }) {
               </div>
             </div>
             <br />
-            <form onSubmit={onSubmit}>
-              <div>{regionForm()}</div>
-              <br />
-              <div>
-                <button
-                  type="submit"
-                  className={
-                    "flex transition-all items-center justify-center gap-3 border-2 rounded-xl w-full font-semibold bg-figma_blue border-figma_blue text-white py-2"
-                  }
-                >
-                  Enviar
-                </button>
-              </div>
-            </form>
+            <div>{regionForm()}</div>
           </div>
         </main>
       </>

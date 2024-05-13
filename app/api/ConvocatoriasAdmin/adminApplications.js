@@ -4,7 +4,7 @@ const endpoint = "application";
 
 export const adminApplications = {
 
-  // #1 Implemented
+  // #1 Implemented: *
   getGeneralApplications: function (
     student_id,
     call_id,
@@ -27,14 +27,14 @@ export const adminApplications = {
     );
   },
 
-  // #3 Implemented
+  // #3 Implemented: *
   getStudentDocuments: function (call_id, student_id, token) {
     return api_instance.get(`${endpoint}/documents/${call_id}/${student_id}/`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   },
 
-  // #4 Implemented
+  // #4 Implemented: *
   putApplicationModification: function (call_id, student_id, token) {
     return api_instance.put(
       `${endpoint}/modify/${call_id}/${student_id}/`,
@@ -45,7 +45,7 @@ export const adminApplications = {
     );
   },
 
-  // #5 Not found
+  // #5 Implemented: Error not found 404
   putAcceptDocuments: function (call_id, student_id, token) {
     return api_instance.put(
       `${endpoint}/accept-documents/${call_id}/${student_id}/`,
@@ -56,7 +56,7 @@ export const adminApplications = {
     );
   },
 
-  // #6 Implemented
+  // #6 Implemented: *
   postCommentApplication: function (call_id, student_id, comment, token) {
     return api_instance.post(
       `${endpoint}/add-comment/${call_id}/${student_id}/`,
@@ -67,7 +67,7 @@ export const adminApplications = {
     );
   },
 
-  // #7 Questions pending
+  // #7 Implemented: Seems to be not necessary, meeting pending.
   getDocumentationStatus: function (call_id, student_id, token) {
     return api_instance.get(`${endpoint}/get-state/${call_id}/${student_id}/`,{
       headers: { Authorization: `Bearer ${token}` },

@@ -1,5 +1,4 @@
 "use client";
-
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useForm, useFieldArray, control } from "react-hook-form";
@@ -7,14 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { apiStudentApplications } from "@/app/api/ConvocatoriasEstudiante/studentApplications";
-
-//Es donde verifico el inicio de seccion y donde coloco ruta dinaminca
-//de aucerdo al id de la convocatoria
-//tener en cuenta que debo poner aqui la verificacion del usuario si puede postularse o no segun
-//numero de convocatorias postulado menor a dos, cumplir porcentaje  de avance, papa, estar matriculado
-//obtener info del usuario para comparar con info de la convocatoria
-//Convocatorias/ConvEstudi/postulacion128384 (api)
-// Pendiente agregar protección de rutas.
 
 function Postulacionform({ params }) {
   const { data: session, status } = useSession({
@@ -28,21 +19,11 @@ function Postulacionform({ params }) {
   const id = params.lambda;
 
   const [studentElegibility, setStudentElegibility] = useState({});
-  const [initialInfo, setInitialInfo] = useState({});
   useEffect(() => {
     apiStudentApplications
       .getStudentEligibility(id, token)
       .then((response) => {
         setStudentElegibility(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    apiStudentApplications
-      .getStudentInformation(token)
-      .then((response) => {
-        setInitialInfo(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -54,18 +35,7 @@ function Postulacionform({ params }) {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({
-    // defaultValues: {
-    //   materias: [
-    //     {
-    //       codigo_unal: 0,
-    //       nombre_unal: "",
-    //       codigo_destino: 0,
-    //       nombre_destino: "",
-    //     },
-    //   ],
-    // },
-  });
+  } = useForm({});
   const { fields, append, remove } = useFieldArray({
     name: "materias",
     control,
@@ -105,31 +75,6 @@ function Postulacionform({ params }) {
     data_to_send["contact_person"] = data_contact_person;
     data_to_send["data_info_mobilitiy"] = data_info_mobility;
 
-    // if (
-    //   data_to_send.contact_person.name === "" ||
-    //   data_to_send.contact_person.last_name === "" ||
-    //   data_to_send.contact_person.email === "" ||
-    //   data_to_send.contact_person.relationship === "" ||
-    //   data_to_send.contact_person.cellphone === ""
-    // ) {
-    //   alert("Toda la información de contacto debe llenarse.");
-    //   delete data_to_send.contact_person;
-    // }
-
-    // if (
-    //   data_to_send.data_info_mobilitiy.fecha_de_inicio === "" ||
-    //   data_to_send.data_info_mobilitiy.fecha_de_fin === "" ||
-    //   data_to_send.data_info_mobilitiy.nombre_contacto_destino === "" ||
-    //   data_to_send.data_info_mobilitiy.telefono_contacto === "" ||
-    //   data_to_send.data_info_mobilitiy.facultad === "" ||
-    //   data_to_send.data_info_mobilitiy.programa === "" ||
-    //   data_to_send.data_info_mobilitiy.cargo_contacto_destino === "" ||
-    //   data_to_send.data_info_mobilitiy.email_contacto === ""
-    // ) {
-    //   alert("Toda la información de movilidad debe llenarse.");
-    //   delete data_to_send.data_info_mobilitiy;
-    // }
-
     if (data_to_send.materias.length === 0) {
       delete data_to_send.materias;
     }
@@ -157,13 +102,6 @@ function Postulacionform({ params }) {
       .catch((error) => {
         console.log(error);
       });
-
-    /**
-     * POST DATA WITH ENDPOINT 4
-     *
-     * code here
-     *  ...
-     */
 
     // router.push(
     //   `/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos/${id}`

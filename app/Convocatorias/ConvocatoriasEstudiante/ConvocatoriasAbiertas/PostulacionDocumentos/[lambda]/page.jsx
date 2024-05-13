@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import Archivo1 from "../../../../../../components/ConvsPage/Archivo_1";
+import File from "../../../../../../components/ConvsPage/File";
 import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
 import internacional from "@/constants/internacional.json";
@@ -36,10 +36,6 @@ function PostulacionDocumentos({ params }) {
         console.log(error);
       });
   }, [token]);
-
-  // PENDIENTE:
-  // 1. Agregar proteccion de ruta *
-  // 2. Fetch de la región de la convocatoria. *
 
   const {
     register,
@@ -77,14 +73,13 @@ function PostulacionDocumentos({ params }) {
       apiStudentApplications
         .postApplication(id, is_extension, token)
         .then((response) => {
-          console.log(response.data);
+          alert(response.data.message);
         })
         .catch((error) => {
           console.log(error);
         });
-      // router.push("/Convocatorias/ConvocatoriasEstudiante");
+      router.push("/Convocatorias/ConvocatoriasEstudiante");
     }
-    console.log(result);
   });
 
   const [values, setValues] = useState(() => {
@@ -110,7 +105,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {nacional.map((item, index) => (
             <div key={index}>
-              <Archivo1
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
@@ -118,6 +113,7 @@ function PostulacionDocumentos({ params }) {
                 allButtons={item.allButtons}
                 call_id={id}
                 token={token}
+                Case={4}
               />
             </div>
           ))}
@@ -128,7 +124,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {internacional.map((item, index) => (
             <div key={index}>
-              <Archivo1
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
@@ -136,6 +132,7 @@ function PostulacionDocumentos({ params }) {
                 allButtons={item.allButtons}
                 call_id={id}
                 token={token}
+                Case={4}
               />
             </div>
           ))}
@@ -146,7 +143,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {base.map((item, index) => (
             <div key={index}>
-              <Archivo1
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
@@ -154,6 +151,7 @@ function PostulacionDocumentos({ params }) {
                 allButtons={item.allButtons}
                 call_id={id}
                 token={token}
+                Case={4}
               />
             </div>
           ))}
@@ -186,7 +184,7 @@ function PostulacionDocumentos({ params }) {
           Por favor cuando este seguro que su documento está correcto y
           corresponde a la casilla correspondiente, dele click en Subir para que
           se guarden. Una vez todos los documentos estén cargados, de click en
-          enviar.
+          enviar para guardar su postulación.
         </p>
         <br />
         <div
