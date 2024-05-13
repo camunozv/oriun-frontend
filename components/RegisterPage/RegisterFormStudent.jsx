@@ -35,13 +35,6 @@ function RegisterFormStudent() {
     reset,
     resetField,
   } = useForm();
-  // register: allows targetting form inputs.
-  // formState: allows accessing the current state of the form, and while changing we can check if the input is correct
-  // or not, this is useful in order to make validations.
-  // also it is worthwhile knowing that the register allows us to use html standard funcitionality such as required
-  // errors: allows us accessing information thrown by the errors caused because of the required condition stablished
-  // within the tags.
-  // watch: allows us bringing the current state.
 
   const [certificateGrades, setCertificateGrades] = useState();
   const [certificateStudent, setCertificateStudent] = useState();
@@ -111,43 +104,6 @@ function RegisterFormStudent() {
 
   const mySubmit = handleSubmit((data) => {
     alert("Registrando usuario...");
-    // API post data_b
-
-    // const axios = require("axios");
-    // const FormData = require("form-data");
-    // const fs = require("fs");
-    // let dataToSend = new FormData();
-    // dataToSend.append("email", data.email);
-    // dataToSend.append("password", data.password);
-    // dataToSend.append("id", data.id);
-    // dataToSend.append("first_name", data.first_name);
-    // dataToSend.append("last_name", data.last_name);
-    // dataToSend.append("type_document", data.type_document);
-    // dataToSend.append("birth_place", data.birth_place);
-    // dataToSend.append("birth_date", data.birth_date);
-    // dataToSend.append("country", data.country);
-    // dataToSend.append("city", data.city);
-    // dataToSend.append("phone", data.phone);
-    // dataToSend.append("address", data.address);
-    // dataToSend.append("sex", data.sex);
-    // dataToSend.append("ethnicity", data.ethnicity);
-    // dataToSend.append("headquarter", data.headquarter);
-    // dataToSend.append("PAPA", data.PAPA);
-    // dataToSend.append("PBM", data.PBM);
-    // dataToSend.append("advance", data.advance);
-    // dataToSend.append("is_enrolled", data.is_enrolled);
-    // dataToSend.append("num_semesters", data.num_semesters);
-    // dataToSend.append("diseases", data.diseases);
-    // dataToSend.append("medication", data.medication);
-    // dataToSend.append("faculty", data.faculty);
-    // dataToSend.append("major", data.major);
-    // dataToSend.append("admission", data.admission);
-    // dataToSend.append("study_level", data.study_level);
-    // dataToSend.append("certificate_grades", newCertificateGrades);
-    // dataToSend.append("certificate_student", newCertificateStudent);
-    // dataToSend.append("payment_receipt", newPaymentReceipt);
-
-    // console.log(dataToSend)
 
     data.certificate_grades = newCertificateGrades;
     data.certificate_student = newCertificateStudent;
@@ -184,18 +140,19 @@ function RegisterFormStudent() {
         data.major,
         data.admission,
         data.study_level,
-        data.certificateGrades,
+        data.certificate_grades,
         data.certificate_student,
         data.payment_receipt
       )
       .then((response) => {
-        alert(response.data);
+        alert(response.data.mensaje);
         console.log(response.data);
       })
       .catch((error) => {
+        alert(error.response.data.Error)
         console.log(error);
       });
-    // reset();
+    reset();
   });
   return (
     <form
@@ -746,8 +703,8 @@ function RegisterFormStudent() {
             {...register("is_enrolled", { required: true })}
           >
             <option value="">Selección...</option>
-            <option value="true">Si</option>
-            <option value="false">No</option>
+            <option value="True">Si</option>
+            <option value="False">No</option>
           </select>
 
           {errors.is_enrolled && (

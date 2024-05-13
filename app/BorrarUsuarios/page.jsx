@@ -28,6 +28,7 @@ function DeleteUsers() {
       apiRegisterAdmin
         .deleteUserStudent(data.id, token)
         .then((response) => {
+            alert(response.data.message);
           console.log(response.data);
         })
         .catch((error) => {
@@ -37,6 +38,7 @@ function DeleteUsers() {
       apiRegisterAdmin
         .deleteUserEmployee(data.id, token)
         .then((response) => {
+            alert(response.data.message);
           console.log(response.data);
         })
         .catch((error) => {
