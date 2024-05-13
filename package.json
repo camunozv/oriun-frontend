@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "start2": "npm run dev"
   },
   "dependencies": {
     "axios": "^1.6.8",
