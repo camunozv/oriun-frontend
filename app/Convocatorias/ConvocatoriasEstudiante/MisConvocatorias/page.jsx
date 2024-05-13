@@ -2,7 +2,7 @@
 import { apiStudentApplications } from "@/app/api/ConvocatoriasEstudiante/studentApplications";
 import ApplicationCard from "@/components/MyCallsPage/ApplicationCard";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 /* getAllStudentApplications

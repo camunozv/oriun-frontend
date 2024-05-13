@@ -16,11 +16,7 @@ async function ConvocatoriasEstudiantePage() {
           ¡Bienvenido querido Estudiante!
         </h1>
         <h2 className="text-[20px]">
-          Por favor, para usar nuestra aplicacción haga click en el módulo que
-          sea de su interés.
-        </h2>
-        <h2 className="text-[20px]">
-          El módulo de mis convocatorias aún se encuentra en desarrollo.
+          Click en los links de arriba para usar la aplicación.
         </h2>
       </main>
     );

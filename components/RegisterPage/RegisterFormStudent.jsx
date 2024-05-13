@@ -195,41 +195,7 @@ function RegisterFormStudent() {
       .catch((error) => {
         console.log(error);
       });
-    reset();
-
-    /**
-     * email,
-    password,
-    verif_code,
-    id,
-    first_name,
-    last_name,
-    type_document,
-    birth_place,
-    birth_date,
-    country,
-    city,
-    phone,
-    address,
-    sex,
-    ethnicity,
-    headquarter,
-    PAPA,
-    PBM,
-    advance,
-    is_enrolled,
-    num_semesters,
-    diseases,
-    medication,
-    faculty,
-    major,
-    admission,
-    study_level,
-    certificate_grades,
-    certificate_student,
-    payment_receipt
-     * 
-     */
+    // reset();
   });
   return (
     <form
@@ -754,10 +720,10 @@ function RegisterFormStudent() {
                 value: true,
                 message: "Avance es requerido",
               },
-              pattern: {
-                value: /^(?:100|\d{1,2}|0)$/,
-                message: "El avance debe ser un número entero entre 0 y 100.",
-              },
+              // pattern: {
+              //   value: /^(?:100|\d{1,2}|0)$/,
+              //   message: "El avance debe ser un número entero entre 0 y 100.",
+              // },
             })}
           ></input>
 

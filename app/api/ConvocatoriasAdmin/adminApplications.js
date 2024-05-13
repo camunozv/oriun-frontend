@@ -45,7 +45,7 @@ export const adminApplications = {
     );
   },
 
-  // #5 Implemented: Error not found 404
+  // #5 Implemented: *
   putAcceptDocuments: function (call_id, student_id, token) {
     return api_instance.put(
       `${endpoint}/accept-documents/${call_id}/${student_id}/`,

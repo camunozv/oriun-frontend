@@ -71,6 +71,7 @@ function VerPostulacionDocumentos({ params }) {
     adminApplications
       .putAcceptDocuments(callId, studentId, token)
       .then((response) => {
+        alert("Documents approved.");
         console.log(response.data);
       })
       .catch((error) => {

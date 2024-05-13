@@ -142,7 +142,7 @@ export const apiStudentApplications = {
     });
   },
 
-  // Implemented: Error in the backend.
+  // Implemented: *
   putDocumentModification: function (call, document, name_file, token) {
     return api_instance.put(
       `${endpoint_1}/edit/`,
