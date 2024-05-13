@@ -71,30 +71,28 @@ function ConvocatoriasGeneralAdminPage() {
       call_language: call_language,
     };
 
-    let data_b = {};
-
     for (const [key, value] of Object.entries(data)) {
-      if (value !== "") {
-        data_b[key] = value;
+      if (value === "") {
+        data[key] = null;
       }
     }
 
-    let data_c = JSON.stringify(data_b);
-
-    let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: `${BASE_URL}call/api/employee_filter/`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      data: data_c,
-    };
-
-    if (!data_b.call_call_id) {
-      axios
-        .request(config)
+    if (!data.call_call_id) {
+      apiAdminFilterCalls
+        .getAdminFilterCalls(
+          data.call_active,
+          data.call_university_id,
+          data.call_university_name,
+          data.call_deadline,
+          data.call_format,
+          data.call_study_level,
+          data.call_year,
+          data.call_semester,
+          data.call_region,
+          data.call_country,
+          data.call_language,
+          token
+        )
         .then((response) => {
           set_my_calls(response.data);
           console.log(response.data);

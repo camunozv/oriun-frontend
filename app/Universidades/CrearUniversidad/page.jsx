@@ -38,12 +38,12 @@ function CreateUniversitiesPage() {
         token
       )
       .then((response) => {
-        alert(response.data);
+        alert(response.data.mensaje);
       })
       .catch((error) => {
         console.log(error);
       });
-    // reset();
+    reset();
   });
 
   if (!session) {
