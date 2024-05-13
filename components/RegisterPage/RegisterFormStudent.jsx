@@ -101,61 +101,135 @@ function RegisterFormStudent() {
     }
   };
 
-  const substringToRemove = 'data:application/pdf;base64,';
-  let newCertificateGrades = certificateGrades?.replace(substringToRemove,'');
-  let newCertificateStudent = certificateStudent?.replace(substringToRemove,'');
-  let newPaymentReceipt = paymentReceipt?.replace(substringToRemove,'');
-
-  console.log(newCertificateGrades, "grade_certificate");
-  console.log(newCertificateStudent, "student_certificate");
-  console.log(newPaymentReceipt, "newnewPaymentReceipt");
+  const substringToRemove = "data:application/pdf;base64,";
+  let newCertificateGrades = certificateGrades?.replace(substringToRemove, "");
+  let newCertificateStudent = certificateStudent?.replace(
+    substringToRemove,
+    ""
+  );
+  let newPaymentReceipt = paymentReceipt?.replace(substringToRemove, "");
 
   const mySubmit = handleSubmit((data) => {
-    alert("Enviando datos...");
+    alert("Registrando usuario...");
     // API post data_b
 
-    const axios = require("axios");
-    const FormData = require("form-data");
+    // const axios = require("axios");
+    // const FormData = require("form-data");
     // const fs = require("fs");
-    let dataToSend = new FormData();
-    dataToSend.append("email", data.email);
-    dataToSend.append("password", data.password);
-    dataToSend.append("id", data.id);
-    dataToSend.append("first_name", data.first_name);
-    dataToSend.append("last_name", data.last_name);
-    dataToSend.append("type_document", data.type_document);
-    dataToSend.append("birth_place", data.birth_place);
-    dataToSend.append("birth_date", data.birth_date);
-    dataToSend.append("country", data.country);
-    dataToSend.append("city", data.city);
-    dataToSend.append("phone", data.phone);
-    dataToSend.append("address", data.address);
-    dataToSend.append("sex", data.sex);
-    dataToSend.append("ethnicity", data.ethnicity);
-    dataToSend.append("headquarter", data.headquarter);
-    dataToSend.append("PAPA", data.PAPA);
-    dataToSend.append("PBM", data.PBM);
-    dataToSend.append("advance", data.advance);
-    dataToSend.append("is_enrolled", data.is_enrolled);
-    dataToSend.append("num_semesters", data.num_semesters);
-    dataToSend.append("diseases", data.diseases);
-    dataToSend.append("medication", data.medication);
-    dataToSend.append("faculty", data.faculty);
-    dataToSend.append("major", data.major);
-    dataToSend.append("admission", data.admission);
-    dataToSend.append("study_level", data.study_level);
-    dataToSend.append("certificate_grades", newCertificateGrades);
-    dataToSend.append("certificate_student", newCertificateStudent);
-    dataToSend.append("payment_receipt", newPaymentReceipt);
+    // let dataToSend = new FormData();
+    // dataToSend.append("email", data.email);
+    // dataToSend.append("password", data.password);
+    // dataToSend.append("id", data.id);
+    // dataToSend.append("first_name", data.first_name);
+    // dataToSend.append("last_name", data.last_name);
+    // dataToSend.append("type_document", data.type_document);
+    // dataToSend.append("birth_place", data.birth_place);
+    // dataToSend.append("birth_date", data.birth_date);
+    // dataToSend.append("country", data.country);
+    // dataToSend.append("city", data.city);
+    // dataToSend.append("phone", data.phone);
+    // dataToSend.append("address", data.address);
+    // dataToSend.append("sex", data.sex);
+    // dataToSend.append("ethnicity", data.ethnicity);
+    // dataToSend.append("headquarter", data.headquarter);
+    // dataToSend.append("PAPA", data.PAPA);
+    // dataToSend.append("PBM", data.PBM);
+    // dataToSend.append("advance", data.advance);
+    // dataToSend.append("is_enrolled", data.is_enrolled);
+    // dataToSend.append("num_semesters", data.num_semesters);
+    // dataToSend.append("diseases", data.diseases);
+    // dataToSend.append("medication", data.medication);
+    // dataToSend.append("faculty", data.faculty);
+    // dataToSend.append("major", data.major);
+    // dataToSend.append("admission", data.admission);
+    // dataToSend.append("study_level", data.study_level);
+    // dataToSend.append("certificate_grades", newCertificateGrades);
+    // dataToSend.append("certificate_student", newCertificateStudent);
+    // dataToSend.append("payment_receipt", newPaymentReceipt);
 
-    console.log(dataToSend)
-    // apiRegisterAdmin.postUserStudent({...dataToSend}).then((response) => {
-    //   alert(response.data)
-    //   console.log(response.data)
-    // }).catch((error) => {
-    //   console.log(error)
-    // })
-    // reset();
+    // console.log(dataToSend)
+
+    data.certificate_grades = newCertificateGrades;
+    data.certificate_student = newCertificateStudent;
+    data.payment_receipt = newPaymentReceipt;
+
+    console.log(data);
+
+    apiRegisterAdmin
+      .postUserStudent(
+        data.email,
+        data.password,
+        data.verif_code,
+        data.id,
+        data.first_name,
+        data.last_name,
+        data.type_document,
+        data.birth_place,
+        data.birth_date,
+        data.country,
+        data.city,
+        data.phone,
+        data.address,
+        data.sex,
+        data.ethnicity,
+        data.headquarter,
+        data.PAPA,
+        data.PBM,
+        data.advance,
+        data.is_enrolled,
+        data.num_semesters,
+        data.diseases,
+        data.medication,
+        data.faculty,
+        data.major,
+        data.admission,
+        data.study_level,
+        data.certificateGrades,
+        data.certificate_student,
+        data.payment_receipt
+      )
+      .then((response) => {
+        alert(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    reset();
+
+    /**
+     * email,
+    password,
+    verif_code,
+    id,
+    first_name,
+    last_name,
+    type_document,
+    birth_place,
+    birth_date,
+    country,
+    city,
+    phone,
+    address,
+    sex,
+    ethnicity,
+    headquarter,
+    PAPA,
+    PBM,
+    advance,
+    is_enrolled,
+    num_semesters,
+    diseases,
+    medication,
+    faculty,
+    major,
+    admission,
+    study_level,
+    certificate_grades,
+    certificate_student,
+    payment_receipt
+     * 
+     */
   });
   return (
     <form
@@ -316,10 +390,10 @@ function RegisterFormStudent() {
                 value: true,
                 message: "El código de verificación es requerido.",
               },
-              pattern: {
-                value: /^[0-9]+$/i,
-                message: "El código de verificación debe ser un número.",
-              },
+              // pattern: {
+              //   value: /^[A-Za-z]+$/i,
+              //   message: "El código de verificación debe tener solo letras.",
+              // },
             })}
           ></input>
 

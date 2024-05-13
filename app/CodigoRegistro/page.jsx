@@ -13,12 +13,10 @@ function RegisterCodePage() {
   } = useForm();
 
   const mySubmit = handleSubmit((data) => {
-    console.log(data);
-
     apiVerificationCode
       .requestVerificationCode(data.id, data.email)
       .then((response) => {
-        alert(response.data);
+        alert(response.data.mensaje);
       })
       .catch((error) => {
         console.log(error);
