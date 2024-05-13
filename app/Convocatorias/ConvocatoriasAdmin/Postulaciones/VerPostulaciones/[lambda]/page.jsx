@@ -62,8 +62,6 @@ function VerPostulaciones({ params }) {
     reset();
   });
 
-  let Key = 0;
-
   if (!session) {
     return <div>{status} ...</div>;
   } else if (user_type === "student") {

@@ -26,7 +26,7 @@ function CardPostulacion({
     case "Documentos aprobados":
       imagenSrc = "/images/CirculoVerde.png";
       break;
-    case "Modificación realizada":
+    case "Modificado por estudiante":
       imagenSrc = "/images/CampanaRoja.png";
       break;
     default:

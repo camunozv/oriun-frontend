@@ -15,7 +15,7 @@ function VerPostulacionDocumentos({ params }) {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/Convocatorias");
+      redirect("/api/auth/signin");
     },
   });
   const token = session?.access;
@@ -31,7 +31,7 @@ function VerPostulacionDocumentos({ params }) {
       .getStudentDocuments(callId, studentId, token)
       .then((response) => {
         setApplicationData(response.data);
-        console.log(response.data);
+        
       })
       .catch((error) => {
         console.log(error);
@@ -41,7 +41,7 @@ function VerPostulacionDocumentos({ params }) {
       .getRegionFromCall(callId, token)
       .then((response) => {
         setRegion(response.data.region);
-        console.log(response.data);
+        
       })
       .catch((error) => {
         console.log(error);

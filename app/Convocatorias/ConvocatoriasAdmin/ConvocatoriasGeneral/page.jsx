@@ -6,8 +6,6 @@ import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { apiAdminFilterCalls } from "@/app/api/ConvocatoriasAdmin/adminFilterCalls";
 import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
-import axios from "axios";
-import { BASE_URL } from "@/app/api/base.api";
 
 function ConvocatoriasGeneralAdminPage() {
   const { data: session, status } = useSession({
@@ -19,7 +17,7 @@ function ConvocatoriasGeneralAdminPage() {
   const [my_calls, set_my_calls] = useState([]);
   const token = session?.access;
   const user_type = session?.type_user;
-  // When the page charges, we will see all the opened calls with this use effect
+  
   useEffect(() => {
     apiAdminCalls
       .getAdminAllCalls(token)
@@ -95,7 +93,6 @@ function ConvocatoriasGeneralAdminPage() {
         )
         .then((response) => {
           set_my_calls(response.data);
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
