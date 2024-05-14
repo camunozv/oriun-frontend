@@ -19,10 +19,10 @@ function ApplicationCard({
 
   if (finalState === 0) {
     finalState = "Sin revisar";
-  } else if (finalState == 1) {
+  } else if (finalState === 1) {
     finalState = "No aprobados";
   } else {
-    finalState = "Aprovados";
+    finalState = "Aprobados";
   }
 
   return (
