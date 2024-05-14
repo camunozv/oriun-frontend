@@ -6,8 +6,6 @@ import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { apiAdminFilterCalls } from "@/app/api/ConvocatoriasAdmin/adminFilterCalls";
 import { apiAdminCalls } from "@/app/api/ConvocatoriasAdmin/adminGeneralCalls";
-import axios from "axios";
-import { BASE_URL } from "@/app/api/base.api";
 
 function ConvocatoriasGeneralAdminPage() {
   const { data: session, status } = useSession({
@@ -18,13 +16,12 @@ function ConvocatoriasGeneralAdminPage() {
   });
   const [my_calls, set_my_calls] = useState([]);
   const token = session?.access;
-
-  // When the page charges, we will see all the opened calls with this use effect
+  const user_type = session?.type_user;
+  
   useEffect(() => {
     apiAdminCalls
       .getAdminAllCalls(token)
       .then((response) => set_my_calls(response.data))
-      .then(() => console.log(my_calls))
       .catch((error) => console.log(error));
   }, [token]);
 
@@ -41,7 +38,7 @@ function ConvocatoriasGeneralAdminPage() {
   const country = useRef();
   const language = useRef();
 
-  function handleFilterSumbit(event) {
+  const handleFilterSumbit = (event) => {
     event.preventDefault();
 
     const call_call_id = call_id.current.value;
@@ -69,41 +66,48 @@ function ConvocatoriasGeneralAdminPage() {
       call_semester: call_semester,
       call_region: call_region,
       call_country: call_country,
-      call_language: call_language
+      call_language: call_language,
     };
 
-    let data_b = {};
-
     for (const [key, value] of Object.entries(data)) {
-      if (value !== "") {
-        data_b[key] = value;
+      if (value === "") {
+        data[key] = null;
       }
     }
 
-    let data_c = JSON.stringify(data_b);
-
-    let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: `${BASE_URL}call/api/employee_filter/`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      data: data_c,
-    };
-
-    axios
-      .request(config)
-      .then((response) => {
-        set_my_calls(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    
-  }
+    if (!data.call_call_id) {
+      apiAdminFilterCalls
+        .getAdminFilterCalls(
+          data.call_active,
+          data.call_university_id,
+          data.call_university_name,
+          data.call_deadline,
+          data.call_format,
+          data.call_study_level,
+          data.call_year,
+          data.call_semester,
+          data.call_region,
+          data.call_country,
+          data.call_language,
+          token
+        )
+        .then((response) => {
+          set_my_calls(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      apiAdminFilterCalls
+        .getAdminFilterCallById(data.call_call_id, token)
+        .then((response) => {
+          set_my_calls([response.data]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   if (!token) {
     return (
@@ -111,6 +115,8 @@ function ConvocatoriasGeneralAdminPage() {
         {status}...
       </main>
     );
+  } else if (user_type === "student") {
+    redirect("/Convocatorias");
   } else {
     return (
       <>

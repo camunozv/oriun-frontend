@@ -7,7 +7,7 @@ function ActualizarConvocatoria({ params }) {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect('/api/auth/signin')
+      redirect("/api/auth/signin");
     },
   });
 
@@ -17,12 +17,17 @@ function ActualizarConvocatoria({ params }) {
 
   const token = session.access;
   const id = params.ActualizarConvocatoria;
+  const user_type = session.type_user;
 
-  return (
-    <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-      <UpdateConvocatoria id={id} token={token} />
-    </main>
-  );
+  if (user_type === "student") {
+    redirect("/Convocatorias");
+  } else {
+    return (
+      <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        <UpdateConvocatoria id={id} token={token} />
+      </main>
+    );
+  }
 }
 
 export default ActualizarConvocatoria;

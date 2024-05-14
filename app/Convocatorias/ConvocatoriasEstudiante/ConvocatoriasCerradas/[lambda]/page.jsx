@@ -16,6 +16,7 @@ function ConvocatoriasCerradasDetailsPage({ params }) {
   });
 
   const token = session?.access;
+  const user_type = session?.type_user;
   const id = params.lambda;
   const [call, set_call] = useState({});
 
@@ -32,6 +33,8 @@ function ConvocatoriasCerradasDetailsPage({ params }) {
         {status}...
       </main>
     );
+  } else if (user_type === "employee") {
+    redirect("/Convocatorias");
   } else {
     return (
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">

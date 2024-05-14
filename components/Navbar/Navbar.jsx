@@ -1,9 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import { LINKS_ESTUDIANTE } from "@/constants";
-import Button from "../Button/Button";
-import { FaUser } from "react-icons/fa";
-import { AiOutlineMenu } from "react-icons/ai";
+import { signIn } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 function Navbar() {
   // NOTES:
@@ -74,39 +72,27 @@ function Navbar() {
   return (
     <nav
       className="flex items-center justify-between mx-auto max-w-[1580px]
-    px-6 lg:px-20 3xl:px-0 z-30 py-5 border-2 border-red-500"
+    px-6 lg:px-20 3xl:px-0 z-30 py-5 rounded-lg shadow-lg"
     >
-      <Link href="/" className="pl-6">
-        <h1 className="text-black font-bold text-[60px]">ORIUN</h1>
-      </Link>
+      <h1 className="text-black font-bold text-[60px] pl-4">ORIUN</h1>
 
-      <ul className="hidden h-full gap-12 lg:flex">
-        {LINKS_ESTUDIANTE.map((link) => (
-          <Link
-            href={link.href}
-            key={link.key}
-            className="flex items-center justify-center text-[16px] font-[400]
-            hover:font-bold cursor-pointer pb-1.5 transition-all"
-          >
-            {link.label}
-          </Link>
-        ))}
-      </ul>
-
-      <div className="lg:flex lg:justify-center lg:items-center hidden">
-        <Link href="/Ingreso">
-          <Button
-            title="Login"
+      <div className="flex items-center gap-3 w-80 pr-4">
+        <button
+          type="button"
+          className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+          onClick={signIn}
+        >
+          Ingresar
+        </button>
+        <Link href="/CodigoRegistro" className="w-full">
+          <button
             type="button"
-            variant="bg-green-90 px-8 py-4 text-white hover:bg-black"
-            
+            className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue hover:text-white hover:bg-figma_blue py-2"
           >
-            <FaUser className="transition-all" />
-          </Button>
+            Registrate
+          </button>
         </Link>
       </div>
-
-      <AiOutlineMenu className="h-[32px] w-[32px] lg:hidden inline-block cursor-pointer" />
     </nav>
   );
 }

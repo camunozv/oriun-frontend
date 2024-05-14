@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+
 import Link from "next/link";
 
 function CardConvocatorias({
@@ -99,7 +99,7 @@ function CardConvocatorias({
             </Link>
           </div>
           <div className="w-full p-2">
-            <Link href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/postulacion/postulacionfor`}>
+            <Link href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/Postulation/${id}`}>
               <button
                 type="button"
                 className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"

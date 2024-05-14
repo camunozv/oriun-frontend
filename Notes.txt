@@ -4,6 +4,70 @@ npm run dev
 Para detener el proyecto basta con presionar Ctrl + c, y adicionalmente la letra S.
 
 
+Perfiles Para acceder rapidamente:
+
+Estudiante:
+valentina.rodriguez@unal.edu.co
+TestPassword
+
+santiago.garcia@unal.edu.co
+Password123
+
+
+
+Empleado:
+maria.alvarez@unal.edu.co
+Maria#1234
+
+juan.garcia@unal.edu.co
+JuanGa2024
+
+
+
+Comando a usar para hacer el push: 
+git push origin development:Developmentcloud
+
+Estructura del push:
+git push <nombre_remoto> <rama_local>:<rama_remota>
+
+
+Comando a usar para hacer pull del repositorio principal de la rama Developmentcloud
+/*
+Para sincronizar tu rama developmentCloud con la rama development del repositorio principal, puedes seguir estos pasos:
+
+Asegúrate de que estás en tu rama developmentCloud. Puedes verificarlo ejecutando el comando git branch.
+Agrega el repositorio principal como un nuevo "remoto" en tu repositorio local si aún no lo has hecho. Puedes hacerlo ejecutando el siguiente comando:
+
+
+git remote add upstream <url-del-repositorio-principal>
+
+
+Reemplaza <url-del-repositorio-principal> con la URL del repositorio principal del cual hiciste el fork.
+
+
+Obtén los últimos cambios de la rama development del repositorio principal ejecutando el siguiente comando:
+
+
+git fetch upstream development
+
+
+Una vez que hayas obtenido los últimos cambios, puedes fusionarlos en tu rama developmentCloud usando el comando git merge. Si estás seguro de que no tienes cambios locales sin confirmar, puedes hacerlo directamente:
+
+
+git merge upstream/development
+
+
+Si tienes cambios locales sin confirmar, es posible que desees confirmarlos primero antes de fusionar los cambios del repositorio principal.
+Después de fusionar los cambios, es posible que necesites resolver conflictos si los hay. Git te guiará a través de este proceso.
+Finalmente, después de resolver cualquier conflicto y completar la fusión, puedes enviar los cambios a tu repositorio en GitHub ejecutando:
+
+
+git push origin developmentCloud
+
+
+Con estos pasos, habrás actualizado tu rama developmentCloud con los cambios de la rama development del repositorio principal.
+
+*/
 
 Hello, this are some notes of the HTML-CSS-COURSE
 

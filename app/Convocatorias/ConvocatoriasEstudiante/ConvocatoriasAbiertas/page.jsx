@@ -1,6 +1,6 @@
 "use client"; // MODULE COMPLETED
 // Main dependencies
-import React from "react";
+import React, { useEffect } from "react";
 import { redirect } from "next/navigation";
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -18,6 +18,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
   });
 
   const token = session?.access;
+  const user_type = session?.type_user;
 
   const [available_calls, set_available_calls] = useState([]);
   const convocatoria_pais = useRef();
@@ -50,12 +51,25 @@ function ConvocatoriasAbiertasEstudiantePage() {
     }
   }
 
+  useEffect(() => {
+    apiFilterOpenCalls
+      .getFilterOpenCalls(null, null, null, token)
+      .then((response) => {
+        set_available_calls(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
+
   if (!token) {
     return (
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         {status}...
       </main>
     );
+  } else if (user_type === "employee") {
+    redirect("/Convocatorias");
   } else {
     return (
       <>

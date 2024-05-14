@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { redirect } from "next/navigation";
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 import { useRef, useState } from "react";
@@ -17,6 +17,7 @@ function ConvocatoriasCerradasEstudiantePage() {
   const [my_calls, set_my_calls] = useState([]);
 
   const token = session?.access;
+  const user_type = session?.type_user;
   const convocatoria_pais = useRef();
   const convocatoria_idioma = useRef();
   const convocatoria_universidad = useRef();
@@ -48,12 +49,25 @@ function ConvocatoriasCerradasEstudiantePage() {
     }
   }
 
+  useEffect(() => {
+    apiFilterClosedCalls
+      .getFilterClosedCalls(null, null, null, token)
+      .then((response) => {
+        set_my_calls(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
+
   if (!token) {
     return (
       <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
         {status}...
       </main>
     );
+  } else if (user_type === "employee") {
+    redirect("/Convocatorias");
   } else {
     return (
       <>
@@ -111,7 +125,7 @@ function ConvocatoriasCerradasEstudiantePage() {
           <div className="grid grid-cols-3 w-full gap-6">
             {my_calls?.map((call) => (
               <CardConvocatorias
-                key = {call.id}
+                key={call.id}
                 id={call.id}
                 admin={false}
                 university_name={call.university_name}

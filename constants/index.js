@@ -10,7 +10,7 @@ export const LINKS_ESTUDIANTE = [
     label: "Convocatorias Cerradas",
   },
   {
-    href: "/MisConvocatorias",
+    href: "/Convocatorias/ConvocatoriasEstudiante/MisConvocatorias",
     key: "mis_convocatorias",
     label: "Mis Convocatorias",
   },
@@ -33,6 +33,11 @@ export const LINKS_ADMIN = [
     href: "/Convocatorias/ConvocatoriasAdmin/CrearConvocatoria",
     key: "crear_convocatorias",
     label: "Crear Convocatorias",
+  },
+  {
+    href: "/Universidades",
+    key: "universidades",
+    label: "Universidades",
   },
   {
     href: "/PreguntasFrecuentes",
