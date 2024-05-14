@@ -31,7 +31,6 @@ function VerPostulacionDocumentos({ params }) {
       .getStudentDocuments(callId, studentId, token)
       .then((response) => {
         setApplicationData(response.data);
-        
       })
       .catch((error) => {
         console.log(error);
@@ -41,7 +40,6 @@ function VerPostulacionDocumentos({ params }) {
       .getRegionFromCall(callId, token)
       .then((response) => {
         setRegion(response.data.region);
-        
       })
       .catch((error) => {
         console.log(error);
@@ -49,10 +47,7 @@ function VerPostulacionDocumentos({ params }) {
   }, [token]);
 
   const {
-    register,
-    handleSubmit,
     formState: { errors },
-    control,
   } = useForm();
 
   const handleAskModification = () => {
@@ -165,11 +160,12 @@ function VerPostulacionDocumentos({ params }) {
     return (
       <div className="p-8">
         <h1 className="text-black font-bold text-[35px]">
-          Documentos de la Postulación
+          Documentos para la convocatoria No. {callId}
         </h1>
         <br />
         <p className="text-2xl text-justify pl-8 pr-10">
           A continuacion se encuentran los documentos enviados por el estudiante
+          con número de coumento <p className="underline">{studentId}</p>
           para postularse a esta convocatoria.
         </p>
         <br />
@@ -180,12 +176,11 @@ function VerPostulacionDocumentos({ params }) {
           notificar al estudiante y para realizar las correciones necesarias.
         </p>
         <br />
-
         <div>
           <div>{regionForm()}</div>
           <br />
           <h1 className="text-2xl font-bold text-center">
-            A continuación, asigne el estado de esta Postulación
+            A continuación, asigne el estado de esta Postulación.
           </h1>
           <br />
           <div className="flex">

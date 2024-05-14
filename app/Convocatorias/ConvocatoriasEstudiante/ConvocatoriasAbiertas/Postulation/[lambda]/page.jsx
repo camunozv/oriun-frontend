@@ -1,9 +1,8 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useForm, useFieldArray, control } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { apiStudentApplications } from "@/app/api/ConvocatoriasEstudiante/studentApplications";
 
@@ -35,7 +34,8 @@ function Postulacionform({ params }) {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({});
+    reset,
+  } = useForm();
   const { fields, append, remove } = useFieldArray({
     name: "materias",
     control,
@@ -45,7 +45,6 @@ function Postulacionform({ params }) {
     let data_to_send = {};
     let data_contact_person = {};
     let data_info_mobility = {};
-    // console.log(data, "hola");
 
     for (const [key, value] of Object.entries(data)) {
       if (
@@ -103,15 +102,8 @@ function Postulacionform({ params }) {
         console.log(error);
       });
 
-    // router.push(
-    //   `/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/PostulacionDocumentos/${id}`
-    // );
+    reset();
   });
-
-  // Falta agregar el endpoint que revisa si el estudiante puede postularse o no;
-  // Se hace haciendo una petición y protegiendo la ruta.
-
-  // Falta agregar el endpoint que llena automáticamente los campos que el usuario ya haya llenado: en vez de implementar eso
 
   if (!session) {
     return <div>{status}...</div>;
@@ -123,13 +115,14 @@ function Postulacionform({ params }) {
       <form onSubmit={mySubmit}>
         <div className="p-10">
           <h1 className="px-6 text-black font-bold text-[35px]">
-            Postularse a la Convocatoria: {id}
+            Postularse a la Convocatoria No. {id}
           </h1>
           <br />
           <p className="text-2xl text-justify pl-8 pr-10">
             Esta información es importante para su solicitud. Su llenado es
-            obligatorio su postulación. Luego podrá dirigirse a subir
-            documentos, para finalizar su proceso de postulación.
+            obligatorio para poder aplicar a una convocatoria. Luego podrá
+            dirigirse a subir documentos, para finalizar su proceso de
+            postulación.
           </p>
           <br />
           <div>
@@ -310,16 +303,6 @@ function Postulacionform({ params }) {
                 </span>
               )}
             </div>
-
-            {/* <div className="w-full flex flex-col items-start justify-start gap-3">
-            <label
-              htmlFor="information_grid"
-              className="font-semibold text-[20px] block"
-            >
-              Convocatoria Selecionada : {id}
-            </label>
-            <p className="text-grey-500">Llene solo los campos que desea modificar.</p>
-          </div> */}
           </div>
           <br />
           <h1 className="text-black font-bold text-[25px] pl-6">

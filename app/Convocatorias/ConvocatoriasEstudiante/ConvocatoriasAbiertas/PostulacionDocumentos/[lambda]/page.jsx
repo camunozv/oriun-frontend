@@ -59,7 +59,7 @@ function PostulacionDocumentos({ params }) {
         result[item.id] = values[item.id];
       });
     }
-    // Validacion si todos tienen Archivo_1
+
     let documents = true;
     Object.entries(result).map(([key, value]) => {
       if (value === undefined) {
@@ -168,22 +168,22 @@ function PostulacionDocumentos({ params }) {
     return (
       <div className="p-8">
         <h1 className="text-black font-bold text-[35px]">
-          Postularse a la Convocatoria: {id}
+          Postularse a la Convocatoria No. {id}
         </h1>
         <br />
         <p className="text-2xl text-justify pl-8 pr-10">
           En está sección puede subir sus documentos. De click en el recuadro
           para subir el documento que desee, una vez lo suba se va a mostrar el
           nombre de su archivo y un icono para eliminarlo si se equivoco de
-          documento. Al lado encuentra el boton para descargar el archivo que
-          subio, descargar el archivo original y finalmente el botón para cargar
-          el documento a la base de datos.
+          documento. Al lado encuentra el boton para descargar archivos subidos
+          previamente, descargar el formato original y finalmente el botón para
+          cargar el documento a la base de datos.
         </p>
         <br />
         <p className="text-2xl text-justify pl-8 pr-10">
           Por favor cuando este seguro que su documento está correcto y
-          corresponde a la casilla correspondiente, dele click en Subir para que
-          se guarden. Una vez todos los documentos estén cargados, de click en
+          corresponde a la casilla adecuada, dele click en Guardar Nuevo para que
+          se guarden. Una vez todos los documentos estén subidos, de click en
           enviar para guardar su postulación.
         </p>
         <br />
