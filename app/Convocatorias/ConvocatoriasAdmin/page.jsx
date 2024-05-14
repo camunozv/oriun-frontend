@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 function ConvocatoriasAdminPage() {
   const { data: session, status } = useSession({

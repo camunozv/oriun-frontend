@@ -165,7 +165,7 @@ function VerPostulacionDocumentos({ params }) {
         <br />
         <p className="text-2xl text-justify pl-8 pr-10">
           A continuacion se encuentran los documentos enviados por el estudiante
-          con número de coumento <p className="underline">{studentId}</p>
+          con número de documento {studentId}
           para postularse a esta convocatoria.
         </p>
         <br />
