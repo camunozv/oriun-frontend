@@ -34,7 +34,7 @@ function RegisterCodePage() {
         >
           <div className="flex justify-center items-center w-full gap-3 mb-9">
             <h1 className="font-bold text-[50px] inline-block text-center">
-              Pide tu código de verficación
+              Pide tu código de verificación
             </h1>
           </div>
 
