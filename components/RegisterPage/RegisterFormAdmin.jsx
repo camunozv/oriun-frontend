@@ -41,10 +41,11 @@ function RegisterFormAdmin() {
         alert(response.data);
       })
       .catch((error) => {
+        alert(error.response.data.Error);
         console.log(error);
       });
 
-    // reset();
+    reset();
   });
 
   return (
