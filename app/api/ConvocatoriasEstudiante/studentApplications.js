@@ -5,17 +5,7 @@ const endpoint_2 = "student";
 
 export const apiStudentApplications = {
   // Use Case #4:
-  /**
-   * medication	
-   * diseases	
-   * contact_person	
-   * call
-   * info_mobility	
-   * info_courses	
-   * "Authorization" : `Bearer ${token}`
-   */
-
-  // Implemented
+  // Implemented: *
   getStudentEligibility: function (call, token) {
     return api_instance.get(`${endpoint_2}/eligible/`, {
       headers: {
@@ -27,7 +17,7 @@ export const apiStudentApplications = {
     });
   },
 
-  // Implemented.
+  // Implemented *
   getStudentInformation: function (token) {
     return api_instance.get(`${endpoint_2}/info_application/`, {
       headers : {
@@ -36,7 +26,7 @@ export const apiStudentApplications = {
     })
   },
 
-  // Implemented
+  // Implemented: *
   postCreateDocuments: function (
     medication,
     diseases,
@@ -64,7 +54,7 @@ export const apiStudentApplications = {
     );
   },
 
-
+  // Implemented: *
   getDocument: function (call, type_file, name_file, token) {
     return api_instance.get(`${endpoint_1}/download/`, {
       headers: {
@@ -78,22 +68,20 @@ export const apiStudentApplications = {
     });
   },
 
-  
+  // Implemented: *
   postDocument: function (call, document, name_file, token) {
     return api_instance.post(
       `${endpoint_1}/upload/`,
       { call, document, name_file },
       {
-        
         headers: {
           "Authorization" : `Bearer ${token}`,
-          // "Content-Type": "multipart/form-data"
-        },
-        
+        },        
       }
     );
   },
 
+  // Implemented: Error in the backend.
   postApplication: function (call, is_extension, token) {
     return api_instance.post(
       `${endpoint_1}/submit/`,
@@ -107,6 +95,7 @@ export const apiStudentApplications = {
   },
 
   // Use Case #5:
+  // Implemented: *
   getAllApplications: function (token) {
     return api_instance.get(`${endpoint_1}/student/`, {
       headers: {
@@ -115,6 +104,7 @@ export const apiStudentApplications = {
     });
   },
 
+  // Implemented: *
   getRegionFromCall: function (call_id, token) {
     return api_instance.get(`${endpoint_1}/region_call/`, {
       headers: {
@@ -126,6 +116,7 @@ export const apiStudentApplications = {
     });
   },
 
+  // Implemented: *
   getApplicationComments: function (call_id, token) {
     return api_instance.get(`${endpoint_1}/comments/`, {
       headers: {
@@ -137,6 +128,7 @@ export const apiStudentApplications = {
     });
   },
 
+  // Same as endpoint getDocument, but finally implemented
   getApplicationDocument: function (call_id, file_type, file_name, token) {
     return api_instance.get(`${endpoint_1}/download/`, {
       headers: {
@@ -150,6 +142,7 @@ export const apiStudentApplications = {
     });
   },
 
+  // Implemented: *
   putDocumentModification: function (call, document, name_file, token) {
     return api_instance.put(
       `${endpoint_1}/edit/`,

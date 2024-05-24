@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { redirect } from "next/navigation";
 import CardConvocatorias from "@/components/ConvsPage/CardConvocatorias";
 import { useRef, useState } from "react";
@@ -48,6 +48,17 @@ function ConvocatoriasCerradasEstudiantePage() {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    apiFilterClosedCalls
+      .getFilterClosedCalls(null, null, null, token)
+      .then((response) => {
+        set_my_calls(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
 
   if (!token) {
     return (

@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import Archivo1 from "../../../../../../components/ConvsPage/Archivo_1";
-import { apitypePos } from "@/app/api/ConvocatoriasEstudiante/typePostulationConv";
+import File from "../../../../../../components/ConvsPage/File";
 import base from "@/constants/base.json";
 import nacional from "@/constants/nacional.json";
 import internacional from "@/constants/internacional.json";
@@ -38,10 +37,6 @@ function PostulacionDocumentos({ params }) {
       });
   }, [token]);
 
-  // PENDIENTE:
-  // 1. Agregar proteccion de ruta *
-  // 2. Fetch de la región de la convocatoria. *
-
   const {
     register,
     handleSubmit,
@@ -64,7 +59,7 @@ function PostulacionDocumentos({ params }) {
         result[item.id] = values[item.id];
       });
     }
-    // Validacion si todos tienen Archivo_1
+
     let documents = true;
     Object.entries(result).map(([key, value]) => {
       if (value === undefined) {
@@ -78,14 +73,13 @@ function PostulacionDocumentos({ params }) {
       apiStudentApplications
         .postApplication(id, is_extension, token)
         .then((response) => {
-          console.log(response.data);
+          alert(response.data.message);
         })
         .catch((error) => {
           console.log(error);
         });
-      // router.push("/Convocatorias/ConvocatoriasEstudiante");
+      router.push("/Convocatorias/ConvocatoriasEstudiante");
     }
-    console.log(result);
   });
 
   const [values, setValues] = useState(() => {
@@ -111,7 +105,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {nacional.map((item, index) => (
             <div key={index}>
-              <Archivo1
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
@@ -119,6 +113,7 @@ function PostulacionDocumentos({ params }) {
                 allButtons={item.allButtons}
                 call_id={id}
                 token={token}
+                Case={4}
               />
             </div>
           ))}
@@ -129,7 +124,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {internacional.map((item, index) => (
             <div key={index}>
-              <Archivo1
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
@@ -137,6 +132,7 @@ function PostulacionDocumentos({ params }) {
                 allButtons={item.allButtons}
                 call_id={id}
                 token={token}
+                Case={4}
               />
             </div>
           ))}
@@ -147,7 +143,7 @@ function PostulacionDocumentos({ params }) {
         <div>
           {base.map((item, index) => (
             <div key={index}>
-              <Archivo1
+              <File
                 id={item.id}
                 title={item.title}
                 nombrearchivo={item.id}
@@ -155,6 +151,7 @@ function PostulacionDocumentos({ params }) {
                 allButtons={item.allButtons}
                 call_id={id}
                 token={token}
+                Case={4}
               />
             </div>
           ))}
@@ -171,23 +168,23 @@ function PostulacionDocumentos({ params }) {
     return (
       <div className="p-8">
         <h1 className="text-black font-bold text-[35px]">
-          Postularse a la Convocatoria: {id}
+          Postularse a la Convocatoria No. {id}
         </h1>
         <br />
         <p className="text-2xl text-justify pl-8 pr-10">
           En está sección puede subir sus documentos. De click en el recuadro
           para subir el documento que desee, una vez lo suba se va a mostrar el
           nombre de su archivo y un icono para eliminarlo si se equivoco de
-          documento. Al lado encuentra el boton para descargar el archivo que
-          subio, descargar el archivo original y finalmente el botón para cargar
-          el documento a la base de datos.
+          documento. Al lado encuentra el boton para descargar archivos subidos
+          previamente, descargar el formato original y finalmente el botón para
+          cargar el documento a la base de datos.
         </p>
         <br />
         <p className="text-2xl text-justify pl-8 pr-10">
           Por favor cuando este seguro que su documento está correcto y
-          corresponde a la casilla correspondiente, dele click en Subir para que
-          se guarden. Una vez todos los documentos estén cargados, de click en
-          enviar.
+          corresponde a la casilla adecuada, dele click en Guardar Nuevo para que
+          se guarden. Una vez todos los documentos estén subidos, de click en
+          enviar para guardar su postulación.
         </p>
         <br />
         <div

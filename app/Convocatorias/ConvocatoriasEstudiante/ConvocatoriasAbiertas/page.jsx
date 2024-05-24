@@ -1,6 +1,6 @@
 "use client"; // MODULE COMPLETED
 // Main dependencies
-import React from "react";
+import React, { useEffect } from "react";
 import { redirect } from "next/navigation";
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -50,6 +50,17 @@ function ConvocatoriasAbiertasEstudiantePage() {
       console.log(error, "Error while fetching student open calls");
     }
   }
+
+  useEffect(() => {
+    apiFilterOpenCalls
+      .getFilterOpenCalls(null, null, null, token)
+      .then((response) => {
+        set_available_calls(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
 
   if (!token) {
     return (

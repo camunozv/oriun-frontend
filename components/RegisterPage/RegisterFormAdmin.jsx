@@ -14,6 +14,7 @@ function RegisterFormAdmin() {
 
   const mySubmit = handleSubmit((data) => {
     
+    console.log(data)
     alert("Enviando datos...");
 
     apiRegisterAdmin
@@ -33,12 +34,14 @@ function RegisterFormAdmin() {
         data.address,
         data.sex,
         data.ethnicity,
-        data.headquarter
+        data.headquarter,
+        data.dependency
       )
       .then((response) => {
-        console.log(alert(response.data));
+        alert(response.data);
       })
       .catch((error) => {
+        alert(error.response.data.Error);
         console.log(error);
       });
 

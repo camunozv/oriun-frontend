@@ -40,6 +40,7 @@ function UpdateUniversityPage({ params }) {
         token
       )
       .then((response) => {
+        alert(response.data.mensaje);
         console.log(response.data);
       })
       .catch((error) => {
@@ -52,7 +53,7 @@ function UpdateUniversityPage({ params }) {
     apiAdminUniversities
       .deleteUniverisitiesById(id, token)
       .then((response) => {
-        alert(`${response.data}`);
+        alert(response.data.mensaje);
       })
       .catch((error) => {
         console.log(error);

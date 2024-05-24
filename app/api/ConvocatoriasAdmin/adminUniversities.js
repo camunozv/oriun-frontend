@@ -1,7 +1,7 @@
 import api_instance from "../base.api";
 
-const endpoint = "/call/university_api";
-const endpoint_put = "/call/university_api_put";
+const endpoint = "/call/university_api/";
+const endpoint_put = "/call/university_api_put/";
 
 /**
  * "Authorization": `Bearer ${token}`,
@@ -17,7 +17,7 @@ export const apiAdminUniversities = {
   },
 
   getUniversitiesById: function (id, token) {
-    return api_instance.get(`${endpoint}/${id}`, {
+    return api_instance.get(`${endpoint}${id}`, {
       headers: {
         "Authorization": `Bearer ${token}`,
       },
@@ -54,7 +54,7 @@ export const apiAdminUniversities = {
   },
 
   deleteUniverisitiesById: function (id, token) {
-    return api_instance.delete(`${endpoint}/${id}`, {
+    return api_instance.delete(`${endpoint}${id}/`, {
       headers: {
         "Authorization": `Bearer ${token}`,
       },
@@ -73,9 +73,8 @@ export const apiAdminUniversities = {
     token
   ) {
     return api_instance.put(
-      `${endpoint}`,
+      `${endpoint_put}${id}/`,
       {
-        id,
         name,
         webpage,
         region,

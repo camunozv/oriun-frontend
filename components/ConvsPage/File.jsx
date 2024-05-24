@@ -2,19 +2,14 @@
 import React, { useState } from "react";
 import { AiFillFilePdf } from "react-icons/ai";
 import { MdCloudUpload, MdDelete } from "react-icons/md";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { apiStudentApplications } from "@/app/api/ConvocatoriasEstudiante/studentApplications";
-import { RedirectType, redirect } from "next/navigation";
 
-function Archivo1({ onChange, id, title, allButtons, call_id, token }) {
+function File({ onChange, id, title, allButtons, call_id, Case, token }) {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("No seleccionado");
 
-  const [link1, setLink1] = useState('/');
-  const [link2, setLink2] = useState('/');
-
   const {
-    register,
     formState: { errors },
     control,
   } = useForm();
@@ -22,8 +17,8 @@ function Archivo1({ onChange, id, title, allButtons, call_id, token }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const file_name = e.target.files[0]?.name;
-    const is_pdf = file_name.includes('.pdf');
-    
+    const is_pdf = file_name.includes(".pdf");
+
     if (e.target.files[0].size > 512000 || !is_pdf) {
       alert("El archivo supera las 500KB o no es pdf.");
       return;
@@ -45,54 +40,72 @@ function Archivo1({ onChange, id, title, allButtons, call_id, token }) {
   };
 
   const handleUploadDocument = () => {
-    console.log(file)
-    apiStudentApplications
-      .postDocument(call_id, file, id, token)
-      .then((response) => {
-        console.log(response.data);
-        alert(response.data.message);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (Case === 4) {
+      apiStudentApplications
+        .postDocument(call_id, file, id, token)
+        .then((response) => {
+          alert(response.data.message);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      apiStudentApplications
+        .putDocumentModification(call_id, file, id, token)
+        .then((response) => {
+          alert(response.data.message);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const handleGetOriginal = () => {
-    apiStudentApplications
-      .getDocument(call_id, "original_doc", id, token)
-      .then((response) => {
-        setLink1(response.data.link);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (Case === 4) {
+      apiStudentApplications
+        .getDocument(call_id, "original_doc", id, token)
+        .then((response) => {
+          window.open(response.data.link);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      apiStudentApplications
+        .getApplicationDocument(call_id, "original_doc", id, token)
+        .then((response) => {
+          window.open(response.data.link);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const handleGetFilled = () => {
-    apiStudentApplications
-      .getDocument(call_id, "filled_doc", id, token)
-      .then((response) => {
-        setLink2(response.data.link);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (Case === 4) {
+      apiStudentApplications
+        .getDocument(call_id, "filled_doc", id, token)
+        .then((response) => {
+          window.open(response.data.link);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      apiStudentApplications
+        .getApplicationDocument(call_id, "filled_doc", id, token)
+        .then((response) => {
+          window.open(response.data.link);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
-
-  // It doesn't make sense to download the same file the user has in it's pc.
-  // const downloadFile = () => {
-  //   if (file) {
-  //     const url = URL.createObjectURL(file);
-  //     const a = document.createElement("a");
-  //     a.href = url;
-  //     a.download = file.name;
-  //     document.body.appendChild(a);
-  //     a.click();
-  //     document.body.removeChild(a);
-  //   }
-  // };
 
   return (
     <div>
@@ -209,4 +222,4 @@ function Archivo1({ onChange, id, title, allButtons, call_id, token }) {
   );
 }
 
-export default Archivo1;
+export default File;

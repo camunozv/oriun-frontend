@@ -30,17 +30,17 @@ function UniversitiesCard({
         <div className="grid grid-cols-2 gap-3 p-4">
           <p className="font-semibold">{city}</p>
           <p className="font-semibold">{region}</p>
-          <a href={`${webpage}`}>
+          <Link href={`${webpage}`} target="_blank">
             <p className="font-semibold underline">Página web.</p>
-          </a>
-          <a href={`${academic_offer}`}>
+          </Link>
+          <Link href={`${academic_offer}`} target="_blank">
             <p className="font-semibold underline">Oferta académica.</p>
-          </a>
-          <a href={`${exchange_info}`}>
+          </Link>
+          <Link href={`${exchange_info}`} target="_blank">
             <p className="font-semibold underline">
               Información de intercambio
             </p>
-          </a>
+          </Link>
         </div>
 
         <div className="flex justify-between items-center w-96">

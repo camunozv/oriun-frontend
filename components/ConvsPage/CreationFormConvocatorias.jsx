@@ -93,7 +93,7 @@ function CreationFormConvocatorias({ token }) {
 
     
       const data = {
-        university_id: conv_universidad_id,
+        university: conv_universidad_id,
         active: conv_active,
         begin_date: conv_begin_date,
         deadline: conv_deadline,
