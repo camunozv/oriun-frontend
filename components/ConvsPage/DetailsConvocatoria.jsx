@@ -99,7 +99,10 @@ function DetailsConvocatoria({ call, admin, id, open }) {
               type="button"
               className="flex-1 mr-3 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
             >
-              Ver Resultados
+              <Link
+              href={`/Convocatorias/ConvocatoriasAdmin/VerResultadosConv`}
+              > Ver Resultados</Link>
+             
             </button>
           </div>
         </section>
@@ -179,7 +182,9 @@ function DetailsConvocatoria({ call, admin, id, open }) {
               type="button"
               className="flex-1 mr-3 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2 pr-3"
             >
-              Ver Resultados
+              <Link
+              href={`/Convocatorias/ConvocatoriasAdmin/VerResultadosConv`}
+              > Ver Resultados</Link>
             </button>
           </div>
         </section>

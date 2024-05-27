@@ -5,32 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
 
-function CardPostulacion({
-  call_id,
-  EstadoConv,
-  StudentName,
-  StudentId,
-  Country,
-  University,
-  major,
-}) {
+function CardPostulacionEm({StudentResult}) {
   let imagenSrc;
 
-  switch (EstadoConv) {
-    case "Documentos no revisados":
-      imagenSrc = "/images/CirculoGris.png";
+  switch (StudentResult) {
+    case "Aprobado":
+      imagenSrc = "/images/Aprobada.jpeg";
       break;
-    case "Modificación de los documentos solicitada":
-      imagenSrc = "/images/CirculoAmarillo.png";
-      break;
-    case "Documentos aprobados":
-      imagenSrc = "/images/CirculoVerde.png";
-      break;
-    case "Modificado por estudiante":
-      imagenSrc = "/images/CampanaRoja.png";
-      break;
-    default:
-      imagenSrc = "/images/CirculoRojo.png"; // Por defecto, mostrar la primera imagen
+    case "No Aprobado":
+      imagenSrc = "/images/NoAprobada.jpeg";
       break;
   }
   {
@@ -38,13 +21,8 @@ function CardPostulacion({
       <>
         <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
           <div className="relative flex justify-center items-center flex-col gap-3 bg-white -lg rounded-xl p-6 w-full h-full">
-            <h6 className="font-bold">Conv No. {call_id}</h6>
+            <h6 className="font-bold">Conv No. </h6>
 
-            {/* Agrega la imagen en la esquina superior derecha 
-            <div className="absolute top-0 right-0 w-12 h-12">
-              <Image src="/images/CirculoVerde.png" width={50} height={50} alt="Logo" />
-            </div>           
-            El metodo de abajo tiene una mejor calidad de imagen*/}
 
             <img
               src={imagenSrc} // Reemplaza esta ruta con la ruta de tu imagen
@@ -63,16 +41,16 @@ function CardPostulacion({
             Flag Here Flag Here Flag Here Flag Here Flag Here
           </div>
 
-          <p className="font-semibold">{StudentId}</p>
+          <p className="font-semibold">ID Estudiante</p>
           <p className="font-semibold">
-            {StudentName} - {major}
+            Nombre del estudiante
           </p>
-          <p className="font-semibold">{University}</p>
-          <p className="font-semibold">{Country}</p>
+          <p className="font-semibold">Nombre Universidad</p>
+          <p className="font-semibold">País</p>
         </div>
       </>
     );
   }
 }
 
-export default CardPostulacion;
+export default CardPostulacionEm;
