@@ -43,6 +43,29 @@ function MyCallsPage() {
     return (
       <>
         <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+          <div className="flex grid grid-cols-4 justify-center p-6">
+                <div>
+                    <p className="font-bold text-[20px] text-right">Aprobado 
+                        <img src={"/images/Aprobada.jpeg"} className="inline object-contain h-10 w-10"/> 
+                    </p>
+                </div>
+                <div>
+                    <p className="font-bold text-[20px] text-center pr-5"> No Aprobado 
+                        <img src={"/images/NoAprobada.jpeg"} className="inline object-contain h-10 w-10"/> 
+                    </p>
+                </div>
+                <div>
+                    <p className="font-bold text-[20px] text-left pr-5"> Pendiente por Revisión
+                        <img src={"/images/Pendiente.jpeg"} className="inline object-contain h-10 w-10"/> 
+                    </p>
+                </div>
+                <div>
+                    <p className="font-bold text-[20px] text-start"> Modificación Solicitada
+                        <img src={"/images/ModificacionSolicitada.jpeg"} className="inline object-contain h-10 w-10"/> 
+                    </p>
+                </div>
+          </div> 
+          <br/>
           <div className="grid grid-cols-3 w-full gap-6">
             {myApplications?.map((application) => (
               <ApplicationCard
