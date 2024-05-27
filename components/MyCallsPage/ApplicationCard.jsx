@@ -46,6 +46,16 @@ function ApplicationCard({
         </div>
 
         <div className="flex justify-between items-center w-96">
+        <div className="w-full p-2">
+            <Link href={`/Convocatorias/ConvocatoriasEstudiante/MisConvocatorias/Resultados`}>
+              <button
+                type="button"
+                className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"
+              >
+                Resultados
+              </button>
+            </Link>
+          </div>
           <div className="w-full p-2">
             <Link
               href={`/Convocatorias/ConvocatoriasEstudiante/MisConvocatorias/${call}`}
