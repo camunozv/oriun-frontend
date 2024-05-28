@@ -182,7 +182,11 @@ function VerPostulaciones({ params }) {
           <div className="fixed bottom-0 right-0 p-4">
             
               <button className="w-full font-semibold bg-figma_blue border-2 rounded-2xl border-figma_blue text-white py-4 px-2">
+              <Link
+                href={`/Convocatorias/ConvocatoriasAdmin/Postulaciones/ResultadosPostulantes`}
+              >
                 Ver Resultados Postulantes
+              </Link>
               </button>
             
           </div>
