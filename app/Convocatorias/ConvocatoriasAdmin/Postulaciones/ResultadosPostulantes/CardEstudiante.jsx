@@ -1,6 +1,13 @@
 import React from 'react';
+import { useState } from 'react';
 
 function CardEstudiante({ idEstudiante, nombreEstudiante, papa, avance, sedes, idioma, pbm }) {
+  const [isGanador, setIsGanador] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsGanador(!isGanador);
+  };
+
   return (
     <div className="flex items-center justify-between p-4 border border-gray-300 rounded-xl shadow-sm px-20 py-5 mx-5 my-5">
       <div className="flex gap-2">
@@ -29,9 +36,10 @@ function CardEstudiante({ idEstudiante, nombreEstudiante, papa, avance, sedes, i
       <div>
         <button
           type="button"
-          className="flex transition-all items-center justify-center gap-3 border-2 rounded-full px-4 py-2 font-semibold bg-blue-600 border-blue-600 text-white hover:text-figma_blue hover:bg-white"
+          onClick={handleButtonClick}
+          className={`flex transition-all items-center justify-center gap-3 border-2 rounded-full px-4 py-2 font-semibold hover:text-figma_blue hover:bg-white ${isGanador ? 'bg-gray-600 border-gray-600 text-white' : 'bg-blue-600 border-blue-600 text-white'}`}
         >
-          Asignar Ganador
+          {isGanador ? 'Quitar Ganador' : 'Asignar Ganador'}
         </button>
       </div>
     </div>
