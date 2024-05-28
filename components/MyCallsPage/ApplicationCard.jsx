@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 function ApplicationCard({
   call,
@@ -25,10 +26,35 @@ function ApplicationCard({
     finalState = "Aprobados";
   }
 
+  let StateAprove="Revision";
+  let imagenSrc;
+  switch (StateAprove) {
+    case "Aprobados":
+      imagenSrc = "/images/Aprobada.jpeg";
+      break;
+    case "No aprobado":
+      imagenSrc = "/images/NoAprobada.jpeg";
+     
+      break;
+    case "Modificaciones Solicitadas":
+      imagenSrc = "/images/ModificacionSolicitada.jpeg";
+      break;
+    default:
+      imagenSrc = "/images/Pendiente.jpeg"; // Por defecto, mostrar pendientes revision
+      break;
+  }
+
   return (
     <>
       <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
-        <h6 className="font-bold">{call}</h6>
+        <div className="relative flex justify-center items-center flex-col gap-3 bg-white -lg rounded-xl p-6 w-full h-full">
+            <h6 className="font-bold">{call}</h6>
+            <img
+              src={imagenSrc} // Reemplaza esta ruta con la ruta de tu imagen
+              alt="Logo"
+              className="absolute top-0 right-0 w-12 h-12" // Estilos para posicionar la imagen en la esquina superior derecha
+            />
+        </div>
         <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
           Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
           Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
