@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import api_instance from "../base.api";
 
 const endpoint = "application";
