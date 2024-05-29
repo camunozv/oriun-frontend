@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import api_instance from "../base.api";
 
 const endpoint = "application";
@@ -76,5 +77,21 @@ export const adminApplications = {
         student_id,
       }
     })
-  }
+  },
+
+  // Use Case 8
+  // # 8
+  getAllResultsCall: function (call_id, approved, student_id, token) {
+    return api_instance.get(`${endpoint}/results_employee/${call_id}`, {
+      headers: {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+      params : {
+        approved, 
+        student_id,
+      }
+    })
+  },
+
+
 };
