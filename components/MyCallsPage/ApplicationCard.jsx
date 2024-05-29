@@ -68,12 +68,12 @@ function ApplicationCard({
         <p className="font-semibold">Estado de documentos: {finalState}</p>
         <div className="grid grid-cols-2 gap-3 p-1">
           <p className="font-semibold">País: {university_country}</p>
-          <p className="font-semibold">Aprovado: {k}</p>
+          <p className="font-semibold">Aprobado: {k}</p>
         </div>
 
         <div className="flex justify-between items-center w-96">
         <div className="w-full p-2">
-            <Link href={`/Convocatorias/ConvocatoriasEstudiante/MisConvocatorias/Resultados`}>
+            <Link href={`/Convocatorias/ConvocatoriasEstudiante/MisConvocatorias/Resultados/${call}`}>
               <button
                 type="button"
                 className="w-full font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-2"

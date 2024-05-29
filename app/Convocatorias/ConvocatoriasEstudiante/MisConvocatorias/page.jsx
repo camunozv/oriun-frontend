@@ -28,7 +28,8 @@ function MyCallsPage() {
     apiStudentApplications
       .getAllApplications(token)
       .then((response) => {
-        setMyApplications(response.data);
+        setMyApplications([response.data]);
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
