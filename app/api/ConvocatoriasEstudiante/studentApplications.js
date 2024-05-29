@@ -156,6 +156,7 @@ export const apiStudentApplications = {
   },
 
   // Use Case 8
+  // Implemented: *
   getApplicationResults: function (call_id, token) {
 
     return api_instance.get(`${endpoint_1}/results/${call_id}`, {
