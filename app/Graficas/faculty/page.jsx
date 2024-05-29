@@ -55,7 +55,7 @@ function renderChart(call_field, dataList, dataListCallField, h_axis, title){
         },
         animation: {
             startup: true,
-            duration: 1000,
+            duration: 1500,
             easing: 'out',
         },
     };

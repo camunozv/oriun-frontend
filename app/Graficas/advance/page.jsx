@@ -48,7 +48,7 @@ function renderChart(call_field, dataList, dataListCallField, h_axis, title, cat
             }
         },
         vAxis: {
-            title: `Rango Porcentaje ${category}`,
+            title: `Rango de porcentaje de ${category}`,
             maxValue: 100,
             minValue: 0,
             titleTextStyle: {

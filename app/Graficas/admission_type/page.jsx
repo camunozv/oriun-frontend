@@ -18,7 +18,7 @@ function renderChart(call_field, dataList, dataListCallField, h_axis, title){
     for (let i = 0; i < dataList.length; i++) {
         const row = [
             dataList[i][dataListCallField],
-            dataList[i]['REGUL'],
+            dataList[i]['Regular'],
             dataList[i]['PAES'],
             dataList[i]['PEAMA']
         ];
@@ -55,14 +55,14 @@ function renderChart(call_field, dataList, dataListCallField, h_axis, title){
 //---------------------------------------------------------
 
 const dataList_univ_adm_post = [
-    {'university': 'UNAL', 'REGUL': 100, 'PAES': 80, "PEAMA": 70},
-    {'university': 'UNIANDES', 'REGUL': 70, 'PAES': 70, 'PEAMA': 100},
+    {'university': 'UNAL', 'Regular': 100, 'PAES': 80, 'PEAMA': 70},
+    {'university': 'UNIANDES', 'Regular': 70, 'PAES': 70, 'PEAMA': 100},
 ];
 const results_univ_adm_post = renderChart("Universidad", dataList_univ_adm_post, 'university', 'Universidades', 'Estadística: Universidades por tipo de admisión estudiantes postulados');
 
 const dataList_univ_adm_win = [
-    {'university': 'UNAL', 'REGUL': 50, 'PAES': 40, "PEAMA": 35},
-    {'university': 'UNIANDES', 'REGUL': 30, 'PAES': 20, 'PEAMA': 40},
+    {'university': 'UNAL', 'Regular': 50, 'PAES': 40, 'PEAMA': 35},
+    {'university': 'UNIANDES', 'Regular': 30, 'PAES': 20, 'PEAMA': 40},
 ];
 const results_univ_adm_win = renderChart("Universidad", dataList_univ_adm_win, 'university', 'Universidades', 'Estadística: Universidades por tipo de admisión estudiantes ganadores');
 
@@ -70,16 +70,16 @@ const results_univ_adm_win = renderChart("Universidad", dataList_univ_adm_win, '
 //----------------------//----------------------//----------
 
 const dataList_cou_adm_post = [
-    {'country': 'Mexico', 'REGUL': 100, 'PAES': 80, "PEAMA": 70},
-    {'country': 'Canadá', 'REGUL': 70, 'PAES': 70, 'PEAMA': 100},
-    {'country': 'Francia', 'REGUL': 100, 'PAES': 80, "PEAMA": 70},
+    {'country': 'Mexico', 'Regular': 100, 'PAES': 80, 'PEAMA': 70},
+    {'country': 'Canadá', 'Regular': 70, 'PAES': 70, 'PEAMA': 100},
+    {'country': 'Francia', 'Regular': 100, 'PAES': 80, 'PEAMA': 70},
 ];
 const results_cou_adm_post = renderChart("País", dataList_cou_adm_post, 'country', 'Países', 'Estadística: Países por tipo de admisión estudiantes postulados');
 
 const dataList_cou_adm_win = [
-    {'country': 'Mexico', 'REGUL': 50, 'PAES': 40, "PEAMA": 35},
-    {'country': 'Canadá', 'REGUL': 30, 'PAES': 20, 'PEAMA': 40},
-    {'country': 'Francia', 'REGUL': 50, 'PAES': 40, "PEAMA": 35},
+    {'country': 'Mexico', 'Regular': 50, 'PAES': 40, 'PEAMA': 35},
+    {'country': 'Canadá', 'Regular': 30, 'PAES': 20, 'PEAMA': 40},
+    {'country': 'Francia', 'Regular': 50, 'PAES': 40, 'PEAMA': 35},
 ];
 const results_cou_adm_win = renderChart("País", dataList_cou_adm_win, 'country', 'Países', 'Estadística: Países por tipo de admisión estudiantes ganadores');
 
@@ -87,22 +87,22 @@ const results_cou_adm_win = renderChart("País", dataList_cou_adm_win, 'country'
 //----------------------//----------------------//----------
 
 const dataList_reg_adm_post = [
-    {'region': 'Uniandes', 'REGUL': 100, 'PAES': 80, "PEAMA": 70},
-    {'region': 'Asia', 'REGUL': 70, 'PAES': 70, 'PEAMA': 100},
-    {'region': 'Norteamérica', 'REGUL': 100, 'PAES': 80, "PEAMA": 70},
-    {'region': 'Europa', 'REGUL': 70, 'PAES': 70, 'PEAMA': 100},
-    {'region': 'Nacional-Sigueme', 'REGUL': 100, 'PAES': 80, "PEAMA": 70},
-    {'region': 'Oceanía', 'REGUL': 70, 'PAES': 70, 'PEAMA': 100},
+    {'region': 'Uniandes', 'Regular': 100, 'PAES': 80, 'PEAMA': 70},
+    {'region': 'Asia', 'Regular': 70, 'PAES': 70, 'PEAMA': 100},
+    {'region': 'Norteamérica', 'Regular': 100, 'PAES': 80, 'PEAMA': 70},
+    {'region': 'Europa', 'Regular': 70, 'PAES': 70, 'PEAMA': 100},
+    {'region': 'Nacional-Sigueme', 'Regular': 100, 'PAES': 80, 'PEAMA': 70},
+    {'region': 'Oceanía', 'Regular': 70, 'PAES': 70, 'PEAMA': 100},
 ];
 const results_reg_adm_post = renderChart("Región", dataList_reg_adm_post, 'region', 'Regiones', 'Estadística: Regiones por tipo de admisión estudiantes postulados');
 
 const dataList_reg_adm_win = [
-    {'region': 'Uniandes', 'REGUL': 50, 'PAES': 40, "PEAMA": 35},
-    {'region': 'Asia', 'REGUL': 30, 'PAES': 20, 'PEAMA': 40},
-    {'region': 'Norteamérica', 'REGUL': 50, 'PAES': 40, "PEAMA": 35},
-    {'region': 'Europa', 'REGUL': 30, 'PAES': 20, 'PEAMA': 40},
-    {'region': 'Nacional-Sigueme', 'REGUL': 50, 'PAES': 40, "PEAMA": 35},
-    {'region': 'Oceanía', 'REGUL': 30, 'PAES': 20, 'PEAMA': 40},
+    {'region': 'Uniandes', 'Regular': 50, 'PAES': 40, 'PEAMA': 35},
+    {'region': 'Asia', 'Regular': 30, 'PAES': 20, 'PEAMA': 40},
+    {'region': 'Norteamérica', 'Regular': 50, 'PAES': 40, 'PEAMA': 35},
+    {'region': 'Europa', 'Regular': 30, 'PAES': 20, 'PEAMA': 40},
+    {'region': 'Nacional-Sigueme', 'Regular': 50, 'PAES': 40, 'PEAMA': 35},
+    {'region': 'Oceanía', 'Regular': 30, 'PAES': 20, 'PEAMA': 40},
 ];
 const results_reg_adm_win = renderChart("Región", dataList_reg_adm_win, 'region', 'Regiones', 'Estadística: regiones por tipo de admisión estudiantes ganadores');
 
@@ -110,14 +110,14 @@ const results_reg_adm_win = renderChart("Región", dataList_reg_adm_win, 'region
 //----------------------//----------------------//----------
 
 const dataList_yea_adm_post = [
-    {'year': '2023', 'REGUL': 100, 'PAES': 80, "PEAMA": 70},
-    {'year': '2024', 'REGUL': 70, 'PAES': 70, 'PEAMA': 100},
+    {'year': '2023', 'Regular': 100, 'PAES': 80, 'PEAMA': 70},
+    {'year': '2024', 'Regular': 70, 'PAES': 70, 'PEAMA': 100},
 ];
 const results_yea_adm_post = renderChart("Año", dataList_yea_adm_post, 'year', 'Años', 'Estadística: Años por tipo de admisión estudiantes postulados');
 
 const dataList_yea_adm_win = [
-    {'year': '2023', 'REGUL': 50, 'PAES': 40, "PEAMA": 35},
-    {'year': '2024', 'REGUL': 30, 'PAES': 20, 'PEAMA': 40},
+    {'year': '2023', 'Regular': 50, 'PAES': 40, 'PEAMA': 35},
+    {'year': '2024', 'Regular': 30, 'PAES': 20, 'PEAMA': 40},
 ];
 const results_yea_adm_win = renderChart("Año", dataList_yea_adm_win, 'year', 'Años', 'Estadística: Años por tipo de admisión estudiantes ganadores');
 
@@ -125,14 +125,14 @@ const results_yea_adm_win = renderChart("Año", dataList_yea_adm_win, 'year', 'A
 //----------------------//----------------------//----------
 
 const dataList_sem_adm_post = [
-    {'semester': '1', 'REGUL': 100, 'PAES': 80, "PEAMA": 70},
-    {'semester': '2', 'REGUL': 70, 'PAES': 70, 'PEAMA': 100},
+    {'semester': '1', 'Regular': 100, 'PAES': 80, 'PEAMA': 70},
+    {'semester': '2', 'Regular': 70, 'PAES': 70, 'PEAMA': 100},
 ];
 const results_sem_adm_post = renderChart("Semestre", dataList_sem_adm_post, 'semester', 'Semestres', 'Estadística: Semestres por tipo de admisión estudiantes postulados');
 
 const dataList_sem_adm_win = [
-    {'semester': '1', 'REGUL': 50, 'PAES': 40, "PEAMA": 35},
-    {'semester': '2', 'REGUL': 30, 'PAES': 20, 'PEAMA': 40},
+    {'semester': '1', 'Regular': 50, 'PAES': 40, 'PEAMA': 35},
+    {'semester': '2', 'Regular': 30, 'PAES': 20, 'PEAMA': 40},
 ];
 const results_sem_adm_win = renderChart("Semestre", dataList_sem_adm_win, 'semester', 'Semestres', 'Estadística: Semestres por tipo de admisión estudiantes ganadores');
 

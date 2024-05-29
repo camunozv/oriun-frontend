@@ -18,9 +18,9 @@ function renderChart(call_field, dataList, dataListCallField, h_axis, title){
     for (let i = 0; i < dataList.length; i++) {
         const row = [
             dataList[i][dataListCallField],
-            dataList[i]['PRE'],
-            dataList[i]['POS'],
-            dataList[i]['DOC']
+            dataList[i]['Pregrado'],
+            dataList[i]['Postgrado'],
+            dataList[i]['Doctorado']
         ];
         data.push(row);
     }
@@ -42,7 +42,7 @@ function renderChart(call_field, dataList, dataListCallField, h_axis, title){
         },
         animation: {
             startup: true,
-            duration: 1000,
+            duration: 1500,
             easing: 'out',
         },
     };
@@ -55,14 +55,14 @@ function renderChart(call_field, dataList, dataListCallField, h_axis, title){
 //---------------------------------------------------------
 
 const dataList_univ_stu_post = [
-    {'university': 'UNAL', 'PRE': 100, 'POS': 80, "DOC": 70},
-    {'university': 'UNIANDES', 'PRE': 70, 'POS': 70, 'DOC': 100},
+    {'university': 'UNAL', 'Pregrado': 100, 'Postgrado': 80, 'Doctorado': 70},
+    {'university': 'UNIANDES', 'Pregrado': 70, 'Postgrado': 70, 'Doctorado': 100},
 ];
 const results_univ_stu_post = renderChart("Universidad", dataList_univ_stu_post, 'university', 'Universidades', 'Estadística: Universidades por nivel de estudios estudiantes postulados');
 
 const dataList_univ_stu_win = [
-    {'university': 'UNAL', 'PRE': 50, 'POS': 40, "DOC": 35},
-    {'university': 'UNIANDES', 'PRE': 30, 'POS': 20, 'DOC': 40},
+    {'university': 'UNAL', 'Pregrado': 50, 'Postgrado': 40, 'Doctorado': 35},
+    {'university': 'UNIANDES', 'Pregrado': 30, 'Postgrado': 20, 'Doctorado': 40},
 ];
 const results_univ_stu_win = renderChart("Universidad", dataList_univ_stu_win, 'university', 'Universidades', 'Estadística: Universidades por nivel de estudios estudiantes ganadores');
 
@@ -70,16 +70,16 @@ const results_univ_stu_win = renderChart("Universidad", dataList_univ_stu_win, '
 //----------------------//----------------------//----------
 
 const dataList_cou_stu_post = [
-    {'country': 'Mexico', 'PRE': 100, 'POS': 80, "DOC": 70},
-    {'country': 'Canadá', 'PRE': 70, 'POS': 70, 'DOC': 100},
-    {'country': 'Francia', 'PRE': 100, 'POS': 80, "DOC": 70},
+    {'country': 'Mexico', 'Pregrado': 100, 'Postgrado': 80, 'Doctorado': 70},
+    {'country': 'Canadá', 'Pregrado': 70, 'Postgrado': 70, 'Doctorado': 100},
+    {'country': 'Francia', 'Pregrado': 100, 'Postgrado': 80, 'Doctorado': 70},
 ];
 const results_cou_stu_post = renderChart("País", dataList_cou_stu_post, 'country', 'Países', 'Estadística: Países por nivel de estudios estudiantes postulados');
 
 const dataList_cou_stu_win = [
-    {'country': 'Mexico', 'PRE': 50, 'POS': 40, "DOC": 35},
-    {'country': 'Canadá', 'PRE': 30, 'POS': 20, 'DOC': 40},
-    {'country': 'Francia', 'PRE': 50, 'POS': 40, "DOC": 35},
+    {'country': 'Mexico', 'Pregrado': 50, 'Postgrado': 40, 'Doctorado': 35},
+    {'country': 'Canadá', 'Pregrado': 30, 'Postgrado': 20, 'Doctorado': 40},
+    {'country': 'Francia', 'Pregrado': 50, 'Postgrado': 40, 'Doctorado': 35},
 ];
 const results_cou_stu_win = renderChart("País", dataList_cou_stu_win, 'country', 'Países', 'Estadística: Países por nivel de estudios estudiantes ganadores');
 
@@ -87,22 +87,22 @@ const results_cou_stu_win = renderChart("País", dataList_cou_stu_win, 'country'
 //----------------------//----------------------//----------
 
 const dataList_reg_stu_post = [
-    {'region': 'Uniandes', 'PRE': 100, 'POS': 80, "DOC": 70},
-    {'region': 'Asia', 'PRE': 70, 'POS': 70, 'DOC': 100},
-    {'region': 'Norteamérica', 'PRE': 100, 'POS': 80, "DOC": 70},
-    {'region': 'Europa', 'PRE': 70, 'POS': 70, 'DOC': 100},
-    {'region': 'Nacional-Sigueme', 'PRE': 100, 'POS': 80, "DOC": 70},
-    {'region': 'Oceanía', 'PRE': 70, 'POS': 70, 'DOC': 100},
+    {'region': 'Uniandes', 'Pregrado': 100, 'Postgrado': 80, 'Doctorado': 70},
+    {'region': 'Asia', 'Pregrado': 70, 'Postgrado': 70, 'Doctorado': 100},
+    {'region': 'Norteamérica', 'Pregrado': 100, 'Postgrado': 80, 'Doctorado': 70},
+    {'region': 'Europa', 'Pregrado': 70, 'Postgrado': 70, 'Doctorado': 100},
+    {'region': 'Nacional-Sigueme', 'Pregrado': 100, 'Postgrado': 80, 'Doctorado': 70},
+    {'region': 'Oceanía', 'Pregrado': 70, 'Postgrado': 70, 'Doctorado': 100},
 ];
 const results_reg_stu_post = renderChart("Región", dataList_reg_stu_post, 'region', 'Regiones', 'Estadística: Regiones por nivel de estudios estudiantes postulados');
 
 const dataList_reg_stu_win = [
-    {'region': 'Uniandes', 'PRE': 50, 'POS': 40, "DOC": 35},
-    {'region': 'Asia', 'PRE': 30, 'POS': 20, 'DOC': 40},
-    {'region': 'Norteamérica', 'PRE': 50, 'POS': 40, "DOC": 35},
-    {'region': 'Europa', 'PRE': 30, 'POS': 20, 'DOC': 40},
-    {'region': 'Nacional-Sigueme', 'PRE': 50, 'POS': 40, "DOC": 35},
-    {'region': 'Oceanía', 'PRE': 30, 'POS': 20, 'DOC': 40},
+    {'region': 'Uniandes', 'Pregrado': 50, 'Postgrado': 40, 'Doctorado': 35},
+    {'region': 'Asia', 'Pregrado': 30, 'Postgrado': 20, 'Doctorado': 40},
+    {'region': 'Norteamérica', 'Pregrado': 50, 'Postgrado': 40, 'Doctorado': 35},
+    {'region': 'Europa', 'Pregrado': 30, 'Postgrado': 20, 'Doctorado': 40},
+    {'region': 'Nacional-Sigueme', 'Pregrado': 50, 'Postgrado': 40, 'Doctorado': 35},
+    {'region': 'Oceanía', 'Pregrado': 30, 'Postgrado': 20, 'Doctorado': 40},
 ];
 const results_reg_stu_win = renderChart("Región", dataList_reg_stu_win, 'region', 'Regiones', 'Estadística: regiones por nivel de estudios estudiantes ganadores');
 
@@ -110,14 +110,14 @@ const results_reg_stu_win = renderChart("Región", dataList_reg_stu_win, 'region
 //----------------------//----------------------//----------
 
 const dataList_yea_stu_post = [
-    {'year': '2023', 'PRE': 100, 'POS': 80, "DOC": 70},
-    {'year': '2024', 'PRE': 70, 'POS': 70, 'DOC': 100},
+    {'year': '2023', 'Pregrado': 100, 'Postgrado': 80, 'Doctorado': 70},
+    {'year': '2024', 'Pregrado': 70, 'Postgrado': 70, 'Doctorado': 100},
 ];
 const results_yea_stu_post = renderChart("Año", dataList_yea_stu_post, 'year', 'Años', 'Estadística: Años por nivel de estudios estudiantes postulados');
 
 const dataList_yea_stu_win = [
-    {'year': '2023', 'PRE': 50, 'POS': 40, "DOC": 35},
-    {'year': '2024', 'PRE': 30, 'POS': 20, 'DOC': 40},
+    {'year': '2023', 'Pregrado': 50, 'Postgrado': 40, 'Doctorado': 35},
+    {'year': '2024', 'Pregrado': 30, 'Postgrado': 20, 'Doctorado': 40},
 ];
 const results_yea_stu_win = renderChart("Año", dataList_yea_stu_win, 'year', 'Años', 'Estadística: Años por nivel de estudios estudiantes ganadores');
 
@@ -125,14 +125,14 @@ const results_yea_stu_win = renderChart("Año", dataList_yea_stu_win, 'year', 'A
 //----------------------//----------------------//----------
 
 const dataList_sem_stu_post = [
-    {'semester': '1', 'PRE': 100, 'POS': 80, "DOC": 70},
-    {'semester': '2', 'PRE': 70, 'POS': 70, 'DOC': 100},
+    {'semester': '1', 'Pregrado': 100, 'Postgrado': 80, 'Doctorado': 70},
+    {'semester': '2', 'Pregrado': 70, 'Postgrado': 70, 'Doctorado': 100},
 ];
 const results_sem_stu_post = renderChart("Semestre", dataList_sem_stu_post, 'semester', 'Semestres', 'Estadística: Semestres por nivel de estudios estudiantes postulados');
 
 const dataList_sem_stu_win = [
-    {'semester': '1', 'PRE': 50, 'POS': 40, "DOC": 35},
-    {'semester': '2', 'PRE': 30, 'POS': 20, 'DOC': 40},
+    {'semester': '1', 'Pregrado': 50, 'Postgrado': 40, 'Doctorado': 35},
+    {'semester': '2', 'Pregrado': 30, 'Postgrado': 20, 'Doctorado': 40},
 ];
 const results_sem_stu_win = renderChart("Semestre", dataList_sem_stu_win, 'semester', 'Semestres', 'Estadística: Semestres por nivel de estudios estudiantes ganadores');
 
