@@ -95,7 +95,37 @@ const dataList_reg_sex_win = [
     {'region': 'Nacional-Sigueme', 'males': 10, 'females': 12},
     {'region': 'Oceanía', 'males': 10, 'females': 12},
 ];
-const results_reg_sex_win = renderChart("Región", dataList_reg_sex_win, 'region', 'Regiones', 'Estadística: Regiones por género estudiantes ganadores');
+const results_reg_sex_win = renderChart("Región", dataList_reg_sex_win, 'region', 'Regiones', 'Estadística: regiones por género estudiantes ganadores');
+
+//----------------------//----------------------//----------
+//----------------------//----------------------//----------
+
+const dataList_yea_sex_post = [
+    {'year': '2023', 'males': 100, 'females': 80},
+    {'year': '2024', 'males': 70, 'females': 80},
+];
+const results_yea_sex_post = renderChart("Año", dataList_yea_sex_post, 'year', 'Años', 'Estadística: Años por género estudiantes postulados');
+
+const dataList_yea_sex_win = [
+    {'year': '2023', 'males': 10, 'females': 12},
+    {'year': '2024', 'males': 15, 'females': 12},
+];
+const results_yea_sex_win = renderChart("Año", dataList_yea_sex_win, 'year', 'Años', 'Estadística: Años por género estudiantes ganadores');
+
+//----------------------//----------------------//----------
+//----------------------//----------------------//----------
+
+const dataList_sem_sex_post = [
+    {'semester': '1', 'males': 100, 'females': 80},
+    {'semester': '2', 'males': 70, 'females': 80},
+];
+const results_sem_sex_post = renderChart("Semestre", dataList_sem_sex_post, 'semester', 'Semestres', 'Estadística: Semestres por género estudiantes postulados');
+
+const dataList_sem_sex_win = [
+    {'semester': '1', 'males': 10, 'females': 12},
+    {'semester': '2', 'males': 15, 'females': 12},
+];
+const results_sem_sex_win = renderChart("Semestre", dataList_sem_sex_win, 'semester', 'Semestres', 'Estadística: Semestres por género estudiantes ganadores');
 
 //---------------------------------------------------------
 //---------------------------------------------------------
@@ -118,6 +148,7 @@ function App() {
     };
     const columnChartStyle = {
         width: "80%",
+        height: "400px",
         margin: "0 auto"
     }
     return (
@@ -149,6 +180,24 @@ function App() {
             <br/>
             <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_reg_sex_win[0]}
                                                  options={results_reg_sex_win[1]}/></div>
+            <br/>
+
+            <h2 style={mystyle}><b>Años</b></h2>
+            <br/>
+            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_yea_sex_post[0]}
+                                                 options={results_yea_sex_post[1]}/></div>
+            <br/>
+            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_yea_sex_win[0]}
+                                                 options={results_yea_sex_win[1]}/></div>
+            <br/>
+
+            <h2 style={mystyle}><b>Semestres</b></h2>
+            <br/>
+            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_sem_sex_post[0]}
+                                                 options={results_sem_sex_post[1]}/></div>
+            <br/>
+            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_sem_sex_win[0]}
+                                                 options={results_sem_sex_win[1]}/></div>
             <br/>
         </div>
     )
