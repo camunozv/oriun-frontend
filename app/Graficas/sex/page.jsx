@@ -3,6 +3,14 @@ import React from "react";
 import { Chart } from 'react-google-charts';
 
 function renderChart(call_field, dataList, dataListCallField, h_axis, title){
+    /*
+    Args:
+    - call_field (string): Nombre Del campo del filtro de la convocatoria que se mostrará en la tabla
+    - dataList (List of dict): Datos para llenar la tabla. Cada diccionario debe tener info. para los campos a visualizar
+    - dataListCallField (string): Nombre Del campo del filtro de la convocatoria que se encuentra en los dataList a enviar
+    - h_axis (string): Titulo del eje x
+    - title (string): Titulo de la gráfica
+     */
     const data =  [
         [call_field, 'Masculino', 'Femenino']
     ];
