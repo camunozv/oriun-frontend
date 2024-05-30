@@ -42,7 +42,7 @@ function ResultConvAdmin({ params }) {
         console.log(error);
       });
 
-    reset();
+    // reset();
   });
 
   if (!session) {
@@ -113,7 +113,7 @@ function ResultConvAdmin({ params }) {
           </div>
           <br />
           <div className="grid grid-cols-3 w-full gap-6">
-            {studentApplications?.map((application) => {
+            {studentApplications?.map((application) => (
               <CardResultadosEmp
                 student_id={application.student_id}
                 student_name={application.student_name}
@@ -121,8 +121,8 @@ function ResultConvAdmin({ params }) {
                 university_country={application.university_country}
                 call={application.country}
                 approved={application.approved}
-              />;
-            })}
+              />
+            ))}
           </div>
         </main>
       </>

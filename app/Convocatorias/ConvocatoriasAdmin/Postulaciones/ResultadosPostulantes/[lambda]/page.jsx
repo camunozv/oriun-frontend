@@ -24,15 +24,27 @@ function ResultadosPostulantes({ params }) {
 
   useEffect(() => {
     apiChooseWinner
-      .getGeneralAppplicantsOrder(id, token)
+      .getGeneralApplicantsNoOrder(id, token)
       .then((response) => {
         setApplcations(response.data);
-        console.log(response.data);
+        console.log('no order implemented');
       })
       .catch((error) => {
         console.log(error);
       });
   }, [token]);
+
+  const handleVerifAssignment = () => {
+    apiChooseWinner
+      .getVerificationAssignWinners(id, token)
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        alert(error.response.data.Error);
+        console.log(error);
+      });
+  };
 
   const handleGeneral = () => {
     apiChooseWinner
@@ -71,41 +83,50 @@ function ResultadosPostulantes({ params }) {
   };
 
   const handleAdvance = () => {
-    apiChooseWinner.getGeneralDocumentsAdvance(id, token).then((response) => {
-      setApplcations(response.data);
-      console.log(response.data, "4");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    apiChooseWinner
+      .getGeneralDocumentsAdvance(id, token)
+      .then((response) => {
+        setApplcations(response.data);
+        console.log(response.data, "4");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handlePbm = () => {
-    apiChooseWinner.getGeneralDocumentsPBM(id, token).then((response) => {
-      setApplcations(response.data);
-      console.log(response.data, "5");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    apiChooseWinner
+      .getGeneralDocumentsPBM(id, token)
+      .then((response) => {
+        setApplcations(response.data);
+        console.log(response.data, "5");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleCloseCall = () => {
-    apiChooseWinner.postCloseCall(id,token).then((response) => {
-      alert(response.data.message)
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    apiChooseWinner
+      .postCloseCall(id, token)
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const handleOpenCall = () => {
-    apiChooseWinner.postOpenCall(id,token).then((response) => {
-      alert(response.data.message)
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    apiChooseWinner
+      .postOpenCall(id, token)
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        
+        console.log(error);
+      });
+  };
 
   if (!session) {
     return <div>{status} ...</div>;
@@ -129,6 +150,13 @@ function ResultadosPostulantes({ params }) {
           <div className="flex items-center justify-between p-4 border border-gray-300 rounded-xl shadow-sm">
             <span className="text-black font-bold px-5">Ordene por:</span>
             <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleVerifAssignment}
+                className="flex transition-all items-center justify-center gap-3 border-2 rounded-full  py-2 font-semibold bg-blue-600 border-blue-600 text-white px-5 mx-2 hover:text-figma_blue hover:bg-white"
+              >
+                Verificar asignación de Ganadores
+              </button>
               <button
                 type="button"
                 onClick={handleGeneral}
@@ -213,7 +241,7 @@ function ResultadosPostulantes({ params }) {
               Abrir Convocatoria
             </button>
           </div>
-          <div className="flex mt-5">
+          {/* <div className="flex mt-5">
             <button
               type="button"
               className="flex-1 mr-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
@@ -227,7 +255,7 @@ function ResultadosPostulantes({ params }) {
             >
               Guardar y volver
             </button>
-          </div>
+          </div> */}
         </main>
       </>
     );

@@ -15,6 +15,7 @@ export const apiChooseWinner = {
     });
   },
 
+  // Implemented: *
   getGeneralApplicantsNoOrder: function (callId, token) {
     return api_instance.get(`${endpoint_1}/get_all/${callId}`, {
         headers: {
@@ -53,7 +54,7 @@ export const apiChooseWinner = {
     })
   },
 
-  // Implemented: no languages are retrieved
+  // Implemented: languages are retrieved as T or F, necessary?
   getGeneralDocumentsLanguage: function (callId, token) {
     
     return api_instance.get(`${endpoint_1}/order_lang/${callId}` , {
@@ -73,22 +74,20 @@ export const apiChooseWinner = {
     })
   },
 
-  // Implemented: 500
+  // Implemented: 400 "Application matching query does not exist."
   postAssignWinner: function (call_id, student_id, token) {
 
-    return api_instance.post(`${endpoint_1}/winner`, {call_id, student_id} , {
+    return api_instance.post(`${endpoint_1}/winner/`, {call_id, student_id} , {
         headers: {
             'Authorization' : `Bearer ${token}`
         },
-        
-        
     })
   },
 
-  // Implemented: 500
+  // Implemented: 400 "Application matching query does not exist."
   postAssignNotWinner: function (call_id, student_id, token) {
 
-    return api_instance.post(`${endpoint_1}/not_winner`, {call_id, student_id} , {
+    return api_instance.post(`${endpoint_1}/not_winner/`, {call_id, student_id} , {
         headers: {
             'Authorization' : `Bearer ${token}`
         },
@@ -97,26 +96,27 @@ export const apiChooseWinner = {
     )
   },
 
-  // Implemented: 500
+  // Implemented: *
   postCloseCall: function (call_id, token) {
 
-    return api_instance.post(`${endpoint_2}/set_closed`, {call_id} , {
+    return api_instance.post(`${endpoint_2}/set_closed/`, {call_id} , {
         headers : {
             'Authorization' : `Bearer ${token}`
         }
     })
   },
 
-  // Implemented: 500
+  // Implemented: *
   postOpenCall: function (call_id, token) {
 
-    return api_instance.post(`${endpoint_2}/set_open`, {call_id} , {
+    return api_instance.post(`${endpoint_2}/set_open/`, {call_id} , {
         headers : {
             'Authorization' : `Bearer ${token}`
         }
     })
   },
 
+  // Implemented: *
   getVerificationAssignWinners: function (call_id, token) {
 
     return api_instance.get(`${endpoint_1}/pre_assign_winners/${call_id}`, {
@@ -125,7 +125,5 @@ export const apiChooseWinner = {
         }
     })
   }
-
-
 
 };
