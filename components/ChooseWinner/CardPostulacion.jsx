@@ -42,15 +42,20 @@ function CardPostulacion({
 
             {/* Agrega la imagen en la esquina superior derecha 
             <div className="absolute top-0 right-0 w-12 h-12">
-              <Image src="/images/CirculoVerde.png" width={50} height={50} alt="Logo" />
+              <Image src={imagenSrc} width={50} height={50} alt="Logo" />
             </div>           
-            El metodo de abajo tiene una mejor calidad de imagen*/}
+            El metodo de abajo tiene una mejor calidad de imagen
 
             <img
               src={imagenSrc} // Reemplaza esta ruta con la ruta de tu imagen
               alt="Logo"
               className="absolute top-0 right-0 w-12 h-12" // Estilos para posicionar la imagen en la esquina superior derecha
             />
+            */}
+
+            <div className="absolute top-0 right-0 w-12 h-12">
+              <Image src={imagenSrc} width={50} height={50} alt="Logo" />
+            </div>
           </div>
 
           <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
