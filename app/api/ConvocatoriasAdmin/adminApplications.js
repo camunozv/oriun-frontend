@@ -83,7 +83,7 @@ export const adminApplications = {
   getAllResultsCall: function (call_id, approved, student_id, token) {
     return api_instance.get(`${endpoint}/results_employee/${call_id}`, {
       headers: {
-        headers: { Authorization: `Bearer ${token}` },
+        Authorization: `Bearer ${token}` ,
       },
       params : {
         approved, 
