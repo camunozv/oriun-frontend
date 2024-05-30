@@ -1,8 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import CardResultadosEmp from "@/components/Results/CardResultadosEmp";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { adminApplications } from "@/app/api/ConvocatoriasAdmin/adminApplications";
 
 function ResultConvAdmin({ params }) {
   const id = params.lambda;
@@ -17,6 +19,32 @@ function ResultConvAdmin({ params }) {
   const token = session?.access;
   const user_type = session?.type_user;
 
+  const { register, handleSubmit, reset } = useForm();
+
+  const [studentApplications, setStudentsApplications] = useState([]);
+
+  const mySubmit = handleSubmit((data) => {
+    if (data.approved === "Aprobado..." || data.approved === "") {
+      data.approved = null;
+    }
+
+    if (data.student_id === "") {
+      data.student_id = null;
+    }
+
+    adminApplications
+      .getAllResultsCall(id, data.approved, data.student_id, token)
+      .then((response) => {
+        console.log(response.data);
+        setStudentsApplications(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // reset();
+  });
+
   if (!session) {
     return <div>{state}...</div>;
   } else if (user_type === "student") {
@@ -26,15 +54,27 @@ function ResultConvAdmin({ params }) {
       <>
         <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
           <h1 className="font-bold text-[40px] underline text-center">
-            Conv No
+            Convocatoria No. {id}
           </h1>
           <br />
-          <section className="flex items-center justify-center w-[1580px]">
-            <form className="flex gap-6 justify-center items-center w-[600px] border border-black px-3 py-2 rounded-lg">
-              <input type="text" className="border-gray-300 border rounded-md outline-none" placeholder="ID Estudiante"></input>
-              
-              <select placeholder={null} className="border-gray-300 border rounded-md outline-none bg-white">
-                <option value={null}>Aprobado...</option>
+          <section className="relative mx-auto flex items-center justify-center w-[1580px]">
+            <form
+              onSubmit={mySubmit}
+              className="flex gap-6 justify-center items-center w-[600px] border border-black px-3 py-2 rounded-lg"
+            >
+              <input
+                type="text"
+                className="border-gray-300 border rounded-md outline-none"
+                {...register("student_id")}
+                placeholder="ID Estudiante"
+              ></input>
+
+              <select
+                placeholder=""
+                {...register("approved")}
+                className="border-gray-300 border rounded-md outline-none bg-white"
+              >
+                <option value="">Aprobado...</option>
                 <option value="true">Si</option>
                 <option value="false">No</option>
               </select>
@@ -72,16 +112,18 @@ function ResultConvAdmin({ params }) {
             </div>
           </div>
           <br />
-          <div className="grid grid-cols-3">
-            <div className="p-2">
-              <CardResultadosEmp StudentResult="Aprobado" />
-            </div>
-            <div className="p-2">
-              <CardResultadosEmp StudentResult="Aprobado" />
-            </div>
-            <div className="p-2">
-              <CardResultadosEmp StudentResult="No Aprobado" />
-            </div>
+          <div className="grid grid-cols-3 w-full gap-6">
+            {studentApplications?.map((application) => (
+              <CardResultadosEmp
+                key={application.student_id}
+                student_id={application.student_id}
+                student_name={application.student_name}
+                university_name={application.university_name}
+                university_country={application.university_country}
+                call={application.country}
+                approved={application.approved}
+              />
+            ))}
           </div>
         </main>
       </>

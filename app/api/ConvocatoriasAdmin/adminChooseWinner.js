@@ -4,6 +4,8 @@ const endpoint_1 = "application";
 const endpoint_2 = "call";
 
 export const apiChooseWinner = {
+
+  // Implemented: *
   getGeneralAppplicantsOrder: function (callId, token) {
     return api_instance.get(`${endpoint_1}/order/${callId}`, {
         headers : {
@@ -13,6 +15,7 @@ export const apiChooseWinner = {
     });
   },
 
+  // Implemented: *
   getGeneralApplicantsNoOrder: function (callId, token) {
     return api_instance.get(`${endpoint_1}/get_all/${callId}`, {
         headers: {
@@ -21,6 +24,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: *
   getGeneralDocumentsOrder: function (callId, token) {
 
     return api_instance.get(`${endpoint_1}/order_docs/${callId}`, {
@@ -30,6 +34,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: *
   getGeneralDocumentsPAPA: function (callId, token) {
     
     return api_instance.get(`${endpoint_1}/order_papa/${callId}` , {
@@ -39,15 +44,17 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: *
   getGeneralDocumentsAdvance: function (callId, token) {
     
-    return api_instance.get(`${endpoint_1}/order_advance/${callId}` , {
+    return api_instance.get(`${endpoint_1}/order_adva/${callId}` , {
         headers : {
             'Authorization' : `Bearer ${token}`
         }
     })
   },
 
+  // Implemented: languages are retrieved as T or F, necessary?
   getGeneralDocumentsLanguage: function (callId, token) {
     
     return api_instance.get(`${endpoint_1}/order_lang/${callId}` , {
@@ -57,6 +64,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: *
   getGeneralDocumentsPBM: function (callId, token) {
     
     return api_instance.get(`${endpoint_1}/order_pbm/${callId}` , {
@@ -66,43 +74,49 @@ export const apiChooseWinner = {
     })
   },
 
-  postAssignWinner: function (call_id, student_id) {
+  // Implemented: 400 "Application matching query does not exist."
+  postAssignWinner: function (call_id, student_id, token) {
 
-    return api_instance.post(`${endpoint_1}/winner`, {call_id, student_id} , {
+    return api_instance.post(`${endpoint_1}/winner/`, {call_id, student_id} , {
         headers: {
             'Authorization' : `Bearer ${token}`
-        }
+        },
     })
   },
 
-  postAssignNotWinner: function (call_id, student_id) {
+  // Implemented: 400 "Application matching query does not exist."
+  postAssignNotWinner: function (call_id, student_id, token) {
 
-    return api_instance.post(`${endpoint_1}/not_winner`, {call_id, student_id} , {
+    return api_instance.post(`${endpoint_1}/not_winner/`, {call_id, student_id} , {
         headers: {
             'Authorization' : `Bearer ${token}`
-        }
+        },
+       
     }     
     )
   },
 
+  // Implemented: *
   postCloseCall: function (call_id, token) {
 
-    return api_instance.post(`${endpoint_2}/set_closed`, {call_id} , {
+    return api_instance.post(`${endpoint_2}/set_closed/`, {call_id} , {
         headers : {
             'Authorization' : `Bearer ${token}`
         }
     })
   },
 
+  // Implemented: *
   postOpenCall: function (call_id, token) {
 
-    return api_instance.post(`${endpoint_2}/set_open`, {call_id} , {
+    return api_instance.post(`${endpoint_2}/set_open/`, {call_id} , {
         headers : {
             'Authorization' : `Bearer ${token}`
         }
     })
   },
 
+  // Implemented: *
   getVerificationAssignWinners: function (call_id, token) {
 
     return api_instance.get(`${endpoint_1}/pre_assign_winners/${call_id}`, {
@@ -111,7 +125,5 @@ export const apiChooseWinner = {
         }
     })
   }
-
-
 
 };

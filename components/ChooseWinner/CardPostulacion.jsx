@@ -72,14 +72,6 @@ function CardPostulacion({
 
           <div className="flex justify-between items-center w-96">
             <div className="w-full p-2">
-              <button
-                type="button"
-                className="w-full text-base font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-1"
-              >
-                Seleccionar como Ganador
-              </button>
-            </div>
-            <div className="w-full p-2">
               <Link
                 href={`/Convocatorias/ConvocatoriasAdmin/Postulaciones/VerPostulacionDocumentos/${call_id}/${StudentId}`}
               >
