@@ -40,8 +40,8 @@ export const LINKS_ADMIN = [
     label: "Universidades",
   },
   {
-    href: "/PreguntasFrecuentes",
-    key: "preguntas_frecuentes",
-    label: "Preguntas Frecuentes",
+    href: "/Statistics",
+    key: "statistics",
+    label: "Estadísticas",
   },
 ];
