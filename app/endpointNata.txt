@@ -1,29 +1,6 @@
-{application{
-: 
+student_id	Integer	Unique identifier of the student.
+student_name	String	Full name of the student.
+university_name	String	Name of the university where the student is an applicant.
+university_country	String	Country where the university is located.
+call	Integer	Unique identifier of the call.
 approved
-: 
-true
-call
-: 
-1
-call_description
-: 
-"Realizar una actividad académica reconocible dentro del plan de estudios que cursa el\nestudiante en la Universidad Nacional de Colombia. Las actividades académicas están\ndescritas y reglamentadas por la Resolución 13 del 9 de julio de 2021 de la Vicerrectoría\nAcadémica: http://www.legal.unal.edu.co/rlunal/home/doc.jsp?d_i=98445."
-state_documents
-: 
-2
-student_id
-: 
-5596848490
-university_country
-: 
-"Colombia"
-university_name
-: 
-"Universidad de los Andes"
-: 
-}
-message
-: 
-"Felicitaciones, usted ha sido seleccionad@ a la convocatoria 1."
-}
