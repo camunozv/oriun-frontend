@@ -115,6 +115,7 @@ function ResultConvAdmin({ params }) {
           <div className="grid grid-cols-3 w-full gap-6">
             {studentApplications?.map((application) => (
               <CardResultadosEmp
+                key={application.student_id}
                 student_id={application.student_id}
                 student_name={application.student_name}
                 university_name={application.university_name}
