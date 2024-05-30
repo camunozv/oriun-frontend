@@ -46,7 +46,7 @@ export const apiChooseWinner = {
   // Implemented: *
   getGeneralDocumentsAdvance: function (callId, token) {
     
-    return api_instance.get(`${endpoint_1}/order_advance/${callId}` , {
+    return api_instance.get(`${endpoint_1}/order_adva/${callId}` , {
         headers : {
             'Authorization' : `Bearer ${token}`
         }
@@ -73,25 +73,31 @@ export const apiChooseWinner = {
     })
   },
 
-  postAssignWinner: function (call_id, student_id) {
+  // Implemented: 500
+  postAssignWinner: function (call_id, student_id, token) {
 
     return api_instance.post(`${endpoint_1}/winner`, {call_id, student_id} , {
         headers: {
             'Authorization' : `Bearer ${token}`
-        }
+        },
+        
+        
     })
   },
 
-  postAssignNotWinner: function (call_id, student_id) {
+  // Implemented: 500
+  postAssignNotWinner: function (call_id, student_id, token) {
 
     return api_instance.post(`${endpoint_1}/not_winner`, {call_id, student_id} , {
         headers: {
             'Authorization' : `Bearer ${token}`
-        }
+        },
+       
     }     
     )
   },
 
+  // Implemented: 500
   postCloseCall: function (call_id, token) {
 
     return api_instance.post(`${endpoint_2}/set_closed`, {call_id} , {
@@ -101,6 +107,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: 500
   postOpenCall: function (call_id, token) {
 
     return api_instance.post(`${endpoint_2}/set_open`, {call_id} , {

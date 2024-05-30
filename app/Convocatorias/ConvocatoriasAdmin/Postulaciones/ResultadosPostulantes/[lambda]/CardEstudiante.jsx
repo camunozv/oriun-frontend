@@ -1,4 +1,5 @@
 "use client";
+import { apiChooseWinner } from "@/app/api/ConvocatoriasAdmin/adminChooseWinner";
 import React from "react";
 import { useState } from "react";
 
@@ -12,11 +13,32 @@ function CardEstudiante({
   sedes,
   idioma,
   pbm,
+  token,
 }) {
   const [isGanador, setIsGanador] = useState(false);
 
   const handleButtonClick = () => {
     setIsGanador(!isGanador);
+
+    if (isGanador === true) {
+      apiChooseWinner
+        .postAssignNotWinner(idCall, idEstudiante, token)
+        .then((response) => {
+          alert(response.data.message);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      apiChooseWinner
+        .postAssignWinner(idCall, idEstudiante, token)
+        .then((response) => {
+          alert(response.data.message);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
