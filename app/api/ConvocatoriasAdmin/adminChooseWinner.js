@@ -4,6 +4,8 @@ const endpoint_1 = "application";
 const endpoint_2 = "call";
 
 export const apiChooseWinner = {
+
+  // Implemented: *
   getGeneralAppplicantsOrder: function (callId, token) {
     return api_instance.get(`${endpoint_1}/order/${callId}`, {
         headers : {
@@ -21,6 +23,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: *
   getGeneralDocumentsOrder: function (callId, token) {
 
     return api_instance.get(`${endpoint_1}/order_docs/${callId}`, {
@@ -30,6 +33,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: *
   getGeneralDocumentsPAPA: function (callId, token) {
     
     return api_instance.get(`${endpoint_1}/order_papa/${callId}` , {
@@ -39,6 +43,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: *
   getGeneralDocumentsAdvance: function (callId, token) {
     
     return api_instance.get(`${endpoint_1}/order_advance/${callId}` , {
@@ -48,6 +53,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: no languages are retrieved
   getGeneralDocumentsLanguage: function (callId, token) {
     
     return api_instance.get(`${endpoint_1}/order_lang/${callId}` , {
@@ -57,6 +63,7 @@ export const apiChooseWinner = {
     })
   },
 
+  // Implemented: *
   getGeneralDocumentsPBM: function (callId, token) {
     
     return api_instance.get(`${endpoint_1}/order_pbm/${callId}` , {

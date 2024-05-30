@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { apiChooseWinner } from "@/app/api/ConvocatoriasAdmin/adminChooseWinner";
 
 function ResultadosPostulantes({ params }) {
   const [applications, setApplcations] = useState([]);
@@ -22,8 +23,8 @@ function ResultadosPostulantes({ params }) {
   const id = params.lambda;
 
   useEffect(() => {
-    adminApplications
-      .getGeneralApplications(null, id, null, token)
+    apiChooseWinner
+      .getGeneralAppplicantsOrder(id, token)
       .then((response) => {
         setApplcations(response.data);
         console.log(response.data);
@@ -32,6 +33,62 @@ function ResultadosPostulantes({ params }) {
         console.log(error);
       });
   }, [token]);
+
+  const handleGeneral = () => {
+    apiChooseWinner
+      .getGeneralAppplicantsOrder(id, token)
+      .then((response) => {
+        setApplcations(response.data);
+        console.log(response.data, "1");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleDocState = () => {
+    apiChooseWinner
+      .getGeneralDocumentsOrder(id, token)
+      .then((response) => {
+        setApplcations(response.data);
+        console.log(response.data, "2");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handlePapa = () => {
+    apiChooseWinner
+      .getGeneralDocumentsPAPA(id, token)
+      .then((response) => {
+        setApplcations(response.data);
+        console.log(response.data, "3");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleAdvance = () => {
+    apiChooseWinner.getGeneralDocumentsAdvance(id, token).then((response) => {
+      setApplcations(response.data);
+      console.log(response.data, "4");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  const handlePbm = () => {
+    apiChooseWinner.getGeneralDocumentsPBM(id, token).then((response) => {
+      setApplcations(response.data);
+      console.log(response.data, "5");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 
   if (!session) {
     return <div>{status} ...</div>;
@@ -46,8 +103,8 @@ function ResultadosPostulantes({ params }) {
               htmlFor="information_grid"
               className="font text-[20px] block"
             >
-              En esta sección se muestran las postulaciones de la convocatoria,
-              con el siguiente menu podra filtrar las postulaciones por el
+              En esta sección se muestran las postulaciones de la Convocatoria{" "}
+              {id}, con el siguiente menu podra filtrar las postulaciones por el
               parametro que se necesite para seleccionar los ganadores.
             </label>
           </div>
@@ -57,6 +114,7 @@ function ResultadosPostulantes({ params }) {
             <div className="flex gap-2">
               <button
                 type="button"
+                onClick={handleGeneral}
                 className="flex transition-all items-center justify-center gap-3 border-2 rounded-full  py-2 font-semibold bg-blue-600 border-blue-600 text-white px-5 mx-2 hover:text-figma_blue hover:bg-white"
               >
                 General
@@ -64,6 +122,7 @@ function ResultadosPostulantes({ params }) {
 
               <button
                 type="button"
+                onClick={handleDocState}
                 className="flex transition-all items-center justify-center gap-3 border-2 rounded-full  py-2 font-semibold bg-blue-600 border-blue-600 text-white px-5 mx-2 hover:text-figma_blue hover:bg-white"
               >
                 Estado docs
@@ -71,6 +130,7 @@ function ResultadosPostulantes({ params }) {
 
               <button
                 type="button"
+                onClick={handlePapa}
                 className="flex transition-all items-center justify-center gap-3 border-2 rounded-full  py-2 font-semibold bg-blue-600 border-blue-600 text-white px-5 mx-2 hover:text-figma_blue hover:bg-white"
               >
                 PAPA
@@ -78,20 +138,22 @@ function ResultadosPostulantes({ params }) {
 
               <button
                 type="button"
+                onClick={handleAdvance}
                 className="flex transition-all items-center justify-center gap-3 border-2 rounded-full  py-2 font-semibold bg-blue-600 border-blue-600 text-white px-5 mx-2 hover:text-figma_blue hover:bg-white"
               >
                 Avance
               </button>
 
-              <button
+              {/* <button
                 type="button"
                 className="flex transition-all items-center justify-center gap-3 border-2 rounded-full  py-2 font-semibold bg-blue-600 border-blue-600 text-white px-5 mx-2 hover:text-figma_blue hover:bg-white"
               >
                 Idioma
-              </button>
+              </button> */}
 
               <button
                 type="button"
+                onClick={handlePbm}
                 className="flex transition-all items-center justify-center gap-3 border-2 rounded-full  py-2 font-semibold bg-blue-600 border-blue-600 text-white px-5 mx-2 hover:text-figma_blue hover:bg-white"
               >
                 PBM
@@ -101,60 +163,21 @@ function ResultadosPostulantes({ params }) {
         </div>
 
         <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
-          <CardEstudiante
-            idEstudiante="ID Estudiante"
-            nombreEstudiante="Nombre Estudiante"
-            papa="PAPA"
-            avance="Avance"
-            sedes="Sedes"
-            idioma="Idioma"
-            pbm="PBM"
-          />
-          <CardEstudiante
-            idEstudiante="ID Estudiante"
-            nombreEstudiante="Nombre Estudiante"
-            papa="PAPA"
-            avance="Avance"
-            sedes="Sedes"
-            idioma="Idioma"
-            pbm="PBM"
-          />
-          <CardEstudiante
-            idEstudiante="ID Estudiante"
-            nombreEstudiante="Nombre Estudiante"
-            papa="PAPA"
-            avance="Avance"
-            sedes="Sedes"
-            idioma="Idioma"
-            pbm="PBM"
-          />
-          <CardEstudiante
-            idEstudiante="ID Estudiante"
-            nombreEstudiante="Nombre Estudiante"
-            papa="PAPA"
-            avance="Avance"
-            sedes="Sedes"
-            idioma="Idioma"
-            pbm="PBM"
-          />
-          <CardEstudiante
-            idEstudiante="ID Estudiante"
-            nombreEstudiante="Nombre Estudiante"
-            papa="PAPA"
-            avance="Avance"
-            sedes="Sedes"
-            idioma="Idioma"
-            pbm="PBM"
-          />
-          <CardEstudiante
-            idEstudiante="ID Estudiante"
-            nombreEstudiante="Nombre Estudiante"
-            papa="PAPA"
-            avance="Avance"
-            sedes="Sedes"
-            idioma="Idioma"
-            pbm="PBM"
-          />
+          {applications?.map((application) => (
+            <CardEstudiante
+              key={application.student_id}
+              idEstudiante={application.student_id}
+              nombreEstudiante={application.student_name}
+              papa={application.student_PAPA}
+              avance={application.student_advance}
+              sedes={application.student_headquarter}
+              idioma={application.language}
+              pbm={application.student_PBM}
+              estadoDocs={application.state_documents}
+              idCall={application.id}
+            />
+          ))}
+
           <div className="flex">
             <button
               type="button"
