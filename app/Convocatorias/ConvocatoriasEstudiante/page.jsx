@@ -1,6 +1,7 @@
-// ConvocatoriasEstudiantePage.jsx
+
 import { options } from "@/app/api/auth/[...nextauth]/credentials_options";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const figmaBlue = "#4e545c";
@@ -11,14 +12,9 @@ async function ConvocatoriasEstudiantePage() {
   const user_type = session?.type_user;
 
   if (user_type === "employee") {
+    redirect("/Convocatorias");
+  } else {
     return (
-      <main className="relative mt-4 mx-auto max-w-[1580px] p-2">
-        <div>Redirigiendo...</div>
-      </main>
-    );
-  }
-
-  return (
    
 <main className="relative mt-4 mx-auto max-w-[1580px] p-2">
   <div className="flex justify-center items-center h-screen">
@@ -138,6 +134,9 @@ async function ConvocatoriasEstudiantePage() {
       </section>
     </main>
   );
+
 }
+}
+
 
 export default ConvocatoriasEstudiantePage;
