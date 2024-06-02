@@ -170,7 +170,7 @@ function App() {
 
     if (data.winner_state === "postulates") {
       apiCharts
-        .getInfoCharts("PAPA", data.chart_parameter, token)
+        .getInfoCharts("advance", data.chart_parameter, token)
         .then((response) => {
           setDataToGraph(response.data.postulates);
           console.log(response.data);
@@ -180,7 +180,7 @@ function App() {
         });
     } else {
       apiCharts
-        .getInfoCharts("PAPA", data.chart_parameter, token)
+        .getInfoCharts("advance", data.chart_parameter, token)
         .then((response) => {
           setDataToGraph(response.data.winners);
           console.log(response.data);
