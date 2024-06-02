@@ -1,9 +1,13 @@
-"use client"
-import React from "react";
-import { Chart } from 'react-google-charts';
+"use client";
+import { apiCharts } from "@/app/api/Graficas/charts";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import React, { useState } from "react";
+import { Chart } from "react-google-charts";
+import { useForm } from "react-hook-form";
 
-function renderChart(call_field, dataList, dataListCallField, h_axis, title){
-    /*
+function renderChart(call_field, dataList, dataListCallField, h_axis, title) {
+  /*
     Args:
     - call_field (string): Nombre Del campo del filtro de la convocatoria que se mostrará en la tabla
     - dataList (List of dict): Datos para llenar la tabla. Cada diccionario debe tener info. para los campos a visualizar
@@ -11,218 +15,223 @@ function renderChart(call_field, dataList, dataListCallField, h_axis, title){
     - h_axis (string): Titulo del eje x
     - title (string): Titulo de la gráfica
      */
-    var columns = [call_field]
+  var columns = [call_field];
 
-    const keys = Object.keys(dataList[0]);
+  const keys = Object.keys(dataList[0]);
 
-    const index = keys.indexOf(dataListCallField);
-    // Si dataList_call_field se encuentra en el array, eliminarlo
-    if (index !== -1) {
-        keys.splice(index, 1);
+  const index = keys.indexOf(dataListCallField);
+  // Si dataList_call_field se encuentra en el array, eliminarlo
+  if (index !== -1) {
+    keys.splice(index, 1);
+  }
+
+  columns = columns.concat(keys);
+
+  const data = [columns];
+
+  for (let i = 0; i < dataList.length; i++) {
+    const row = [dataList[i][dataListCallField]];
+    for (let j = 0; j < keys.length; j++) {
+      row.push(dataList[i][keys[j]]);
     }
+    data.push(row);
+  }
 
-    columns = columns.concat(keys)
+  const options = {
+    title: title,
+    allowHtml: true,
+    alternatingRowStyle: true,
+    width: "100%",
+    height: "100%",
+    sort: "enable",
+    backgroundColor: "#f7f7f7",
+    hAxis: {
+      title: h_axis,
+      scrollbar: "true",
+    },
+    vAxis: {
+      title: "Número Estudiantes",
+    },
+    animation: {
+      startup: true,
+      duration: 1500,
+      easing: "out",
+    },
+  };
 
-    const data =  [
-        columns
-    ];
-
-    for (let i = 0; i < dataList.length; i++) {
-        const row = [
-            dataList[i][dataListCallField],
-        ];
-        for (let j=0; j< keys.length; j++) {
-            row.push(dataList[i][keys[j]]);
-        }
-        data.push(row);
-    }
-
-
-    const options = {
-        title: title,
-        allowHtml: true,
-        alternatingRowStyle: true,
-        width: '100%',
-        height: '100%',
-        sort: 'enable',
-        backgroundColor: '#f7f7f7',
-        hAxis: {
-            title: h_axis,
-            scrollbar: 'true'
-        },
-        vAxis: {
-            title: 'Número Estudiantes',
-        },
-        animation: {
-            startup: true,
-            duration: 1500,
-            easing: 'out',
-        },
-    };
-
-    return [data, options]
+  return [data, options];
 }
 
-//---------------------------------------------------------
-//---------------------------------------------------------
-//---------------------------------------------------------
-
-const dataList_univ_hea_post = [
-    {'university': 'UNAL', 'Bogotá': 100, 'Medellín': 80, "...": 70},
-    {'university': 'UNIANDES', 'Bogotá': 70, 'Medellín': 70, '...': 100},
-];
-const results_univ_hea_post = renderChart("Universidad", dataList_univ_hea_post, 'university', 'Universidades', 'Estadística: Universidades por sede estudiantes postulados');
-
-const dataList_univ_hea_win = [
-    {'university': 'UNAL', 'Bogotá': 50, 'Medellín': 40, "...": 35},
-    {'university': 'UNIANDES', 'Bogotá': 30, 'Medellín': 20, '...': 40},
-];
-const results_univ_hea_win = renderChart("Universidad", dataList_univ_hea_win, 'university', 'Universidades', 'Estadística: Universidades por sede estudiantes ganadores');
-
-//----------------------//----------------------//----------
-//----------------------//----------------------//----------
-
-const dataList_cou_hea_post = [
-    {'country': 'Mexico', 'Bogotá': 100, 'Medellín': 80, "...": 70},
-    {'country': 'Canadá', 'Bogotá': 70, 'Medellín': 70, '...': 100},
-    {'country': 'Francia', 'Bogotá': 100, 'Medellín': 80, "...": 70},
-];
-const results_cou_hea_post = renderChart("País", dataList_cou_hea_post, 'country', 'Países', 'Estadística: Países por sede estudiantes postulados');
-
-const dataList_cou_hea_win = [
-    {'country': 'Mexico', 'Bogotá': 50, 'Medellín': 40, "...": 35},
-    {'country': 'Canadá', 'Bogotá': 30, 'Medellín': 20, '...': 40},
-    {'country': 'Francia', 'Bogotá': 50, 'Medellín': 40, "...": 35},
-];
-const results_cou_hea_win = renderChart("País", dataList_cou_hea_win, 'country', 'Países', 'Estadística: Países por sede estudiantes ganadores');
-
-//----------------------//----------------------//----------
-//----------------------//----------------------//----------
-
-const dataList_reg_hea_post = [
-    {'region': 'Uniandes', 'Bogotá': 100, 'Medellín': 80, "...": 70},
-    {'region': 'Asia', 'Bogotá': 70, 'Medellín': 70, '...': 100},
-    {'region': 'Norteamérica', 'Bogotá': 100, 'Medellín': 80, "...": 70},
-    {'region': 'Europa', 'Bogotá': 70, 'Medellín': 70, '...': 100},
-    {'region': 'Nacional-Sigueme', 'Bogotá': 100, 'Medellín': 80, "...": 70},
-    {'region': 'Oceanía', 'Bogotá': 70, 'Medellín': 70, '...': 100},
-];
-const results_reg_hea_post = renderChart("Región", dataList_reg_hea_post, 'region', 'Regiones', 'Estadística: Regiones por sede estudiantes postulados');
-
-const dataList_reg_hea_win = [
-    {'region': 'Uniandes', 'Bogotá': 50, 'Medellín': 40, "...": 35},
-    {'region': 'Asia', 'Bogotá': 30, 'Medellín': 20, '...': 40},
-    {'region': 'Norteamérica', 'Bogotá': 50, 'Medellín': 40, "...": 35},
-    {'region': 'Europa', 'Bogotá': 30, 'Medellín': 20, '...': 40},
-    {'region': 'Nacional-Sigueme', 'Bogotá': 50, 'Medellín': 40, "...": 35},
-    {'region': 'Oceanía', 'Bogotá': 30, 'Medellín': 20, '...': 40},
-];
-const results_reg_hea_win = renderChart("Región", dataList_reg_hea_win, 'region', 'Regiones', 'Estadística: regiones por sede estudiantes ganadores');
-
-//----------------------//----------------------//----------
-//----------------------//----------------------//----------
-
-const dataList_yea_hea_post = [
-    {'year': '2023', 'Bogotá': 100, 'Medellín': 80, "...": 70},
-    {'year': '2024', 'Bogotá': 70, 'Medellín': 70, '...': 100},
-];
-const results_yea_hea_post = renderChart("Año", dataList_yea_hea_post, 'year', 'Años', 'Estadística: Años por sede estudiantes postulados');
-
-const dataList_yea_hea_win = [
-    {'year': '2023', 'Bogotá': 50, 'Medellín': 40, "...": 35},
-    {'year': '2024', 'Bogotá': 30, 'Medellín': 20, '...': 40},
-];
-const results_yea_hea_win = renderChart("Año", dataList_yea_hea_win, 'year', 'Años', 'Estadística: Años por sede estudiantes ganadores');
-
-//----------------------//----------------------//----------
-//----------------------//----------------------//----------
-
-const dataList_sem_hea_post = [
-    {'semester': '1', 'Bogotá': 100, 'Medellín': 80, "...": 70},
-    {'semester': '2', 'Bogotá': 70, 'Medellín': 70, '...': 100},
-];
-const results_sem_hea_post = renderChart("Semestre", dataList_sem_hea_post, 'semester', 'Semestres', 'Estadística: Semestres por sede estudiantes postulados');
-
-const dataList_sem_hea_win = [
-    {'semester': '1', 'Bogotá': 50, 'Medellín': 40, "...": 35},
-    {'semester': '2', 'Bogotá': 30, 'Medellín': 20, '...': 40},
-];
-const results_sem_hea_win = renderChart("Semestre", dataList_sem_hea_win, 'semester', 'Semestres', 'Estadística: Semestres por sede estudiantes ganadores');
-
-//---------------------------------------------------------
-//---------------------------------------------------------
-
 function App() {
-    const mystyle0 = {
-        color: "white",
-        backgroundColor: "DodgerBlue",
-        padding: "10px",
-        fontFamily: "Arial",
-        margin: "0 auto",
-    };
-    const mystyle = {
-        color: "white",
-        backgroundColor: "DodgerBlue",
-        padding: "10px",
-        fontFamily: "Arial",
-        margin: "0 auto",
-        width: "80%",
-    };
-    const columnChartStyle = {
-        width: "80%",
-        height: "400px",
-        margin: "0 auto"
+  const mystyle0 = {
+    color: "white",
+    backgroundColor: "DodgerBlue",
+    padding: "10px",
+    fontFamily: "Arial",
+    margin: "0 auto",
+  };
+  const mystyle = {
+    color: "white",
+    backgroundColor: "DodgerBlue",
+    padding: "10px",
+    fontFamily: "Arial",
+    margin: "0 auto",
+    width: "80%",
+  };
+  const columnChartStyle = {
+    width: "80%",
+    height: "400px",
+    margin: "0 auto",
+  };
+
+  const { data: session, state } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/Convocatorias");
+    },
+  });
+
+  const token = session?.access;
+
+  const { register, reset, handleSubmit } = useForm();
+
+  const [dataToGraph, setDataToGraph] = useState([]);
+  const [renderSettings, setRenderSettings] = useState({
+    caso: "",
+    field: "",
+    title: "",
+  });
+  const my_submit = handleSubmit((data) => {
+    if (data.chart_parameter === "seleccion") {
+      alert("Ningun parámetro de gráfica seleccionado.");
+      return;
     }
-    return (
-        <div className="py-10">
-            <h2 style={mystyle0}><b>Estadísticas por sede</b></h2>
-            <br/>
-            <h2 style={mystyle}><b>Universidades</b></h2>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_univ_hea_post[0]}
-                                                 options={results_univ_hea_post[1]}/></div>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_univ_hea_win[0]}
-                                                 options={results_univ_hea_win[1]}/></div>
-            <br/>
+    if (data.winner_state === "seleccion") {
+      alert("Ningun parámetro de estado de ganador seleccionado.");
+      return;
+    }
 
-            <h2 style={mystyle}><b>Países</b></h2>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_cou_hea_post[0]}
-                                                 options={results_cou_hea_post[1]}/></div>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_cou_hea_win[0]}
-                                                 options={results_cou_hea_win[1]}/></div>
-            <br/>
+    switch (data.chart_parameter) {
+      case "university":
+        setRenderSettings({
+          caso: "Universidades",
+          field: "university",
+          title: `Estudiantes ${data.winner_state} por universidad.`,
+        });
+        break;
+      case "semester":
+        setRenderSettings({
+          caso: "Semestre",
+          field: "semester",
+          title: `Estudiantes ${data.winner_state} por semestre.`,
+        });
+        break;
+      case "region":
+        setRenderSettings({
+          caso: "Region",
+          field: "region",
+          title: `Estudiantes ${data.winner_state} por region.`,
+        });
+        break;
+      default:
+        setRenderSettings({
+          caso: "País",
+          field: "country",
+          title: `Estudiantes ${data.winner_state} por país.`,
+        });
+    }
 
-            <h2 style={mystyle}><b>Regiones</b></h2>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_reg_hea_post[0]}
-                                                 options={results_reg_hea_post[1]}/></div>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_reg_hea_win[0]}
-                                                 options={results_reg_hea_win[1]}/></div>
-            <br/>
+    if (data.winner_state === "postulates") {
+      apiCharts
+        .getInfoCharts("headquarter", data.chart_parameter, token)
+        .then((response) => {
+          setDataToGraph(response.data.postulates);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      apiCharts
+        .getInfoCharts("headquarter", data.chart_parameter, token)
+        .then((response) => {
+          setDataToGraph(response.data.winners);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
 
-            <h2 style={mystyle}><b>Años</b></h2>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_yea_hea_post[0]}
-                                                 options={results_yea_hea_post[1]}/></div>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_yea_hea_win[0]}
-                                                 options={results_yea_hea_win[1]}/></div>
-            <br/>
+    reset();
+  });
 
-            <h2 style={mystyle}><b>Semestres</b></h2>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_sem_hea_post[0]}
-                                                 options={results_sem_hea_post[1]}/></div>
-            <br/>
-            <div style={columnChartStyle}><Chart chartType="ColumnChart" data={results_sem_hea_win[0]}
-                                                 options={results_sem_hea_win[1]}/></div>
-            <br/>
-        </div>
-    )
+  let results = [];
+  if (dataToGraph?.length !== 0) {
+    results = renderChart(
+      renderSettings.caso,
+      dataToGraph,
+      renderSettings.field,
+      renderSettings.caso,
+      renderSettings.title
+    );
+  }
+
+  return (
+    <div className="py-10">
+      <div className="flex justify-between items-center" style={mystyle0}>
+        <h2>
+          <b>Estadísticas por sede</b>
+        </h2>
+        <form onSubmit={my_submit} className="flex gap-3 p-6">
+          <select
+            {...register("chart_parameter")}
+            className="bg-white rounded-lg text-blue-500 h-10"
+          >
+            <option value="seleccion">Selección</option>
+            <option value="university">Universidad</option>
+            <option value="semester">Semestre</option>
+            <option value="region">Región</option>
+            <option value="country">País</option>
+          </select>
+
+          <select
+            {...register("winner_state")}
+            className="bg-white rounded-lg text-blue-500 h-10"
+          >
+            <option value="seleccion">Selección</option>
+            <option value="postulates">Postulados</option>
+            <option value="winners">Ganadores</option>
+          </select>
+
+          <button
+            type="submit"
+            className="text-center justify-center flex items-center bg-white rounded-lg text-blue-500 h-10 p-5"
+          >
+            Buscar
+          </button>
+        </form>
+      </div>
+
+      <br />
+      <h2 style={mystyle}>
+        <b>{renderSettings.caso}</b>
+      </h2>
+      <br />
+      <div style={columnChartStyle}>
+        {results.length !== 0 ? (
+          <Chart
+            chartType="ColumnChart"
+            data={results[0]}
+            options={results[1]}
+          />
+        ) : (
+          <>No data to show</>
+        )}
+      </div>
+      <br />
+    </div>
+  );
 }
 
 export default App;

@@ -56,6 +56,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
       .getFilterOpenCalls(null, null, null, token)
       .then((response) => {
         set_available_calls(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
