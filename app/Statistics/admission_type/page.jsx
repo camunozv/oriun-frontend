@@ -96,6 +96,15 @@ function App() {
   const my_submit = handleSubmit((data) => {
     console.log(data);
 
+    if (data.chart_parameter === "seleccion") {
+      alert("Ningun parámetro de gráfica seleccionado.");
+      return;
+    }
+    if (data.winner_state === "seleccion") {
+      alert("Ningun parámetro de estado de ganador seleccionado.");
+      return;
+    }
+
     switch (data.chart_parameter) {
       case "university":
         setRenderSettings({
@@ -169,6 +178,7 @@ function App() {
             {...register("chart_parameter")}
             className="bg-white rounded-lg text-blue-500 h-10"
           >
+            <option value="seleccion">Selección</option>
             <option value="university">Universidad</option>
             <option value="semester">Semestre</option>
             <option value="region">Región</option>
@@ -179,13 +189,14 @@ function App() {
             {...register("winner_state")}
             className="bg-white rounded-lg text-blue-500 h-10"
           >
+            <option value="seleccion">Selección</option>
             <option value="postulates">Postulados</option>
             <option value="winners">Ganadores</option>
           </select>
 
           <button
             type="submit"
-            className="bg-white rounded-lg text-blue-500 h-10"
+            className="text-center justify-center flex items-center bg-white rounded-lg text-blue-500 h-10 p-5"
           >
             Buscar
           </button>
