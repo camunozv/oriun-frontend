@@ -162,23 +162,34 @@ function App() {
     <div className="py-10">
       <div className="flex justify-between items-center" style={mystyle0}>
         <h2>
-          <b>Estadísticas por tipo de admisión</b>          
+          <b>Estadísticas por tipo de admisión</b>
         </h2>
         <form onSubmit={my_submit} className="flex gap-3 p-6">
-            <select {...register("chart_parameter")} className="bg-white rounded-lg text-blue-500 h-10">
-              <option value="university">Universidad</option>
-              <option value="semester">Semestre</option>
-              <option value="region">Región</option>
-              <option value="country">País</option>
-            </select>
+          <select
+            {...register("chart_parameter")}
+            className="bg-white rounded-lg text-blue-500 h-10"
+          >
+            <option value="university">Universidad</option>
+            <option value="semester">Semestre</option>
+            <option value="region">Región</option>
+            <option value="country">País</option>
+          </select>
 
-            <select {...register("winner_state")} className="bg-white rounded-lg text-blue-500 h-10">
-              <option value="postulates">Postulados</option>
-              <option value="winners">Ganadores</option>
-            </select>
+          <select
+            {...register("winner_state")}
+            className="bg-white rounded-lg text-blue-500 h-10"
+          >
+            <option value="postulates">Postulados</option>
+            <option value="winners">Ganadores</option>
+          </select>
 
-            <button type="submit" className="bg-white rounded-lg text-blue-500 h-10">Buscar</button>
-          </form>
+          <button
+            type="submit"
+            className="bg-white rounded-lg text-blue-500 h-10"
+          >
+            Buscar
+          </button>
+        </form>
       </div>
 
       <br />
