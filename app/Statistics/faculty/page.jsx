@@ -2,7 +2,7 @@
 import { apiCharts } from "@/app/api/Graficas/charts";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Chart } from "react-google-charts";
 import { useForm } from "react-hook-form";
 
@@ -176,7 +176,6 @@ function App() {
       renderSettings.title
     );
   }
-
 
   return (
     <div className="py-10">
