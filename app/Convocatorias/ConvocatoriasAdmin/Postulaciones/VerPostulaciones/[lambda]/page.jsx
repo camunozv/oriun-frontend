@@ -174,6 +174,7 @@ function VerPostulaciones({ params }) {
                 Country={application.university_country}
                 EstadoConv={application.state_documents}
                 University={application.university_name}
+                imageLink={application.flag_image_url}
 
               />
             ))}

@@ -40,6 +40,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
         token
       );
       set_available_calls(fetched_calls.data);
+      console.log(available_calls)
 
       if (available_calls.length() === 0) {
         alert(
@@ -129,6 +130,7 @@ function ConvocatoriasAbiertasEstudiantePage() {
             {available_calls?.map((call) => (
               <CardConvocatorias
                 key={call.id}
+                imageLink={call.flag_image_url}
                 id={call.id}
                 admin={false}
                 university_name={call.university_name}

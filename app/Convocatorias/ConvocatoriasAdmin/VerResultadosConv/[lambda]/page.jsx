@@ -42,7 +42,7 @@ function ResultConvAdmin({ params }) {
         console.log(error);
       });
 
-    // reset();
+    reset();
   });
 
   if (!session) {
@@ -52,43 +52,43 @@ function ResultConvAdmin({ params }) {
   } else {
     return (
       <>
-        <main className="relative mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
+        <main className="flex flex-col items-center justify-center mt-4 mx-auto overflow-hidden max-w-[1580px] gap-3 p-2">
           <h1 className="font-bold text-[40px] underline text-center">
             Convocatoria No. {id}
           </h1>
           <br />
-          <section className="relative mx-auto flex items-center justify-center w-[1580px]">
-            <form
-              onSubmit={mySubmit}
-              className="flex gap-6 justify-center items-center w-[600px] border border-black px-3 py-2 rounded-lg"
+
+          <form
+            onSubmit={mySubmit}
+            className="flex gap-6 justify-center items-center w-[600px] border border-black px-3 py-2 rounded-lg"
+          >
+            <input
+              type="text"
+              className="border-gray-300 border rounded-md outline-none"
+              {...register("student_id")}
+              placeholder="ID Estudiante"
+            ></input>
+
+            <select
+              placeholder=""
+              {...register("approved")}
+              className="border-gray-300 border rounded-md outline-none bg-white"
             >
-              <input
-                type="text"
-                className="border-gray-300 border rounded-md outline-none"
-                {...register("student_id")}
-                placeholder="ID Estudiante"
-              ></input>
+              <option value="">Aprobado...</option>
+              <option value="true">Si</option>
+              <option value="false">No</option>
+            </select>
 
-              <select
-                placeholder=""
-                {...register("approved")}
-                className="border-gray-300 border rounded-md outline-none bg-white"
+            <div className="p-2">
+              <button
+                type="submit"
+                className="font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2 px-10"
               >
-                <option value="">Aprobado...</option>
-                <option value="true">Si</option>
-                <option value="false">No</option>
-              </select>
+                Buscar
+              </button>
+            </div>
+          </form>
 
-              <div className="p-2">
-                <button
-                  type="submit"
-                  className="font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2 px-10"
-                >
-                  Filtrar
-                </button>
-              </div>
-            </form>
-          </section>
           <br />
           <div className="grid grid-cols-2 justify-center">
             <div className="px-3">
@@ -115,12 +115,13 @@ function ResultConvAdmin({ params }) {
           <div className="grid grid-cols-3 w-full gap-6">
             {studentApplications?.map((application) => (
               <CardResultadosEmp
+                imageLink={application.flag_image_url}
                 key={application.student_id}
                 student_id={application.student_id}
                 student_name={application.student_name}
                 university_name={application.university_name}
                 university_country={application.university_country}
-                call={application.country}
+                call={application.call}
                 approved={application.approved}
               />
             ))}

@@ -10,20 +10,18 @@ function UniversitiesCard({
   city,
   academic_offer,
   exchange_info,
+  imageLink
 }) {
   return (
     <>
       <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
         <h6 className="font-bold">{id}</h6>
-        <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here
-        </div>
+        <img
+          className="w-[95%] h-45 w-45 rounded-md border-2 border-grey-1000"
+          src={imageLink}
+          alt="flag"
+        ></img>
+
         <p className="font-semibold">
           {name} - {country}
         </p>

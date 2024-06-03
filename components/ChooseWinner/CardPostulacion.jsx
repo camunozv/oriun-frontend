@@ -13,6 +13,7 @@ function CardPostulacion({
   Country,
   University,
   major,
+  imageLink
 }) {
   let imagenSrc;
 
@@ -58,15 +59,12 @@ function CardPostulacion({
             </div>
           </div>
 
-          <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here
-          </div>
+          <img
+          className="w-[95%] h-45 w-45 rounded-md border-2 border-grey-1000"
+          src={imageLink}
+          alt="flag"
+        ></img>
+
 
           <p className="font-semibold">{StudentId}</p>
           <p className="font-semibold">

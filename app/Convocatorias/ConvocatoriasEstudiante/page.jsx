@@ -34,31 +34,31 @@ async function ConvocatoriasEstudiantePage() {
 
             {/* Galería */}
 
-            <div class="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <div>
                 <img
-                  class="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg"
                   src="https://wired.me/wp-content/uploads/2021/02/kaust-covid-vaccines.jpg"
                   alt=""
                 />
               </div>
               <div>
                 <img
-                  class="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg"
                   src="https://www.buildings-mena.com/image/1360/pr/KAUST-08-024-1900-1600x1069.jpg"
                   alt=""
                 />
               </div>
               <div>
                 <img
-                  class="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg"
                   src="https://www.gaceta.unam.mx/wp-content/uploads/2021/06/14cudes.jpg"
                   alt=""
                 />
               </div>
               <div>
                 <img
-                  class="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg"
                   src="https://universidadesyprofesiones.com/images/universidades/campus/universidad-nacional-de-colombia-banner.jpg"
                   alt=""
                 />

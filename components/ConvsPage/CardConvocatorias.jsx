@@ -14,6 +14,7 @@ function CardConvocatorias({
   semester,
   study_level,
   year,
+  imageLink,
 
   open,
   admin,
@@ -23,15 +24,12 @@ function CardConvocatorias({
       <>
         <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
           <h6 className="font-bold">{id}</h6>
-          <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here
-          </div>
+
+          <img
+            className="w-[95%] h-45 w-45 rounded-md border-2 border-grey-1000"
+            src={imageLink}
+            alt="flag"
+          ></img>
 
           <p className="font-semibold">
             {year} - {semester}
@@ -70,15 +68,12 @@ function CardConvocatorias({
     return (
       <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
         <h6 className="font-bold">{id}</h6>
-        <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here
-        </div>
+
+        <img
+          className="w-[95%] h-45 w-45 rounded-md border-2 border-grey-1000"
+          src={imageLink}
+          alt="flag"
+        ></img>
 
         <p className="font-semibold">{university_name}</p>
         <p className="font-semibold">{country}</p>
@@ -99,7 +94,9 @@ function CardConvocatorias({
             </Link>
           </div>
           <div className="w-full p-2">
-            <Link href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/Postulation/${id}`}>
+            <Link
+              href={`/Convocatorias/ConvocatoriasEstudiante/ConvocatoriasAbiertas/Postulation/${id}`}
+            >
               <button
                 type="button"
                 className="w-full font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white py-2"
@@ -107,7 +104,6 @@ function CardConvocatorias({
                 Postularme
               </button>
             </Link>
-            
           </div>
         </div>
       </div>
@@ -116,15 +112,12 @@ function CardConvocatorias({
     return (
       <div className="flex justify-center items-center flex-col gap-3 bg-white shadow-lg rounded-xl p-6 w-full h-full">
         <h6 className="font-bold">{id}</h6>
-        <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here
-        </div>
+
+        <img
+          className="w-[95%] h-45 w-45 rounded-md border-2 border-grey-1000"
+          src={imageLink}
+          alt="flag"
+        ></img>
 
         <p className="font-semibold">{university_name}</p>
         <p className="font-semibold">{country}</p>

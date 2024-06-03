@@ -1,6 +1,14 @@
 import React from "react";
 
-function CardPostulacionEm({student_id, student_name, university_name, university_country, call, approved}) {
+function CardPostulacionEm({
+  student_id,
+  student_name,
+  university_name,
+  university_country,
+  call,
+  approved,
+  imageLink,
+}) {
   let imagenSrc;
 
   switch (approved) {
@@ -24,20 +32,14 @@ function CardPostulacionEm({student_id, student_name, university_name, universit
             />
           </div>
 
-          <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here
-          </div>
+          <img
+            className="w-[95%] h-45 w-45 rounded-md border-2 border-grey-1000"
+            src={imageLink}
+            alt="flag"
+          ></img>
 
           <p className="font-semibold">{student_id}</p>
-          <p className="font-semibold">
-            {student_name}
-          </p>
+          <p className="font-semibold">{student_name}</p>
           <p className="font-semibold">{university_name}</p>
           <p className="font-semibold">{university_country}</p>
         </div>

@@ -8,6 +8,7 @@ function ApplicationCard({
   university_country,
   state_documents,
   approved,
+  imageLink
 }) {
   let k = approved;
   if (k === false) {
@@ -55,15 +56,11 @@ function ApplicationCard({
               className="absolute top-0 right-0 w-12 h-12" // Estilos para posicionar la imagen en la esquina superior derecha
             />
         </div>
-        <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-          Flag Here Flag Here
-        </div>
+        <img
+          className="w-[95%] h-45 w-45 rounded-md border-2 border-grey-1000"
+          src={imageLink}
+          alt="flag"
+        ></img>
         <p className="font-semibold">{university_name}</p>
         <p className="font-semibold">Estado de documentos: {finalState}</p>
         <div className="grid grid-cols-2 gap-3 p-1">
