@@ -113,7 +113,7 @@ function ResultConvAdmin({ params }) {
             <div className="px-3">
               <p className="font-bold text-[20px] text-left">
                 {" "}
-                No Aprobado
+                Pendiente de Revisión
                 <img
                   src={"/images/Pendiente.jpeg"}
                   className="inline object-contain h-10 w-10"
