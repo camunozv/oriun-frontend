@@ -90,7 +90,7 @@ function ResultConvAdmin({ params }) {
           </form>
 
           <br />
-          <div className="grid grid-cols-2 justify-center">
+          <div className="grid grid-cols-3 justify-center">
             <div className="px-3">
               <p className="font-bold text-[20px] text-right">
                 Aprobado
@@ -106,6 +106,16 @@ function ResultConvAdmin({ params }) {
                 No Aprobado
                 <img
                   src={"/images/NoAprobada.jpeg"}
+                  className="inline object-contain h-10 w-10"
+                />
+              </p>
+            </div>
+            <div className="px-3">
+              <p className="font-bold text-[20px] text-left">
+                {" "}
+                No Aprobado
+                <img
+                  src={"/images/Pendiente.jpeg"}
                   className="inline object-contain h-10 w-10"
                 />
               </p>

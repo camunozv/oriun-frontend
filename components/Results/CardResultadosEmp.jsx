@@ -12,11 +12,14 @@ function CardPostulacionEm({
   let imagenSrc;
 
   switch (approved) {
-    case "Aprobado":
+    case true:
       imagenSrc = "/images/Aprobada.jpeg";
       break;
-    case "No Aprobado":
+    case false:
       imagenSrc = "/images/NoAprobada.jpeg";
+      break;
+    default:
+      imagenSrc = '/images/Pendiente.jpeg';
       break;
   }
   {

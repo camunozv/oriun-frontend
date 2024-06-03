@@ -219,7 +219,7 @@ function ResultadosPostulantes({ params }) {
               idioma={application.language}
               pbm={application.student_PBM}
               estadoDocs={application.state_documents}
-              idCall={application.id}
+              idCall={id}
               token={token}
             />
           ))}
@@ -241,21 +241,6 @@ function ResultadosPostulantes({ params }) {
               Abrir Convocatoria
             </button>
           </div>
-          {/* <div className="flex mt-5">
-            <button
-              type="button"
-              className="flex-1 mr-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
-            >
-              Volver
-            </button>
-
-            <button
-              type="button"
-              className="flex-1 ml-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
-            >
-              Guardar y volver
-            </button>
-          </div> */}
         </main>
       </>
     );
