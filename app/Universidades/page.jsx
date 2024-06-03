@@ -103,6 +103,7 @@ function UniversitiesMainPage() {
             {myUniversities?.map((university) => (
               <UniversitiesCard
                 key={university.id}
+                imageLink={university.flag_image_url}
                 id={university.id}
                 country={university.country}
                 city={university.city}

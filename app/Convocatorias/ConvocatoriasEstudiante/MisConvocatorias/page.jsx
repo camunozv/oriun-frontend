@@ -71,6 +71,7 @@ function MyCallsPage() {
             {myApplications?.map((application) => (
               <ApplicationCard
                 key={application.call}
+                imageLink={application.flag_image_url}
                 call={application.call}
                 university_country={application.university_country}
                 university_name={application.university_name}

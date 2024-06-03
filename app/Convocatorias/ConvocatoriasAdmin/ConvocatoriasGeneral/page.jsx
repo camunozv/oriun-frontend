@@ -356,6 +356,7 @@ function ConvocatoriasGeneralAdminPage() {
             {my_calls?.map((call) => (
               <CardConvocatorias
                 key={call.id}
+                imageLink={call.flag_image_url}
                 id={call.id}
                 semester={call.semester}
                 year={call.year}

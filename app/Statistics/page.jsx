@@ -1,9 +1,21 @@
-import React from 'react'
+"use client";
+import React from "react";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 function StatisticsPage() {
-  return (
-    <div></div>
-  )
+  const { data: session, state } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/Convocatorias");
+    },
+  });
+
+  if (!session) {
+    return <div>{state}...</div>;
+  } else {
+    return <div></div>;
+  }
 }
 
-export default StatisticsPage
+export default StatisticsPage;
