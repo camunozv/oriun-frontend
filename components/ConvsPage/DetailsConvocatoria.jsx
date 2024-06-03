@@ -75,10 +75,10 @@ function DetailsConvocatoria({ call, admin, id, open }) {
           </label>
           <p id="active">{call.active}</p>
 
-          <div className="flex">
+          <div className="flex gap-3">
             <button
               type="button"
-              className="flex-1 mr-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+              className="flex-1  font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
               onClick={handleClickDelete}
             >
               Eliminar
@@ -86,12 +86,23 @@ function DetailsConvocatoria({ call, admin, id, open }) {
 
             <button
               type="button"
-              className="flex-1 ml-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+              className="flex-1  font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
             >
               <Link
                 href={`/Convocatorias/ConvocatoriasAdmin/Postulaciones/VerPostulaciones/${id}`}
               >
                 Ver Postulaciones
+              </Link>
+            </button>
+
+            <button
+              type="button"
+              className="flex-1  font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+            >
+              <Link
+                href={`/Convocatorias/ConvocatoriasAdmin/VerResultadosConv/${id}`}
+              >
+                Ver Resultados
               </Link>
             </button>
           </div>
@@ -152,7 +163,7 @@ function DetailsConvocatoria({ call, admin, id, open }) {
           <div className="flex">
             <button
               type="button"
-              className="flex-1 mr-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+              className="flex-1  font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
               onClick={handleClickDelete}
             >
               Eliminar
@@ -160,12 +171,22 @@ function DetailsConvocatoria({ call, admin, id, open }) {
 
             <button
               type="button"
-              className="flex-1 ml-2 font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
+              className="flex-1  font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2"
             >
               <Link
                 href={`/Convocatorias/ConvocatoriasAdmin/Postulaciones/VerPostulaciones/${id}`}
               >
                 Ver Postulaciones
+              </Link>
+            </button>
+            <button
+              type="button"
+              className="flex-1  font-semibold bg-figma_blue border-2 rounded-full border-figma_blue text-white hover:text-figma_blue hover:bg-white py-2 pr-3"
+            >
+              <Link
+                href={`/Convocatorias/ConvocatoriasAdmin/VerResultadosConv/${id}`}
+              >
+                Ver Resultados
               </Link>
             </button>
           </div>

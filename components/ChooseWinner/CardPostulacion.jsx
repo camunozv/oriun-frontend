@@ -13,6 +13,7 @@ function CardPostulacion({
   Country,
   University,
   major,
+  imageLink
 }) {
   let imagenSrc;
 
@@ -42,26 +43,28 @@ function CardPostulacion({
 
             {/* Agrega la imagen en la esquina superior derecha 
             <div className="absolute top-0 right-0 w-12 h-12">
-              <Image src="/images/CirculoVerde.png" width={50} height={50} alt="Logo" />
+              <Image src={imagenSrc} width={50} height={50} alt="Logo" />
             </div>           
-            El metodo de abajo tiene una mejor calidad de imagen*/}
+            El metodo de abajo tiene una mejor calidad de imagen
 
             <img
               src={imagenSrc} // Reemplaza esta ruta con la ruta de tu imagen
               alt="Logo"
               className="absolute top-0 right-0 w-12 h-12" // Estilos para posicionar la imagen en la esquina superior derecha
             />
+            */}
+
+            <div className="absolute top-0 right-0 w-12 h-12">
+              <Image src={imagenSrc} width={50} height={50} alt="Logo" />
+            </div>
           </div>
 
-          <div className="w-[95%] h-45 bg-figma_grey text-black rounded-lg">
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag
-            Here Flag Here Flag Here Flag Here Flag Here Flag Here Flag Here
-            Flag Here Flag Here Flag Here Flag Here Flag Here
-          </div>
+          <img
+          className="w-[95%] h-45 w-45 rounded-md border-2 border-grey-1000"
+          src={imageLink}
+          alt="flag"
+        ></img>
+
 
           <p className="font-semibold">{StudentId}</p>
           <p className="font-semibold">
@@ -71,14 +74,6 @@ function CardPostulacion({
           <p className="font-semibold">{Country}</p>
 
           <div className="flex justify-between items-center w-96">
-            <div className="w-full p-2">
-              <button
-                type="button"
-                className="w-full text-base font-semibold bg-white border-2 rounded-full border-figma_blue text-figma_blue py-1"
-              >
-                Seleccionar como Ganador
-              </button>
-            </div>
             <div className="w-full p-2">
               <Link
                 href={`/Convocatorias/ConvocatoriasAdmin/Postulaciones/VerPostulacionDocumentos/${call_id}/${StudentId}`}
