@@ -4,26 +4,6 @@ npm run dev
 Para detener el proyecto basta con presionar Ctrl + c, y adicionalmente la letra S.
 
 
-Perfiles Para acceder rapidamente:
-
-Estudiante:
-valentina.rodriguez@unal.edu.co
-TestPassword
-
-santiago.garcia@unal.edu.co
-Password123
-
-
-
-Empleado:
-maria.alvarez@unal.edu.co
-Maria#1234
-
-juan.garcia@unal.edu.co
-JuanGa2024
-
-
-
 Comando a usar para hacer el push: 
 git push origin development:Developmentcloud
 

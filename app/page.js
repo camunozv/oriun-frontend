@@ -7,7 +7,6 @@
 
 import { redirect } from "next/navigation";
 
-
 // <div className="grid h-[100vh] grid-rows-12">
 //   <div className="grid grid-cols-3 grid-rows-2">
 //     <header className="text-center w-full bg-figma_blue col-span-3 row-start-1">

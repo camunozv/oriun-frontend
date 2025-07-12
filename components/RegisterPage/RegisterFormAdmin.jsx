@@ -2,6 +2,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { apiRegisterAdmin } from "@/app/api/Registro/registerAdmin";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 function RegisterFormAdmin() {
   const {
@@ -12,8 +14,12 @@ function RegisterFormAdmin() {
     reset,
   } = useForm();
 
+  const changeFunction = () => {
+
+  };
+
   const mySubmit = handleSubmit((data) => {
-    
+
     console.log(data)
     alert("Enviando datos...");
 
@@ -527,6 +533,18 @@ function RegisterFormAdmin() {
               {errors.dependency.message}
             </span>
           )}
+        </div>
+
+        <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
+          <label htmlFor="headquarter" className="font-semibold">
+            Test de Captcha
+          </label>
+
+          <ReCAPTCHA
+            sitekey="Your client site key"
+            onChange={changeFunction}
+          />
+        
         </div>
       </div>
 
