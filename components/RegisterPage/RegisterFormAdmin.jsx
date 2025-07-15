@@ -537,11 +537,11 @@ function RegisterFormAdmin() {
 
         <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
           <label htmlFor="headquarter" className="font-semibold">
-            Test de Captcha
+            Captcha
           </label>
 
           <ReCAPTCHA
-            sitekey="Your client site key"
+            sitekey="6LfuoIQrAAAAALpWeJNd7MgmFYteZ7wsagaUQQrf"
             onChange={changeFunction}
           />
         

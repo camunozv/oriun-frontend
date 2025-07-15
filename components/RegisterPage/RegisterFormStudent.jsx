@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { apiRegisterAdmin } from "@/app/api/Registro/registerAdmin";
+import ReCAPTCHA from "react-google-recaptcha";
 
 // This function must be modified to send the data to the backend.
 async function createUser(name, email, password) {
@@ -13,6 +13,8 @@ async function createUser(name, email, password) {
       "Content-type": "application/json",
     },
   });
+
+  
 
   const data = await response.json();
 
@@ -35,6 +37,10 @@ function RegisterFormStudent() {
     reset,
     resetField,
   } = useForm();
+
+  const changeFunction = () => {
+
+  };
 
   const [certificateGrades, setCertificateGrades] = useState();
   const [certificateStudent, setCertificateStudent] = useState();
@@ -1009,6 +1015,17 @@ function RegisterFormStudent() {
               Recibo de pago es requerido
             </span>
           )}
+        </div>
+
+        <div className="flex justify-left items-left flex-col gap-2 w-full p-2">
+          <label htmlFor="headquarter" className="font-semibold">
+            Captcha
+          </label>
+        
+          <ReCAPTCHA
+            sitekey="6LfuoIQrAAAAALpWeJNd7MgmFYteZ7wsagaUQQrf"
+            onChange={changeFunction}
+          />      
         </div>
       </div>
 
