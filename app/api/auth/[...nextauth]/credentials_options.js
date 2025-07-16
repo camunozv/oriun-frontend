@@ -1,4 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
 import { apiLogin } from "../../userLogin";
 import { signOut } from "next-auth/react";
 
@@ -8,6 +9,16 @@ export const options = {
     newUser: "/Convocatorias",
   },
   providers: [
+
+    GitHubProvider({
+        clientId: process.env.GITHUB_ID,
+        clientSecret: process.env.GITHUB_SECRET,    
+        authorization: {
+          params: { scope: "read:user user:email" },
+        },
+    
+    }),
+
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -46,7 +57,27 @@ export const options = {
   callbacks: {
     // For persisting the role on the server side
     async jwt({ token, user }) {
-      if (user) {
+      
+      if (user.image !== null) {
+      
+        try {
+          // look for the user
+          const user = await apiLogin.postUser(
+            user.name,
+            credentials.entered_password
+          );
+
+          console.log("successfully gotten user tokens");
+          console.log(user.data);
+
+          return user;
+        } catch (error) {
+          return null;
+        }
+      
+      } else if (user) {
+        console.log(user);
+        console.log(token);
         token.access = user.data.access;
         token.refresh = user.data.refresh;
         token.type_user = user.data.type_user;
