@@ -1,22 +1,35 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import { apiLogin } from "../../userLogin";
 import { signOut } from "next-auth/react";
 
 export const options = {
   pages: {
-    signOut: "/PreguntasFrecuentes",   
+    signOut: "/PreguntasFrecuentes",
     newUser: "/Convocatorias",
   },
   providers: [
 
-    GitHubProvider({
-        clientId: process.env.GITHUB_ID,
-        clientSecret: process.env.GITHUB_SECRET,    
-        authorization: {
-          params: { scope: "read:user user:email" },
-        },
-    
+    /*GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+      authorization: {
+        params: { scope: "read:user user:email" },
+      },
+
+    }),*/
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
     }),
 
     CredentialsProvider({
@@ -56,28 +69,13 @@ export const options = {
 
   callbacks: {
     // For persisting the role on the server side
-    async jwt({ token, user }) {
-      
-      if (user.image !== null) {
-      
-        try {
-          // look for the user
-          const user = await apiLogin.postUser(
-            user.name,
-            credentials.entered_password
-          );
+    async jwt({ token, user, account }) {
 
-          console.log("successfully gotten user tokens");
-          console.log(user.data);
-
-          return user;
-        } catch (error) {
-          return null;
-        }
-      
+      if (account && user) {
+        token.access = account.access_token
+        token.refresh = user.refresh
+        token.type_user = "student"
       } else if (user) {
-        console.log(user);
-        console.log(token);
         token.access = user.data.access;
         token.refresh = user.data.refresh;
         token.type_user = user.data.type_user;
@@ -90,6 +88,13 @@ export const options = {
       session.refresh = token.refresh;
       session.type_user = token.type_user;
       return session;
+    },
+
+    async signIn({ account, profile }) {
+      if (account.provider === "google") {
+        return profile.email_verified && profile.email.endsWith("@unal.edu.co");
+      }
+      return true
     },
   },
 };
