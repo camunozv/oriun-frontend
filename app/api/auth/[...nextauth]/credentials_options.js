@@ -71,14 +71,14 @@ export const options = {
     // For persisting the role on the server side
     async jwt({ token, user, account }) {
 
-      if (account && user) {
-        token.access = account.access_token
-        token.refresh = user.refresh
-        token.type_user = "student"
-      } else if (user) {
+      if (user?.data?.type_user == "employee") {
         token.access = user.data.access;
         token.refresh = user.data.refresh;
         token.type_user = user.data.type_user;
+      } else if (account && user) {
+        token.access = account.access_token
+        token.refresh = user.refresh
+        token.type_user = "student"
       }
       return token;
     },
